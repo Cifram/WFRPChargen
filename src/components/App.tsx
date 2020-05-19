@@ -1,10 +1,11 @@
 import * as React from "react";
 import { GenerateScreen } from "./GenerateScreen";
 import { State } from "../state/state";
+import { Sidebar } from "./Sidebar";
 
 export function App(props: { state: State }) {
-	return <div>
-		<h1>Warhammer Fantasy Character Generator</h1>
+	return <div className="flexrow">
+		<Sidebar state={props.state} />
 		<GenerateScreen state={props.state} />
 	</div>;
 }

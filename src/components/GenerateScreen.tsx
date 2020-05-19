@@ -1,13 +1,12 @@
 import * as React from "react";
 import { State } from "../state/state";
-import { races } from "../data/races";
-import { GenerateRace } from "./GenerateRace";
+import { GenerateButton } from "./GenerateButton";
 
 export function GenerateScreen(props: { state: State }) {
-	return <div style={{ display: "flex", flexDirection: "row" }}>
-		<GenerateRace state={props.state} race="Human" />
-		<GenerateRace state={props.state} race="Elf" />
-		<GenerateRace state={props.state} race="Dwarf" />
-		<GenerateRace state={props.state} race="Halfling" />
+	return <div className="flexrow" style={{ flex: 1, alignItems: "flex-start" }}>
+		<GenerateButton state={props.state} race="Human" />
+		<GenerateButton state={props.state} race="Elf" />
+		<GenerateButton state={props.state} race="Dwarf" />
+		<GenerateButton state={props.state} race="Halfling" />
 	</div>
 };
