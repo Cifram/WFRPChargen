@@ -59,3 +59,42 @@ body {
 	margin: 5px 0px;
 	height: 1px;
 }
+
+.characterScreen {
+	flex: 1;
+	background-color: cornsilk;
+}
+
+.characterScreen .block {
+	background-color: white;
+	border: 2px solid black;
+	margin: 10px;
+}
+
+.characterScreen .block .header {
+	flex: 1;
+	background-color: black;
+	color: white;
+	font-size: 20pt;
+	font-family: serif;
+	text-align: center;
+}
+
+.characterScreen .block .cell {
+	flex: 1;
+	outline: 1px solid black;
+	margin: 1px;
+	padding: 2px;
+}
+
+.characterScreen .block .cell .title {
+	font-size: 10pt;
+	font-family: sans-serif;
+	margin-right: 4px;
+}
+
+.characterScreen .block .cell .content {
+	font-size: 14pt;
+	font-family: serif;
+	margin-top: 5px;
+}
