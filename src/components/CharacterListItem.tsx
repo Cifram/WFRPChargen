@@ -3,21 +3,15 @@ import { State } from "../state/state";
 import { races } from "../data/races";
 
 export function CharacterListItem(props: { state: State, index: number }) {
-	let containerStyle: React.CSSProperties = {
-		backgroundColor: (props.index % 2 == 0) ? "#eeeeee" : "#ffffdd",
-		padding: 5,
+	let onClick = () => {
+		props.state.selectedCharacter = props.index;
+		props.state.dirty = true;
 	}
-	let nameStyle: React.CSSProperties = {
-		fontSize: 18,
-		fontFamily: "serif",
-	}
-	let dataStyle: React.CSSProperties = {
-		fontSize: 12,
-		fontFamily: "sans-serif",
-	}
+
+	let className = "flexcol listItem" + (props.index == props.state.selectedCharacter ? " selected" : "");
 	let char = props.state.characters[props.index];
-	return <div className="flexcol" style={containerStyle}>
-		<div style={nameStyle}>{char.name}</div>
-		<div style={dataStyle}>{races[char.race].name}</div>
-	</div>
+	return <div className={className} onClick={onClick}>
+		<div className="name">{char.name}</div>
+		<div className="details">{races[char.race].name}</div>
+	</div>;
 }

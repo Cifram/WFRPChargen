@@ -7,3 +7,55 @@
 	display: flex;
 	flex-direction: column;
 }
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0px;
+}
+
+#root {
+	width: 100%;
+	height: 100%;
+}
+
+.app {
+	width: 100%;
+	height: 100%;
+}
+
+.sidebar {
+	outline: 1px solid #eeeeee;
+	width: 200px;
+	height: 100%;
+	flex: none;
+}
+
+.sidebar .listItem {
+	padding: 0px 3px;
+	font-size: 18px;
+	font-family: "serif";
+}
+
+.sidebar .listItem.selected {
+	background-color: #b9b9ff;
+}
+
+.sidebar .listItem:hover {
+	background-color: #cccccc;
+}
+
+.sidebar .listItem .details {
+	font-size: 12px;
+	font-family: "sans-serif";
+	margin-left: 5px;
+}
+
+.sidebar .divider {
+	background-color: #eeeeee;
+	margin: 5px 0px;
+	height: 1px;
+}
