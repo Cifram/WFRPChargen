@@ -4,12 +4,14 @@
 	"main": "main.js",
 	"license": "MIT",
 	"scripts": {
-		"start": "npx webpack && electron ."
+		"start": "npx webpack && electron .",
+		"make": "electron-packager . --out=build --asar"
 	},
 	"devDependencies": {
 		"@types/react": "^16.9.35",
 		"@types/react-dom": "^16.9.8",
 		"electron": "^8.3.0",
+		"electron-packager": "^14.2.1",
 		"source-map-loader": "^0.2.4",
 		"ts-loader": "^7.0.4",
 		"typescript": "^3.9.2",
