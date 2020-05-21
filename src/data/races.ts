@@ -1,6 +1,5 @@
 import { PrimaryStatBlock } from './stats';
-
-export type D10Table = { [K in 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10]: number };
+import { D10Table } from './dieTables';
 
 export interface Race {
 	name: string;
