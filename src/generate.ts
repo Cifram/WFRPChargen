@@ -1,7 +1,7 @@
 import { RaceName, races } from './data/races';
 import { HistoryStatRolls, HistorySecondaryStats } from './state/history';
 import { Character } from './state/character';
-import { d10 } from './dice';
+import { d10, d1000 } from './dice';
 
 export function generate(race: RaceName) : Character {
 	const rolls: HistoryStatRolls = {
@@ -17,18 +17,19 @@ export function generate(race: RaceName) : Character {
 	};
 	const secondary: HistorySecondaryStats = {
 		A: 1,
-		W: races[race].baseWoundTable[d10()],
+		W: races[race].baseWoundTable[d10()-1],
 		SB: 0,
 		TB: 0,
 		MV: races[race].baseMovement,
 		MAG: 0,
 		IP: 0,
-		FP: races[race].baseFatePointTable[d10()],
+		FP: races[race].baseFatePointTable[d10()-1],
 	};
 	return {
 		name: "Foo Barson",
 		age: 20,
 		race: race,
+		career: races[race].careerTable[d1000()-1],
 		history: [ rolls, secondary ],
 	};
 }

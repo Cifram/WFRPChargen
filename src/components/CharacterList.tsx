@@ -6,7 +6,7 @@ export function CharacterList(props: { state: State }) {
 	let characters: JSX.Element[] = [];
 	for (let i = 0; i < props.state.characters.length; i++) {
 		let char = props.state.characters[i]
-		let key = char.name + ", " + char.race + ", " + char.age;
+		let key = char.name + ", " + char.race + ", " + char.career;
 		characters.push(<CharacterListItem state={props.state} index={i} key={key} />);
 	}
 	console.log("Num characters " + props.state.characters.length);
