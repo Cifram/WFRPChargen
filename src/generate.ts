@@ -33,5 +33,6 @@ export function generate(race: RaceName) : Character {
 		race: race,
 		career: races[race].careerTable[d1000()-1],
 		history: [ rolls, secondary ],
+		birthplace: races[race].birthplace(),
 	};
 }

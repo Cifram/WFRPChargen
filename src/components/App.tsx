@@ -1,8 +1,8 @@
 import * as React from "react";
 import { GenerateScreen } from "./GenerateScreen";
 import { State } from "../state/state";
-import { Sidebar } from "./Sidebar";
-import { CharacterScreen } from "./CharacterScreen";
+import { Sidebar } from "./Sidebar/Sidebar";
+import { Screen as CharacterScreen } from "./CharacterScreen/Screen";
 
 export function App(props: { state: State }) {
 	let screen = props.state.selectedCharacter == null ?

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { State } from "../state/state";
+import { State } from "../../state/state";
 import { CharacterListItem } from "./CharacterListItem";
 
 export function CharacterList(props: { state: State }) {

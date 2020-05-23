@@ -1,8 +1,8 @@
 import * as React from "react";
-import { State } from "../state/state";
-import { races } from "../data/races";
-import { careers } from "../data/careers";
-import { Character } from "../state/character";
+import { State } from "../../state/state";
+import { races } from "../../data/races";
+import { careers } from "../../data/careers";
+import { Character } from "../../state/character";
 
 export function CharacterSection(props: { char: Character }) {
 	return <div className="flexcol block">

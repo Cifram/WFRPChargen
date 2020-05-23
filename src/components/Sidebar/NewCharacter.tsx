@@ -1,7 +1,7 @@
 import * as React from "react";
-import { State } from "../state/state";
+import { State } from "../../state/state";
 
-export function NewCharacterSidebarButton(props: { state: State }) {
+export function NewCharacter(props: { state: State }) {
 	let className = "listItem" + (props.state.selectedCharacter == null ? " selected" : "");
 	let onClick = () => {
 		props.state.selectedCharacter = null;

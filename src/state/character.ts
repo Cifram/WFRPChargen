@@ -9,6 +9,7 @@ export interface Character {
 	race: RaceName;
 	career: CareerName;
 	history: HistoryStep[];
+	birthplace: string;
 }
 
 export type HistoryStep = HistoryStatRolls | HistorySecondaryStats | HistoryStatAdvance;

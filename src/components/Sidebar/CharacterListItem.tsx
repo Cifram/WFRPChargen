@@ -1,7 +1,7 @@
 import * as React from "react";
-import { State } from "../state/state";
-import { races } from "../data/races";
-import { careers } from "../data/careers";
+import { State } from "../../state/state";
+import { races } from "../../data/races";
+import { careers } from "../../data/careers";
 
 export function CharacterListItem(props: { state: State, index: number }) {
 	let onClick = () => {
