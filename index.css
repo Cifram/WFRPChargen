@@ -87,6 +87,14 @@ body {
 	padding: 2px;
 }
 
+.characterScreen .block .cell .subcell {
+	flex: 1;
+}
+
+.characterScreen .block .centered {
+	text-align: center;
+}
+
 .characterScreen .block .cell .title {
 	font-size: 10pt;
 	font-family: sans-serif;

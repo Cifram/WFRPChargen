@@ -1,5 +1,7 @@
-export type PrimaryStat = "WS" | "BS" | "S" | "T" | "AG" | "INT" | "WP" | "FEL";
-export type SecondaryStat = "A" | "W" | "SB" | "TB" | "MV" | "MAG" | "IP" | "FP";
+export var PrimaryStatNames = { "WS": true, "BS": true, "S": true, "T": true, "AG": true, "INT": true, "WP": true, "FEL": true, };
+export type PrimaryStat = keyof typeof PrimaryStatNames;
+export var SecondaryStatNames = { "A": true, "W": true, "SB": true, "TB": true, "MV": true, "MAG": true, "IP": true, "FP": true, };
+export type SecondaryStat = keyof typeof SecondaryStatNames;
 export type Stat = PrimaryStat | SecondaryStat;
 
 export type PrimaryStatBlock = { [K in PrimaryStat]: number };

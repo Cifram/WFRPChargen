@@ -5,6 +5,7 @@ import { d10, d1000 } from './dice';
 
 export function generate(race: RaceName) : Character {
 	const rolls: HistoryStatRolls = {
+		type: "StatRolls",
 		WS: d10() + d10(),
 		BS: d10() + d10(),
 		S: d10() + d10(),
@@ -16,6 +17,7 @@ export function generate(race: RaceName) : Character {
 		shallyasMercyStat: null,
 	};
 	const secondary: HistorySecondaryStats = {
+		type: "SecondaryStats",
 		A: 1,
 		W: races[race].baseWoundTable[d10()-1],
 		SB: 0,
