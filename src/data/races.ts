@@ -10,6 +10,11 @@ export interface Race {
 	baseMovement: number;
 	careerTable: CareerName[];
 	birthplace: () => string;
+	baseHeightMale: number;
+	baseHeightFemale: number;
+	weightTable: number[];
+	baseAge: number;
+	ageStep: number;
 }
 
 export type RaceName = "Human" | "Elf" | "Dwarf" | "Halfling"
@@ -26,7 +31,12 @@ export const races: { [K in RaceName] : Race } = {
 			let place = ["Averland", "Hochland", "Middenland", "Nordland", "Ostermark", "Ostland", "Reikland", "Stirland", "Talabecland", "Wissenland"][d10()-1];
 			let type = ["City", "Prosperous Town", "Market Town", "Fortified Town", "Farming Village", "Poor Village", "Small Settlement", "Pig/Cattle Farm", "Arable Farm", "Hovel"][d10()-1];
 			return `${type} in ${place}`;
-		}
+		},
+		baseHeightMale: 64,
+		baseHeightFemale: 61,
+		weightTable: initDieTable([1, 105], [3, 110], [5, 115], [8, 120], [12, 125], [17, 130], [22, 135], [29, 140], [37, 145], [49, 150], [64, 155], [71, 160], [78, 165], [83, 170], [88, 175], [92, 180], [95, 190], [97, 200], [99, 210], [100, 220]),
+		baseAge: 16,
+		ageStep: 1,
 	},
 	"Elf": {
 		name: "Elf",
@@ -36,6 +46,11 @@ export const races: { [K in RaceName] : Race } = {
 		baseMovement: 5,
 		careerTable: initDieTable<CareerName>([7, "Apothecary"], [64, "Apprentice Wizard"], [78, "Bodyguard"], [99, "Bounty Hunter"], [113, "Cartographer"], [141, "Dilettante"], [176, "Entertainer"], [218, "Envoy"], [222, "Gambler"], [278, "Hunter"], [292, "Initiate"], [342, "Kithband Warrior"], [377, "Marine"], [412, "Mercenary"], [450, "Messenger"], [464, "Noble"], [494, "Outlaw"], [534, "Outrider"], [548, "Pilgrim"], [562, "Pit Fighter"], [600, "Raconteur"], [625, "Riverwarden"], [665, "Rogue"], [705, "Scribe"], [745, "Seaman"], [752, "Slave"], [780, "Smuggler"], [815, "Student"], [856, "Thief"], [869, "Thug"], [919, "Tradesman"], [961, "Vagabond"], [1000, "Woodsman"]),
 		birthplace: () => initDieTable<string>([20, "City of Altdorf"], [40, "City of Marienburg"], [70, "Laurelorn Forest"], [85, "The Great Forest"], [100, "Reikwald Forest"])[d100()-1],
+		baseHeightMale: 66,
+		baseHeightFemale: 64,
+		weightTable: initDieTable([1, 80], [3, 85], [5, 90], [8, 95], [12, 100], [17, 105], [22, 110], [29, 115], [37, 120], [49, 125], [64, 130], [71, 135], [78, 140], [83, 145], [88, 150], [92, 155], [95, 160], [97, 165], [99, 170], [100, 175]),
+		baseAge: 30,
+		ageStep: 5,
 	},
 	"Dwarf": {
 		name: "Dwarf",
@@ -45,6 +60,11 @@ export const races: { [K in RaceName] : Race } = {
 		baseMovement: 3,
 		careerTable: initDieTable<CareerName>([15, "Agitator"], [57, "Apprentice Runesmith"], [85, "Bodyguard"], [100, "Bounty Hunter"], [121, "Burgher"], [136, "Cartographer"], [151, "Coachman"], [166, "Dilettante"], [187, "Entertainer"], [202, "Ex-convict"], [217, "Gambler"], [245, "Hunter"], [260, "Initiate"], [288, "Jailer"], [330, "Mercenary"], [358, "Militiaman"], [400, "Miner"], [421, "Muleskinner"], [436, "Noble"], [457, "Outlaw"], [472, "Pilgrim"], [507, "Pit Fighter"], [535, "Protagonist"], [550, "Raconteur"], [578, "Rat Catcher"], [606, "Rogue"], [641, "Runebearer"], [656, "Scribe"], [664, "Seaman"], [679, "Servant"], [694, "Sewer Jack"], [722, "Shieldbreaker"], [730, "Slave"], [751, "Smuggler"], [779, "Soldier"], [794, "Stevedore"], [809, "Student"], [824, "Temple Guardian"], [845, "Thief"], [860, "Thug"], [875, "Toll Keeper"], [896, "Tomb Robber"], [924, "Tradesman"], [952, "Troll Slayer"], [980, "Vagabond"], [1000, "Watchman"]),
 		birthplace: () => initDieTable<string>([30, races["Human"].birthplace()], [40, "Karak Norn (Grey Mountains)"], [50, "Karak Izor (the Vaults)"], [60, "Karak Hirn (Black Mountains)"], [70, "Karak Kadrin (World's Edge Mountains)"], [80, "Karaz-a-Karak (World's Edge Mountains"], [90, "Zhufbar (World's Edge Mountains)"], [100, "Karak Varr (the Black Gulf)"])[d100()-1],
+		baseHeightMale: 52,
+		baseHeightFemale: 50,
+		weightTable: initDieTable([1, 90], [3, 95], [5, 100], [8, 105], [12, 110], [17, 115], [22, 120], [29, 125], [37, 130], [49, 135], [64, 140], [71, 145], [78, 150], [83, 155], [88, 160], [92, 165], [95, 170], [97, 175], [99, 180], [100, 185]),
+		baseAge: 20,
+		ageStep: 5,
 	},
 	"Halfling": {
 		name: "Halfling",
@@ -54,5 +74,10 @@ export const races: { [K in RaceName] : Race } = {
 		baseMovement: 4,
 		careerTable: initDieTable<CareerName>([20, "Agitator"], [33, "Apothecary"], [40, "Badlander"], [53, "Bailiff"], [60, "Barber-Surgeon"], [67, "Bonepicker"], [80, "Bounty Hunter"], [93, "Burgher"], [106, "Camp Follower"], [119, "Cartographer"], [139, "Charcoal Burner"], [172, "Chimneysweep"], [192, "Dilettante"], [199, "Dung Collector"], [206, "Embalmer"], [226, "Entertainer"], [233, "Ex-convict"], [240, "Exciseman"], [253, "Farmer"], [260, "Ferryman"], [293, "Fieldwarden"], [306, "Fisherman"], [319, "Gambler"], [349, "Grave Robber"], [356, "Grave Warden"], [389, "Hunter"], [402, "Initiate"], [415, "Lamplighter"], [428, "Litigant"], [453, "Mercenary"], [486, "Messenger"], [511, "Militiaman"], [518, "Muleskinner"], [538, "Newssheet Vendor"], [551, "Noble"], [571, "Outlaw"], [596, "Peasant"], [609, "Pilgrim"], [638, "Raconteur"], [648, "Rat Catcher"], [681, "Rogue"], [694, "Scribe"], [732, "Servant"], [745, "Sewer Jack"], [752, "Slave"], [772, "Smuggler"], [785, "Soldier"], [798, "Student"], [811, "Temple Guardian"], [849, "Thief"], [852, "Thug"], [865, "Toll Keeper"], [898, "Tomb Robber"], [931, "Tradesman"], [956, "Vagabond"], [976, "Valet"], [1000, "Watchman"]),
 		birthplace: () => initDieTable<string>([50, races["Human"].birthplace()], [100, "the Moot"])[d100()-1],
+		baseHeightMale: 38,
+		baseHeightFemale: 40,
+		weightTable: initDieTable([1, 75], [3, 75], [5, 80], [8, 80], [12, 85], [17, 85], [22, 90], [29, 90], [37, 95], [49, 100], [64, 100], [71, 105], [78, 110], [83, 115], [88, 120], [92, 125], [95, 130], [97, 135], [99, 140], [100, 145]),
+		baseAge: 20,
+		ageStep: 2,
 	},
 };

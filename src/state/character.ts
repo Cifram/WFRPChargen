@@ -5,11 +5,14 @@ import { StatBlock, SecondaryStatNames, SecondaryStat, PrimaryStatNames, Primary
 
 export interface Character {
 	name: string;
-	age: number;
 	race: RaceName;
 	career: CareerName;
 	history: HistoryStep[];
 	birthplace: string;
+	age: number;
+	gender: "Male" | "Female";
+	weight: number;
+	height: number;
 }
 
 export type HistoryStep = HistoryStatRolls | HistorySecondaryStats | HistoryStatAdvance;

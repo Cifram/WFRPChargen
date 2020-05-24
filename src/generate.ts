@@ -1,9 +1,9 @@
 import { RaceName, races } from './data/races';
 import { HistoryStatRolls, HistorySecondaryStats } from './state/history';
 import { Character } from './state/character';
-import { d10, d1000 } from './dice';
+import { d10, d100, d1000 } from './dice';
 
-export function generate(race: RaceName) : Character {
+export function generate(race: RaceName, gender: "Male" | "Female") : Character {
 	const rolls: HistoryStatRolls = {
 		type: "StatRolls",
 		WS: d10() + d10(),
@@ -29,10 +29,13 @@ export function generate(race: RaceName) : Character {
 	};
 	return {
 		name: "Foo Barson",
-		age: 20,
 		race: race,
 		career: races[race].careerTable[d1000()-1],
 		history: [ rolls, secondary ],
 		birthplace: races[race].birthplace(),
+		age: Math.ceil(d100()/5) * races[race].ageStep + races[race].baseAge,
+		gender: gender,
+		weight: races[race].weightTable[d100()-1],
+		height: (gender == "Male" ? races[race].baseHeightMale : races[race].baseHeightFemale) + d10(),
 	};
 }
