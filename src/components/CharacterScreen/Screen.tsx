@@ -2,6 +2,7 @@ import * as React from "react";
 import { State } from "../../state/state";
 import { CharacterSection } from "./CharacterSection";
 import { StatsSection } from "./StatsSection";
+import { PersonalSection } from "./PersonalSection";
 
 export function Screen(props: { state: State }) {
 	if (props.state.selectedCharacter == null) {
@@ -12,5 +13,6 @@ export function Screen(props: { state: State }) {
 	return <div className="flexcol characterScreen">
 		<CharacterSection char={character} />
 		<StatsSection char={character} />
+		<PersonalSection char={character} />
 	</div>
 }

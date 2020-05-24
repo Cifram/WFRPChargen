@@ -1,5 +1,4 @@
 import * as React from "react";
-import { State } from "../../state/state";
 import { races } from "../../data/races";
 import { careers } from "../../data/careers";
 import { Character } from "../../state/character";
