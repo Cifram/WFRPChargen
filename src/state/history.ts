@@ -5,16 +5,3 @@ export type HistoryStatAdvance = {
 	stat: PrimaryStat | SecondaryStat;
 	change: number;
 }
-
-export type HistoryStatRolls = {
-	[K in PrimaryStat]: number;
-} & {
-	type: "StatRolls";
-	shallyasMercyStat: PrimaryStat | null;
-}
-
-export type HistorySecondaryStats = {
-	[K in SecondaryStat]: number;
-} & {
-	type: "SecondaryStats";
-}
