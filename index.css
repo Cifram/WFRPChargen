@@ -18,12 +18,10 @@ body {
 }
 
 #root {
-	width: 100%;
 	height: 100%;
 }
 
 .app {
-	width: 100%;
 	height: 100%;
 }
 
@@ -41,11 +39,11 @@ body {
 }
 
 .sidebar .listItem.selected {
-	background-color: #b9b9ff;
+	background-color: powderblue;
 }
 
 .sidebar .listItem:hover {
-	background-color: #cccccc;
+	background-color: lightgray;
 }
 
 .sidebar .listItem .details {
@@ -55,9 +53,36 @@ body {
 }
 
 .sidebar .divider {
-	background-color: #eeeeee;
+	background-color: lightgray;
 	margin: 5px 0px;
 	height: 1px;
+}
+
+.generateScreen {
+	flex: 1;
+	background-color: cornsilk;
+	padding: 5px;
+	align-items: flex-start;
+}
+
+.generateScreen .group {
+	flex: 1;
+	background-color: white;
+	outline: 1px solid black;
+	padding: 3px;
+	margin: 5px;
+	text-align: center;
+}
+
+.generateScreen .group .button {
+	background-color: white;
+	outline: 1px solid black;
+	margin: 3px;
+	height: 20px;
+}
+
+.generateScreen .group .button:hover {
+	background-color: lightgray;
 }
 
 .characterScreen {
