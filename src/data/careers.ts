@@ -13,10 +13,10 @@ export interface Career {
 	careerExits: string[];
 }
 
-export type CareerName = "Abbot" | "Admiral" | "Agent of the Shroud" | "Agitator" | "Ambassador" | "Anchorite" | "Animal Trainer" | "Anointed Priest" | "Apothecary" | "Apprentice Runesmith" | "Apprentice Witch" | "Apprentice Wizard" | "Artillerist" | "Artisan" | "Assassin" | "Astrologer" | "Ataman" | "Badlander" | "Badlands Ranger" | "Bailiff" | "Barber-Surgeon" | "Battle Pilgrim" | "Bear Tamer" | "Black Guard" | "Boatman" | "Bodyguard" | "Bondsman" | "Bonepicker" | "Border Courtier" | "Bounty Hunter" | "Burgher" | "Cadet" | "Camp Follower" | "Cantor" | "Captain" | "Carcassonne Shepherd" | "Cartographer" | "Cat Burglar" | "Catechist" | "Cenobite" | "Champion" | "Charcoal Burner" | "Charlatan" | "Chekist" | "Chimneysweep" | "Cloaked Brother" | "Coachman" | "Courtier" | "Crime Lord" | "Crusader" | "Cult Attendant" | "Daemon Slayer" | "Deepwatcher" | "Demagogue" | "Dilettante" | "Drover" | "Duellist" | "Dung Collector" | "Embalmer" | "Enforcer" | "Engineer" | "Entertainer" | "Envoy" | "Estalian Diestro" | "Ex-convict" | "Exciseman" | "Exorcist" | "Explorer" | "Faceless" | "Farmer" | "Fence" | "Ferryman" | "Fieldwarden" | "Fisherman" | "Flagellant" | "Foreman" | "Forger" | "Freeholder" | "Friar" | "Frogwife" | "Gambler" | "Ghost Strider" | "Giant Slayer" | "Grail Knight" | "Grail Pilgrim" | "Grandmaster" | "Grave Robber" | "Grave Warden" | "Guild Master" | "Hag Mother" | "Hag Witch" | "Hedge Wizard" | "Hedgecraft Apprentice" | "Hedge Master" | "Hedgewise" | "Herald" | "Herrimault" | "High Priest" | "Highwayman" | "Horned Hunter" | "Horse Archer" | "Horse Coper" | "Horse Master" | "Hunter" | "Ice Maiden" | "Ice Witch" | "Initiate" | "Innkeeper" | "Interrogator" | "Jailer" | "Journeyman Runesmith" | "Journeyman Wizard" | "Judicial Champion" | "Killer of the Dead" | "Kislevite Kossar" | "Kithband Warrior" | "Knight" | "Knight Errant" | "Knight of the Blazing Sun" | "Knight of the Inner Circle" | "Knight of the Raven" | "Knight of the Realm" | "Knight of the Verdant Field" | "Knight Panther" | "Lamplighter" | "Lay Priest" | "Litigant" | "Man-at-Arms" | "Marauder" | "Marine" | "Master Runesmith" | "Master Thief" | "Master Vigilant" | "Master Wizard" | "Mate" | "Mediator" | "Mercenary" | "Merchant" | "Messenger" | "Militiaman" | "Miner" | "Minstrel" | "Monk" | "Muleskinner" | "Mystic" | "Navigator" | "Newssheet Vendor" | "Noble" | "Noble Lord" | "Norse Berserker" | "Outlaw" | "Outlaw Chief" | "Outrider" | "Pamphleteer" | "Peasant" | "Penitent" | "Physician" | "Pilgrim" | "Pistolier" | "Pit Fighter" | "Politician" | "Prelate" | "Priest" | "Protagonist" | "Questing Knight" | "Racketeer" | "Raconteur" | "Rapscallion" | "Rat Catcher" | "Reaver" | "Riverwarden" | "Roadwarden" | "Rogue" | "Runebearer" | "Runelord" | "Scholar" | "Scourge of God" | "Scout" | "Scribe" | "Sea Captain" | "Seaman" | "Seer" | "Sergeant" | "Servant" | "Sewer Jack" | "Shieldbreaker" | "Skald" | "Slave" | "Slaver" | "Smuggler" | "Soldier" | "Spy" | "SQuire" | "Steppes Nomad" | "Stevedore" | "Steward" | "Streltsi" | "Strigany Mystic" | "Student" | "Swamp Skimmer" | "Swampaire" | "Targeteer" | "Temple Guardian" | "Thief" | "Thug" | "Toll Keeper" | "Tomb Robber" | "Tradesman" | "Troll Slayer" | "Vagabond" | "Valet" | "Vampire Hunter" | "Verenean Investigator" | "Veteran" | "Village Elder" | "Wall Warden" | "Warleader" | "Warlock" | "Warrior Priest" | "Watchman" | "Whaler" | "Winged Lancer" | "Wise Woman" | "Witch" | "Witch Hunter" | "Wizard Lord" | "Woodsman" | "Wrecker" | "Yeoman" | "Zealot";
+let MakeCareer = (career: Career) => career;
 
-export const careers: { [K in CareerName]: Career } = {
-	"Abbot": {
+export const careers = {
+	"Abbot": MakeCareer({
 		name: "Abbot",
 		quote: "My vow of poverty has made me rich, my vow of obedience has made me a lord. My vow of chastity? Ah...",
 		book: "ToS",
@@ -87,8 +87,8 @@ export const careers: { [K in CareerName]: Career } = {
 		been there. The abbot must avoid scandal, while making sure that the
 		Dark Gods do not have a foothold in his abbey.
 		*/
-	},
-	"Admiral": {
+	}),
+	"Admiral": MakeCareer({
 		name: "Admiral",
 		quote: "I don’t care about the shoals. If Bruckmeier and Lowenstein haven’t tacked two leagues east-southeast of their position by fourteen-hundred hours, we’ll be eating catapult shot for dinner. And then those Orc pirates will be eating us.",
 		book: "SoE",
@@ -158,8 +158,8 @@ export const careers: { [K in CareerName]: Career } = {
 		cyclone overtakes the admiral’s fleet, it will transport the ships to a
 		strange sea in the Realms of Chaos.
 		*/
-	},
-	"Agent of the Shroud": {
+	}),
+	"Agent of the Shroud": MakeCareer({
 		name: "Agent of the Shroud",
 		quote: "Dead? Yes. For now. But notice the bite marks. Can there be any doubt? I know he was your brother, but now he needs you one last time… He needs you to bring him eternal peace.",
 		book: "NDM",
@@ -229,8 +229,8 @@ export const careers: { [K in CareerName]: Career } = {
 		investigators rescue him before he becomes the Necromancer’s next
 		unwilling subject?
 		*/
-	},
-	"Agitator": {
+	}),
+	"Agitator": MakeCareer({
 		name: "Agitator",
 		quote: "Friend –step closer! I would like to make you aware of a dire situation... an atrocity you may not be aware of. There’s trouble my friend, trouble right here Altdorf.",
 		book: "Core",
@@ -302,8 +302,8 @@ export const careers: { [K in CareerName]: Career } = {
 		with one of the agitator groups, or the authorities might approach them
 		to help police the increasing violence.
 		*/
-	},
-	"Ambassador": {
+	}),
+	"Ambassador": MakeCareer({
 		name: "Ambassador",
 		quote: "To fight for one’s lands is a privilege. To speak for one’s lands is an honor.",
 		book: "RotIQ",
@@ -371,8 +371,8 @@ export const careers: { [K in CareerName]: Career } = {
 		city-states as they can. The party must also make steps to guarantee the
 		safety of goods and peoples from their lands to Tilea and back.
 		*/
-	},
-	"Anchorite": {
+	}),
+	"Anchorite": MakeCareer({
 		name: "Anchorite",
 		quote: "Pain? What pain? There is no pain. Only penance.",
 		book: "RC",
@@ -442,8 +442,8 @@ export const careers: { [K in CareerName]: Career } = {
 		is living somewhere in the wastes, so they must find him and somehow
 		convince him to reclaim his barony.
 		*/
-	},
-	"Animal Trainer": {
+	}),
+	"Animal Trainer": MakeCareer({
 		name: "Animal Trainer",
 		quote: "Behold, gentlemen! This beast is less ferocious than an old crone. Watch as I insert my entire foot into the dancing bear’s mouth...wait...no Vinny! Stop...urk!",
 		book: "New",
@@ -514,8 +514,8 @@ export const careers: { [K in CareerName]: Career } = {
 		release, and safely secure the creature so it can be transported and released
 		back into the wild.
 		*/
-	},
-	"Anointed Priest": {
+	}),
+	"Anointed Priest": MakeCareer({
 		name: "Anointed Priest",
 		quote: "Reveal to me the deeper mysteries of my faith, oh wise Verena, that I may serve you better.",
 		book: "Core",
@@ -581,8 +581,8 @@ export const careers: { [K in CareerName]: Career } = {
 		to dissuade the others from them as well, suggesting alternate plans and
 		using every means necessary to block those activities.
 		*/
-	},
-	"Apothecary": {
+	}),
+	"Apothecary": MakeCareer({
 		name: "Apothecary",
 		quote: "Two parts alcohol, one part powdered bear tooth and one part pasty phlegmberry. Infuse the solids until bubbles appear, then boil off the alcohol. It’ll put extra power in your arms for a good hour, if you can take the cramps.",
 		book: "SH",
@@ -648,8 +648,8 @@ export const careers: { [K in CareerName]: Career } = {
 		game too far, when toxic agents are added to the formula to perpetuate
 		the customers’ maladies. Will anyone squeal?
 		*/
-	},
-	"Apprentice Runesmith": {
+	}),
+	"Apprentice Runesmith": MakeCareer({
 		name: "Apprentice Runesmith",
 		quote: "In another fifty years, perhaps I will have perfected this simple rune so I can learn deeper mysteries.",
 		book: "RoS",
@@ -714,8 +714,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Alternatively, the characters could be hired to guide or guard the
 		apprentice on his journey.
 		*/
-	},
-	"Apprentice Witch": {
+	}),
+	"Apprentice Witch": MakeCareer({
 		name: "Apprentice Witch",
 		quote: "The winter’s chill is my teacher. And it can be a cruel master.",
 		book: "RotIQ",
@@ -784,8 +784,8 @@ export const careers: { [K in CareerName]: Career } = {
 		young girl is destined to become an Ice Maiden, and rid the village of
 		the pesky spirit?
 		*/
-	},
-	"Apprentice Wizard": {
+	}),
+	"Apprentice Wizard": MakeCareer({
 		name: "Apprentice Wizard",
 		quote: "My exam is coming up soon. If I can light the candle from ten paces without setting my hair on fire, I’m sure I’ll pass this time.",
 		book: "Core",
@@ -859,8 +859,8 @@ export const careers: { [K in CareerName]: Career } = {
 		pustules. The master was overwhelmed by the daemon, which now waits
 		for the apprentice...and anyone who might be travelling with him.
 		*/
-	},
-	"Artillerist": {
+	}),
+	"Artillerist": MakeCareer({
 		name: "Artillerist",
 		quote: "Wot? Wot? You’ll have to speak louder, lad? The cannons are barkin’ fierce today.",
 		book: "WC",
@@ -920,8 +920,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Imperial Great Cannon 1500gc 4–5 Engineer 20 400/800 12 Impact, Unreliable Very Rare
 		Hellblast Volley Gun 5000gc 6 Engineer 10 150/300 20 Experimental, Special Very Rare
 		*/
-	},
-	"Artisan": {
+	}),
+	"Artisan": MakeCareer({
 		name: "Artisan",
 		quote: "The key to fine craftsmanship is simple. Remove everything that keeps your work from being perfect.",
 		book: "Core",
@@ -990,8 +990,8 @@ export const careers: { [K in CareerName]: Career } = {
 		truth, the noble is a volatile knight and his blushing bride is hideous to
 		behold – can an artisan satisfy the knight yet remain true to his craft?
 		*/
-	},
-	"Assassin": {
+	}),
+	"Assassin": MakeCareer({
 		name: "Assassin",
 		quote: "You have but to whisper the name and pay the gold. He will be dead by week’s end.",
 		book: "Core",
@@ -1062,8 +1062,8 @@ export const careers: { [K in CareerName]: Career } = {
 		identity in exchange for his own freedom. Now the guards are after the
 		assassin, intent upon punishing him for his previous jobs.
 		*/
-	},
-	"Astrologer": {
+	}),
+	"Astrologer": MakeCareer({
 		name: "Astrologer",
 		quote: "The star sign of Dragomas the Drake aligns with Mammit the Wise. Mannslieb is ascendant and fully revealed. Such portents are auspicious indeed, my lord. Now, concerning the matter of my payment…",
 		book: "SH",
@@ -1130,8 +1130,8 @@ export const careers: { [K in CareerName]: Career } = {
 		has been possessed. Of course, if the adventures actually carry out the
 		astrologer’s scheme, they are going to be in a lot of trouble.
 		*/
-	},
-	"Ataman": {
+	}),
+	"Ataman": MakeCareer({
 		name: "Ataman",
 		quote: "Let us gather as a community and celebrate the ties that bind us together.",
 		book: "RotIQ",
@@ -1197,8 +1197,8 @@ export const careers: { [K in CareerName]: Career } = {
 		someone to travel to the north and try and unite the atamans before it
 		is too late.
 		*/
-	},
-	"Badlander": {
+	}),
+	"Badlander": MakeCareer({
 		name: "Badlander",
 		quote: "Life’s tough here, so we’re tougher. The only hope here is the dream of leaving these rocks behind.",
 		book: "RC",
@@ -1263,8 +1263,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the information is an armed escort willing to brave the dangers of the
 		Border Princes and help him locate and explore the ruins.
 		*/
-	},
-	"Badlands Ranger": {
+	}),
+	"Badlands Ranger": MakeCareer({
 		name: "Badlands Ranger",
 		quote: "You don’t have to hire me; there are lots of guides willing to take you into the badlands. Very few know about the lost mine, or how to find fresh water in the Scorched Valley. By all means, find someone who’ll guide you cheaply; maybe you’ll have enough money left over to pay for your funeral.",
 		book: "RC",
@@ -1330,8 +1330,8 @@ export const careers: { [K in CareerName]: Career } = {
 		will pay good coin if someone can locate the shrine and bring him the
 		evidence he seeks.
 		*/
-	},
-	"Bailiff": {
+	}),
+	"Bailiff": MakeCareer({
 		name: "Bailiff",
 		quote: "Open up, Johann. I know you’re in there. You always seem to be indisposed when it’s time to collect the rent.",
 		book: "Core",
@@ -1401,8 +1401,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and sends the bailiff to substantiate these threats, as well as identify the
 		people behind this little insurrection and “deal with them.”
 		*/
-	},
-	"Barber-Surgeon": {
+	}),
+	"Barber-Surgeon": MakeCareer({
 		name: "Barber-Surgeon",
 		quote: "This won’t hurt a bit. Before I start, though, you may want to bite down on this leather strop.",
 		book: "Core",
@@ -1467,8 +1467,8 @@ export const careers: { [K in CareerName]: Career } = {
 		are reputed to be good, but really not good enough to kill for. What is
 		going on?
 		*/
-	},
-	"Battle Pilgrim": {
+	}),
+	"Battle Pilgrim": MakeCareer({
 		name: "Battle Pilgrim",
 		quote: "Milord bequeathed unto me this relic for my honored service. Failure to serve me, and through me his Holiness, shall reveal what holy powers this gauntlet shall visit upon thy sorry skull.",
 		book: "KotG",
@@ -1540,8 +1540,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Knights to complete his reliquae, after which he believes the Lady of the
 		Lake shall grant him a vision and lead him to the Grail.
 		*/
-	},
-	"Bear Tamer": {
+	}),
+	"Bear Tamer": MakeCareer({
 		name: "Bear Tamer",
 		quote: "Me and Bruno, we like brothers… share same food, share same bed… what so funny, eh, Empire-man?",
 		book: "RotIQ",
@@ -1608,8 +1608,8 @@ export const careers: { [K in CareerName]: Career } = {
 		from their Kislevite hosts should they take part, and a successful mission
 		promises a great reward.
 		*/
-	},
-	"Black Guard": {
+	}),
+	"Black Guard": MakeCareer({
 		name: "Black Guard",
 		quote: "You may not pass. Unless it is through Morr’s Gates you wish to travel.",
 		book: "NDM",
@@ -1676,8 +1676,8 @@ export const careers: { [K in CareerName]: Career } = {
 		duties to inspect the crime scene and bring the culprits to justice if
 		possible.
 		*/
-	},
-	"Boatman": {
+	}),
+	"Boatman": MakeCareer({
 		name: "Boatman",
 		quote: "Are you looking for a ride up the river, sir? We – my captain and me, that is – can help you out with that -- for a small fee, of course.",
 		book: "Core",
@@ -1741,8 +1741,8 @@ export const careers: { [K in CareerName]: Career } = {
 		over the cargo, they may find they their payment is more than they
 		bargained for.
 		*/
-	},
-	"Bodyguard": {
+	}),
+	"Bodyguard": MakeCareer({
 		name: "Bodyguard",
 		quote: "Back off! Nobody touches Mister Garibaldi!",
 		book: "Core",
@@ -1810,8 +1810,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Rumours on the street say that the famed assassin and master of
 		disguise, Alizandre, is in the city. Can the assassin be stopped in time?
 		*/
-	},
-	"Bondsman": {
+	}),
+	"Bondsman": MakeCareer({
 		name: "Bondsman",
 		quote: "The Jarl says you die. Slowly. And I am nothing if not loyal to the Jarl.",
 		book: "ToC",
@@ -1880,8 +1880,8 @@ export const careers: { [K in CareerName]: Career } = {
 		act, and asks the characters to uncover – or contrive – whatever evidence
 		is necessary to implicate his rival.
 		*/
-	},
-	"Bonepicker": {
+	}),
+	"Bonepicker": MakeCareer({
 		name: "Bonepicker",
 		quote: "There’s a lovely bit of rubbish over here...",
 		book: "Core",
@@ -1948,8 +1948,8 @@ export const careers: { [K in CareerName]: Career } = {
 		person. Perhaps it’s a hint of a dark past, or it may even amount to
 		evidence of membership in a Chaos cult.
 		*/
-	},
-	"Border Courtier": {
+	}),
+	"Border Courtier": MakeCareer({
 		name: "Border Courtier",
 		quote: "Life in the borderlands is indeed rough. Good thing I’m here to look out for your interests.",
 		book: "RC",
@@ -2020,8 +2020,8 @@ export const careers: { [K in CareerName]: Career } = {
 		both gold and manpower, and both princes seek a decisive advantage to
 		settle the conflict one way or another.
 		*/
-	},
-	"Bounty Hunter": {
+	}),
+	"Bounty Hunter": MakeCareer({
 		name: "Bounty Hunter",
 		quote: "I’m bringing you back. Live, dead. Don’t matter to me. Worth more live, but you seem to be the sort that won’t come quietly. Dead it is, then.",
 		book: "Core",
@@ -2085,8 +2085,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Hills. Catching him is a challenge many bounty hunters will leap at, as
 		they expect to find a worthy adversary in one of their own.
 		*/
-	},
-	"Burgher": {
+	}),
+	"Burgher": MakeCareer({
 		name: "Burgher",
 		quote: "Hmm? What did you need? Can’t you see I’m terribly busy right now? This town doesn’t run itself, you know.",
 		book: "Core",
@@ -2153,8 +2153,8 @@ export const careers: { [K in CareerName]: Career } = {
 		an active part of their escapades. Will he learn to become a skilled
 		adventurer, die or run from his first real fight, or simply get in the way?
 		*/
-	},
-	"Cadet": {
+	}),
+	"Cadet": MakeCareer({
 		name: "Cadet",
 		quote: "Sir! Yes, sir! Right away, sir!",
 		book: "SoE",
@@ -2225,8 +2225,8 @@ export const careers: { [K in CareerName]: Career } = {
 		he hires the adventurers to break into his cadet school and steal a copy of
 		the exam answers from the Commandent’s office.
 		*/
-	},
-	"Camp Follower": {
+	}),
+	"Camp Follower": MakeCareer({
 		name: "Camp Follower",
 		quote: "You must get awfully cold and lonely on the march. I can help with both.",
 		book: "Core",
@@ -2294,8 +2294,8 @@ export const careers: { [K in CareerName]: Career } = {
 		follower in order to survive. This opens a whole new world to her, a
 		dirty place, but full of strange new opportunities.
 		*/
-	},
-	"Cantor": {
+	}),
+	"Cantor": MakeCareer({
 		name: "Cantor",
 		quote: "I raise my voice in song to raise the spirits of our faithful and the energy of our god.",
 		book: "ToS",
@@ -2361,8 +2361,8 @@ export const careers: { [K in CareerName]: Career } = {
 		number of people with this talent may assist in this manner
 		equal to the number of spellcasters participating in the ritual.
 		*/
-	},
-	"Captain": {
+	}),
+	"Captain": MakeCareer({
 		name: "Captain",
 		quote: "We’re looking for a few good men to lead a suicide raid against the Orc army. Volunteers?",
 		book: "Core",
@@ -2429,8 +2429,8 @@ export const careers: { [K in CareerName]: Career } = {
 		are desperate to put his military know-how to use, helping train and
 		organise the milita.
 		*/
-	},
-	"Carcassonne Shepherd": {
+	}),
+	"Carcassonne Shepherd": MakeCareer({
 		name: "Carcassonne Shepherd",
 		quote: "Shush, my little lambs. No man nor beast shall bother you while I’m here.",
 		book: "KotG",
@@ -2501,8 +2501,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the horde to allow the muster of reinforcements falls to the shepherds,
 		and they will be glad to receive any help they can get.
 		*/
-	},
-	"Cartographer": {
+	}),
+	"Cartographer": MakeCareer({
 		name: "Cartographer",
 		quote: "Hmm... What an interesting anomoly. The details of the coastline suggest an inlet along this stretch. Perhaps we could land there and I could map out the interior?",
 		book: "New",
@@ -2571,8 +2571,8 @@ export const careers: { [K in CareerName]: Career } = {
 		obvious to him that once he has finished his maps, the mob will do him
 		in. He needs to think fast.
 		*/
-	},
-	"Cat Burglar": {
+	}),
+	"Cat Burglar": MakeCareer({
 		name: "Cat Burglar",
 		quote: "The secret to getting in is choosing the right window. The secret to getting out is choosing the right door.",
 		book: "Core",
@@ -2636,8 +2636,8 @@ export const careers: { [K in CareerName]: Career } = {
 		burglar finds himself hunted by Chaos cultists, the gem’s owner, and
 		possibly the thieves’ guild.
 		*/
-	},
-	"Catechist": {
+	}),
+	"Catechist": MakeCareer({
 		name: "Catechist",
 		quote: "Initiate Borgas, if you’re so eager to talk during lessons, perhaps you’d care to stand and recite the Seventeen Virtues of Shallya to the rest of the class?",
 		book: "ToS",
@@ -2702,8 +2702,8 @@ export const careers: { [K in CareerName]: Career } = {
 		that knowledge got the priest killed, what will it do to the catechist who
 		discovers it?
 		*/
-	},
-	"Cenobite": {
+	}),
+	"Cenobite": MakeCareer({
 		name: "Cenobite",
 		quote: "Suffering? Yes, it is the sweetest lesson that can be learned. And I have learned it well.",
 		book: "RC",
@@ -2773,8 +2773,8 @@ export const careers: { [K in CareerName]: Career } = {
 		A direct assault on the monastery wouble be difficult, but if someone
 		could manage to kidnap Brother David, this could all be resolved...
 		*/
-	},
-	"Champion": {
+	}),
+	"Champion": MakeCareer({
 		name: "Champion",
 		quote: "By my honour, I will not yield!",
 		book: "Core",
@@ -2844,8 +2844,8 @@ export const careers: { [K in CareerName]: Career } = {
 		master’s oppressive cruelties against innocent folk. Will the champion
 		risk all to turn against the noble to defend his victims?
 		*/
-	},
-	"Charcoal Burner": {
+	}),
+	"Charcoal Burner": MakeCareer({
 		name: "Charcoal Burner",
 		quote: "Don’t mind the smoke, lad. You eventually get (hack, cough) used to it. (cough)",
 		book: "Core",
@@ -2913,8 +2913,8 @@ export const careers: { [K in CareerName]: Career } = {
 		charcoal burners, well versed with fire and their results, to help uncover
 		what took place.
 		*/
-	},
-	"Charlatan": {
+	}),
+	"Charlatan": MakeCareer({
 		name: "Charlatan",
 		quote: "I’m out to steal every last moment’s peace out of my mark, not just his coin. Naught but doubts nor despair shall fill the purses of my victims.",
 		book: "Core",
@@ -2977,8 +2977,8 @@ export const careers: { [K in CareerName]: Career } = {
 		he dealt with has suddenly disappeared – along with several hundred
 		gold crowns worth of silks and satins.
 		*/
-	},
-	"Chekist": {
+	}),
+	"Chekist": MakeCareer({
 		name: "Chekist",
 		quote: "Does that hurt, comrade? I’m sorry; Sasha doesn’t know his own strength sometimes. Please believe that I will learn what you’re hiding from me; when I do, our next meeting will not be so pleasant.",
 		book: "RotIQ",
@@ -3047,8 +3047,8 @@ export const careers: { [K in CareerName]: Career } = {
 		is due to the fact that the tradesman has fallen in love with a woman the
 		chekist himself fancies.
 		*/
-	},
-	"Chimneysweep": {
+	}),
+	"Chimneysweep": MakeCareer({
 		name: "Chimneysweep",
 		quote: "It’s not so bad when yer climbing up. It’s the getting stuck bit I don’t much like.",
 		book: "FoN",
@@ -3105,8 +3105,8 @@ export const careers: { [K in CareerName]: Career } = {
 		man’s house on the pretext of cleaning his chimneys, and promises to
 		pay him well if he steals the jeweller back.
 		*/
-	},
-	"Cloaked Brother": {
+	}),
+	"Cloaked Brother": MakeCareer({
 		name: "Cloaked Brother",
 		quote: "Really? There is a rumour going ‘round that poor Bertram is caught up in a cult? Tell me more, good brother...",
 		book: "ToC",
@@ -3175,8 +3175,8 @@ export const careers: { [K in CareerName]: Career } = {
 		pair of Cloaked Brother infiltrators has been caught up in the raid, and
 		they desperately need rescuing.
 		*/
-	},
-	"Coachman": {
+	}),
+	"Coachman": MakeCareer({
 		name: "Coachman",
 		quote: "I’ll make sure it gets there safe and sound. If I have to shoot every beastman and goblin from here to Nuln, it’ll get there.",
 		book: "Core",
@@ -3245,8 +3245,8 @@ export const careers: { [K in CareerName]: Career } = {
 		leaving the coachmen and their passengers stranded in the wilderness,
 		far from the nearest coaching inn.
 		*/
-	},
-	"Courtier": {
+	}),
+	"Courtier": MakeCareer({
 		name: "Courtier",
 		quote: "Have you heard about the viscount? The wags in court all believe he’s taken another lover and this time – she’s married. Heads will roll, Stephan. Heads will roll. What business is that of mine? Why Stephan, you should know by now that I find my own business quite dreary. I much prefer other people’s.",
 		book: "Core",
@@ -3316,8 +3316,8 @@ export const careers: { [K in CareerName]: Career } = {
 		him. He needs that journal (which is full of scandals and gossip) back
 		immediately.
 		*/
-	},
-	"Crime Lord": {
+	}),
+	"Crime Lord": MakeCareer({
 		name: "Crime Lord",
 		quote: "It’s a shame our dealings had to end this way. We could have worked together so well, if only you had...oh, do stop screaming, he’s barely got half your fingers off yet.",
 		book: "Core",
@@ -3385,8 +3385,8 @@ export const careers: { [K in CareerName]: Career } = {
 		must not allow the noblewoman to know it is going on. The game is
 		afoot...
 		*/
-	},
-	"Crusader": {
+	}),
+	"Crusader": MakeCareer({
 		name: "Crusader",
 		quote: "Shall mankind’s lot be to sit idle and let the darkness take him? No, I say thee! We must strike back against the shadows!",
 		book: "ToS",
@@ -3456,8 +3456,8 @@ export const careers: { [K in CareerName]: Career } = {
 		any templar orders of its own. The merchants are therefore recruiting
 		independent knights to lead the crusade.
 		*/
-	},
-	"Cult Attendant": {
+	}),
+	"Cult Attendant": MakeCareer({
 		name: "Cult Attendant",
 		quote: "Are they attacking now? No? Then you can tell the high priest about the rampaging mutants after morning prayers.",
 		book: "ToS",
@@ -3521,8 +3521,8 @@ export const careers: { [K in CareerName]: Career } = {
 		temple’s supplies? Did someone deliberately acquire them, looking to
 		subvert members of the faith?
 		*/
-	},
-	"Daemon Slayer": {
+	}),
+	"Daemon Slayer": MakeCareer({
 		name: "Daemon Slayer",
 		quote: "Phaw. That weren’t so tough. Wake me when we find something worthy of my axe.",
 		book: "Core",
@@ -3591,8 +3591,8 @@ export const careers: { [K in CareerName]: Career } = {
 		beasts that University professors claim are extinct or never even existed,
 		such as the fabled Jabberwock or the half-daemonic Fen Cyclops.
 		*/
-	},
-	"Deepwatcher": {
+	}),
+	"Deepwatcher": MakeCareer({
 		name: "Deepwatcher",
 		quote: "To see the sun again after a long Deepwatch. Was ne’er a shinier gold crown, nor richer reward.",
 		book: "WC",
@@ -3660,8 +3660,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the increase in traffic beneath Tobaro also increases the dangers for any
 		moving beneath the city.
 		*/
-	},
-	"Demagogue": {
+	}),
+	"Demagogue": MakeCareer({
 		name: "Demagogue",
 		quote: "Surely, good people, you will not tolerate this injustice in our town?",
 		book: "Core",
@@ -3727,8 +3727,8 @@ export const careers: { [K in CareerName]: Career } = {
 		turn things around before the city is filled only with the dead, and the
 		new masters of Altdorf are the villainous rat-men!
 		*/
-	},
-	"Dilettante": {
+	}),
+	"Dilettante": MakeCareer({
 		name: "Dilettante",
 		quote: "This reminds me of something interesting that von Halmith wrote, and... Oh! Is that Griffon’s Bane?",
 		book: "New",
@@ -3799,8 +3799,8 @@ export const careers: { [K in CareerName]: Career } = {
 		powers. The dilettante gets nervous; she doesn’t remember making any
 		pacts with dark powers, but what’s going on with the painting?
 		*/
-	},
-	"Drover": {
+	}),
+	"Drover": MakeCareer({
 		name: "Drover",
 		quote: "Wait a second... Weren’t there sixty head counted this morning?",
 		book: "RotIQ",
@@ -3865,8 +3865,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Getting to these first can be an adventure in itself as drovers push their
 		herds hard through the thawing landscape.
 		*/
-	},
-	"Duellist": {
+	}),
+	"Duellist": MakeCareer({
 		name: "Duellist",
 		quote: "Didst thou besmirch my good name with your ill-timed jest? I surely hope so...",
 		book: "Core",
@@ -3934,8 +3934,8 @@ export const careers: { [K in CareerName]: Career } = {
 		schoolmates want revenge. But who is responsible? And can a group of
 		duellists work together without killing each other?
 		*/
-	},
-	"Dung Collector": {
+	}),
+	"Dung Collector": MakeCareer({
 		name: "Dung Collector",
 		quote: "Take yer horse or cow dung. Good fertiliser and it burns well when dried, if’n you don’t mind the stink. Pig slop, on the other hand...",
 		book: "FoN",
@@ -4002,8 +4002,8 @@ export const careers: { [K in CareerName]: Career } = {
 		turn him over to the authorities, before a full-blown plague wipes out
 		half the population.
 		*/
-	},
-	"Embalmer": {
+	}),
+	"Embalmer": MakeCareer({
 		name: "Embalmer",
 		quote: "So beautiful, so exquisite… Notice the skin. It retains all the warmth, all the pliability she possessed in life. Why it’s almost as if your beloved were alive again, my lord.",
 		book: "NDM",
@@ -4071,8 +4071,8 @@ export const careers: { [K in CareerName]: Career } = {
 		plan to do away with whoever deals with the embalmer. It is best to
 		leave no loose ends.
 		*/
-	},
-	"Enforcer": {
+	}),
+	"Enforcer": MakeCareer({
 		name: "Enforcer",
 		quote: "I don’t care what Prince Olbert says about the border. This here’s part of the free lands of Southwick, and yer tresspassing. That’s a hefty fine or seven lashes. I’ll let you choose.",
 		book: "RC",
@@ -4139,8 +4139,8 @@ export const careers: { [K in CareerName]: Career } = {
 		jealousy, or they may just fancy trying their luck if any of the party look
 		like they can put up a good fight.
 		*/
-	},
-	"Engineer": {
+	}),
+	"Engineer": MakeCareer({
 		name: "Engineer",
 		quote: "Now, if I simply adjust the targeting ratchet by one degree… oops! Thank Sigmar they were only mercenaries!",
 		book: "Core",
@@ -4210,8 +4210,8 @@ export const careers: { [K in CareerName]: Career } = {
 		going missing, impeding his work. Is the thief merely a jealous rival, or
 		is something more sinister involved?
 		*/
-	},
-	"Entertainer": {
+	}),
+	"Entertainer": MakeCareer({
 		name: "Entertainer",
 		quote: "Allow me to regale you with my enchanting rendition of The Seven Dancing Dwarfs.",
 		book: "Core",
@@ -4277,8 +4277,8 @@ export const careers: { [K in CareerName]: Career } = {
 		been circulating that once completed, the ballad will actually perform a
 		blasphemous ritual if all the verses are sung in the correct order.
 		*/
-	},
-	"Envoy": {
+	}),
+	"Envoy": MakeCareer({
 		name: "Envoy",
 		quote: "Your ways are strange to me, human. But I believe we can arrive at a mutually beneficial arrangement.",
 		book: "Core",
@@ -4349,8 +4349,8 @@ export const careers: { [K in CareerName]: Career } = {
 		is a newcomer, recently rich and very ambitious, but something about
 		him – and the source of his sudden wealth – is disquieting.
 		*/
-	},
-	"Estalian Diestro": {
+	}),
+	"Estalian Diestro": MakeCareer({
 		name: "Estalian Diestro",
 		quote: "I will parry your prima attacks on my three-quarters radial, and take zeh high ground. With just a fifty-three inch reach, you can’t win this fight using a cutting blade. Not with such a poor stance, senor.",
 		book: "Core",
@@ -4420,8 +4420,8 @@ export const careers: { [K in CareerName]: Career } = {
 		favourably, and organises a rescue party to recover the girl and punish
 		her “kidnapper.”
 		*/
-	},
-	"Ex-convict": {
+	}),
+	"Ex-convict": MakeCareer({
 		name: "Ex-convict",
 		quote: "Oh yes, sir, I’m completely reformed. I’ve learned my lesson, m’lord. Honest Rickard, that’s what they’ll be calling me from now on, strewth.",
 		book: "New",
@@ -4494,8 +4494,8 @@ export const careers: { [K in CareerName]: Career } = {
 		making life impossible for honest criminals, and the lords of the
 		underworld are demanding a quick resolution.
 		*/
-	},
-	"Exciseman": {
+	}),
+	"Exciseman": MakeCareer({
 		name: "Exciseman",
 		quote: "You lost this year’s tax receipt? How unfortunate, master cobbler. Toss his home, my lads! I want every penny found! Time to pay up, my friend.",
 		book: "TiT",
@@ -4564,8 +4564,8 @@ export const careers: { [K in CareerName]: Career } = {
 		enough is enough and has hired outside help to find out who Torsten
 		Tommel really is.
 		*/
-	},
-	"Exorcist": {
+	}),
+	"Exorcist": MakeCareer({
 		name: "Exorcist",
 		quote: "The patient responds to the holy symbol of Ulric but not to Sigmar’s; I’ll have to study this to determine the best course of action. I’m confident we can identify and cast out the spirit in my next visit.",
 		book: "SH",
@@ -4634,8 +4634,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the Exorcist by performing these tasks on their behalf that he may
 		concentrate more fully on defeating the supernatural entity at hand.
 		*/
-	},
-	"Explorer": {
+	}),
+	"Explorer": MakeCareer({
 		name: "Explorer",
 		quote: "What an amazing structure off in the distance. It’s unlike anything I’ve seen in these parts. Stay back at camp if you like, I’m going off to have a closer look.",
 		book: "Core",
@@ -4702,8 +4702,8 @@ export const careers: { [K in CareerName]: Career } = {
 		bloodthirsty pirates, and sea monsters could stand to make their weight
 		in gold.
 		*/
-	},
-	"Faceless": {
+	}),
+	"Faceless": MakeCareer({
 		name: "Faceless",
 		quote: "Honour among thieves? We are not thieves. We have no such constraints.",
 		book: "KotG",
@@ -4773,8 +4773,8 @@ export const careers: { [K in CareerName]: Career } = {
 		himself fat. But the faceless needs more information, which means
 		disguising himself and going to spy on the noble.
 		*/
-	},
-	"Farmer": {
+	}),
+	"Farmer": MakeCareer({
 		name: "Farmer",
 		quote: "Burn the cities, but leave the farms, and the cities will grow from the ashes. But burn the farms, and grass will grow through the cobbles on every city street.",
 		book: "New",
@@ -4842,8 +4842,8 @@ export const careers: { [K in CareerName]: Career } = {
 		land, a farmer secretly hires the adventurers to do away with the flock
 		by any means necessary.
 		*/
-	},
-	"Fence": {
+	}),
+	"Fence": MakeCareer({
 		name: "Fence",
 		quote: "Lad, if it ain’t worth risking yer neck over to bring to me, then it’s probably not worth my time.",
 		book: "Core",
@@ -4910,8 +4910,8 @@ export const careers: { [K in CareerName]: Career } = {
 		secretly alerting the authorities if any goods pass through his hands that
 		may be potentially robbed from certain local tombs or graves.
 		*/
-	},
-	"Ferryman": {
+	}),
+	"Ferryman": MakeCareer({
 		name: "Ferryman",
 		quote: "The journey’s far more than the current between the shores…and that journey be short if’n you don’t come up with the proper fare.",
 		book: "Core",
@@ -4975,8 +4975,8 @@ export const careers: { [K in CareerName]: Career } = {
 		possibility of vampires returning to the lands). It’s the characters’ task to
 		flush out any dangers and make the trade routes safe again.
 		*/
-	},
-	"Fieldwarden": {
+	}),
+	"Fieldwarden": MakeCareer({
 		name: "Fieldwarden",
 		quote: "And stay out, unless you want the next stone to hit something more sensitive.",
 		book: "Core",
@@ -5045,8 +5045,8 @@ export const careers: { [K in CareerName]: Career } = {
 		of a great wagon piled high with corpses, and the deep gong of a bell in
 		the dark of night.
 		*/
-	},
-	"Fisherman": {
+	}),
+	"Fisherman": MakeCareer({
 		name: "Fisherman",
 		quote: "If yer wantin’ to catch a Stirpike, you’ll have to give up a finger, ‘cause that’s all what they’ll take for bait. I sure as Taal ain’t givin’ up no more o’ mine!",
 		book: "Core",
@@ -5113,8 +5113,8 @@ export const careers: { [K in CareerName]: Career } = {
 		cursed relics, incriminating evidence of forgotten crimes, or sunken
 		treasures that turn men against their own brothers.
 		*/
-	},
-	"Flagellant": {
+	}),
+	"Flagellant": MakeCareer({
 		name: "Flagellant",
 		quote: "There is a stench of Chaos about you, blasphemer! Perhaps my whip can free it from your flesh!",
 		book: "Core",
@@ -5186,8 +5186,8 @@ export const careers: { [K in CareerName]: Career } = {
 		of Chaos inhabits the tunnels, trying to trick the flagellant into doing
 		their dirty work.
 		*/
-	},
-	"Foreman": {
+	}),
+	"Foreman": MakeCareer({
 		name: "Foreman",
 		quote: "C’mon, layabouts! Yer not gettin’ paid to sit there and gather dust! Get up and get going, there’s work to be done.",
 		book: "WC",
@@ -5258,8 +5258,8 @@ export const careers: { [K in CareerName]: Career } = {
 		docks, a nasty turf war is heating up between competing foremen as
 		they vie for the dwindling supply of day labour.
 		*/
-	},
-	"Forger": {
+	}),
+	"Forger": MakeCareer({
 		name: "Forger",
 		quote: "An Imperial Warrant for the arrest of Magistrate Leopold? Aye, I can do that – but it will cost a pretty crown.",
 		book: "SH",
@@ -5330,8 +5330,8 @@ export const careers: { [K in CareerName]: Career } = {
 		in the black market trade of plundered artefacts suspects that one his
 		tomb robber suppliers is providing counterfeit relics and seeks proof.
 		*/
-	},
-	"Freeholder": {
+	}),
+	"Freeholder": MakeCareer({
 		name: "Freeholder",
 		quote: "…an excellent trade; thank you. Say, is that thing gold? You sure have a wealthy town here; I hope those merciless raiders from my land don’t decide to pay you a visit.",
 		book: "ToC",
@@ -5394,8 +5394,8 @@ export const careers: { [K in CareerName]: Career } = {
 		safely escort him and his recently acquired goods back to his ship, and
 		to guard him on the long voyage back to his freehold.
 		*/
-	},
-	"Friar": {
+	}),
+	"Friar": MakeCareer({
 		name: "Friar",
 		quote: "Fear not, my brothers and sisters. These hardships, too, shall pass. Have faith in the gods, so they might have faith in you.",
 		book: "Core",
@@ -5458,8 +5458,8 @@ export const careers: { [K in CareerName]: Career } = {
 		him down and are offering a good reward for his capture. Who is this
 		man? Is he really a friar, and who is Saint Dalius?
 		*/
-	},
-	"Frogwife": {
+	}),
+	"Frogwife": MakeCareer({
 		name: "Frogwife",
 		quote: "Knife goes in, guts come out. Knife goes in, guts come out. Say... have you heard the news of Madam de Verre? They say her son has ten fingers... but not five per hand...",
 		book: "BotD",
@@ -5526,8 +5526,8 @@ export const careers: { [K in CareerName]: Career } = {
 		allegedly found it can be tracked down, is the temple real, or are people
 		just excited over the ramblings of an old woman who saw an oddlyshaped rock?
 		*/
-	},
-	"Gambler": {
+	}),
+	"Gambler": MakeCareer({
 		name: "Gambler",
 		quote: "It’s not those who always win you’ve got to be afraid of… it’s those who always seem to lose.",
 		book: "SH",
@@ -5598,8 +5598,8 @@ export const careers: { [K in CareerName]: Career } = {
 		gambler doesn’t realise that initiation into the den involves surviving a
 		game of Six Pistols…
 		*/
-	},
-	"Ghost Strider": {
+	}),
+	"Ghost Strider": MakeCareer({
 		name: "Ghost Strider",
 		quote: "Those who threaten the sanctity of the woods shall feel the forest’s fury with each arrow.",
 		book: "Core",
@@ -5669,8 +5669,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the trail and learn where the missing children have been taken...and to
 		slay the kidnapper, if possible.
 		*/
-	},
-	"Giant Slayer": {
+	}),
+	"Giant Slayer": MakeCareer({
 		name: "Giant Slayer",
 		quote: "Aah, that got the blood stirring. Too bad the blighter died before he could hit me a few more times.",
 		book: "Core",
@@ -5736,8 +5736,8 @@ export const careers: { [K in CareerName]: Career } = {
 		example), but can use the Giant Slayer advance scheme, Skills
 		and Talents.
 		*/
-	},
-	"Grail Knight": {
+	}),
+	"Grail Knight": MakeCareer({
 		name: "Grail Knight",
 		quote: "The darkness is upon us! Every heart must decide, shall I forsake my kingdom, my sacred honour, the Lady herself? No! We shall rise as one and cry ‘Back, daemons! Back to the hell that spawned you!",
 		book: "KotG",
@@ -5803,8 +5803,8 @@ export const careers: { [K in CareerName]: Career } = {
 		knight and gain the Lady’s blessing, or will they turn away and face her
 		wrathful curse?
 		*/
-	},
-	"Grail Pilgrim": {
+	}),
+	"Grail Pilgrim": MakeCareer({
 		name: "Grail Pilgrim",
 		quote: "I am but a simple man. To serve this most holy quest is reward enough for me.",
 		book: "KotG",
@@ -5873,8 +5873,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the enchanted wood of Athel Loren. The spites have been on the trail of
 		the gem, seeking to reclaim it now that its rightful bearer is dead.
 		*/
-	},
-	"Grandmaster": {
+	}),
+	"Grandmaster": MakeCareer({
 		name: "Grandmaster",
 		quote: "To lead admirable knights into honorable combat against the Chaos is a credit to their commander. And to stand and lead such a band as you is a honored blessing as if from the gods themselves.",
 		book: "ToS",
@@ -5944,8 +5944,8 @@ export const careers: { [K in CareerName]: Career } = {
 		toward defending the Black Fire Pass – adding an air of mystery to the
 		summons.
 		*/
-	},
-	"Grave Robber": {
+	}),
+	"Grave Robber": MakeCareer({
 		name: "Grave Robber",
 		quote: "Can’t be doin’ with this burnin’ at the stake. Takin’ away honest folks’ work, that’s what it is.",
 		book: "Core",
@@ -6010,8 +6010,8 @@ export const careers: { [K in CareerName]: Career } = {
 		who had been in competition with the merchant. Rumour blames the
 		merchant’s ghost, but the grave robber knows that is unlikely.
 		*/
-	},
-	"Grave Warden": {
+	}),
+	"Grave Warden": MakeCareer({
 		name: "Grave Warden",
 		quote: "Morr hisself couldn’t slip past me to disturb these graves. Not on my watch.",
 		book: "NDM",
@@ -6082,8 +6082,8 @@ export const careers: { [K in CareerName]: Career } = {
 		to have any hope of success, he will need help from those knowledgeable
 		about such places.
 		*/
-	},
-	"Guild Master": {
+	}),
+	"Guild Master": MakeCareer({
 		name: "Guild Master",
 		quote: "For the next general meeting, I’d like Zigmund and Greta to jointly present a seminar on realising productivity targets through actionable cost-containment initiatives. Oh, and guild fees are due on 23 Jahrdrung.",
 		book: "Core",
@@ -6154,8 +6154,8 @@ export const careers: { [K in CareerName]: Career } = {
 		put them in conflict with the powerful merchants’ guild. The noble has
 		already negotiated support from several other guilds.
 		*/
-	},
-	"Hag Mother": {
+	}),
+	"Hag Mother": MakeCareer({
 		name: "Hag Mother",
 		quote: "If only you could hear what the spirits say ‘bout you. That’d wipe the smile from your face.",
 		book: "RotIQ",
@@ -6219,8 +6219,8 @@ export const careers: { [K in CareerName]: Career } = {
 		is Kislevite... but little do they know a real Hag Mother, displaced from
 		her homeland, lives there.
 		*/
-	},
-	"Hag Witch": {
+	}),
+	"Hag Witch": MakeCareer({
 		name: "Hag Witch",
 		quote: "Oh Great Spirits, grant me your sight, so I may see what dangers lie in my path.",
 		book: "RotIQ",
@@ -6281,8 +6281,8 @@ export const careers: { [K in CareerName]: Career } = {
 		market. Seeing a way to power, or simply to annoy their hag, the local
 		spirits then do their best to turn the wizard against the characters.
 		*/
-	},
-	"Hedge Wizard": {
+	}),
+	"Hedge Wizard": MakeCareer({
 		name: "Hedge Wizard",
 		quote: "Magic? I don’t know anything about that. I’m just a simple herbalist.",
 		book: "Core",
@@ -6353,8 +6353,8 @@ export const careers: { [K in CareerName]: Career } = {
 		out to be a hedge wizard, a fact that may give them pause for thought
 		along the way.
 		*/
-	},
-	"Hedgecraft Apprentice": {
+	}),
+	"Hedgecraft Apprentice": MakeCareer({
 		name: "Hedgecraft Apprentice",
 		quote: "I know little of the arts of the hedge … but I am eager to learn.",
 		book: "SoE",
@@ -6424,8 +6424,8 @@ export const careers: { [K in CareerName]: Career } = {
 		arrives at the caves, he discovers the mosses… as well as the creature of
 		Chaos that is responsible for spreading the disease.
 		*/
-	},
-	"Hedge Master": {
+	}),
+	"Hedge Master": MakeCareer({
 		name: "Hedge Master",
 		quote: "I understand you seek a potion. I can brew one for you, if you wish … but perhaps some words of counsel might aid you as well.",
 		book: "SoE",
@@ -6492,8 +6492,8 @@ export const careers: { [K in CareerName]: Career } = {
 		hedge master to destroy the daemon, or is he so zealous that he will not
 		rest until both are destroyed?
 		*/
-	},
-	"Hedgewise": {
+	}),
+	"Hedgewise": MakeCareer({
 		name: "Hedgewise",
 		quote: "To some, our way of life is witchcraft. We merely see it as a way of better understanding both the world that can be seen and the world that cannot.",
 		book: "SoE",
@@ -6561,8 +6561,8 @@ export const careers: { [K in CareerName]: Career } = {
 		of the Blessed Few. The local hedgewise must rescue the child without
 		further agitating the witch hunters.
 		*/
-	},
-	"Herald": {
+	}),
+	"Herald": MakeCareer({
 		name: "Herald",
 		quote: "Per pale, sable and or, two scorpions tergant, counterchanged...that’s registered to one of the great merchant houses of Remas. Odd that one of their mercenaries would be so far to the north. Hm. For all we know, he stole that shield in a raid, but if he didn’t...well. This could get interesting.",
 		book: "Core",
@@ -6628,8 +6628,8 @@ export const careers: { [K in CareerName]: Career } = {
 		needs to be safely removed from the city before the information leaks
 		any further.
 		*/
-	},
-	"Herrimault": {
+	}),
+	"Herrimault": MakeCareer({
 		name: "Herrimault",
 		quote: "When noble honor doesn’t exceed the reach of a sword, our bows and blades reveal that shame. The people know our bowshots still fall short of our honor in comparison.",
 		book: "KotG",
@@ -6701,8 +6701,8 @@ export const careers: { [K in CareerName]: Career } = {
 		decides they need to put a stop to the Earl’s strong-armed tactics once
 		and for all.
 		*/
-	},
-	"High Priest": {
+	}),
+	"High Priest": MakeCareer({
 		name: "High Priest",
 		quote: "Blessed be Sigmar for his many boons. He has shown us great favour this day by granting us the strength to defeat our foes and spread his most holy word.",
 		book: "Core",
@@ -6770,8 +6770,8 @@ export const careers: { [K in CareerName]: Career } = {
 		scrolls and musty books, and the goblins were desperate to know the
 		location of the temple’s gold. The fiends hacked at their captive’s limbs,
 		*/
-	},
-	"Highwayman": {
+	}),
+	"Highwayman": MakeCareer({
 		name: "Highwayman",
 		quote: "This won’t take long. Just hand over your jewellery. If you resist, it will all be over much quicker.",
 		book: "Core",
@@ -6840,8 +6840,8 @@ export const careers: { [K in CareerName]: Career } = {
 		someone ignoring the rule or someone who doesn’t even know it. Either
 		way, the highwayman needs to find the interloper and stop him – fast!
 		*/
-	},
-	"Horned Hunter": {
+	}),
+	"Horned Hunter": MakeCareer({
 		name: "Horned Hunter",
 		quote: "Serve the forest, and the forest shall serve you.",
 		book: "TiT",
@@ -6904,8 +6904,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the black rock may be a shard of deadly warpstone. They are keen to see
 		the skull destroyed and to discover just where Forst found it.
 		*/
-	},
-	"Horse Archer": {
+	}),
+	"Horse Archer": MakeCareer({
 		name: "Horse Archer",
 		quote: "When you sit at my table, I am your servant. When you sleep beside my fire, I am your protector. When we ride into battle, I owe you nothing.",
 		book: "RotIQ",
@@ -6976,8 +6976,8 @@ export const careers: { [K in CareerName]: Career } = {
 		However, the carnival operator is running a scam, and the unsuspecting
 		horse archer has serious criminal allegations levied against him.
 		*/
-	},
-	"Horse Coper": {
+	}),
+	"Horse Coper": MakeCareer({
 		name: "Horse Coper",
 		quote: "Of course this horse is healthy, Sir. Weeping sores? I don’t see any… oh that; those are just flea bites; those will heal quickly. You obviously know horses; I’ll throw in a fresh saddle blanket and saddlebags for this fine animal if you’ll buy him now. I’ve an urgent appointment in another town….",
 		book: "RotIQ",
@@ -7041,8 +7041,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and condemn his innocent family to certain death, or do they suffer a
 		wicked man to live?
 		*/
-	},
-	"Horse Master": {
+	}),
+	"Horse Master": MakeCareer({
 		name: "Horse Master",
 		quote: "A good horse and a fine woman are all a man really needs. But only trust the horse.",
 		book: "RotIQ",
@@ -7107,8 +7107,8 @@ export const careers: { [K in CareerName]: Career } = {
 		he can do little to clear the boy, so reluctantly turns to outsiders in the
 		hope that they can find the true culprits and clear the boy’s name.
 		*/
-	},
-	"Hunter": {
+	}),
+	"Hunter": MakeCareer({
 		name: "Hunter",
 		quote: "The trail is old, but I can follow it. Go back to camp and start a cookfire. We’re eating coney tonight.",
 		book: "Core",
@@ -7176,8 +7176,8 @@ export const careers: { [K in CareerName]: Career } = {
 		rumours persist of a beautiful river nymph whose siren call beckons the
 		hunters to their doom.
 		*/
-	},
-	"Ice Maiden": {
+	}),
+	"Ice Maiden": MakeCareer({
 		name: "Ice Maiden",
 		quote: "The ice called to me, and I answered. That is all you need to know.",
 		book: "RotIQ",
@@ -7243,8 +7243,8 @@ export const careers: { [K in CareerName]: Career } = {
 		that lore according to the rules presented in Realm of the Ice
 		Queen, Chapter IX.
 		*/
-	},
-	"Ice Witch": {
+	}),
+	"Ice Witch": MakeCareer({
 		name: "Ice Witch",
 		quote: "Now I call to the ice, and the ice answers. That is all you need to know.",
 		book: "RotIQ",
@@ -7314,8 +7314,8 @@ export const careers: { [K in CareerName]: Career } = {
 		witch is dispatched to find this young man, check for any truth to the
 		rumour – and, if it is true, kill him before he can destroy their heritage.
 		*/
-	},
-	"Initiate": {
+	}),
+	"Initiate": MakeCareer({
 		name: "Initiate",
 		quote: "Faith is not given freely. It must be earned. I have been trying to earn it for many years now.",
 		book: "Core",
@@ -7382,8 +7382,8 @@ export const careers: { [K in CareerName]: Career } = {
 		trials. The initiates must work together to uncover the truth before the
 		town bands together against their entire order.
 		*/
-	},
-	"Innkeeper": {
+	}),
+	"Innkeeper": MakeCareer({
 		name: "Innkeeper",
 		quote: "A private room’s a gold piece each. Don’t blame me, blame the festival. Otherwise, common quarters is only half a shilling. Bed bugs come free.",
 		book: "Core",
@@ -7449,8 +7449,8 @@ export const careers: { [K in CareerName]: Career } = {
 		who tracks down the beer and brings it safely to the inn can keep a keg
 		for themselves.
 		*/
-	},
-	"Interrogator": {
+	}),
+	"Interrogator": MakeCareer({
 		name: "Interrogator",
 		quote: "We’ll save the tongue for last. He’ll need it to confess. As for the rest...well, pick a limb and hand me the pliers.",
 		book: "Core",
@@ -7515,8 +7515,8 @@ export const careers: { [K in CareerName]: Career } = {
 		innocent and report false “confessions,” while letting the true cultists go
 		after only mild discomfort.
 		*/
-	},
-	"Jailer": {
+	}),
+	"Jailer": MakeCareer({
 		name: "Jailer",
 		quote: "Good morning, master thief. Did you enjoy the face branding yesterday? I can see that you did. And how are you enjoying the accommodations? More lip from you and I’ll be glad to brand the other cheek.",
 		book: "Core",
@@ -7580,8 +7580,8 @@ export const careers: { [K in CareerName]: Career } = {
 		than he seems. Is there any truth to the stories about undead in the
 		cemetery and a necromancer in residence at a hidden crypt?
 		*/
-	},
-	"Journeyman Runesmith": {
+	}),
+	"Journeyman Runesmith": MakeCareer({
 		name: "Journeyman Runesmith",
 		quote: "It’s good. But not good enough. You can wield it if you want, human. I don’t want to see it again.",
 		book: "RoS",
@@ -7647,8 +7647,8 @@ export const careers: { [K in CareerName]: Career } = {
 		did nothing wrong – why did the runes fail (if they did) and how can he
 		redeem his reputation?
 		*/
-	},
-	"Journeyman Wizard": {
+	}),
+	"Journeyman Wizard": MakeCareer({
 		name: "Journeyman Wizard",
 		quote: "Learning things man was not meant to know is our job. We learn them so that you don’t have to.",
 		book: "Core",
@@ -7713,8 +7713,8 @@ export const careers: { [K in CareerName]: Career } = {
 		potential. In addition, someone is systematically searching the goods
 		being carried, a little every night.
 		*/
-	},
-	"Judicial Champion": {
+	}),
+	"Judicial Champion": MakeCareer({
 		name: "Judicial Champion",
 		quote: "You got nothing to fear if you are innocent. But my sword ain’t met no innocent men yet.",
 		book: "Core",
@@ -7785,8 +7785,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the characters must best the magistrate’s judicial champion to prove
 		their innocence.
 		*/
-	},
-	"Killer of the Dead": {
+	}),
+	"Killer of the Dead": MakeCareer({
 		name: "Killer of the Dead",
 		quote: "Stake in the heart, cut off the head, burn it to ash, douse in holy water, scatter the ashes in four different provinces. Kills them nine times in ten.",
 		book: "NDM",
@@ -7852,8 +7852,8 @@ export const careers: { [K in CareerName]: Career } = {
 		person is a vampire. Is the claim real, or is the Killer of the Dead being
 		manipulated by the benefactor to hunt an innocent person?
 		*/
-	},
-	"Kislevite Kossar": {
+	}),
+	"Kislevite Kossar": MakeCareer({
 		name: "Kislevite Kossar",
 		quote: "We’ll save some kvas for after the fight, sing hey kalinka hey! Just make sure to survive the night, sing hey kalinka hey! It’s cold enough to crack the stones, sing hey kalinka key! Just one more kvas to warm the bones, sing hey kalinka hey!",
 		book: "Core",
@@ -7922,8 +7922,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the Pleasure Lord has a hold on his soul, and that only by confronting
 		his personal daemons firsthand will he ever sleep peacefully.
 		*/
-	},
-	"Kithband Warrior": {
+	}),
+	"Kithband Warrior": MakeCareer({
 		name: "Kithband Warrior",
 		quote: "There are dark things lurking within these woods. Be wary.",
 		book: "Core",
@@ -7991,8 +7991,8 @@ export const careers: { [K in CareerName]: Career } = {
 		of the PCs be a kithband warrior they will feel obliged to provide their
 		kinsman with assistance.
 		*/
-	},
-	"Knight": {
+	}),
+	"Knight": MakeCareer({
 		name: "Knight",
 		quote: "When we fight with honour, we bring honour to our house.",
 		book: "Core",
@@ -8059,8 +8059,8 @@ export const careers: { [K in CareerName]: Career } = {
 		confusion and distrust throughout the knights by replacing some of the
 		hollow lances with military grade weapons.
 		*/
-	},
-	"Knight Errant": {
+	}),
+	"Knight Errant": MakeCareer({
 		name: "Knight Errant",
 		quote: "Thou hast not heard of me nor of mine great deeds? Let me rectify that.",
 		book: "KotG",
@@ -8125,8 +8125,8 @@ export const careers: { [K in CareerName]: Career } = {
 		She escaped to seek aid. How could any knight errant refuse such a
 		damsel? However, is all as it seems?
 		*/
-	},
-	"Knight of the Blazing Sun": {
+	}),
+	"Knight of the Blazing Sun": MakeCareer({
 		name: "Knight of the Blazing Sun",
 		quote: "For glory! For honour! For Myrmidia!",
 		book: "SH",
@@ -8196,8 +8196,8 @@ export const careers: { [K in CareerName]: Career } = {
 		will be outraged if he realises other knights behaved in a manner that
 		resulted in unnecessary casualties.
 		*/
-	},
-	"Knight of the Inner Circle": {
+	}),
+	"Knight of the Inner Circle": MakeCareer({
 		name: "Knight of the Inner Circle",
 		quote: "To me, brave knights! Together we shall purge the land of this threat to the Empire!",
 		book: "Core",
@@ -8267,8 +8267,8 @@ export const careers: { [K in CareerName]: Career } = {
 		claiming that the Grand Master was out of his mind, others taking his
 		final words as a message from Sigmar.
 		*/
-	},
-	"Knight of the Raven": {
+	}),
+	"Knight of the Raven": MakeCareer({
 		name: "Knight of the Raven",
 		quote: "We shall return these abominations to the very earth that spat them out!",
 		book: "NDM",
@@ -8338,8 +8338,8 @@ export const careers: { [K in CareerName]: Career } = {
 		agitators or newssheets. Finding and neutralising these spies will become
 		paramount if the party want to operate with any secrecy or privacy.
 		*/
-	},
-	"Knight of the Realm": {
+	}),
+	"Knight of the Realm": MakeCareer({
 		name: "Knight of the Realm",
 		quote: "I shall protect this land until my last breath. It is my solemn duty, and I shall not fail.",
 		book: "KotG",
@@ -8411,8 +8411,8 @@ export const careers: { [K in CareerName]: Career } = {
 		is causing great hardship. They beg the Knight to fix his mistake by
 		putting the monster to death.
 		*/
-	},
-	"Knight of the Verdant Field": {
+	}),
+	"Knight of the Verdant Field": MakeCareer({
 		name: "Knight of the Verdant Field",
 		quote: "Our work is not done here. More evil lurks within the heart of Drakwald.",
 		book: "TiT",
@@ -8483,8 +8483,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the leader of a band of beastmen who have been raiding farmsteads
 		surrounding the Taalbaston.
 		*/
-	},
-	"Knight Panther": {
+	}),
+	"Knight Panther": MakeCareer({
 		name: "Knight Panther",
 		quote: "Why sail to faraway lands for a pelt? We have no shortage of mountain lions right here in the Empire. It would be comparable to visiting Norsca in search of a Chaos cult.",
 		book: "ToC",
@@ -8555,8 +8555,8 @@ export const careers: { [K in CareerName]: Career } = {
 		overlooking any mutants, whilst the other half would rather show the
 		lepers mercy. Heated debate ensues.
 		*/
-	},
-	"Lamplighter": {
+	}),
+	"Lamplighter": MakeCareer({
 		name: "Lamplighter",
 		quote: "There’s no sight more beautiful than the sun rising over the streets of Altdorf… ah… bed time!",
 		book: "SoA",
@@ -8621,8 +8621,8 @@ export const careers: { [K in CareerName]: Career } = {
 		blood, his throat cut, murdered while performing his nightly duties. A
 		high bounty is offered to anyone who can track down the killer.
 		*/
-	},
-	"Lay Priest": {
+	}),
+	"Lay Priest": MakeCareer({
 		name: "Lay Priest",
 		quote: "The gods cannot possibly answer every plea for aid. Therefore, we must be grateful for the help we are given, and we must always remain prepared to help ourselves.",
 		book: "New",
@@ -8691,8 +8691,8 @@ export const careers: { [K in CareerName]: Career } = {
 		rigourous enough that the lay priest needs to rely on the assistance of
 		others to help complete the ordeal.
 		*/
-	},
-	"Litigant": {
+	}),
+	"Litigant": MakeCareer({
 		name: "Litigant",
 		quote: "Well, there are fifteen witnesses who say it was you, and the Watch caught you in the act. Other than that, I don’t think they have a case against you.",
 		book: "TiT",
@@ -8758,8 +8758,8 @@ export const careers: { [K in CareerName]: Career } = {
 		to investigate the murder, and they unravel a plot that threatens to
 		destabilise the higher reaches of Imperial society.
 		*/
-	},
-	"Man-at-Arms": {
+	}),
+	"Man-at-Arms": MakeCareer({
 		name: "Man-at-Arms",
 		quote: "You shall fight at his Lordship’s command and his whim. You shall be better than you were, for you wield and wear the arms of his Excellency! And you shall die, if that sacrifice be demanded of you, but you die well for the cause of our Lord.",
 		book: "KotG",
@@ -8828,8 +8828,8 @@ export const careers: { [K in CareerName]: Career } = {
 		himself. Can the fighting men find a way to end the madness before
 		their own lives are forfeit?
 		*/
-	},
-	"Marauder": {
+	}),
+	"Marauder": MakeCareer({
 		name: "Marauder",
 		quote: "Blood! Death! Blood! Death!",
 		book: "ToC",
@@ -8894,8 +8894,8 @@ export const careers: { [K in CareerName]: Career } = {
 		all be used. Parties of Norse descent will have an easier time of it, and if
 		one of their number is a marauder, so much the better!
 		*/
-	},
-	"Marine": {
+	}),
+	"Marine": MakeCareer({
 		name: "Marine",
 		quote: "So, they think they can just waltz over here and plunder our hold? Let’s show ‘em wot’s wot, boys!",
 		book: "Core",
@@ -8965,8 +8965,8 @@ export const careers: { [K in CareerName]: Career } = {
 		vessel. To close this embarrassing chapter, the navy will pay much for the
 		renegade’s head and more for his ship and cargo.
 		*/
-	},
-	"Master Runesmith": {
+	}),
+	"Master Runesmith": MakeCareer({
 		name: "Master Runesmith",
 		quote: "Pay attention. I am not going to repeat myself.",
 		book: "RoS",
@@ -9033,8 +9033,8 @@ export const careers: { [K in CareerName]: Career } = {
 		subtle form of service. It’s obvious from some of his cryptic statements
 		that he has something in mind, but what is it?
 		*/
-	},
-	"Master Thief": {
+	}),
+	"Master Thief": MakeCareer({
 		name: "Master Thief",
 		quote: "Nothing is ever truly safe. If someone wants it badly enough, they can find... ways... to obtain it.",
 		book: "Core",
@@ -9104,8 +9104,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the nature of the item, only that it is a rare and precious relic, and must
 		not be touched with bare skin.
 		*/
-	},
-	"Master Vigilant": {
+	}),
+	"Master Vigilant": MakeCareer({
 		name: "Master Vigilant",
 		quote: "The time for contrition has passed, Magister Festus. Now is the judgement.",
 		book: "NDM",
@@ -9176,8 +9176,8 @@ export const careers: { [K in CareerName]: Career } = {
 		regarded socialite. Bergen employs adventurers to infiltrate one of her
 		renowned parties and discover evidence that will damn her.
 		*/
-	},
-	"Master Wizard": {
+	}),
+	"Master Wizard": MakeCareer({
 		name: "Master Wizard",
 		quote: "The Winds of Magic are not to be trifled with. I have learned to respect them, and that was the key to unlocking their power.",
 		book: "Core",
@@ -9243,8 +9243,8 @@ export const careers: { [K in CareerName]: Career } = {
 		robberies of wizard tombs. This is a practice the colleges would very
 		much like stopped.
 		*/
-	},
-	"Mate": {
+	}),
+	"Mate": MakeCareer({
 		name: "Mate",
 		quote: "Mister Garbach is the man you want to see. Captain Soarsteiger may own the Nettle’s Sting, but nothing happens on this ship without Garbach’s having a say-so about it.",
 		book: "Core",
@@ -9310,8 +9310,8 @@ export const careers: { [K in CareerName]: Career } = {
 		mutineers. He now seeks assistance, in whatever form he can find it, to
 		exact revenge for the treachery of his former crewmates.
 		*/
-	},
-	"Mediator": {
+	}),
+	"Mediator": MakeCareer({
 		name: "Mediator",
 		quote: "Gentlemen, please. I am sure we can come to a mutual understanding.",
 		book: "KotG",
@@ -9379,8 +9379,8 @@ export const careers: { [K in CareerName]: Career } = {
 		village leaders have even suggested asking strangers to try and settle the
 		argument, though woe betide those who fail to please both parties.
 		*/
-	},
-	"Mercenary": {
+	}),
+	"Mercenary": MakeCareer({
 		name: "Mercenary",
 		quote: "I could happily live several lifetimes without quashing another peasant revolt. Unless, of course, the revolt pays good coin. Ale doesn’t buy itself, you know.",
 		book: "Core",
@@ -9449,8 +9449,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the Strigany camp occupied only by women and children. Where are
 		the Strigany men, and why is a flock of ravens circling overhead?
 		*/
-	},
-	"Merchant": {
+	}),
+	"Merchant": MakeCareer({
 		name: "Merchant",
 		quote: "Those bolts of exotic Cathay silks? Pfft. Who’d want those? I’ll give you fifty gold crowns for the entire cartload because I feel sorry for you. I’m doing you a favour.",
 		book: "Core",
@@ -9520,8 +9520,8 @@ export const careers: { [K in CareerName]: Career } = {
 		ruin, which they have been unable to find. Whoever finds this for the
 		Dwarfs might also find a caravan wagon full of rubies.
 		*/
-	},
-	"Messenger": {
+	}),
+	"Messenger": MakeCareer({
 		name: "Messenger",
 		quote: "I’ve an urgent message for the Baron. No, I’m not leaving it with you – ‘tis for the Baron’s eyes only.",
 		book: "Core",
@@ -9591,8 +9591,8 @@ export const careers: { [K in CareerName]: Career } = {
 		very powerful and corrupt tradesman (who has secretly offered a large
 		reward for the witness’s head).
 		*/
-	},
-	"Militiaman": {
+	}),
+	"Militiaman": MakeCareer({
 		name: "Militiaman",
 		quote: "I hear the Duke is calling up the militia to deal with the orcs. If they think I’m going down those holes after those greenskins, they’ve gone completely starkers.",
 		book: "Core",
@@ -9661,8 +9661,8 @@ export const careers: { [K in CareerName]: Career } = {
 		orcs has been sighted in the forest. He needs someone to quickly deliver
 		a shipment of weapons from the nearest city before disaster strikes.
 		*/
-	},
-	"Miner": {
+	}),
+	"Miner": MakeCareer({
 		name: "Miner",
 		quote: "If you hear a tapping sound, and it isn’t coming from you, best leave the mine and come back another day.",
 		book: "Core",
@@ -9726,8 +9726,8 @@ export const careers: { [K in CareerName]: Career } = {
 		from the denizens of the forest but also to guard his stake against rival
 		gold-diggers.
 		*/
-	},
-	"Minstrel": {
+	}),
+	"Minstrel": MakeCareer({
 		name: "Minstrel",
 		quote: "A song can touch the heart easier than a speech, and that song may teach as many about beauty as it educates others in its words.",
 		book: "Core",
@@ -9797,8 +9797,8 @@ export const careers: { [K in CareerName]: Career } = {
 		The characters must help him escape the baron’s lands and escort him
 		back home.
 		*/
-	},
-	"Monk": {
+	}),
+	"Monk": MakeCareer({
 		name: "Monk",
 		quote: "Silence, please. I’m trying to meditate over here.",
 		book: "ToS",
@@ -9868,8 +9868,8 @@ export const careers: { [K in CareerName]: Career } = {
 		preaching (not to mention those who prey on the monk’s naiveté) is
 		causing the normal business of the town to dissolve into confusion.
 		*/
-	},
-	"Muleskinner": {
+	}),
+	"Muleskinner": MakeCareer({
 		name: "Muleskinner",
 		quote: "We ought to be able to reach the next inn by nightfall, if we press a bit harder. It’s either that, or risk a night in the open with raiders and wolves.",
 		book: "RC",
@@ -9931,8 +9931,8 @@ export const careers: { [K in CareerName]: Career } = {
 		simple, or perhaps the rival seeks to poison the keg and remove the
 		competition once and for all.
 		*/
-	},
-	"Mystic": {
+	}),
+	"Mystic": MakeCareer({
 		name: "Mystic",
 		quote: "And then, from the maw of the seventh serpent sprang a fattened calf, and it spake unto me…",
 		book: "RC",
@@ -10003,8 +10003,8 @@ export const careers: { [K in CareerName]: Career } = {
 		ridiculous instructions? What catastrophe awaits should they ignore his
 		pronouncements of doom?
 		*/
-	},
-	"Navigator": {
+	}),
+	"Navigator": MakeCareer({
 		name: "Navigator",
 		quote: "Based on my calculations, we need to adjust our heading starboard by ten degrees. Suit yourself, but don’t complain to me when we miss the next port.",
 		book: "Core",
@@ -10071,8 +10071,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Of course he decides to investigate, and advertises a commission for a
 		navigator to join him and see his ship safely along the charted course.
 		*/
-	},
-	"Newssheet Vendor": {
+	}),
+	"Newssheet Vendor": MakeCareer({
 		name: "Newssheet Vendor",
 		quote: "Extra! Extra! The story of the century! Monsters rampage through Wissenland! Ladies of good virtue stalked by the undead! Cultists, courtiers, and cutthroats responsible! Read all about it!",
 		book: "SoA",
@@ -10139,8 +10139,8 @@ export const careers: { [K in CareerName]: Career } = {
 		attempt to woo the youngest daughter of the town’s most influential
 		merchant house?
 		*/
-	},
-	"Noble": {
+	}),
+	"Noble": MakeCareer({
 		name: "Noble",
 		quote: "Being born into a noble house isn’t as easy as it appears. You’re constantly faced with dilemmas. Which silk tunic should I wear today? What wine shall I have with my roasted pheasant?",
 		book: "Core",
@@ -10210,8 +10210,8 @@ export const careers: { [K in CareerName]: Career } = {
 		to be taken seriously, or are the rumours of surreptitious meetings with
 		the masters of the physicians’ guild more likely?
 		*/
-	},
-	"Noble Lord": {
+	}),
+	"Noble Lord": MakeCareer({
 		name: "Noble Lord",
 		quote: "My father and my father’s father worked hard to build up our family’s wealth and political clout. I am pleased to be able to wield both on their behalf.",
 		book: "Core",
@@ -10282,8 +10282,8 @@ export const careers: { [K in CareerName]: Career } = {
 		pour oil on troubled waters, or they may encourage their peers in the
 		hope of an exciting bloody spectacle.
 		*/
-	},
-	"Norse Berserker": {
+	}),
+	"Norse Berserker": MakeCareer({
 		name: "Norse Berserker",
 		quote: "No make Skorri angry. Not like when angry. Pay wages now.",
 		book: "Core",
@@ -10351,8 +10351,8 @@ export const careers: { [K in CareerName]: Career } = {
 		berserker could escape his cage, with nothing more than brute force.
 		How convenient.
 		*/
-	},
-	"Outlaw": {
+	}),
+	"Outlaw": MakeCareer({
 		name: "Outlaw",
 		quote: "Hand over all your valuables and unbuckle those sword belts. Do what you’re told and everything will be fine. We don’t want to kill you... Yet.",
 		book: "Core",
@@ -10425,8 +10425,8 @@ export const careers: { [K in CareerName]: Career } = {
 		villagers send out one of their own to seek a band of adventurers
 		willing to rid them of the outlaws.
 		*/
-	},
-	"Outlaw Chief": {
+	}),
+	"Outlaw Chief": MakeCareer({
 		name: "Outlaw Chief",
 		quote: "This isn’t some sort of mercenary company. Once you’re in, you become part of the family. If you want to run with us, you take the bad with the good.",
 		book: "Core",
@@ -10493,8 +10493,8 @@ export const careers: { [K in CareerName]: Career } = {
 		a formal pardon to outlaws who turn in their fellows. Paranoia reaches a
 		new level; the schism must be confronted.
 		*/
-	},
-	"Outrider": {
+	}),
+	"Outrider": MakeCareer({
 		name: "Outrider",
 		quote: "We are not the first to pass this way. See the tracks? I fear we are hunted.",
 		book: "Core",
@@ -10562,8 +10562,8 @@ export const careers: { [K in CareerName]: Career } = {
 		This bonus cannot be applied to a horse wearing chain, scale, or
 		plate barding.
 		*/
-	},
-	"Pamphleteer": {
+	}),
+	"Pamphleteer": MakeCareer({
 		name: "Pamphleteer",
 		quote: "Read all about it! Has Karl Franz finally lost his marbles... erm, hello officer. Read all about it! Karl Franz’s Imperial marble quarry lost to marauding Beastmen!",
 		book: "SoE",
@@ -10629,8 +10629,8 @@ export const careers: { [K in CareerName]: Career } = {
 		is extremely popular down his way and a number of locals will be happy
 		to help him out.
 		*/
-	},
-	"Peasant": {
+	}),
+	"Peasant": MakeCareer({
 		name: "Peasant",
 		quote: "But my lord, the harvest was terrible; if I pay you that much in taxes I’ll have naught to eat for the winter!",
 		book: "Core",
@@ -10700,8 +10700,8 @@ export const careers: { [K in CareerName]: Career } = {
 		taken away for the army. There may also be secrets the villagers are
 		trying to keep hidden from the militia.
 		*/
-	},
-	"Penitent": {
+	}),
+	"Penitent": MakeCareer({
 		name: "Penitent",
 		quote: "I have been very, very bad.",
 		book: "ToS",
@@ -10773,8 +10773,8 @@ export const careers: { [K in CareerName]: Career } = {
 		are fearsome.The debate on whether to attend or not is dividing the
 		penitent community.
 		*/
-	},
-	"Physician": {
+	}),
+	"Physician": MakeCareer({
 		name: "Physician",
 		quote: "My, what an interesting infection. Does it always ooze like that?",
 		book: "Core",
@@ -10844,8 +10844,8 @@ export const careers: { [K in CareerName]: Career } = {
 		group to locate the court physician to tend to his son – and won’t take
 		no for an answer.
 		*/
-	},
-	"Pilgrim": {
+	}),
+	"Pilgrim": MakeCareer({
 		name: "Pilgrim",
 		quote: "Your hospitality has been most generous. Would you like me to deliver a prayer in your name?",
 		book: "ToS",
@@ -10914,8 +10914,8 @@ export const careers: { [K in CareerName]: Career } = {
 		whether to shun his new friend, or allow him to tag along and risk
 		losing favour with his god.
 		*/
-	},
-	"Pistolier": {
+	}),
+	"Pistolier": MakeCareer({
 		name: "Pistolier",
 		quote: "Look what their damned arrows did to my doublet! Right chaps, let’s give ’em a taste of hot lead. Charge!",
 		book: "Core",
@@ -10984,8 +10984,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Weapon (Engineer). An Outrider is usually armed with an Engineer
 		weapon, such as a Repeater Firearm.
 		*/
-	},
-	"Pit Fighter": {
+	}),
+	"Pit Fighter": MakeCareer({
 		name: "Pit Fighter",
 		quote: "I am Gustaf the Mighty! Face me if you dare!",
 		book: "Core",
@@ -11052,8 +11052,8 @@ export const careers: { [K in CareerName]: Career } = {
 		embarrassment and grievous injury, the mayor is looking for someone
 		to fight in his stead.
 		*/
-	},
-	"Politician": {
+	}),
+	"Politician": MakeCareer({
 		name: "Politician",
 		quote: "I don’t pretend to speak for all of you here in this fine village. However, I can speak from experience that having such an advocate makes it all the easier to both alleviate your suffering and to negotiate on a stronger footing with merchants, consortiums, and nobles alike. Grant me your trust and you shall see greater returns in providence, safety, and welfare.",
 		book: "Core",
@@ -11124,8 +11124,8 @@ export const careers: { [K in CareerName]: Career } = {
 		over the town’s mill to extort money from the town’s inhabitants and
 		hires thugs to keep people afraid of retaliating against him.
 		*/
-	},
-	"Prelate": {
+	}),
+	"Prelate": MakeCareer({
 		name: "Prelate",
 		quote: "The temple roof is leaking, the dog tongs have gone missing –again – and Lord Grüber has invited me to another of his infernal banquets. Indeed, the gods test us with every turn of the page.",
 		book: "New",
@@ -11195,8 +11195,8 @@ export const careers: { [K in CareerName]: Career } = {
 		savvy to challenge the local priesthood at the cult’s high courts. But first,
 		they must capture a trophy relic…
 		*/
-	},
-	"Priest": {
+	}),
+	"Priest": MakeCareer({
 		name: "Priest",
 		quote: "I am but a vessel for the will and wont of the gods. All I do, I do at their behest.",
 		book: "Core",
@@ -11263,8 +11263,8 @@ export const careers: { [K in CareerName]: Career } = {
 		doomsayer forseen? Is he insane or does the child’s future really bode ill
 		for the Empire?
 		*/
-	},
-	"Protagonist": {
+	}),
+	"Protagonist": MakeCareer({
 		name: "Protagonist",
 		quote: "You want him busted up good, or just scared? I charge the same either way, just wondering how far you want this to go.",
 		book: "Core",
@@ -11332,8 +11332,8 @@ export const careers: { [K in CareerName]: Career } = {
 		a generous sum of money to find out who beat him so badly. The
 		protagonist had better skip town quickly before someone sells him out.
 		*/
-	},
-	"Questing Knight": {
+	}),
+	"Questing Knight": MakeCareer({
 		name: "Questing Knight",
 		quote: "Has thou seen or heard of the Grail? I’ve ridden a fortnight to find out what you know.",
 		book: "KotG",
@@ -11402,8 +11402,8 @@ export const careers: { [K in CareerName]: Career } = {
 		questing knight may need his social charms more than his sword to get
 		his answers.
 		*/
-	},
-	"Racketeer": {
+	}),
+	"Racketeer": MakeCareer({
 		name: "Racketeer",
 		quote: "We live in a dangerous world, Siegfried. I’d hate to see anything... happen... to that new shop you opened up.",
 		book: "Core",
@@ -11474,8 +11474,8 @@ export const careers: { [K in CareerName]: Career } = {
 		must uncover who the racketeers work for, and put an end to the
 		extortion ring.
 		*/
-	},
-	"Raconteur": {
+	}),
+	"Raconteur": MakeCareer({
 		name: "Raconteur",
 		quote: "Hah, hah…yes, your daughter you say? Well…I’m sure this is all a misunderstanding. In fact, it reminds me of a tale…",
 		book: "SH",
@@ -11542,8 +11542,8 @@ export const careers: { [K in CareerName]: Career } = {
 		about their tales. Of course, when they learn exactly what he thinks
 		they’ve done, they may not be so amused.
 		*/
-	},
-	"Rapscallion": {
+	}),
+	"Rapscallion": MakeCareer({
 		name: "Rapscallion",
 		quote: "The night is still young, friends. There’s at least three or four more hours ‘til daybreak. What shall we do next?",
 		book: "New",
@@ -11613,8 +11613,8 @@ export const careers: { [K in CareerName]: Career } = {
 		could any young man resist the urge to introduce himself and offer to
 		shield her from whatever evil stalks her?
 		*/
-	},
-	"Rat Catcher": {
+	}),
+	"Rat Catcher": MakeCareer({
 		name: "Rat Catcher",
 		quote: "If you grabs them by the tails, they can’t barely even bite you. Well, not most of the time.",
 		book: "Core",
@@ -11682,8 +11682,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and are hoping for the return of the rats so everything can return to
 		normal.
 		*/
-	},
-	"Reaver": {
+	}),
+	"Reaver": MakeCareer({
 		name: "Reaver",
 		quote: "Blood and terror! For the glory of the Plague Lords!",
 		book: "ToC",
@@ -11749,8 +11749,8 @@ export const careers: { [K in CareerName]: Career } = {
 		a powerful relic hidden somewhere in the village ripe for plunder –
 		should the reavers survive.
 		*/
-	},
-	"Riverwarden": {
+	}),
+	"Riverwarden": MakeCareer({
 		name: "Riverwarden",
 		quote: "And what’s this? Brandy, eh? Produce of Bretonnia. Just a single bottle. You’ve never seen it before in your life? I’d better get it out the way, then, before someone trips on it. And, see you same time next week.",
 		book: "WC",
@@ -11817,8 +11817,8 @@ export const careers: { [K in CareerName]: Career } = {
 		all the way to the destination for them without a sniff of trouble, but it
 		will cost them. If they get it wrong, it will cost them a lot more.
 		*/
-	},
-	"Roadwarden": {
+	}),
+	"Roadwarden": MakeCareer({
 		name: "Roadwarden",
 		quote: "It’s the work of the Red Band. Look, there’s a clear trail into the trees. We bury the dead then we take the Emperor’s justice into this forest. Leave none alive.",
 		book: "Core",
@@ -11882,8 +11882,8 @@ export const careers: { [K in CareerName]: Career } = {
 		but a fighter against the injustices perpetrated against defenceless
 		commoners. Whose justice will the lawman decide to follow?
 		*/
-	},
-	"Rogue": {
+	}),
+	"Rogue": MakeCareer({
 		name: "Rogue",
 		quote: "Robbed? Here? In this very inn?! Unthinkable! On my honour I shall not rest, good merchant, until we have discovered the villain responsible for so cunningly relieving you of your silver!",
 		book: "Core",
@@ -11950,8 +11950,8 @@ export const careers: { [K in CareerName]: Career } = {
 		left the city. It has to be hidden somewhere. Alas, word gets out quick
 		and soon enough the treasure hunt is on!
 		*/
-	},
-	"Runebearer": {
+	}),
+	"Runebearer": MakeCareer({
 		name: "Runebearer",
 		quote: "The message is my life.",
 		book: "Core",
@@ -12018,8 +12018,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Dwarf, hearing this, would refuse to take the message where it belongs –
 		no matter how far he has to go.
 		*/
-	},
-	"Runelord": {
+	}),
+	"Runelord": MakeCareer({
 		name: "Runelord",
 		quote: "You show potential. Get back to me in a century.",
 		book: "RoS",
@@ -12085,8 +12085,8 @@ export const careers: { [K in CareerName]: Career } = {
 		damage dwarf/human relations should the visitor die while under
 		Imperial protection.
 		*/
-	},
-	"Scholar": {
+	}),
+	"Scholar": MakeCareer({
 		name: "Scholar",
 		quote: "Whoever thinks education is a painless endeavor has yet to suffer through von Richstein’s treatise on the Border Princes.",
 		book: "Core",
@@ -12152,8 +12152,8 @@ export const careers: { [K in CareerName]: Career } = {
 		who lives on the estates of a minor noble. Was this book possibly passed
 		along via the mysterious Travelling School? And if so, for what purpose?
 		*/
-	},
-	"Scourge of God": {
+	}),
+	"Scourge of God": MakeCareer({
 		name: "Scourge of God",
 		quote: "Oh, ye of little faith! Witness the grace of our god! It is writ in blood upon my body, His most holy commandment. Every drop I bleed is further proof of His favour!",
 		book: "ToS",
@@ -12223,8 +12223,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and it needs someone to restore the people’s faith. There are some who
 		doubt the scourge’s claims to divine favour and demand proof.
 		*/
-	},
-	"Scout": {
+	}),
+	"Scout": MakeCareer({
 		name: "Scout",
 		quote: "Don’t clomp about as if you’re a drunkard in Marienburg’s slums, boy! Feel your way around. Let the forest talk to you. She’ll tell you everything you need to know…if you’re quiet enough to listen. Such things a forest can tell you…more than most city-folk’d dream…",
 		book: "Core",
@@ -12286,8 +12286,8 @@ export const careers: { [K in CareerName]: Career } = {
 		patrol the roads and the waterways, the party can hunt out the perils
 		within the uncharted wilderness between the cities and villages.
 		*/
-	},
-	"Scribe": {
+	}),
+	"Scribe": MakeCareer({
 		name: "Scribe",
 		quote: "I’ve never seen writing like this before. It may be a seldom used form of Archaic Imperial. Perhaps, I can find a clue in one of my books…",
 		book: "Core",
@@ -12352,8 +12352,8 @@ export const careers: { [K in CareerName]: Career } = {
 		an ancient treasure map. He tries to gather a group of like-minded
 		adventurers to follow it and see where it leads.
 		*/
-	},
-	"Sea Captain": {
+	}),
+	"Sea Captain": MakeCareer({
 		name: "Sea Captain",
 		quote: "Avast ye lubbers! Stow anchor and prepare to set sail!",
 		book: "Core",
@@ -12422,8 +12422,8 @@ export const careers: { [K in CareerName]: Career } = {
 		bandits who took him or the people trying to rescue him? And why was
 		he kidnapped in the first place?
 		*/
-	},
-	"Seaman": {
+	}),
+	"Seaman": MakeCareer({
 		name: "Seaman",
 		quote: "There ain’t enough rum to get me back on that ship. But rum and a bit of gold might do.",
 		book: "Core",
@@ -12493,8 +12493,8 @@ export const careers: { [K in CareerName]: Career } = {
 		idea that it is a treasure map is silly, but soon the map goes missing and
 		tempers ignite.
 		*/
-	},
-	"Seer": {
+	}),
+	"Seer": MakeCareer({
 		name: "Seer",
 		quote: "I see ill omens in the stars. Fetch me a lamb, preferably one born under the full moon. Its blood shall reveal the nature of these omens.",
 		book: "ToC",
@@ -12560,8 +12560,8 @@ export const careers: { [K in CareerName]: Career } = {
 		seek his counsel to see what other ill omens menace the land. But the
 		seer is suddenly nowhere to be found.
 		*/
-	},
-	"Sergeant": {
+	}),
+	"Sergeant": MakeCareer({
 		name: "Sergeant",
 		quote: "Any of you scum even think about retreating, I’ll kill you myself!",
 		book: "Core",
@@ -12624,8 +12624,8 @@ export const careers: { [K in CareerName]: Career } = {
 		duty to follow the retreating orcs to their mountain lair and rescue his
 		beloved leader, despite the fact that he will face almost certain death.
 		*/
-	},
-	"Servant": {
+	}),
+	"Servant": MakeCareer({
 		name: "Servant",
 		quote: "Dost thou wish crisped potatoes with that?",
 		book: "Core",
@@ -12691,8 +12691,8 @@ export const careers: { [K in CareerName]: Career } = {
 		man that difficult to work for? Or is there something more nefarious
 		going on in the merchant’s household?
 		*/
-	},
-	"Sewer Jack": {
+	}),
+	"Sewer Jack": MakeCareer({
 		name: "Sewer Jack",
 		quote: "So there I was, face-to-face with four ratmen. I made peace with Morr, figuring they was gonna gut me right then, but nope, they just hissed and scurried past. Last time I ever go down there alone.",
 		book: "AoM",
@@ -12762,8 +12762,8 @@ export const careers: { [K in CareerName]: Career } = {
 		river has also brought something else into the sewers, and it’s starting to
 		eat people…
 		*/
-	},
-	"Shieldbreaker": {
+	}),
+	"Shieldbreaker": MakeCareer({
 		name: "Shieldbreaker",
 		quote: "Axes ready. Shields up. Put yer backs into it, lads. They’re not getting past us today.",
 		book: "",
@@ -12829,8 +12829,8 @@ export const careers: { [K in CareerName]: Career } = {
 		years. Now as he is close to passing he is calling for a shieldbreaker to
 		pass on an ancient secret – the location of a long lost dwarf hold!
 		*/
-	},
-	"Skald": {
+	}),
+	"Skald": MakeCareer({
 		name: "Skald",
 		quote: "They will sing of our victory today for generations. I’ll see to it myself.",
 		book: "ToC",
@@ -12898,8 +12898,8 @@ export const careers: { [K in CareerName]: Career } = {
 		little Graeling tongue, and wonders who the ‘grotesque and lumpen
 		lonesome brute’ they mock so cruelly might be.
 		*/
-	},
-	"Slave": {
+	}),
+	"Slave": MakeCareer({
 		name: "Slave",
 		quote: "Oh, woe is me! What did I do to deserve this?",
 		book: "CotHR",
@@ -12963,8 +12963,8 @@ export const careers: { [K in CareerName]: Career } = {
 		town. At last he hears the name; his home town. Can he escape and take
 		a warning, and will anyone believe him if he does?
 		*/
-	},
-	"Slaver": {
+	}),
+	"Slaver": MakeCareer({
 		name: "Slaver",
 		quote: "Oh, a troublemaker? I bet you’d like me to unlock your shackles and give you a chance at my throat? Hah, that’s the spirit, lad! You’ll make a grand gladiator! Keep that anger and you might even live to see next year!",
 		book: "ToC",
@@ -13027,8 +13027,8 @@ export const careers: { [K in CareerName]: Career } = {
 		seized his eldest son. The merchant promises a great reward to anyone
 		who can restore the boy to him.
 		*/
-	},
-	"Smuggler": {
+	}),
+	"Smuggler": MakeCareer({
 		name: "Smuggler",
 		quote: "Smuggling? I don’t know what you’re talking about!",
 		book: "Core",
@@ -13090,8 +13090,8 @@ export const careers: { [K in CareerName]: Career } = {
 		description of his last client sounds very familiar to the characters, and
 		they decide to track down this elusive smuggler.
 		*/
-	},
-	"Soldier": {
+	}),
+	"Soldier": MakeCareer({
 		name: "Soldier",
 		quote: "You heard the sergeant, men. Charge!",
 		book: "Core",
@@ -13158,8 +13158,8 @@ export const careers: { [K in CareerName]: Career } = {
 		other details that would allow a small group of miscreants to wreak
 		unimaginable chaos on the army camp.
 		*/
-	},
-	"Spy": {
+	}),
+	"Spy": MakeCareer({
 		name: "Spy",
 		quote: "Secrets are my stock in trade. My compensation is coin equal to the secret’s value to a client. My silence will cost at least twice as much.",
 		book: "Core",
@@ -13229,8 +13229,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Unfortunately, the spy’s enemies find out who is carrying the message.
 		They are desperate to prevent its delivery by any means necessary.
 		*/
-	},
-	"SQuire": {
+	}),
+	"SQuire": MakeCareer({
 		name: "SQuire",
 		quote: "I’ve groomed your horse, sharpened your sword and polished your armor, m’lord. What else needs to be done?",
 		book: "Core",
@@ -13299,8 +13299,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the squire arrives, he learns that the lord’s cousin has incurred debt with
 		gamblers, and has gone missing.
 		*/
-	},
-	"Steppes Nomad": {
+	}),
+	"Steppes Nomad": MakeCareer({
 		name: "Steppes Nomad",
 		quote: "It is good our paths have crossed. Be wary travelling that way, for the steppes are thick with trolls this time of year.",
 		book: "RotIQ",
@@ -13367,8 +13367,8 @@ export const careers: { [K in CareerName]: Career } = {
 		a rota of warriors northward to crush infidels and spread his zealous
 		religious doctrine.
 		*/
-	},
-	"Stevedore": {
+	}),
+	"Stevedore": MakeCareer({
 		name: "Stevedore",
 		quote: "None o’ yer lip, lad. Either help me get these crates down to the holds, or find a different pier to loiter on.",
 		book: "WC",
@@ -13437,8 +13437,8 @@ export const careers: { [K in CareerName]: Career } = {
 		vaguely human, but with disturbing twists and knobs. What will the
 		stevedore do with this unsightly discovery?
 		*/
-	},
-	"Steward": {
+	}),
+	"Steward": MakeCareer({
 		name: "Steward",
 		quote: "This beef is nearly rotting, you oaf! His Lordship is entertaining the Elector Count himself this evening. If you don’t get me fresh meat immediately, you’ll be on the menu!",
 		book: "Core",
@@ -13501,8 +13501,8 @@ export const careers: { [K in CareerName]: Career } = {
 		offers a reward to anyone who can shift the dwarfs by any method that
 		does not incur an entry in their infamous Book of Grudges.
 		*/
-	},
-	"Streltsi": {
+	}),
+	"Streltsi": MakeCareer({
 		name: "Streltsi",
 		quote: "First, you use this, for the big bang, da? Then, when no more powder -- the axe! Nyet trouble after that.",
 		book: "RotIQ",
@@ -13570,8 +13570,8 @@ export const careers: { [K in CareerName]: Career } = {
 		commanders, and they can’t allow that. The characters are employed to
 		go behind enemy lines and lead them back to safety.
 		*/
-	},
-	"Strigany Mystic": {
+	}),
+	"Strigany Mystic": MakeCareer({
 		name: "Strigany Mystic",
 		quote: "I sense a cloud of evil in this place … beware the dead, for they walk among you wearing the faces of the living.",
 		book: "NDM",
@@ -13642,8 +13642,8 @@ export const careers: { [K in CareerName]: Career } = {
 		a Strigany mystic, who foretold of a foul harvest for the farmer the
 		previous year.
 		*/
-	},
-	"Student": {
+	}),
+	"Student": MakeCareer({
 		name: "Student",
 		quote: "Psst... Wilhelm – what answer did you get for question eleven?",
 		book: "Core",
@@ -13709,8 +13709,8 @@ export const careers: { [K in CareerName]: Career } = {
 		brought to light. Is this a test concocted by the eccentric instructor, or
 		has someone really gone through the trouble of stealing his notes?
 		*/
-	},
-	"Swamp Skimmer": {
+	}),
+	"Swamp Skimmer": MakeCareer({
 		name: "Swamp Skimmer",
 		quote: "A fish hook, an old hat, a notched sword blade and two bronze clanks. All in all, a good morning’s work.",
 		book: "RC",
@@ -13781,8 +13781,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and recover the cargo of precious gromril. They must race to reach the
 		wreck before the swamp skimmers pillage it.
 		*/
-	},
-	"Swampaire": {
+	}),
+	"Swampaire": MakeCareer({
 		name: "Swampaire",
 		quote: "No, no … over there. See that darker patch of mud? That’s where you’ll find the fattest frogs. Fine enough for a prince to eat, they are!",
 		book: "BotD",
@@ -13854,8 +13854,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the waters have gone, and learn the truth about these mysterious
 		scarecrows…
 		*/
-	},
-	"Targeteer": {
+	}),
+	"Targeteer": MakeCareer({
 		name: "Targeteer",
 		quote: "I prefer to let my bow do the talking.",
 		book: "Core",
@@ -13917,8 +13917,8 @@ export const careers: { [K in CareerName]: Career } = {
 		to give the party the antidote to the poison, if only they’ll help him with
 		one trivial errand…
 		*/
-	},
-	"Temple Guardian": {
+	}),
+	"Temple Guardian": MakeCareer({
 		name: "Temple Guardian",
 		quote: "Form a single queue please, ladies, and stop the shoving. The relic isn’t going anywhere.",
 		book: "ToS",
@@ -13982,8 +13982,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and possibly mutilated. Investigation leads the guardian to discover that
 		the real thief is one of the temple’s own priests.
 		*/
-	},
-	"Thief": {
+	}),
+	"Thief": MakeCareer({
 		name: "Thief",
 		quote: "If he really wanted to keep it, he’d take better care of it. He left it in a strongbox where anyone could find it.",
 		book: "Core",
@@ -14050,8 +14050,8 @@ export const careers: { [K in CareerName]: Career } = {
 		will have the thief’s hand cut off unless he can produce the evidence he
 		desires.
 		*/
-	},
-	"Thug": {
+	}),
+	"Thug": MakeCareer({
 		name: "Thug",
 		quote: "I love my job. I’m real good at it. And yer about to find out why.",
 		book: "Core",
@@ -14113,8 +14113,8 @@ export const careers: { [K in CareerName]: Career } = {
 		group of thugs are looking to restore the status quo. They just need to
 		uncover the vigilante’s identity.
 		*/
-	},
-	"Toll Keeper": {
+	}),
+	"Toll Keeper": MakeCareer({
 		name: "Toll Keeper",
 		quote: "Please pull back the tarp on your wagon. Carrying pickled beets, are we? Well, there’s a penny tariff on all pickled goods hereabouts, in addition to the standard tolls.",
 		book: "Core",
@@ -14186,8 +14186,8 @@ export const careers: { [K in CareerName]: Career } = {
 		regain the stolen toll money, and make sure the bandits never threaten
 		a tollbooth again.
 		*/
-	},
-	"Tomb Robber": {
+	}),
+	"Tomb Robber": MakeCareer({
 		name: "Tomb Robber",
 		quote: "The dead weren’t going to be using that jewellery anyway.",
 		book: "Core",
@@ -14255,8 +14255,8 @@ export const careers: { [K in CareerName]: Career } = {
 		mysterious origin. If these amateur tomb robbers haven’t cleaned out
 		their discovery, it won’t be long before more seasoned professionals do.
 		*/
-	},
-	"Tradesman": {
+	}),
+	"Tradesman": MakeCareer({
 		name: "Tradesman",
 		quote: "Trade’s the lifesblood of the Empire. Think of me as a leech-man-doctor who keeps that blood running clear and clean. What you or the Empire needs, I’ve got, for a price.",
 		book: "Core",
@@ -14321,8 +14321,8 @@ export const careers: { [K in CareerName]: Career } = {
 		two shipments of stone and uncut gems and the party is expected to
 		escort them safely back to the tradesmen for their payments.
 		*/
-	},
-	"Troll Slayer": {
+	}),
+	"Troll Slayer": MakeCareer({
 		name: "Troll Slayer",
 		quote: "My shame is my own. Let me find an enemy worthy of it.",
 		book: "Core",
@@ -14387,8 +14387,8 @@ export const careers: { [K in CareerName]: Career } = {
 		See the entries for Giant Slayer and Daemon Slayer for more
 		about Slayers.
 		*/
-	},
-	"Vagabond": {
+	}),
+	"Vagabond": MakeCareer({
 		name: "Vagabond",
 		quote: "Me? I’m no one of consequence. Just passing through….",
 		book: "Core",
@@ -14451,8 +14451,8 @@ export const careers: { [K in CareerName]: Career } = {
 		and armed to teach this sheriff a lesson. They don’t want him killed –
 		they just want to be left alone.
 		*/
-	},
-	"Valet": {
+	}),
+	"Valet": MakeCareer({
 		name: "Valet",
 		quote: "Your dress uniform has been washed, pressed and is laid out for you. Is there anything else you need at the moment, sir?",
 		book: "Core",
@@ -14522,8 +14522,8 @@ export const careers: { [K in CareerName]: Career } = {
 		valet and the other requisite staff to form a “proper” war-party, and then
 		enter the local dark forest to slay some sort of beast.
 		*/
-	},
-	"Vampire Hunter": {
+	}),
+	"Vampire Hunter": MakeCareer({
 		name: "Vampire Hunter",
 		quote: "They cannot outrun me for long. The sun will see to that.",
 		book: "Core",
@@ -14592,8 +14592,8 @@ export const careers: { [K in CareerName]: Career } = {
 		friendly ear can help him carry on, or aid him in his final blaze of glory
 		against the dark masters of the night.
 		*/
-	},
-	"Verenean Investigator": {
+	}),
+	"Verenean Investigator": MakeCareer({
 		name: "Verenean Investigator",
 		quote: "What have we here? Let me take a closer look. Hmm... Interesting. Very interesting.",
 		book: "SH",
@@ -14659,8 +14659,8 @@ export const careers: { [K in CareerName]: Career } = {
 		watch, and the party might have to go back to destroy evidence and buy
 		the silence of witnesses if they want to escape justice.
 		*/
-	},
-	"Veteran": {
+	}),
+	"Veteran": MakeCareer({
 		name: "Veteran",
 		quote: "This is a lot like that siege in Ostland. There weren’t many survivors. I was one of them. Stick with me, kid, and we’ll be among the survivors here, too.",
 		book: "Core",
@@ -14729,8 +14729,8 @@ export const careers: { [K in CareerName]: Career } = {
 		of someone he can trust – his own flesh and blood – to retrieve it from
 		the orc-infested caves where it lies.
 		*/
-	},
-	"Village Elder": {
+	}),
+	"Village Elder": MakeCareer({
 		name: "Village Elder",
 		quote: "We don’t get many outsiders here; what brings you to these parts?",
 		book: "KotG",
@@ -14796,8 +14796,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Moisi, across the river. The inhabitants of Le Moisi will not be inclined
 		to part with any of their own villagers.
 		*/
-	},
-	"Wall Warden": {
+	}),
+	"Wall Warden": MakeCareer({
 		name: "Wall Warden",
 		quote: "Finished? I’ll have you defending this bit of wall when the Beastmen come... There are a few things you want to check again, are there? Well, well.",
 		book: "KotG",
@@ -14864,8 +14864,8 @@ export const careers: { [K in CareerName]: Career } = {
 		to suspect that this must be deliberate. What could the son and heir
 		possibly be doing?
 		*/
-	},
-	"Warleader": {
+	}),
+	"Warleader": MakeCareer({
 		name: "Warleader",
 		quote: "The third eye? Got that many years back. Oh, the fourth eye? Yeah, that one’s new.",
 		book: "ToC",
@@ -14935,8 +14935,8 @@ export const careers: { [K in CareerName]: Career } = {
 		bands, into the south. The characters are despatched to assassinate the
 		champion of Chaos before his horde gathers strength.
 		*/
-	},
-	"Warlock": {
+	}),
+	"Warlock": MakeCareer({
 		name: "Warlock",
 		quote: "Do not dare to call upon the great dark powers, unless you are willing to risk everything – even your soul – as I have.",
 		book: "RoS",
@@ -15006,8 +15006,8 @@ export const careers: { [K in CareerName]: Career } = {
 		secrets of Blood Magic for assistance on a dangerous river journey. A
 		vampire hunter, as well as a pair of Lahmian agents, are in close pursuit.
 		*/
-	},
-	"Warrior Priest": {
+	}),
+	"Warrior Priest": MakeCareer({
 		name: "Warrior Priest",
 		quote: "Faith shall be my shield, and Sigmar my righteous hammer.",
 		book: "ToS",
@@ -15074,8 +15074,8 @@ export const careers: { [K in CareerName]: Career } = {
 		spot any signs of decadence among the templars and report back to the
 		High Priest in coded missives.
 		*/
-	},
-	"Watchman": {
+	}),
+	"Watchman": MakeCareer({
 		name: "Watchman",
 		quote: "Halt! Who goes there?",
 		book: "Core",
@@ -15142,8 +15142,8 @@ export const careers: { [K in CareerName]: Career } = {
 		protagonist bursts in, bleeding profusely. Another working day at the
 		Luitpoldstrasse Station begins.
 		*/
-	},
-	"Whaler": {
+	}),
+	"Whaler": MakeCareer({
 		name: "Whaler",
 		quote: "You killed a skaven, you say? A rat the size of a man? Come brag at us when ye’ve tackled a Chaos Beast larger than two taverns that drags you a country’s width across the seas before it realizes you killed it!",
 		book: "ToC",
@@ -15212,8 +15212,8 @@ export const careers: { [K in CareerName]: Career } = {
 		they experience the excitement of a whale hunt, and the captain expects
 		everyone on board to pitch in.
 		*/
-	},
-	"Winged Lancer": {
+	}),
+	"Winged Lancer": MakeCareer({
 		name: "Winged Lancer",
 		quote: "For the Queen, for Kislev, for glory -- we fly! And damned be he that first cries hold!",
 		book: "RotIQ",
@@ -15282,8 +15282,8 @@ export const careers: { [K in CareerName]: Career } = {
 		father, a veteran of the lancers and a powerful boyar, is disgusted with
 		the boy’s failure and does not care if he is ever seen again.
 		*/
-	},
-	"Wise Woman": {
+	}),
+	"Wise Woman": MakeCareer({
 		name: "Wise Woman",
 		quote: "You have no place here, this is women’s business.",
 		book: "RotIQ",
@@ -15345,8 +15345,8 @@ export const careers: { [K in CareerName]: Career } = {
 		where the river meets the hills to learn the true source of the spirits’
 		displeasure, and remedy it if they can.
 		*/
-	},
-	"Witch": {
+	}),
+	"Witch": MakeCareer({
 		name: "Witch",
 		quote: "Eye of newt? No, no, Lilith! Eye of dog! Dog! No wonder it’s frothing blue!",
 		book: "RoS",
@@ -15415,8 +15415,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the crime he inspired. The adventurers become embroiled in the affair,
 		untangling the truth to discover the real culprit.
 		*/
-	},
-	"Witch Hunter": {
+	}),
+	"Witch Hunter": MakeCareer({
 		name: "Witch Hunter",
 		quote: "Confess your foul deeds, and perhaps I shall make your death swift.",
 		book: "Core",
@@ -15488,8 +15488,8 @@ export const careers: { [K in CareerName]: Career } = {
 		Bach was a great and devout hunter, and if he has been tainted then this
 		cult is dangerous indeed.
 		*/
-	},
-	"Wizard Lord": {
+	}),
+	"Wizard Lord": MakeCareer({
 		name: "Wizard Lord",
 		quote: "Leave me to my studies. I have far more important matters to deal with – the fate of the Empire may be at stake!",
 		book: "Core",
@@ -15556,8 +15556,8 @@ export const careers: { [K in CareerName]: Career } = {
 		investigate to see if they can learn more about Girtz’s plans through his
 		colleagues and apprentices.
 		*/
-	},
-	"Woodsman": {
+	}),
+	"Woodsman": MakeCareer({
 		name: "Woodsman",
 		quote: "Looks like we need to clear out that copse of trees by the old Holmstead farm. They need the wood to rebuild the inn that burned down.",
 		book: "Core",
@@ -15620,8 +15620,8 @@ export const careers: { [K in CareerName]: Career } = {
 		lumber to Middenland’s markets, but risks earning the enmity of the
 		wood elves who seek to protect the forest from meddlesome humans.
 		*/
-	},
-	"Wrecker": {
+	}),
+	"Wrecker": MakeCareer({
 		name: "Wrecker",
 		quote: "Well, well, well... Would you look at what just washed up?",
 		book: "WC",
@@ -15688,8 +15688,8 @@ export const careers: { [K in CareerName]: Career } = {
 		didn’t do it! Which means, if the stories are true, there are other
 		wreckers working in their territory!
 		*/
-	},
-	"Yeoman": {
+	}),
+	"Yeoman": MakeCareer({
 		name: "Yeoman",
 		quote: "It’s bloody work, but it beats breakin’ yer back in the fields.",
 		book: "KotG",
@@ -15758,8 +15758,8 @@ export const careers: { [K in CareerName]: Career } = {
 		the survivor’s strange behaviour leads the noble to believe perhaps the
 		peasants did not die at the hands of the goblins, after all.
 		*/
-	},
-	"Zealot": {
+	}),
+	"Zealot": MakeCareer({
 		name: "Zealot",
 		quote: "O great and mighty Sigmar, why hast thou forsaken me? Show me the light that I might find repentance. Show me the path that I may walk with you. Show me the truth so that I may dedicate myself to thee! My life for thee, O Sigmar, my life for thee!",
 		book: "Core",
@@ -15827,5 +15827,7 @@ export const careers: { [K in CareerName]: Career } = {
 		has to do is convince them that their mission is in accordance with
 		Sigmar’s will. That, and win the battle that follows.
 		*/
-	}
+	})
 }
+
+export type CareerName = keyof typeof careers;
