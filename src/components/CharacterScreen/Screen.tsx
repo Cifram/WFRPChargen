@@ -10,9 +10,11 @@ export function Screen(props: { state: State }) {
 	}
 
 	let character = props.state.characters[props.state.selectedCharacter];
-	return <div className="flexcol characterScreen">
-		<CharacterSection char={character} />
-		<StatsSection char={character} />
-		<PersonalSection char={character} />
-	</div>
+	return (
+		<div className="flexcol characterScreen">
+			<CharacterSection char={character} />
+			<StatsSection char={character} />
+			<PersonalSection char={character} />
+		</div>
+	);
 }

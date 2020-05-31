@@ -1,7 +1,7 @@
-import { HistoryStatAdvance } from './history';
-import { RaceName, races } from '../data/races';
-import { CareerName } from '../data/careers';
-import { StatBlock, PrimaryStatNames, PrimaryStat } from '../data/stats';
+import { HistoryStatAdvance } from "./history";
+import { RaceName, races } from "../data/races";
+import { CareerName } from "../data/careers";
+import { StatBlock, PrimaryStatNames, PrimaryStat } from "../data/stats";
 
 export interface Character {
 	name: string;

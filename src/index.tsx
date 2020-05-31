@@ -9,10 +9,7 @@ let state: State = { characters: [], dirty: true, selectedCharacter: null };
 function tick() {
 	if (state.dirty) {
 		state.dirty = false;
-		ReactDOM.render(
-			<App state={state} />,
-			document.getElementById("root")
-		);
+		ReactDOM.render(<App state={state} />, document.getElementById("root"));
 	}
 	requestAnimationFrame(tick);
 }
