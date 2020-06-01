@@ -2,6 +2,7 @@ import { HistoryStatAdvance } from "./history";
 import { RaceName, races } from "../data/races";
 import { CareerName } from "../data/careers";
 import { StatBlock, PrimaryStatNames, PrimaryStat } from "../data/stats";
+import { SkillName } from "../data/skills";
 
 export interface Character {
 	name: string;

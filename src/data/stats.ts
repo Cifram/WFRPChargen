@@ -3,10 +3,10 @@ export var PrimaryStatNames = {
 	BS: true,
 	S: true,
 	T: true,
-	AG: true,
-	INT: true,
+	Ag: true,
+	Int: true,
 	WP: true,
-	FEL: true,
+	Fel: true,
 };
 export type PrimaryStat = keyof typeof PrimaryStatNames;
 export var SecondaryStatNames = {
@@ -15,7 +15,7 @@ export var SecondaryStatNames = {
 	SB: true,
 	TB: true,
 	MV: true,
-	MAG: true,
+	Mag: true,
 	IP: true,
 	FP: true,
 };
