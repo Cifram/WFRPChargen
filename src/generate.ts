@@ -37,5 +37,6 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 				: races[race].baseHeightFemale) + d10(),
 		statRolls: rolls,
 		shallyasMercy: null,
+		skillChoices: [],
 	};
 }

@@ -3,6 +3,7 @@ import { State } from "../../state/state";
 import { CharacterSection } from "./CharacterSection";
 import { StatsSection } from "./StatsSection";
 import { PersonalSection } from "./PersonalSection";
+import { SkillsSection } from "./SkillsSection";
 
 export function Screen(props: { state: State }) {
 	if (props.state.selectedCharacter == null) {
@@ -15,6 +16,7 @@ export function Screen(props: { state: State }) {
 			<CharacterSection char={character} />
 			<StatsSection char={character} />
 			<PersonalSection char={character} />
+			<SkillsSection char={character} />
 		</div>
 	);
 }

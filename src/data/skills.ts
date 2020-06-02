@@ -762,3 +762,4 @@ export const skills = {
 };
 
 export type SkillName = keyof typeof skills;
+export type SkillMastery = 0 | 1 | 2;

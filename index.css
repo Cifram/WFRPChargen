@@ -30,6 +30,7 @@ body {
 	width: 200px;
 	height: 100%;
 	flex: none;
+	overflow-y: scroll;
 }
 
 .sidebar .listItem {
@@ -88,6 +89,7 @@ body {
 .characterScreen {
 	flex: 1;
 	background-color: cornsilk;
+	overflow-y: scroll;
 }
 
 .characterScreen .block {
@@ -130,4 +132,11 @@ body {
 	font-size: 14pt;
 	font-family: serif;
 	margin-top: 5px;
+}
+
+.characterScreen .block .cell .stat {
+	font-size: 10pt;
+	font-family: sans-serif;
+	margin-left: 5px;
+	color: dimgray;
 }
