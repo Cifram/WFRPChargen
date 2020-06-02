@@ -33,6 +33,10 @@ body {
 	overflow-y: scroll;
 }
 
+.sidebar::-webkit-scrollbar {
+	display: none;
+}
+
 .sidebar .listItem {
 	padding: 0px 3px;
 	font-size: 18px;
@@ -92,6 +96,10 @@ body {
 	overflow-y: scroll;
 }
 
+.characterScreen::-webkit-scrollbar {
+	display: none;
+}
+
 .characterScreen .block {
 	background-color: white;
 	border: 2px solid black;
@@ -139,4 +147,12 @@ body {
 	font-family: sans-serif;
 	margin-left: 5px;
 	color: dimgray;
+}
+
+.characterScreen .history {
+	outline: 1px solid #eeeeee;
+	width: 200px;
+	height: 100%;
+	flex: none;
+	overflow-y: scroll;
 }
