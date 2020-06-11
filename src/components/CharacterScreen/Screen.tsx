@@ -4,6 +4,7 @@ import { CharacterSection } from "./CharacterSection";
 import { StatsSection } from "./StatsSection";
 import { PersonalSection } from "./PersonalSection";
 import { SkillsSection } from "./SkillsSection";
+import { History } from "./History";
 
 export function Screen(props: { state: State }) {
 	if (props.state.selectedCharacter == null) {
@@ -12,11 +13,14 @@ export function Screen(props: { state: State }) {
 
 	let character = props.state.characters[props.state.selectedCharacter];
 	return (
-		<div className="flexcol characterScreen">
-			<CharacterSection char={character} />
-			<StatsSection char={character} />
-			<PersonalSection char={character} />
-			<SkillsSection char={character} />
+		<div className="flexrow characterScreen">
+			<div className="flexcol character">
+				<CharacterSection char={character} />
+				<StatsSection char={character} />
+				<PersonalSection char={character} />
+				<SkillsSection char={character} />
+			</div>
+			<History char={character} />
 		</div>
 	);
 }
