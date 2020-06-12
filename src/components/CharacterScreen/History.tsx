@@ -5,42 +5,19 @@ import { StatBlock, PrimaryStatNames, PrimaryStat } from "../../data/stats";
 import { races } from "../../data/races";
 
 export function History(props: { char: Character }) {
-	let skillAdvances: { [p in SkillName]?: number } = {};
-	let statAdvances: StatBlock = {
-		WS: 0,
-		BS: 0,
-		S: 0,
-		T: 0,
-		Ag: 0,
-		Int: 0,
-		WP: 0,
-		Fel: 0,
-		A: 0,
-		W: 0,
-		SB: 0,
-		TB: 0,
-		MV: 0,
-		Mag: 0,
-		IP: 0,
-		FP: 0,
-	};
+	let eventIndex = 0;
 	let history = props.char.history.map((event) => {
+		eventIndex++;
 		if (event.type == "SkillAdvance") {
-			let skillAdvancedCount = skillAdvances[event.skill];
-			skillAdvances[event.skill] =
-				skillAdvancedCount == undefined ? 1 : skillAdvancedCount + 1;
-			const key = `${event.skill}:${skillAdvances[event.skill]}`;
 			return (
-				<div key={key} className="flexcol event">
+				<div key={eventIndex} className="flexcol event">
 					<div className="title">Learned Skill</div>
 					<div className="content">{skills[event.skill].name}</div>
 				</div>
 			);
 		} else if (event.type == "StatAdvance") {
-			statAdvances[event.stat]++;
-			const key = `${event.stat}:${statAdvances[event.stat]}`;
 			return (
-				<div key={key} className="flexcol event">
+				<div key={eventIndex} className="flexcol event">
 					<div className="title">Improved Characteristic</div>
 					<div className="content">
 						{event.stat} +{event.change}
