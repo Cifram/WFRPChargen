@@ -1,4 +1,4 @@
-export var PrimaryStatNames = {
+const PrimaryStatList = {
 	WS: true,
 	BS: true,
 	S: true,
@@ -8,8 +8,9 @@ export var PrimaryStatNames = {
 	WP: true,
 	Fel: true,
 };
-export type PrimaryStat = keyof typeof PrimaryStatNames;
-export var SecondaryStatNames = {
+export type PrimaryStat = keyof typeof PrimaryStatList;
+export const PrimaryStatNames = Object.keys(PrimaryStatList) as PrimaryStat[];
+export const SecondaryStatList = {
 	A: true,
 	W: true,
 	SB: true,
@@ -19,7 +20,10 @@ export var SecondaryStatNames = {
 	IP: true,
 	FP: true,
 };
-export type SecondaryStat = keyof typeof SecondaryStatNames;
+export type SecondaryStat = keyof typeof SecondaryStatList;
+export const SecondaryStatNames = Object.keys(
+	SecondaryStatList
+) as SecondaryStat[];
 export type Stat = PrimaryStat | SecondaryStat;
 
 export type PrimaryStatBlock = { [K in PrimaryStat]: number };

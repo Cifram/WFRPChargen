@@ -1,7 +1,8 @@
 import { RaceName, races } from "./data/races";
-import { Character } from "./state/character";
+import { Character, HistoryStep } from "./state/character";
 import { d10, d100, d1000 } from "./dice";
 import { StatBlock } from "./data/stats";
+import { careers } from "./data/careers";
 
 export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 	const rolls: StatBlock = {
@@ -22,11 +23,21 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 		IP: 0,
 		FP: races[race].baseFatePointTable[d10() - 1],
 	};
+	const career = races[race].careerTable[d1000() - 1];
+	let history: HistoryStep[] = [];
+	for (let careerSkill of careers[career].skills) {
+		if (typeof careerSkill == "string") {
+			history.push({
+				type: "SkillAdvance",
+				skill: careerSkill,
+			});
+		}
+	}
 	return {
 		name: "Foo Barson",
 		race: race,
-		career: races[race].careerTable[d1000() - 1],
-		history: [],
+		career: career,
+		history: history,
 		birthplace: races[race].birthplace(),
 		age: Math.ceil(d100() / 5) * races[race].ageStep + races[race].baseAge,
 		gender: gender,
@@ -37,6 +48,5 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 				: races[race].baseHeightFemale) + d10(),
 		statRolls: rolls,
 		shallyasMercy: null,
-		skillChoices: [],
 	};
 }

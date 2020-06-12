@@ -1,6 +1,6 @@
 import { HistoryStatAdvance, HistorySkillAdvance } from "./history";
 import { RaceName, races } from "../data/races";
-import { CareerName, careers } from "../data/careers";
+import { CareerName, careers, SkillChoice } from "../data/careers";
 import { StatBlock, PrimaryStatNames, PrimaryStat } from "../data/stats";
 import { SkillName, SkillMastery } from "../data/skills";
 
@@ -16,7 +16,6 @@ export interface Character {
 	height: number;
 	statRolls: StatBlock;
 	shallyasMercy: PrimaryStat | null;
-	skillChoices: SkillName[];
 }
 
 export type HistoryStep = HistoryStatAdvance | HistorySkillAdvance;
@@ -27,7 +26,7 @@ export function calcStatBlock(char: Character): StatBlock {
 	if (char.shallyasMercy != null) {
 		stats[char.shallyasMercy] = 11;
 	}
-	for (let statName in PrimaryStatNames) {
+	for (let statName of PrimaryStatNames) {
 		let stat = <PrimaryStat>statName;
 		stats[stat] += race.baseStats[stat];
 	}
@@ -62,18 +61,52 @@ export function getSkillList(char: Character): OwnedSkill[] {
 		}
 	};
 
-	for (let skill of careers[char.career].skills) {
-		if (typeof skill == "string") {
-			addSkill(skill);
-		}
-	}
-	for (let skill of char.skillChoices) {
-		addSkill(skill);
-	}
 	for (let event of char.history) {
 		if (event.type == "SkillAdvance") {
 			addSkill(event.skill);
 		}
 	}
 	return skills;
+}
+
+export function getCurrentCareer(char: Character): CareerName {
+	return char.career;
+}
+
+export function getAvailableSkills(
+	char: Character
+): (SkillName | SkillChoice)[] {
+	let career = getCurrentCareer(char);
+	let careerSkills = careers[career].skills;
+	let availableSkills: (SkillName | SkillChoice)[] = [];
+	let ownedSkills = getSkillList(char);
+
+	for (let careerSkill of careerSkills) {
+		if (typeof careerSkill == "string") {
+			let found = ownedSkills.find(
+				(ownedSkill) => ownedSkill.skill == careerSkill
+			);
+
+			if (found == undefined) {
+				availableSkills.push(careerSkill);
+			}
+		} else {
+			var unchosen: SkillName[] = [];
+			for (let skill of careerSkill.skills) {
+				let found = ownedSkills.find((ownedSkill) => ownedSkill.skill == skill);
+				if (found == undefined) {
+					unchosen.push(skill);
+				}
+			}
+
+			var numChosen = careerSkill.skills.length - unchosen.length;
+			if (careerSkill.count > numChosen) {
+				availableSkills.push({
+					skills: unchosen,
+					count: careerSkill.count - numChosen,
+				});
+			}
+		}
+	}
+	return availableSkills;
 }

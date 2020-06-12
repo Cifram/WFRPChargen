@@ -1,11 +1,6 @@
 import { StatBlock } from "./stats";
 import { SkillName } from "./skills";
 
-export interface SkillChoice {
-	count: number;
-	skills: SkillName[];
-}
-
 let academicKnowledges: SkillName[] = [
 	"Academic Knowledge (Arts)",
 	"Academic Knowledge (Astronomy)",
@@ -141,6 +136,11 @@ let anyX = (
 		skills: skills.filter((skill) => !except.includes(skill)),
 	};
 };
+
+export interface SkillChoice {
+	count: number;
+	skills: SkillName[];
+}
 
 export interface Career {
 	name: string;
