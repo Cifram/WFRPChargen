@@ -1,30 +1,15 @@
 import * as React from "react";
 import { Character, getAvailableSkills } from "../../state/character";
-import { skills, SkillName } from "../../data/skills";
-import { StatBlock, PrimaryStatNames, PrimaryStat } from "../../data/stats";
+import { skills } from "../../data/skills";
+import { PrimaryStatNames } from "../../data/stats";
 import { races } from "../../data/races";
+import { Event } from "./Event";
 
 export function History(props: { char: Character }) {
 	let eventIndex = 0;
 	let history = props.char.history.map((event) => {
 		eventIndex++;
-		if (event.type == "SkillAdvance") {
-			return (
-				<div key={eventIndex} className="flexcol event">
-					<div className="title">Learned Skill</div>
-					<div className="content">{skills[event.skill].name}</div>
-				</div>
-			);
-		} else if (event.type == "StatAdvance") {
-			return (
-				<div key={eventIndex} className="flexcol event">
-					<div className="title">Improved Characteristic</div>
-					<div className="content">
-						{event.stat} +{event.change}
-					</div>
-				</div>
-			);
-		}
+		return <Event key={eventIndex} event={event} />;
 	});
 
 	let availableSkills = getAvailableSkills(props.char).map((skill) => {

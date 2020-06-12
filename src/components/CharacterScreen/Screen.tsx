@@ -4,7 +4,7 @@ import { CharacterSection } from "./CharacterSection";
 import { StatsSection } from "./StatsSection";
 import { PersonalSection } from "./PersonalSection";
 import { SkillsSection } from "./SkillsSection";
-import { History } from "./History";
+import { History } from "../HistoryBar/History";
 
 export function Screen(props: { state: State }) {
 	if (props.state.selectedCharacter == null) {
