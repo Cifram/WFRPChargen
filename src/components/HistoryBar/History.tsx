@@ -28,23 +28,27 @@ export function History(props: { char: Character; state: State }) {
 
 	return (
 		<div className="flexcol history">
-			<div className="header">HISTORY</div>
-			{props.char.shallyasMercy == null ? (
-				""
-			) : (
-				<div className="flexcol event">
-					<div className="title">Shallya's Mercy</div>
-					<div className="content">
-						{props.char.shallyasMercy}{" "}
-						{props.char.statRolls[props.char.shallyasMercy] +
-							races[props.char.race].baseStats[props.char.shallyasMercy]}
-						→{11 + races[props.char.race].baseStats[props.char.shallyasMercy]}
+			<div className="historySection">
+				<div className="header">HISTORY</div>
+				{props.char.shallyasMercy == null ? (
+					""
+				) : (
+					<div className="flexcol event">
+						<div className="title">Shallya's Mercy</div>
+						<div className="content">
+							{props.char.shallyasMercy}{" "}
+							{props.char.statRolls[props.char.shallyasMercy] +
+								races[props.char.race].baseStats[props.char.shallyasMercy]}
+							→{11 + races[props.char.race].baseStats[props.char.shallyasMercy]}
+						</div>
 					</div>
-				</div>
-			)}
-			{history}
-			<div className="header">ADVANCES</div>
-			<Advances char={props.char} state={props.state} />
+				)}
+				{history}
+			</div>
+			<div className="advancesSection">
+				<div className="header">ADVANCES</div>
+				<Advances char={props.char} state={props.state} />
+			</div>
 		</div>
 	);
 }

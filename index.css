@@ -158,11 +158,6 @@ body {
 	width: 300px;
 	height: 100%;
 	flex: none;
-	overflow-y: scroll;
-}
-
-.characterScreen .history::-webkit-scrollbar {
-	display: none;
 }
 
 .characterScreen .history .header {
@@ -171,6 +166,24 @@ body {
 	font-size: 20pt;
 	font-family: serif;
 	text-align: center;
+}
+
+.characterScreen .history .historySection {
+	flex: 2;
+	overflow-y: scroll;
+}
+
+.characterScreen .history .historySection::-webkit-scrollbar {
+	display: none;
+}
+
+.characterScreen .history .advancesSection {
+	flex: 1;
+	overflow-y: scroll;
+}
+
+.characterScreen .history .advancesSection::-webkit-scrollbar {
+	display: none;
 }
 
 .characterScreen .history .event {
