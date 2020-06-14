@@ -180,6 +180,34 @@ body {
 	outline: 1px solid lightgray;
 }
 
-.characterScreen .history .title {
+.characterScreen .history .event .title {
 	border-bottom: 1px solid lightgray;
+}
+
+.characterScreen .history .subheader {
+	padding: 3px;
+	user-select: none;
+	border-bottom: 1px solid black;
+	background-color: lightgray;
+}
+
+.characterScreen .history .subheader:hover {
+	background-color: powderblue;
+}
+
+.characterScreen .history .sectionButton {
+	margin: 4px;
+	padding: 3px;
+	background-color: lightgray;
+	outline: 1px solid gray;
+}
+
+.characterScreen .history .sectionButton:hover {
+	background-color: powderblue;
+}
+
+.characterScreen .history .backButton {
+	color: gray;
+	user-select: none;
+	margin-right: 4px;
 }

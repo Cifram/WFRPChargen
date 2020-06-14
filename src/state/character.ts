@@ -16,9 +16,22 @@ export interface Character {
 	height: number;
 	statRolls: StatBlock;
 	shallyasMercy: PrimaryStat | null;
+	uiState: CharacterUiState;
 }
 
 export type HistoryStep = HistoryStatAdvance | HistorySkillAdvance;
+
+export enum CharacterAdvanceBarState {
+	Root,
+	FreeAdvances,
+	RequiredAdvances,
+	OptionalAdvances,
+	OtherChanges,
+}
+
+export interface CharacterUiState {
+	advanceBarState: CharacterAdvanceBarState;
+}
 
 export function calcStatBlock(char: Character): StatBlock {
 	let race = races[char.race];

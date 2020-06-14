@@ -20,7 +20,7 @@ export function Screen(props: { state: State }) {
 				<PersonalSection char={character} />
 				<SkillsSection char={character} />
 			</div>
-			<History char={character} />
+			<History char={character} state={props.state} />
 		</div>
 	);
 }

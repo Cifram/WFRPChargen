@@ -1,5 +1,9 @@
 import { RaceName, races } from "./data/races";
-import { Character, HistoryStep } from "./state/character";
+import {
+	Character,
+	HistoryStep,
+	CharacterAdvanceBarState,
+} from "./state/character";
 import { d10, d100, d1000 } from "./dice";
 import { StatBlock } from "./data/stats";
 import { careers } from "./data/careers";
@@ -48,5 +52,8 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 				: races[race].baseHeightFemale) + d10(),
 		statRolls: rolls,
 		shallyasMercy: null,
+		uiState: {
+			advanceBarState: CharacterAdvanceBarState.Root,
+		},
 	};
 }

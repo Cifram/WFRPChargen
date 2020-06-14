@@ -4,35 +4,14 @@ import { skills } from "../../data/skills";
 import { PrimaryStatNames } from "../../data/stats";
 import { races } from "../../data/races";
 import { Event } from "./Event";
+import { Advances } from "./Advances";
+import { State } from "../../state/state";
 
-export function History(props: { char: Character }) {
+export function History(props: { char: Character; state: State }) {
 	let eventIndex = 0;
 	let history = props.char.history.map((event) => {
 		eventIndex++;
 		return <Event key={eventIndex} event={event} />;
-	});
-
-	let availableSkills = getAvailableSkills(props.char).map((skill) => {
-		if (typeof skill == "string") {
-			return (
-				<div key={skill} className="flexcol event">
-					<div className="content">Skill: {skills[skill].name}</div>
-				</div>
-			);
-		} else {
-			let key = `${skill.count}:${skill.skills.join(",")}`;
-			let content = skill.skills.map((skill) => (
-				<div key={skill} className="content">
-					Skill: {skills[skill].name}
-				</div>
-			));
-			return (
-				<div key={key} className="flexcol event">
-					<div className="title">Choose {skill.count}:</div>
-					{content}
-				</div>
-			);
-		}
 	});
 
 	let shallyasMercy = PrimaryStatNames.filter(
@@ -57,7 +36,7 @@ export function History(props: { char: Character }) {
 			</div>
 			{history}
 			<div className="header">ADVANCES</div>
-			{availableSkills}
+			<Advances char={props.char} state={props.state} />
 		</div>
 	);
 }
