@@ -184,6 +184,24 @@ body {
 	border-bottom: 1px solid lightgray;
 }
 
+.characterScreen .history .event .shallyasMercy {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.characterScreen .history .event .stat {
+	flex: 2;
+}
+.characterScreen .history .event .old {
+	flex: 1;
+}
+.characterScreen .history .event .arrow {
+	flex: 1;
+}
+.characterScreen .history .event .new {
+	flex: 1;
+}
+
 .characterScreen .history .subheader {
 	padding: 3px;
 	user-select: none;
@@ -195,14 +213,14 @@ body {
 	background-color: powderblue;
 }
 
-.characterScreen .history .sectionButton {
+.characterScreen .history .button {
 	margin: 4px;
 	padding: 3px;
 	background-color: lightgray;
 	outline: 1px solid gray;
 }
 
-.characterScreen .history .sectionButton:hover {
+.characterScreen .history .button:hover {
 	background-color: powderblue;
 }
 

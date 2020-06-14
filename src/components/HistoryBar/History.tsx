@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Character, getAvailableSkills } from "../../state/character";
-import { skills } from "../../data/skills";
+import { Character } from "../../state/character";
 import { PrimaryStatNames } from "../../data/stats";
 import { races } from "../../data/races";
 import { Event } from "./Event";
@@ -30,10 +29,19 @@ export function History(props: { char: Character; state: State }) {
 	return (
 		<div className="flexcol history">
 			<div className="header">HISTORY</div>
-			<div className="flexcol event">
-				<div className="title">Shallya's Mercy</div>
-				{shallyasMercy}
-			</div>
+			{props.char.shallyasMercy == null ? (
+				""
+			) : (
+				<div className="flexcol event">
+					<div className="title">Shallya's Mercy</div>
+					<div className="content">
+						{props.char.shallyasMercy}{" "}
+						{props.char.statRolls[props.char.shallyasMercy] +
+							races[props.char.race].baseStats[props.char.shallyasMercy]}
+						→{11 + races[props.char.race].baseStats[props.char.shallyasMercy]}
+					</div>
+				</div>
+			)}
 			{history}
 			<div className="header">ADVANCES</div>
 			<Advances char={props.char} state={props.state} />

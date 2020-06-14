@@ -1,6 +1,9 @@
 import * as React from "react";
 import { Character, CharacterAdvanceBarState } from "../../state/character";
 import { State } from "../../state/state";
+import { PrimaryStatNames } from "../../data/stats";
+import { races } from "../../data/races";
+import { ShallyasMercyAdvance } from "./ShallyasMercyAdvance";
 
 export function Advances(props: { char: Character; state: State }) {
 	const gotoSection = (section: CharacterAdvanceBarState) => {
@@ -12,25 +15,25 @@ export function Advances(props: { char: Character; state: State }) {
 		return (
 			<div className="flexCol">
 				<div
-					className="sectionButton"
+					className="button"
 					onClick={() => gotoSection(CharacterAdvanceBarState.FreeAdvances)}
 				>
 					Free Advances
 				</div>
 				<div
-					className="sectionButton"
+					className="button"
 					onClick={() => gotoSection(CharacterAdvanceBarState.RequiredAdvances)}
 				>
 					Required Advances
 				</div>
 				<div
-					className="sectionButton"
+					className="button"
 					onClick={() => gotoSection(CharacterAdvanceBarState.OptionalAdvances)}
 				>
 					Optional Advances
 				</div>
 				<div
-					className="sectionButton"
+					className="button"
 					onClick={() => gotoSection(CharacterAdvanceBarState.OtherChanges)}
 				>
 					Other Changes
@@ -38,22 +41,34 @@ export function Advances(props: { char: Character; state: State }) {
 			</div>
 		);
 	}
-	const sectionTitle =
-		uiState == CharacterAdvanceBarState.FreeAdvances
-			? "Free Advances"
-			: uiState == CharacterAdvanceBarState.RequiredAdvances
-			? "Required Advances"
-			: uiState == CharacterAdvanceBarState.OptionalAdvances
-			? "Optional Advances"
-			: "Other Changes";
-	return (
+
+	let SectionContainer = (props: {
+		title: string;
+		children?: (JSX.Element | null)[];
+	}) => (
 		<div className="flexcol">
 			<div
 				className="flexrow subheader"
 				onClick={() => gotoSection(CharacterAdvanceBarState.Root)}
 			>
-				← {sectionTitle}
+				← {props.title}
 			</div>
+			{props.children}
 		</div>
 	);
+
+	if (uiState == CharacterAdvanceBarState.FreeAdvances) {
+		let advances: JSX.Element[] = [
+			<ShallyasMercyAdvance char={props.char} state={props.state} />,
+		];
+		return (
+			<SectionContainer title="Free Advances">{advances}</SectionContainer>
+		);
+	} else if (uiState == CharacterAdvanceBarState.RequiredAdvances) {
+		return <SectionContainer title="Required Advances"></SectionContainer>;
+	} else if (uiState == CharacterAdvanceBarState.OptionalAdvances) {
+		return <SectionContainer title="Optional Advances"></SectionContainer>;
+	} else {
+		return <SectionContainer title="Other Changes"></SectionContainer>;
+	}
 }
