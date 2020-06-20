@@ -5,7 +5,7 @@ export function selectedCharacterReducer(
 	action: Action
 ) {
 	switch (action.type) {
-		case "CHANGE_SELECTED_CHARACTER":
+		case "SELECT_CHARACTER":
 			return action.index;
 		default:
 			return state;

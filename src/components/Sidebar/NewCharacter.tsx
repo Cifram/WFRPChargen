@@ -1,25 +1,15 @@
 import * as React from "react";
-import { State } from "../../store/state/state";
-import { connect, ConnectedProps } from "react-redux";
-import { changeSelectedCharacter } from "../../store/actions/ChangeSelectedCharacter";
 
-const mapDispatch = {
-	changeSelectedCharacter,
-};
-
-const connector = connect(undefined, mapDispatch);
-
-interface Props extends ConnectedProps<typeof connector> {
-	selectedCharacter: number | null;
+interface Props {
+	selected: boolean;
+	changeSelectedCharacter: (charIndex: number | null) => void;
 }
 
-export const NewCharacter = connector((props: Props) => (
+export const NewCharacter = (props: Props) => (
 	<div
-		className={
-			"listItem" + (props.selectedCharacter == null ? " selected" : "")
-		}
+		className={"listItem" + (props.selected ? " selected" : "")}
 		onClick={() => props.changeSelectedCharacter(null)}
 	>
 		New Character
 	</div>
-));
+);

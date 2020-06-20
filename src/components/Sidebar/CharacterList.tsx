@@ -1,24 +1,27 @@
 import * as React from "react";
-import { State } from "../../store/state/state";
 import { CharacterListItem } from "./CharacterListItem";
-import { connect, ConnectedProps } from "react-redux";
+import { Character } from "../../store/state/character";
 
-const mapState = (state: State) => ({
-	charIndex: state.selectedCharacter,
-	characters: state.characters,
-});
+interface Props {
+	selectedChar: number | null;
+	characters: Character[];
+	changeSelectedCharacter: (charIndex: number | null) => void;
+}
 
-const connector = connect(mapState);
-
-interface Props extends ConnectedProps<typeof connector> {}
-
-export const CharacterList = connector((props: Props) => {
+export const CharacterList = (props: Props) => {
 	let characters: JSX.Element[] = [];
 	for (let i = 0; i < props.characters.length; i++) {
 		let char = props.characters[i];
-		let key = char.name + ", " + char.race + ", " + char.career;
-		characters.push(<CharacterListItem charIndex={i} key={key} />);
+		characters.push(
+			<CharacterListItem
+				charIndex={i}
+				char={char}
+				selected={i == props.selectedChar}
+				changeSelectedCharacter={props.changeSelectedCharacter}
+				key={i}
+			/>
+		);
 	}
 	console.log("Num characters " + props.characters.length);
 	return <div className="flexcol">{characters}</div>;
-});
+};

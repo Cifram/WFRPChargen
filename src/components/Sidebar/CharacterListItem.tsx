@@ -1,28 +1,16 @@
 import * as React from "react";
-import { State } from "../../store/state/state";
 import { races } from "../../data/races";
 import { careers } from "../../data/careers";
-import { changeSelectedCharacter } from "../../store/actions/ChangeSelectedCharacter";
-import { ConnectedProps, connect } from "react-redux";
+import { Character } from "../../store/state/character";
 
-interface OwnProps {
+interface Props {
 	charIndex: number;
+	char: Character;
+	selected: boolean;
+	changeSelectedCharacter: (charIndex: number | null) => void;
 }
 
-const mapState = (state: State, props: OwnProps) => ({
-	char: state.characters[props.charIndex],
-	selected: props.charIndex == state.selectedCharacter,
-});
-
-const mapDispatch = {
-	changeSelectedCharacter,
-};
-
-const connector = connect(mapState, mapDispatch);
-
-type Props = ConnectedProps<typeof connector> & OwnProps;
-
-export const CharacterListItem = connector((props: Props) => {
+export const CharacterListItem = (props: Props) => {
 	let className = "flexcol listItem" + (props.selected ? " selected" : "");
 	return (
 		<div
@@ -35,4 +23,4 @@ export const CharacterListItem = connector((props: Props) => {
 			</div>
 		</div>
 	);
-});
+};

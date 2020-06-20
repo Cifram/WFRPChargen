@@ -6,7 +6,6 @@ import { connect, ConnectedProps } from "react-redux";
 import { State } from "../store/state/state";
 
 const mapState = (state: State) => ({
-	charIndex: state.selectedCharacter,
 	char:
 		state.selectedCharacter == null
 			? null
@@ -19,7 +18,7 @@ interface Props extends ConnectedProps<typeof connector> {}
 
 export let App = connector((props: Props) => (
 	<div className="flexrow app">
-		<Sidebar selectedCharacter={props.charIndex} />
+		<Sidebar />
 		{props.char != null ? (
 			<CharacterScreen char={props.char} />
 		) : (
