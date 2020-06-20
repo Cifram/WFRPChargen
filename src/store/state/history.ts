@@ -1,5 +1,5 @@
-import { PrimaryStat, SecondaryStat } from "../data/stats";
-import { SkillName } from "../data/skills";
+import { PrimaryStat, SecondaryStat } from "../../data/stats";
+import { SkillName } from "../../data/skills";
 
 export interface HistoryStatAdvance {
 	type: "StatAdvance";

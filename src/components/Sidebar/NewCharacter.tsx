@@ -1,16 +1,25 @@
 import * as React from "react";
-import { State } from "../../state/state";
+import { State } from "../../store/state/state";
+import { connect, ConnectedProps } from "react-redux";
+import { changeSelectedCharacter } from "../../store/actions/ChangeSelectedCharacter";
 
-export function NewCharacter(props: { state: State }) {
-	let className =
-		"listItem" + (props.state.selectedCharacter == null ? " selected" : "");
-	let onClick = () => {
-		props.state.selectedCharacter = null;
-		props.state.dirty = true;
-	};
-	return (
-		<div className={className} onClick={onClick}>
-			New Character
-		</div>
-	);
+const mapDispatch = {
+	changeSelectedCharacter,
+};
+
+const connector = connect(undefined, mapDispatch);
+
+interface Props extends ConnectedProps<typeof connector> {
+	selectedCharacter: number | null;
 }
+
+export const NewCharacter = connector((props: Props) => (
+	<div
+		className={
+			"listItem" + (props.selectedCharacter == null ? " selected" : "")
+		}
+		onClick={() => props.changeSelectedCharacter(null)}
+	>
+		New Character
+	</div>
+));

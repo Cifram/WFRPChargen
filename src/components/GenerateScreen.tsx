@@ -1,13 +1,20 @@
 import * as React from "react";
-import { State } from "../state/state";
 import { generate } from "../generate";
 import { RaceName } from "../data/races";
+import { addCharacter } from "../store/actions/addChracter";
+import { connect, ConnectedProps } from "react-redux";
 
-export function GenerateScreen(props: { state: State }) {
-	let makeOnClick = (race: RaceName, gender: "Male" | "Female") => () => {
-		props.state.characters.push(generate(race, gender));
-		props.state.dirty = true;
-	};
+const mapDispatch = {
+	addCharacter,
+};
+
+const connector = connect(undefined, mapDispatch);
+
+interface Props extends ConnectedProps<typeof connector> {}
+
+export const GenerateScreen = connector((props: Props) => {
+	const makeOnClick = (race: RaceName, gender: "Male" | "Female") => () =>
+		props.addCharacter(generate(race, gender));
 	return (
 		<div className="flexrow generateScreen">
 			<div className="flexcol group">
@@ -48,4 +55,4 @@ export function GenerateScreen(props: { state: State }) {
 			</div>
 		</div>
 	);
-}
+});

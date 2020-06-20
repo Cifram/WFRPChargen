@@ -1,10 +1,13 @@
 import * as React from "react";
-import { Character } from "../../state/character";
-import { State } from "../../state/state";
-import { PrimaryStatNames } from "../../data/stats";
+import { Character } from "../../store/state/character";
+import { PrimaryStatNames, PrimaryStat } from "../../data/stats";
 import { races } from "../../data/races";
 
-export function ShallyasMercyAdvance(props: { char: Character; state: State }) {
+export const ShallyasMercyAdvance = (props: {
+	char: Character;
+	charIndex: number;
+	applyShallyasMercy: (stat: PrimaryStat) => void;
+}) => {
 	if (props.char.shallyasMercy == null) {
 		let shallyasMercyStats = PrimaryStatNames.filter(
 			(stat) => props.char.statRolls[stat] < 11
@@ -12,10 +15,7 @@ export function ShallyasMercyAdvance(props: { char: Character; state: State }) {
 			result.push(
 				<div
 					className="flexrow button"
-					onClick={() => {
-						props.char.shallyasMercy = stat;
-						props.state.dirty = true;
-					}}
+					onClick={() => props.applyShallyasMercy(stat)}
 				>
 					<div className="stat">{stat}</div>
 					<div className="old">
@@ -40,4 +40,4 @@ export function ShallyasMercyAdvance(props: { char: Character; state: State }) {
 		}
 	}
 	return <></>;
-}
+};

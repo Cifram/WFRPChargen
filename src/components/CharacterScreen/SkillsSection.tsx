@@ -1,5 +1,9 @@
 import * as React from "react";
-import { Character, getSkillList, calcStatBlock } from "../../state/character";
+import {
+	Character,
+	getSkillList,
+	calcStatBlock,
+} from "../../store/state/character";
 import { skills } from "../../data/skills";
 
 export function SkillsSection(props: { char: Character }) {

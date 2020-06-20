@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Character } from "../../state/character";
+import { Character } from "../../store/state/character";
 
 export function PersonalSection(props: { char: Character }) {
 	return (

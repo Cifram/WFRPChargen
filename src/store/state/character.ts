@@ -1,8 +1,8 @@
 import { HistoryStatAdvance, HistorySkillAdvance } from "./history";
-import { RaceName, races } from "../data/races";
-import { CareerName, careers, SkillChoice } from "../data/careers";
-import { StatBlock, PrimaryStatNames, PrimaryStat } from "../data/stats";
-import { SkillName, SkillMastery } from "../data/skills";
+import { RaceName, races } from "../../data/races";
+import { CareerName, careers, SkillChoice } from "../../data/careers";
+import { StatBlock, PrimaryStatNames, PrimaryStat } from "../../data/stats";
+import { SkillName, SkillMastery } from "../../data/skills";
 
 export interface Character {
 	name: string;

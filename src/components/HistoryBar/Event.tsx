@@ -1,5 +1,5 @@
 import * as React from "react";
-import { HistoryStep } from "../../state/character";
+import { HistoryStep } from "../../store/state/character";
 import { skills } from "../../data/skills";
 
 export function Event(props: { event: HistoryStep }): JSX.Element {

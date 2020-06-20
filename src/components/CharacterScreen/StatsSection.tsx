@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Character, calcStatBlock } from "../../state/character";
+import { Character, calcStatBlock } from "../../store/state/character";
 
 export function StatsSection(props: { char: Character }) {
 	let stats = calcStatBlock(props.char);

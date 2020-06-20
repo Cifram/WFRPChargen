@@ -1,7 +1,7 @@
 import * as React from "react";
 import { races } from "../../data/races";
 import { careers } from "../../data/careers";
-import { Character } from "../../state/character";
+import { Character } from "../../store/state/character";
 
 export function CharacterSection(props: { char: Character }) {
 	return (

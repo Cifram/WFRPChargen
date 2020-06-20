@@ -1,20 +1,29 @@
 import * as React from "react";
 import { GenerateScreen } from "./GenerateScreen";
-import { State } from "../state/state";
 import { Sidebar } from "./Sidebar/Sidebar";
-import { Screen as CharacterScreen } from "./CharacterScreen/Screen";
+import { CharacterScreen } from "./CharacterScreen/CharacterScreen";
+import { connect, ConnectedProps } from "react-redux";
+import { State } from "../store/state/state";
 
-export function App(props: { state: State }) {
-	let screen =
-		props.state.selectedCharacter == null ? (
-			<GenerateScreen state={props.state} />
+const mapState = (state: State) => ({
+	charIndex: state.selectedCharacter,
+	char:
+		state.selectedCharacter == null
+			? null
+			: state.characters[state.selectedCharacter],
+});
+
+const connector = connect(mapState);
+
+interface Props extends ConnectedProps<typeof connector> {}
+
+export let App = connector((props: Props) => (
+	<div className="flexrow app">
+		<Sidebar selectedCharacter={props.charIndex} />
+		{props.char != null ? (
+			<CharacterScreen char={props.char} />
 		) : (
-			<CharacterScreen state={props.state} />
-		);
-	return (
-		<div className="flexrow app">
-			<Sidebar state={props.state} />
-			{screen}
-		</div>
-	);
-}
+			<GenerateScreen />
+		)}
+	</div>
+));

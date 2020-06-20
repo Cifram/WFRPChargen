@@ -1,40 +1,65 @@
 import * as React from "react";
-import { Character, CharacterAdvanceBarState } from "../../state/character";
-import { State } from "../../state/state";
-import { PrimaryStatNames } from "../../data/stats";
-import { races } from "../../data/races";
+import { CharacterAdvanceBarState } from "../../store/state/character";
 import { ShallyasMercyAdvance } from "./ShallyasMercyAdvance";
+import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
+import { changeAdvancesSection } from "../../store/actions/ChangeAdvancesSection";
+import { ConnectedProps, connect } from "react-redux";
+import { State } from "../../store/state/state";
 
-export function Advances(props: { char: Character; state: State }) {
-	const gotoSection = (section: CharacterAdvanceBarState) => {
-		props.char.uiState.advanceBarState = section;
-		props.state.dirty = true;
+const mapState = (state: State) => {
+	if (state.selectedCharacter == null) {
+		throw "Somehow rendering Advances component with no character selected";
+	}
+	return {
+		charIndex: state.selectedCharacter,
+		char: state.characters[state.selectedCharacter],
 	};
+};
+
+const mapDispatch = {
+	changeAdvancesSection,
+	applyShallyasMercy,
+};
+
+const connector = connect(mapState, mapDispatch);
+interface Props extends ConnectedProps<typeof connector> {}
+
+export const Advances = connector((props: Props) => {
 	const uiState = props.char.uiState.advanceBarState;
+	const changeSection = props.changeAdvancesSection;
+	const index = props.charIndex;
 	if (uiState == CharacterAdvanceBarState.Root) {
 		return (
 			<div className="flexCol">
 				<div
 					className="button"
-					onClick={() => gotoSection(CharacterAdvanceBarState.FreeAdvances)}
+					onClick={() =>
+						changeSection(index, CharacterAdvanceBarState.FreeAdvances)
+					}
 				>
 					Free Advances
 				</div>
 				<div
 					className="button"
-					onClick={() => gotoSection(CharacterAdvanceBarState.RequiredAdvances)}
+					onClick={() =>
+						changeSection(index, CharacterAdvanceBarState.RequiredAdvances)
+					}
 				>
 					Required Advances
 				</div>
 				<div
 					className="button"
-					onClick={() => gotoSection(CharacterAdvanceBarState.OptionalAdvances)}
+					onClick={() =>
+						changeSection(index, CharacterAdvanceBarState.OptionalAdvances)
+					}
 				>
 					Optional Advances
 				</div>
 				<div
 					className="button"
-					onClick={() => gotoSection(CharacterAdvanceBarState.OtherChanges)}
+					onClick={() =>
+						changeSection(index, CharacterAdvanceBarState.OtherChanges)
+					}
 				>
 					Other Changes
 				</div>
@@ -49,7 +74,7 @@ export function Advances(props: { char: Character; state: State }) {
 		<div className="flexcol">
 			<div
 				className="flexrow subheader"
-				onClick={() => gotoSection(CharacterAdvanceBarState.Root)}
+				onClick={() => changeSection(index, CharacterAdvanceBarState.Root)}
 			>
 				← {props.title}
 			</div>
@@ -59,7 +84,13 @@ export function Advances(props: { char: Character; state: State }) {
 
 	if (uiState == CharacterAdvanceBarState.FreeAdvances) {
 		let advances: JSX.Element[] = [
-			<ShallyasMercyAdvance char={props.char} state={props.state} />,
+			<ShallyasMercyAdvance
+				char={props.char}
+				charIndex={props.charIndex}
+				applyShallyasMercy={(stat) =>
+					props.applyShallyasMercy(props.charIndex, stat)
+				}
+			/>,
 		];
 		return (
 			<SectionContainer title="Free Advances">{advances}</SectionContainer>
@@ -71,4 +102,4 @@ export function Advances(props: { char: Character; state: State }) {
 	} else {
 		return <SectionContainer title="Other Changes"></SectionContainer>;
 	}
-}
+});

@@ -3,7 +3,7 @@ import {
 	Character,
 	HistoryStep,
 	CharacterAdvanceBarState,
-} from "./state/character";
+} from "./store/state/character";
 import { d10, d100, d1000 } from "./dice";
 import { StatBlock } from "./data/stats";
 import { careers } from "./data/careers";
