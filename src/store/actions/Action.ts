@@ -1,10 +1,10 @@
 import { AddCharacterAction } from "./addChracter";
-import { ChangeAdvancesSectionAction } from "./ChangeAdvancesSection";
+import { ChangeAdvancesPageAction } from "./ChangeAdvancesPage";
 import { ApplyShallyasMercyAction } from "./ApplyShallyasMercy";
 import { SelectCharacterAction } from "./SelectCharacter";
 
 export type Action =
 	| AddCharacterAction
-	| ChangeAdvancesSectionAction
+	| ChangeAdvancesPageAction
 	| ApplyShallyasMercyAction
 	| SelectCharacterAction;

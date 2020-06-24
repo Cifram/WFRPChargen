@@ -2,9 +2,10 @@ import * as React from "react";
 import { CharacterAdvanceBarState } from "../../store/state/character";
 import { ShallyasMercyAdvance } from "./ShallyasMercyAdvance";
 import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
-import { changeAdvancesSection } from "../../store/actions/ChangeAdvancesSection";
+import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
 import { ConnectedProps, connect } from "react-redux";
 import { State } from "../../store/state/state";
+import { AdvancesPageSelection } from "./AdvancesPageSelection";
 
 const mapState = (state: State) => {
 	if (state.selectedCharacter == null) {
@@ -17,7 +18,7 @@ const mapState = (state: State) => {
 };
 
 const mapDispatch = {
-	changeAdvancesSection,
+	changeAdvancesSection: changeAdvancesPage,
 	applyShallyasMercy,
 };
 
@@ -30,40 +31,10 @@ export const Advances = connector((props: Props) => {
 	const index = props.charIndex;
 	if (uiState == CharacterAdvanceBarState.Root) {
 		return (
-			<div className="flexCol">
-				<div
-					className="button"
-					onClick={() =>
-						changeSection(index, CharacterAdvanceBarState.FreeAdvances)
-					}
-				>
-					Free Advances
-				</div>
-				<div
-					className="button"
-					onClick={() =>
-						changeSection(index, CharacterAdvanceBarState.RequiredAdvances)
-					}
-				>
-					Required Advances
-				</div>
-				<div
-					className="button"
-					onClick={() =>
-						changeSection(index, CharacterAdvanceBarState.OptionalAdvances)
-					}
-				>
-					Optional Advances
-				</div>
-				<div
-					className="button"
-					onClick={() =>
-						changeSection(index, CharacterAdvanceBarState.OtherChanges)
-					}
-				>
-					Other Changes
-				</div>
-			</div>
+			<AdvancesPageSelection
+				changePage={props.changeAdvancesSection}
+				index={props.charIndex}
+			/>
 		);
 	}
 

@@ -1,15 +1,15 @@
 import { CharacterAdvanceBarState } from "../state/character";
 
-export interface ChangeAdvancesSectionAction {
+export interface ChangeAdvancesPageAction {
 	type: "CHANGE_ADVANCES_SECTION";
 	charIndex: number;
 	section: CharacterAdvanceBarState;
 }
 
-export const changeAdvancesSection = (
+export const changeAdvancesPage = (
 	charIndex: number,
 	section: CharacterAdvanceBarState
-): ChangeAdvancesSectionAction => ({
+): ChangeAdvancesPageAction => ({
 	type: "CHANGE_ADVANCES_SECTION",
 	charIndex,
 	section,
