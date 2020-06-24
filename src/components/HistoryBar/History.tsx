@@ -5,6 +5,7 @@ import { Event } from "./Event";
 import { Advances } from "./Advances";
 import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
 import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
+import { gainSkill } from "../../store/actions/GainSkill";
 import { ConnectedProps, connect } from "react-redux";
 import { State } from "../../store/state/state";
 
@@ -20,6 +21,7 @@ const mapState = (state: State) => {
 const mapDispatch = {
 	applyShallyasMercy,
 	changeAdvancesPage,
+	gainSkill,
 };
 
 const connector = connect(mapState, mapDispatch);
@@ -60,6 +62,7 @@ export const History = connector((props: Props) => {
 					charIndex={props.charIndex}
 					applyShallyasMercy={props.applyShallyasMercy}
 					changeAdvancesPage={props.changeAdvancesPage}
+					gainSkill={props.gainSkill}
 				/>
 			</div>
 		</div>

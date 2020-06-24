@@ -16,6 +16,14 @@ export function characterReducer(state: Character, action: Action): Character {
 				...state,
 				shallyasMercy: action.stat,
 			};
+		case "GAIN_SKILL":
+			return {
+				...state,
+				history: [
+					...state.history,
+					{ type: "SkillAdvance", skill: action.skill },
+				],
+			};
 		default:
 			return state;
 	}
