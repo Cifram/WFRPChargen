@@ -1,11 +1,11 @@
 import * as React from "react";
-import { CharacterAdvanceBarState } from "../../store/state/character";
+import { CharacterAdvancesPage } from "../../store/state/character";
 import { ChangeAdvancesPageAction } from "../../store/actions/ChangeAdvancesPage";
 
 export const AdvancesPageSelection = (props: {
 	changePage: (
 		charIndex: number,
-		section: CharacterAdvanceBarState
+		section: CharacterAdvancesPage
 	) => ChangeAdvancesPageAction;
 	index: number;
 }) => (
@@ -13,7 +13,7 @@ export const AdvancesPageSelection = (props: {
 		<div
 			className="button"
 			onClick={() =>
-				props.changePage(props.index, CharacterAdvanceBarState.FreeAdvances)
+				props.changePage(props.index, CharacterAdvancesPage.FreeAdvances)
 			}
 		>
 			Free Advances
@@ -21,7 +21,7 @@ export const AdvancesPageSelection = (props: {
 		<div
 			className="button"
 			onClick={() =>
-				props.changePage(props.index, CharacterAdvanceBarState.RequiredAdvances)
+				props.changePage(props.index, CharacterAdvancesPage.RequiredAdvances)
 			}
 		>
 			Required Advances
@@ -29,7 +29,7 @@ export const AdvancesPageSelection = (props: {
 		<div
 			className="button"
 			onClick={() =>
-				props.changePage(props.index, CharacterAdvanceBarState.OptionalAdvances)
+				props.changePage(props.index, CharacterAdvancesPage.OptionalAdvances)
 			}
 		>
 			Optional Advances
@@ -37,7 +37,7 @@ export const AdvancesPageSelection = (props: {
 		<div
 			className="button"
 			onClick={() =>
-				props.changePage(props.index, CharacterAdvanceBarState.OtherChanges)
+				props.changePage(props.index, CharacterAdvancesPage.OtherChanges)
 			}
 		>
 			Other Changes

@@ -21,7 +21,7 @@ export interface Character {
 
 export type HistoryStep = HistoryStatAdvance | HistorySkillAdvance;
 
-export enum CharacterAdvanceBarState {
+export enum CharacterAdvancesPage {
 	Root,
 	FreeAdvances,
 	RequiredAdvances,
@@ -30,7 +30,7 @@ export enum CharacterAdvanceBarState {
 }
 
 export interface CharacterUiState {
-	advanceBarState: CharacterAdvanceBarState;
+	advanceBarState: CharacterAdvancesPage;
 }
 
 export function calcStatBlock(char: Character): StatBlock {

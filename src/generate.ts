@@ -2,7 +2,7 @@ import { RaceName, races } from "./data/races";
 import {
 	Character,
 	HistoryStep,
-	CharacterAdvanceBarState,
+	CharacterAdvancesPage,
 } from "./store/state/character";
 import { d10, d100, d1000 } from "./dice";
 import { StatBlock } from "./data/stats";
@@ -53,7 +53,7 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 		statRolls: rolls,
 		shallyasMercy: null,
 		uiState: {
-			advanceBarState: CharacterAdvanceBarState.Root,
+			advanceBarState: CharacterAdvancesPage.Root,
 		},
 	};
 }

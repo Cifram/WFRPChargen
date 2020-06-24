@@ -1,11 +1,11 @@
 import * as React from "react";
-import { CharacterAdvanceBarState } from "../../store/state/character";
-import { ShallyasMercyAdvance } from "./ShallyasMercyAdvance";
+import { CharacterAdvancesPage } from "../../store/state/character";
 import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
 import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
 import { ConnectedProps, connect } from "react-redux";
 import { State } from "../../store/state/state";
 import { AdvancesPageSelection } from "./AdvancesPageSelection";
+import { FreeAdvancesPage } from "./FreeAdvancesPage";
 
 const mapState = (state: State) => {
 	if (state.selectedCharacter == null) {
@@ -18,7 +18,7 @@ const mapState = (state: State) => {
 };
 
 const mapDispatch = {
-	changeAdvancesSection: changeAdvancesPage,
+	changeAdvancesPage: changeAdvancesPage,
 	applyShallyasMercy,
 };
 
@@ -27,50 +27,40 @@ interface Props extends ConnectedProps<typeof connector> {}
 
 export const Advances = connector((props: Props) => {
 	const uiState = props.char.uiState.advanceBarState;
-	const changeSection = props.changeAdvancesSection;
 	const index = props.charIndex;
-	if (uiState == CharacterAdvanceBarState.Root) {
+	if (uiState == CharacterAdvancesPage.Root) {
 		return (
 			<AdvancesPageSelection
-				changePage={props.changeAdvancesSection}
+				changePage={props.changeAdvancesPage}
 				index={props.charIndex}
 			/>
 		);
-	}
-
-	let SectionContainer = (props: {
-		title: string;
-		children?: (JSX.Element | null)[];
-	}) => (
-		<div className="flexcol">
-			<div
-				className="flexrow subheader"
-				onClick={() => changeSection(index, CharacterAdvanceBarState.Root)}
-			>
-				← {props.title}
-			</div>
-			{props.children}
-		</div>
-	);
-
-	if (uiState == CharacterAdvanceBarState.FreeAdvances) {
-		let advances: JSX.Element[] = [
-			<ShallyasMercyAdvance
-				char={props.char}
-				charIndex={props.charIndex}
-				applyShallyasMercy={(stat) =>
-					props.applyShallyasMercy(props.charIndex, stat)
-				}
-			/>,
-		];
-		return (
-			<SectionContainer title="Free Advances">{advances}</SectionContainer>
-		);
-	} else if (uiState == CharacterAdvanceBarState.RequiredAdvances) {
-		return <SectionContainer title="Required Advances"></SectionContainer>;
-	} else if (uiState == CharacterAdvanceBarState.OptionalAdvances) {
-		return <SectionContainer title="Optional Advances"></SectionContainer>;
 	} else {
-		return <SectionContainer title="Other Changes"></SectionContainer>;
+		return (
+			<div className="flexcol">
+				<div
+					className="flexrow subheader"
+					onClick={() =>
+						props.changeAdvancesPage(index, CharacterAdvancesPage.Root)
+					}
+				>
+					←{" "}
+					{uiState == CharacterAdvancesPage.FreeAdvances
+						? "Free Advances"
+						: uiState == CharacterAdvancesPage.RequiredAdvances
+						? "Required Advances"
+						: uiState == CharacterAdvancesPage.OptionalAdvances
+						? "Optional Advances"
+						: "Other Changes"}
+				</div>
+				{uiState == CharacterAdvancesPage.FreeAdvances ? (
+					<FreeAdvancesPage
+						char={props.char}
+						charIndex={props.charIndex}
+						applyShallyasMercy={props.applyShallyasMercy}
+					/>
+				) : null}
+			</div>
+		);
 	}
 });

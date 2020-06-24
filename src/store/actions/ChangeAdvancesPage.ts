@@ -1,14 +1,14 @@
-import { CharacterAdvanceBarState } from "../state/character";
+import { CharacterAdvancesPage } from "../state/character";
 
 export interface ChangeAdvancesPageAction {
 	type: "CHANGE_ADVANCES_SECTION";
 	charIndex: number;
-	section: CharacterAdvanceBarState;
+	section: CharacterAdvancesPage;
 }
 
 export const changeAdvancesPage = (
 	charIndex: number,
-	section: CharacterAdvanceBarState
+	section: CharacterAdvancesPage
 ): ChangeAdvancesPageAction => ({
 	type: "CHANGE_ADVANCES_SECTION",
 	charIndex,
