@@ -169,7 +169,7 @@ body {
 }
 
 .characterScreen .history .historySection {
-	flex: 2;
+	flex: 1;
 	overflow-y: scroll;
 }
 
@@ -178,11 +178,14 @@ body {
 }
 
 .characterScreen .history .advancesSection {
-	flex: 1;
+	height: 300px;
+}
+
+.characterScreen .history .scrollPage {
 	overflow-y: scroll;
 }
 
-.characterScreen .history .advancesSection::-webkit-scrollbar {
+.characterScreen .history .scrollPage::-webkit-scrollbar {
 	display: none;
 }
 

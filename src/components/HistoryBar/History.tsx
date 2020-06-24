@@ -3,8 +3,31 @@ import { Character } from "../../store/state/character";
 import { races } from "../../data/races";
 import { Event } from "./Event";
 import { Advances } from "./Advances";
+import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
+import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
+import { ConnectedProps, connect } from "react-redux";
+import { State } from "../../store/state/state";
 
-export function History(props: { char: Character }) {
+const mapState = (state: State) => {
+	if (state.selectedCharacter == null) {
+		throw "Somehow showing the history sidebar without a character selected";
+	}
+	return {
+		charIndex: state.selectedCharacter,
+	};
+};
+
+const mapDispatch = {
+	applyShallyasMercy,
+	changeAdvancesPage,
+};
+
+const connector = connect(mapState, mapDispatch);
+interface Props extends ConnectedProps<typeof connector> {
+	char: Character;
+}
+
+export const History = connector((props: Props) => {
 	let eventIndex = 0;
 	let history = props.char.history.map((event) => {
 		eventIndex++;
@@ -13,8 +36,8 @@ export function History(props: { char: Character }) {
 
 	return (
 		<div className="flexcol history">
-			<div className="historySection">
-				<div className="header">HISTORY</div>
+			<div className="header">HISTORY</div>
+			<div className="historySection scrollPage">
 				{props.char.shallyasMercy == null ? (
 					""
 				) : (
@@ -30,10 +53,15 @@ export function History(props: { char: Character }) {
 				)}
 				{history}
 			</div>
-			<div className="advancesSection">
-				<div className="header">ADVANCES</div>
-				<Advances />
+			<div className="header">ADVANCES</div>
+			<div className="advancesSection flexcol">
+				<Advances
+					char={props.char}
+					charIndex={props.charIndex}
+					applyShallyasMercy={props.applyShallyasMercy}
+					changeAdvancesPage={props.changeAdvancesPage}
+				/>
 			</div>
 		</div>
 	);
-}
+});
