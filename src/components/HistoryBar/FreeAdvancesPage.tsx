@@ -1,8 +1,9 @@
 import * as React from "react";
 import { ShallyasMercyAdvance } from "./ShallyasMercyAdvance";
-import { Character } from "../../store/state/character";
+import { Character, getFreeSkillChoices } from "../../store/state/character";
 import { PrimaryStat } from "../../data/stats";
 import { ApplyShallyasMercyAction } from "../../store/actions/ApplyShallyasMercy";
+import { SkillChoiceAdvance } from "./SkillChoiceAdvance";
 
 export const FreeAdvancesPage = (props: {
 	char: Character;
@@ -11,14 +12,20 @@ export const FreeAdvancesPage = (props: {
 		charIndex: number,
 		stat: PrimaryStat
 	) => ApplyShallyasMercyAction;
-}) => (
-	<>
-		<ShallyasMercyAdvance
-			char={props.char}
-			charIndex={props.charIndex}
-			applyShallyasMercy={(stat) =>
-				props.applyShallyasMercy(props.charIndex, stat)
-			}
-		/>
-	</>
-);
+}) => {
+	var choices = getFreeSkillChoices(props.char).map((choice) => (
+		<SkillChoiceAdvance choice={choice} key={choice.skills[0]} />
+	));
+	return (
+		<>
+			<ShallyasMercyAdvance
+				char={props.char}
+				charIndex={props.charIndex}
+				applyShallyasMercy={(stat) =>
+					props.applyShallyasMercy(props.charIndex, stat)
+				}
+			/>
+			{choices}
+		</>
+	);
+};

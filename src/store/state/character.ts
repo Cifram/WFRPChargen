@@ -86,24 +86,14 @@ export function getCurrentCareer(char: Character): CareerName {
 	return char.career;
 }
 
-export function getAvailableSkills(
-	char: Character
-): (SkillName | SkillChoice)[] {
+export function getFreeSkillChoices(char: Character): SkillChoice[] {
 	let career = getCurrentCareer(char);
 	let careerSkills = careers[career].skills;
-	let availableSkills: (SkillName | SkillChoice)[] = [];
+	let availableSkills: SkillChoice[] = [];
 	let ownedSkills = getSkillList(char);
 
 	for (let careerSkill of careerSkills) {
-		if (typeof careerSkill == "string") {
-			let found = ownedSkills.find(
-				(ownedSkill) => ownedSkill.skill == careerSkill
-			);
-
-			if (found == undefined) {
-				availableSkills.push(careerSkill);
-			}
-		} else {
+		if (typeof careerSkill != "string") {
 			var unchosen: SkillName[] = [];
 			for (let skill of careerSkill.skills) {
 				let found = ownedSkills.find((ownedSkill) => ownedSkill.skill == skill);
@@ -118,6 +108,26 @@ export function getAvailableSkills(
 					skills: unchosen,
 					count: careerSkill.count - numChosen,
 				});
+			}
+		}
+	}
+	return availableSkills;
+}
+
+export function getRequiredSkills(char: Character): SkillName[] {
+	let career = getCurrentCareer(char);
+	let careerSkills = careers[career].skills;
+	let availableSkills: SkillName[] = [];
+	let ownedSkills = getSkillList(char);
+
+	for (let careerSkill of careerSkills) {
+		if (typeof careerSkill == "string") {
+			let found = ownedSkills.find(
+				(ownedSkill) => ownedSkill.skill == careerSkill
+			);
+
+			if (found == undefined) {
+				availableSkills.push(careerSkill);
 			}
 		}
 	}
