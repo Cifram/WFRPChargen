@@ -1,5 +1,3 @@
-import { Action } from "../actions/Action";
-import { State } from "../state/state";
 import { combineReducers } from "redux";
 import { charactersReducer } from "./charactersReducer";
 import { selectedCharacterReducer } from "./selectedCharacterReducer";
