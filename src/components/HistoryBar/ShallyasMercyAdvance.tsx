@@ -11,25 +11,20 @@ export const ShallyasMercyAdvance = (props: {
 	if (props.char.shallyasMercy == null) {
 		let shallyasMercyStats = PrimaryStatNames.filter(
 			(stat) => props.char.statRolls[stat] < 11
-		).reduce((result: JSX.Element[], stat) => {
-			result.push(
-				<div
-					className="flexrow button"
-					onClick={() => props.applyShallyasMercy(stat)}
-				>
-					<div className="stat">{stat}</div>
-					<div className="old">
-						{props.char.statRolls[stat] +
-							races[props.char.race].baseStats[stat]}
-					</div>
-					<div className="arrow">→</div>
-					<div className="new">
-						{11 + races[props.char.race].baseStats[stat]}
-					</div>
+		).map((stat) => (
+			<div
+				key={stat}
+				className="flexrow button"
+				onClick={() => props.applyShallyasMercy(stat)}
+			>
+				<div className="stat">{stat}</div>
+				<div className="old">
+					{props.char.statRolls[stat] + races[props.char.race].baseStats[stat]}
 				</div>
-			);
-			return result;
-		}, []);
+				<div className="arrow">→</div>
+				<div className="new">{11 + races[props.char.race].baseStats[stat]}</div>
+			</div>
+		));
 		if (shallyasMercyStats.length > 0) {
 			return (
 				<div className="flexcol event">
