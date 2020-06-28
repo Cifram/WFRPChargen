@@ -48,6 +48,8 @@ export function calcStatBlock(char: Character): StatBlock {
 			stats[event.stat] += event.change;
 		}
 	}
+	stats.SB += Math.floor(stats.S / 10);
+	stats.TB += Math.floor(stats.T / 10);
 
 	return stats;
 }
