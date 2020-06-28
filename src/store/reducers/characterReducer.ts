@@ -26,7 +26,15 @@ export function characterReducer(state: Character, action: Action): Character {
 				...state,
 				history: [
 					...state.history,
-					{ type: "SkillAdvance", skill: action.skill },
+					{ type: "SkillAdvance", skill: action.skill, locked: action.locked },
+				],
+			};
+		case "REMOVE_EVENT":
+			return {
+				...state,
+				history: [
+					...state.history.slice(0, action.eventIndex),
+					...state.history.slice(action.eventIndex + 1, state.history.length),
 				],
 			};
 		default:

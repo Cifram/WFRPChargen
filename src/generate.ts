@@ -34,6 +34,7 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 			history.push({
 				type: "SkillAdvance",
 				skill: careerSkill,
+				locked: true,
 			});
 		}
 	}

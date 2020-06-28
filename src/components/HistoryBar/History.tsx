@@ -6,6 +6,7 @@ import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
 import { removeShallyasMercy } from "../../store/actions/RemoveShallyasMercy";
 import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
 import { gainSkill } from "../../store/actions/GainSkill";
+import { removeEvent } from "../../store/actions/RemoveEvent";
 import { ConnectedProps, connect } from "react-redux";
 import { State } from "../../store/state/state";
 import { ShallyasMercyEvent } from "./ShallyasMercyEvent";
@@ -24,6 +25,7 @@ const mapDispatch = {
 	removeShallyasMercy,
 	changeAdvancesPage,
 	gainSkill,
+	removeEvent,
 };
 
 const connector = connect(mapState, mapDispatch);
@@ -32,10 +34,16 @@ interface Props extends ConnectedProps<typeof connector> {
 }
 
 export const History = connector((props: Props) => {
-	let eventIndex = 0;
+	let eventIndex = -1;
 	let history = props.char.history.map((event) => {
 		eventIndex++;
-		return <Event key={eventIndex} event={event} />;
+		return (
+			<Event
+				key={eventIndex}
+				event={event}
+				remove={() => props.removeEvent(props.charIndex, eventIndex)}
+			/>
+		);
 	});
 
 	return (
@@ -61,7 +69,9 @@ export const History = connector((props: Props) => {
 					charIndex={props.charIndex}
 					applyShallyasMercy={props.applyShallyasMercy}
 					changeAdvancesPage={props.changeAdvancesPage}
-					gainSkill={props.gainSkill}
+					gainSkill={(charIndex, skill) =>
+						props.gainSkill(charIndex, skill, false)
+					}
 				/>
 			</div>
 		</div>

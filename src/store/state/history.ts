@@ -10,4 +10,5 @@ export interface HistoryStatAdvance {
 export interface HistorySkillAdvance {
 	type: "SkillAdvance";
 	skill: SkillName;
+	locked: boolean;
 }
