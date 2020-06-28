@@ -1,13 +1,14 @@
 import * as React from "react";
 import { Character } from "../../store/state/character";
-import { races } from "../../data/races";
 import { Event } from "./Event";
 import { Advances } from "./Advances";
 import { applyShallyasMercy } from "../../store/actions/ApplyShallyasMercy";
+import { removeShallyasMercy } from "../../store/actions/RemoveShallyasMercy";
 import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
 import { gainSkill } from "../../store/actions/GainSkill";
 import { ConnectedProps, connect } from "react-redux";
 import { State } from "../../store/state/state";
+import { ShallyasMercyEvent } from "./ShallyasMercyEvent";
 
 const mapState = (state: State) => {
 	if (state.selectedCharacter == null) {
@@ -20,6 +21,7 @@ const mapState = (state: State) => {
 
 const mapDispatch = {
 	applyShallyasMercy,
+	removeShallyasMercy,
 	changeAdvancesPage,
 	gainSkill,
 };
@@ -43,15 +45,12 @@ export const History = connector((props: Props) => {
 				{props.char.shallyasMercy == null ? (
 					""
 				) : (
-					<div className="flexcol event">
-						<div className="title">Shallya's Mercy</div>
-						<div className="content">
-							{props.char.shallyasMercy}{" "}
-							{props.char.statRolls[props.char.shallyasMercy] +
-								races[props.char.race].baseStats[props.char.shallyasMercy]}
-							→{11 + races[props.char.race].baseStats[props.char.shallyasMercy]}
-						</div>
-					</div>
+					<ShallyasMercyEvent
+						char={props.char}
+						charIndex={props.charIndex}
+						stat={props.char.shallyasMercy}
+						removeShallyasMercy={props.removeShallyasMercy}
+					/>
 				)}
 				{history}
 			</div>

@@ -200,6 +200,45 @@ body {
 	border-bottom: 1px solid lightgray;
 }
 
+.characterScreen .history .event .title .titleText {
+	flex: 1;
+}
+
+.characterScreen .history .event .title .remove {
+	width: 10px;
+	height: 10px;
+	float: right;
+	border: 2px solid white;
+	border-radius: 100%;
+	background: -webkit-linear-gradient(
+			-45deg,
+			transparent 0%,
+			transparent 46%,
+			black 46%,
+			black 56%,
+			transparent 54%,
+			transparent 100%
+		),
+		-webkit-linear-gradient(45deg, white 0%, white 46%, black 46%, black 56%, white
+					56%, white 100%);
+	box-shadow: 0px 0px 5px black;
+}
+
+.characterScreen .history .event .title .remove:hover {
+	border-color: red;
+	background: -webkit-linear-gradient(
+			-45deg,
+			transparent 0%,
+			transparent 46%,
+			white 46%,
+			white 56%,
+			transparent 54%,
+			transparent 100%
+		),
+		-webkit-linear-gradient(45deg, red 0%, red 46%, white 46%, white 56%, red
+					56%, red 100%);
+}
+
 .characterScreen .history .event .shallyasMercy {
 	display: grid;
 	grid-template-columns: 1fr 1fr;

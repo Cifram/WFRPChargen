@@ -16,6 +16,11 @@ export function characterReducer(state: Character, action: Action): Character {
 				...state,
 				shallyasMercy: action.stat,
 			};
+		case "REMOVE_SHALLYAS_MERCY":
+			return {
+				...state,
+				shallyasMercy: null,
+			};
 		case "GAIN_SKILL":
 			return {
 				...state,
