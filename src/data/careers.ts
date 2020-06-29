@@ -1,145 +1,54 @@
 import { StatBlock } from "./stats";
-import { SkillName } from "./skills";
+import {
+	SkillName,
+	academicKnowledgeSkills,
+	commonKnowledgeSkills,
+	performerSkills,
+	secretLanguageSkills,
+	secretSignSkills,
+	arcaneLanguageSkills,
+	languageSkills,
+	tradeSkills,
+} from "./skills";
+import {
+	TalentName,
+	divineLoreTalents,
+	lesserMagicTalents,
+	specialistWeaponGroupTalents,
+	grailVirtueTalents,
+	runeTalents,
+	arcaneLoreTalents,
+	darkLoreTalents,
+	virtueOfKnighthoodTalents,
+	masterRuneTalents,
+} from "./talents";
 
-let academicKnowledges: SkillName[] = [
-	"Academic Knowledge (Arts)",
-	"Academic Knowledge (Astronomy)",
-	"Academic Knowledge (Daemonology)",
-	"Academic Knowledge (Engineering)",
-	"Academic Knowledge (Genealogy/Heraldry)",
-	"Academic Knowledge (Geography)",
-	"Academic Knowledge (History)",
-	"Academic Knowledge (Law)",
-	"Academic Knowledge (Magic)",
-	"Academic Knowledge (Necromancy)",
-	"Academic Knowledge (Philosophy)",
-	"Academic Knowledge (Runes)",
-	"Academic Knowledge (Science)",
-	"Academic Knowledge (Spirits)",
-	"Academic Knowledge (Strategy/Tactics)",
-	"Academic Knowledge (Theology)",
-];
-let commonKnowledges: SkillName[] = [
-	"Common Knowledge (Border Princes)",
-	"Common Knowledge (Bretonnia)",
-	"Common Knowledge (Dwarves)",
-	"Common Knowledge (Elves)",
-	"Common Knowledge (Estalia)",
-	"Common Knowledge (Halflings)",
-	"Common Knowledge (Kislev)",
-	"Common Knowledge (Lustria)",
-	"Common Knowledge (Norsca)",
-	"Common Knowledge (Ogres)",
-	"Common Knowledge (Skaven)",
-	"Common Knowledge (Southlands)",
-	"Common Knowledge (Tilea)",
-	"Common Knowledge (the Empire)",
-	"Common Knowledge (the Wasteland)",
-	"Common Knowledge (Troll Country)",
-];
-let performers: SkillName[] = [
-	"Performer (Acrobat)",
-	"Performer (Actor)",
-	"Performer (Clown)",
-	"Performer (Comedian)",
-	"Performer (Dancer)",
-	"Performer (Fire Eater)",
-	"Performer (Jester)",
-	"Performer (Juggler)",
-	"Performer (Mime)",
-	"Performer (Musician)",
-	"Performer (Palm Reader)",
-	"Performer (Singer)",
-	"Performer (Storyteller)",
-];
-let secretLanguages: SkillName[] = [
-	"Secret Language (Battle Tongue)",
-	"Secret Language (Guild Tongue)",
-	"Secret Language (Prison Cant)",
-	"Secret Language (Thieves' Tongue)",
-	"Secret Language (Ranger Tongue)",
-];
-let secretSigns: SkillName[] = [
-	"Secret Signs (Astrologer)",
-	"Secret Signs (Scout)",
-	"Secret Signs (Templar)",
-	"Secret Signs (Thief)",
-	"Secret Signs (Ranger)",
-];
-let arcaneLanguages: SkillName[] = [
-	"Speak Arcane Language (Arcane Dwarf)",
-	"Speak Arcane Language (Arcane Elf)",
-	"Speak Arcane Language (Daemonic)",
-	"Speak Arcane Language (Magick)",
-];
-let languages: SkillName[] = [
-	"Speak Language (Arabyan)",
-	"Speak Language (Breton)",
-	"Speak Language (Classical)",
-	"Speak Language (Dark Tongue)",
-	"Speak Language (Eltharin)",
-	"Speak Language (Estalian)",
-	"Speak Language (Grumbarth)",
-	"Speak Language (Halfling)",
-	"Speak Language (Khazalid)",
-	"Speak Language (Kislevian)",
-	"Speak Language (Norse)",
-	"Speak Language (Queekish)",
-	"Speak Language (Reikspiel)",
-	"Speak Language (Strigany)",
-	"Speak Language (Tilean)",
-	"Speak Language (the Goblin Tongue)",
-	"Speak Language (Ungol)",
-];
-let trades: SkillName[] = [
-	"Trade (Apothecary)",
-	"Trade (Armourer)",
-	"Trade (Artist)",
-	"Trade (Aviarist)",
-	"Trade (Bowyer)",
-	"Trade (Brewer)",
-	"Trade (Calligrapher)",
-	"Trade (Candlemaker)",
-	"Trade (Carpenter)",
-	"Trade (Cartographer)",
-	"Trade (Cook)",
-	"Trade (Cooper)",
-	"Trade (Embalmer)",
-	"Trade (Farmer)",
-	"Trade (Cutter)",
-	"Trade (Goldsmith)",
-	"Trade (Gunsmith)",
-	"Trade (Herbalist)",
-	"Trade (Horse Trader)",
-	"Trade (Kennel Master)",
-	"Trade (Merchant)",
-	"Trade (Miller)",
-	"Trade (Miner)",
-	"Trade (Prospector)",
-	"Trade (Shipwright)",
-	"Trade (Shoemaker)",
-	"Trade (Smith)",
-	"Trade (Stableman)",
-	"Trade (Stoneworker)",
-	"Trade (Tailor)",
-	"Trade (Tanner)",
-	"Trade (Weaponsmith)",
-];
-
-let anyX = (
+const anyXSkills = (
 	count: number,
 	skills: SkillName[],
 	except: SkillName[] = []
-): SkillChoice => {
-	return {
-		count: count,
-		skills: skills.filter((skill) => !except.includes(skill)),
-	};
-};
+): SkillChoice => ({
+	count: count,
+	skills: skills.filter((skill) => !except.includes(skill)),
+});
+
+const anyXTalents = (
+	count: number,
+	talents: TalentName[],
+	except: TalentName[] = []
+): TalentChoice => ({
+	count: count,
+	talents: talents.filter((talent) => !except.includes(talent)),
+});
 
 export interface SkillChoice {
 	count: number;
 	skills: SkillName[];
+}
+
+export interface TalentChoice {
+	count: number;
+	talents: TalentName[];
 }
 
 export interface Career {
@@ -149,13 +58,13 @@ export interface Career {
 	description: string;
 	advances: StatBlock;
 	skills: (SkillName | SkillChoice)[];
-	talents: string;
+	talents: (TalentName | TalentChoice)[];
 	trappings: string;
 	careerEntries: string[];
 	careerExits: string[];
 }
 
-let MakeCareer = (career: Career) => career;
+const MakeCareer = (career: Career) => career;
 
 export const careers = {
 	Abbot: MakeCareer({
@@ -184,20 +93,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Animal Care",
 			"Speak Arcane Language (Magick)",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Heal",
 			"Perception",
 			"Read/Write",
-			anyX(2, languages, ["Speak Language (Classical)"]),
+			anyXSkills(2, languageSkills, ["Speak Language (Classical)"]),
 			"Speak Language (Classical)",
 		],
-		talents: "Master Orator, Savvy, Strong-Minded",
+		talents: ["Master Orator", "Savvy", "Strong-Minded"],
 		trappings: "Prayer Book, Religious Relic, Robes, Writing Kit",
 		careerEntries: ["Anointed Priest", "High Priest", "Monk", "Scholar"],
 		careerExits: ["High Priest", "Scholar"],
@@ -285,20 +194,26 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Strategy/Tactics)"]),
+			anyXSkills(2, academicKnowledgeSkills, [
+				"Academic Knowledge (Strategy/Tactics)",
+			]),
 			"Academic Knowledge (Strategy/Tactics)",
-			anyX(1, ["Charm", "Dodge Blow"]),
+			anyXSkills(1, ["Charm", "Dodge Blow"]),
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Intimidate",
 			"Perception",
 			"Read/Write",
 			"Sail",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 			"Swim",
 		],
-		talents:
-			"Etiquette or Seasonsed Traveller, Linguistics, Master Orater, Public Speaking or Savvy",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Seasoned Traveller"]),
+			"Linguistics",
+			"Master Orator",
+			anyXTalents(1, ["Public Speaking", "Savvy"]),
+		],
 		trappings:
 			"Admiral’s Whistle, Bicorn or Tricorn, Squadron of ships, Telescope",
 		careerEntries: ["Noble Lord", "Sea Captain"],
@@ -386,7 +301,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges, [
+			anyXSkills(1, academicKnowledgeSkills, [
 				"Academic Knowledge (Necromancy)",
 				"Academic Knowledge (Theology)",
 			]),
@@ -406,10 +321,14 @@ export const careers = {
 			"Search",
 			"Silent Move",
 			"Shadowing",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Coolheaded or Stout-Hearted, Keen Senses or Sixth Sense, Savvy or Suave, Schemer",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Stout-Hearted"]),
+			anyXTalents(1, ["Keen Senses", "Sixth Sense"]),
+			anyXTalents(1, ["Savvy", "Suave"]),
+			"Schemer",
+		],
 		trappings:
 			"Medium Armour (Leather Jack, Mail Shirt), Best Hand Weapon, 4 Stakes, a braided rope of Garlic, Religious Symbol",
 		careerEntries: [
@@ -512,16 +431,23 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (History)", "Gossip"]),
-			anyX(1, ["Academic Knowledge (Law)", "Common Knowledge (the Empire)"]),
+			anyXSkills(1, ["Academic Knowledge (History)", "Gossip"]),
+			anyXSkills(1, [
+				"Academic Knowledge (Law)",
+				"Common Knowledge (the Empire)",
+			]),
 			"Concealment",
 			"Charm",
 			"Perception",
 			"Read/Write",
-			anyX(1, ["Speak Language (Breton)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Breton)", "Speak Language (Tilean)"]),
 			"Speak Language (Reikspiel)",
 		],
-		talents: "Coolheaded or Street Fighting, Flee!, Public Speaking",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Street Fighting"]),
+			"Flee!",
+			"Public Speaking",
+		],
 		trappings:
 			"Light Armour (Leather Jack), One set of Good Craftsmenship Clothes, 2d10 leaflets for various causes",
 		careerEntries: [
@@ -628,23 +554,28 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Academic Knowledge (History)",
 			]),
-			anyX(1, ["Blather", "Charm"]),
+			anyXSkills(1, ["Blather", "Charm"]),
 			"Command",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Haggle",
 			"Perception",
 			"Performer (Actor)",
 			"Read/Write",
 			"Ride",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 		],
-		talents:
-			"Dealmaker or Schemer, Etiquette, Linguistics or Suave, Master Orator or Savvy, Public Speaking",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Schemer"]),
+			"Etiquette",
+			anyXTalents(1, ["Linguistics", "Suave"]),
+			anyXTalents(1, ["Master Orator", "Savvy"]),
+			"Public Speaking",
+		],
 		trappings:
 			"Ambassadors are representatives of their governments, empowered to deal on behalf of their lands.As such, they must look the part. Ambassadors must have several sets of superior noble’s garb, and many also have valuable jewellery to enhance their ensemble. An ambassador should keep a contingent of guards (no fewer than six). Finally, ambassadors are often quite wealthy and must have coin, jewellery, art objects, property, and so on worth no less than 1,000 gc.",
 		careerEntries: [
@@ -741,7 +672,13 @@ export const careers = {
 			"Scale Sheer Surface",
 			"Silent Move",
 		],
-		talents: "Flee!, Hardy, Resistance to Poison, Rover, Stout-hearted",
+		talents: [
+			"Flee!",
+			"Hardy",
+			"Resistance to Poison",
+			"Rover",
+			"Stout-Hearted",
+		],
 		trappings: "None",
 		careerEntries: ["None"],
 		careerExits: ["Badlander", "Mystic", "Outlaw", "Swamp Skimmer", "Vagabond"],
@@ -832,20 +769,23 @@ export const careers = {
 			"Animal Training",
 			"Charm Animal",
 			"Command",
-			anyX(1, commonKnowledges),
-			anyX(1, ["Drive", "Swim"]),
+			anyXSkills(1, commonKnowledgeSkills),
+			anyXSkills(1, ["Drive", "Swim"]),
 			"Perception",
 			"Ride",
-			anyX(1, languages),
-			anyX(2, [
+			anyXSkills(1, languageSkills),
+			anyXSkills(2, [
 				"Trade (Aviarist)",
 				"Trade (Horse Trader)",
 				"Trade (Kennel Master)",
 				"Trade (Stableman)",
 			]),
 		],
-		talents:
-			"Etiquette or Wrestling, Specialist Weapon (Entangling), Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Wrestling"]),
+			"Specialist Weapon Group (Entangling)",
+			"Strike to Stun",
+		],
 		trappings:
 			"Collar with 10 Feet of Rope or Chain, Light Armour (Leather Jack), Net, Thick Gloves, Whip",
 		careerEntries: [
@@ -942,20 +882,25 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Channelling",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Heal",
 			"Magical Sense",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Speak Arcane Language (Magick)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Aethyric Attunement or Meditation, Armoured Casting or Fast Hands, Divine Lore (any one), Lesser Magic (any two), Seasoned Traveller or Strike Mighty Blow",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", "Meditation"]),
+			anyXTalents(1, ["Armoured Casting", "Fast Hands"]),
+			anyXTalents(1, divineLoreTalents),
+			anyXTalents(2, lesserMagicTalents),
+			anyXTalents(1, ["Seasoned Traveller", "Strike Mighty Blow"]),
+		],
 		trappings: "Noble’s Garb",
 		careerEntries: ["Priest"],
 		careerExits: [
@@ -1047,14 +992,17 @@ export const careers = {
 			"Academic Knowledge (Science)",
 			"Gossip",
 			"Haggle",
-			anyX(1, ["Heal", "Prepare Poison"]),
+			anyXSkills(1, ["Heal", "Prepare Poison"]),
 			"Perception",
 			"Read/Write",
 			"Secret Language (Guild Tongue)",
 			"Speak Language (Classical)",
 			"Trade (Apothecary)",
 		],
-		talents: "Etiquette or Resistance to Poison, Suave or Very Resilient",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Resistance to Poison"]),
+			anyXTalents(1, ["Suave", "Very Resilient"]),
+		],
 		trappings:
 			"Healing Draught, Light Armour (Leather Jerkin), Trade Tools (Apothecary’s Kit)",
 		careerEntries: [
@@ -1159,9 +1107,16 @@ export const careers = {
 			"Runecraft",
 			"Speak Arcane Language (Arcane Dwarf)",
 			"Trade (Smith)",
-			anyX(1, ["Trade (Armourer)", "Trade (Weaponsmith)"]),
+			anyXSkills(1, ["Trade (Armourer)", "Trade (Weaponsmith)"]),
 		],
-		talents: "Rune (any two with an Inscription Number of 10 or less)",
+		talents: [
+			anyXTalents(2, [
+				"Rune (Speed)",
+				"Rune (Stone)",
+				"Rune (Striking)",
+				"Rune (Warding)",
+			]),
+		],
 		trappings:
 			"Medium Armour (Leather Jack, Mail Shirt), Trade Tools (Runesmith)",
 		careerEntries: ["Artisan", "Runebearer", "Scribe", "Student"],
@@ -1249,17 +1204,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (Magic)", "Intimidate"]),
+			anyXSkills(1, ["Academic Knowledge (Magic)", "Intimidate"]),
 			"Channelling",
 			"Common Knowledge (Kislev)",
 			"Magical Sense",
-			anyX(1, ["Navigation", "Perception"]),
+			anyXSkills(1, ["Navigation", "Perception"]),
 			"Outdoor Survival",
 			"Speak Arcane Language (Magick)",
 			"Speak Language (Kislevian)",
 		],
-		talents:
-			"Aethyric Attunement or Lesser Magic (any one), Hardy or Very Resilient, Petty Magic (Ice)",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", ...lesserMagicTalents]),
+			anyXTalents(1, ["Hardy", "Very Resilient"]),
+			"Petty Magic (Ice)",
+		],
 		trappings:
 			"Given the harsh conditions of their training, apprentice witches need survival gear, generally consisting of a sturdy suit of winter clothing, a pack or sling bag, a flask of kvas to warm their bones, and a few days of rations.",
 		careerEntries: ["Any"],
@@ -1355,8 +1313,11 @@ export const careers = {
 			"Speak Arcane Language (Magick)",
 			"Speak Language (Classical)",
 		],
-		talents:
-			"Aethyric Attunement or Fast Hands, Petty Magic (Arcane), Savvy or Very Resilient",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", "Fast Hands"]),
+			"Petty Magic (Arcane)",
+			anyXTalents(1, ["Savvy", "Very Resilient"]),
+		],
 		trappings: "Quarter Staff, Backpack, Printed Book",
 		careerEntries: [
 			"Dilettante",
@@ -1461,8 +1422,18 @@ export const careers = {
 			"Secret Language (Battle Tongue)",
 			"Trade (Gunsmith)",
 		],
-		talents:
-			"Coolheaded, Marksman, Mighty Shot, Rapid Reload, Sharpshooter, Specialist Weapon Group (Engineering or Gunpowder), Sure Shot",
+		talents: [
+			"Coolheaded",
+			"Marksman",
+			"Mighty Shot",
+			"Rapid Reload",
+			"Sharpshooter",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Engineer)",
+				"Specialist Weapon Group (Gunpowder)",
+			]),
+			"Sure Shot",
+		],
 		trappings:
 			"Light Armour (Leather Jack), Firearm with ammunition and powder for 10 shots, Engineer’s Kit, Telescope",
 		careerEntries: ["Engineer", "Sergeant"],
@@ -1546,14 +1517,14 @@ export const careers = {
 			"Haggle",
 			"Perception",
 			"Secret Language (Guild Tongue)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Khazalid)",
 				"Speak Language (Breton)",
 				"Speak Language (Tilean)",
 			]),
-			anyX(3, trades),
+			anyXSkills(3, tradeSkills),
 		],
-		talents: "Artistic or Etiquette",
+		talents: [anyXTalents(1, ["Artistic", "Etiquette"])],
 		trappings: "Trade Tools (according to Trade), 15 gc",
 		careerEntries: [
 			"Cartographer",
@@ -1661,8 +1632,17 @@ export const careers = {
 			"Shadowing",
 			"Silent Move",
 		],
-		talents:
-			"Quick Draw, Lightning Parry, Sharpshooter, Specialist Weapon Group (Entangling), Specialist Weapon Group (Parrying), Specialist Weapon Group (Throwing), Street Fighting, Streetwise, Swashbuckler",
+		talents: [
+			"Quick Draw",
+			"Lightning Parry",
+			"Sharpshooter",
+			"Specialist Weapon Group (Entangling)",
+			"Specialist Weapon Group (Parrying)",
+			"Specialist Weapon Group (Throwing)",
+			"Street Fighting",
+			"Streetwise",
+			"Swashbuckler",
+		],
 		trappings:
 			"Net, 4 Throwing Knives, Grappling Hook, 10 yards of Rope, 1 dose of Poison (any)",
 		careerEntries: [
@@ -1768,7 +1748,7 @@ export const careers = {
 			"Academic Knowledge (Science)",
 			"Charm",
 			"Common Knowledge (the Empire)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (Estalia)",
 				"Common Knowledge (Kislev)",
@@ -1781,14 +1761,17 @@ export const careers = {
 			"Read/Write",
 			"Secret Signs (Astrologer)",
 			"Speak Language (Classical)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents: "Etiquette or Flee!, Luck or Super Numerate",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Flee!"]),
+			anyXTalents(1, ["Luck", "Super Numerate"]),
+		],
 		trappings:
 			"Book of Star Charts, Telescope, Trade Tools (Astrologer’s Kit), Writing Kit",
 		careerEntries: [
@@ -1891,24 +1874,27 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (History)", "Academic Knowledge (Law)"]),
-			anyX(1, [
+			anyXSkills(1, [
+				"Academic Knowledge (History)",
+				"Academic Knowledge (Law)",
+			]),
+			anyXSkills(1, [
 				"Academic Knowledge (Strategy/Tactics)",
 				"Academic Knowledge (Theology)",
 			]),
-			anyX(1, ["Charm", "Intimidate"]),
+			anyXSkills(1, ["Charm", "Intimidate"]),
 			"Command",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
-			anyX(1, ["Gossip", "Outdoor Survival"]),
+			anyXSkills(1, ["Gossip", "Outdoor Survival"]),
 			"Haggle",
 			"Perception",
 			"Ride",
 			"Speak Language (Kislevian)",
 		],
-		talents: "Coolheaded or Suave, Public Speaking",
+		talents: [anyXTalents(1, ["Coolheaded", "Suave"]), "Public Speaking"],
 		trappings:
 			"An ataman must be a distinguished member of a Kislevite community. To stand out from the rest of their people, atamans wield a bulava, a ceremonial mace (Superior Hand Weapon) recognised as a symbol of authority throughout Kislev.",
 		careerEntries: ["Captain", "Horse Master", "Noble", "Veteran"],
@@ -2001,7 +1987,7 @@ export const careers = {
 			"Search",
 			"Silent Move",
 		],
-		talents: "Orientation, Sixth Sense",
+		talents: ["Orientation", "Sixth Sense"],
 		trappings: "Climbing Equipment",
 		careerEntries: ["Anchorite", "Peasant", "Vagabond"],
 		careerExits: ["Cat Burglar", "Vagabond"],
@@ -2097,7 +2083,7 @@ export const careers = {
 			"Silent Move",
 			"Swim",
 		],
-		talents: "Flee!, Orientation, Rover, Sixth Sense, Very Resilient",
+		talents: ["Flee!", "Orientation", "Rover", "Sixth Sense", "Very Resilient"],
 		trappings: "Medium Armour (Mail Shirt and Leather Jack), 10 yards of Rope",
 		careerEntries: ["Explorer", "Outlaw Chief", "Scout"],
 		careerExits: ["Captain", "Explorer", "Outlaw Chief"],
@@ -2181,15 +2167,18 @@ export const careers = {
 		},
 		skills: [
 			"Academic Knowledge (Law)",
-			anyX(1, ["Animal Care", "Gossip"]),
+			anyXSkills(1, ["Animal Care", "Gossip"]),
 			"Charm",
-			anyX(1, ["Command", "Navigation"]),
-			anyX(1, ["Intimidate", "Common Knowledge (the Empire)"]),
+			anyXSkills(1, ["Command", "Navigation"]),
+			anyXSkills(1, ["Intimidate", "Common Knowledge (the Empire)"]),
 			"Perception",
 			"Read/Write",
 			"Ride",
 		],
-		talents: "Etiquette or Super Numerate, Public Speaking",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Super Numerate"]),
+			"Public Speaking",
+		],
 		trappings:
 			"Light Armour (Leather Jack and Leather Skullcap), Riding Horse with Saddle and Harness, One Set of Good Craftsmenship Clothing",
 		careerEntries: ["Bodyguard", "Jailer"],
@@ -2285,19 +2274,23 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(1, ["Drive", "Swim"]),
+			anyXSkills(1, ["Drive", "Swim"]),
 			"Haggle",
 			"Heal",
 			"Perception",
 			"Read/Write",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Reikspiel)",
 				"Speak Language (Tilean)",
 			]),
 			"Trade (Apothecary)",
 		],
-		talents: "Resistance to Disease or Savvy, Suave or Very Resilient, Surgery",
+		talents: [
+			anyXTalents(1, ["Resistance to Disease", "Savvy"]),
+			anyXTalents(1, ["Suave", "Very Resilient"]),
+			"Surgery",
+		],
 		trappings: "Trade Tools (Barber-Surgeon)",
 		careerEntries: ["Dilettante", "Initiate", "Student"],
 		careerExits: [
@@ -2394,8 +2387,16 @@ export const careers = {
 			"Outdoor Survival",
 			"Perception",
 		],
-		talents:
-			"Flee!, Hardy, Public Speaking, Stout-hearted, Strike to Stun, Strong-minded, Very Resilient, Very Strong",
+		talents: [
+			"Flee!",
+			"Hardy",
+			"Public Speaking",
+			"Stout-Hearted",
+			"Strike to Stun",
+			"Strong-Minded",
+			"Very Resilient",
+			"Very Strong",
+		],
 		trappings: "Halberd, Bow and 20 Arrows, Medium Armour (Full Mail Armour)",
 		careerEntries: ["Grail Pilgrim"],
 		careerExits: ["Faceless", "Sergeant", "Vagabond", "Veteran"],
@@ -2487,12 +2488,15 @@ export const careers = {
 			"Animal Care",
 			"Animal Training",
 			"Charm Animal",
-			anyX(1, ["Consume Alcohol", "Gossip"]),
-			anyX(1, performers.concat(["Perception"])),
+			anyXSkills(1, ["Consume Alcohol", "Gossip"]),
+			anyXSkills(1, ["Perception", ...performerSkills]),
 			"Speak Language (Kislevian)",
 		],
-		talents:
-			"Coolheaded or Very Strong, Lightning Reflexes or Public Speaking, Very Resilient or Wrestling",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Very Strong"]),
+			anyXTalents(1, ["Lightning Reflexes", "Public Speaking"]),
+			anyXTalents(1, ["Very Resilient", "Wrestling"]),
+		],
 		trappings:
 			"Bear tamers find that a bit of armour goes a long way towards deflecting the claws of an unruly or grouchy bear and so most wear at least leather jacks. As well, every bear tamer needs a collar and chain for his beast, and a whip or goad can’t hurt. A starting bear tamer must also have a bear, which he can train over the course of his career.",
 		careerEntries: ["Entertainer", "Initiate of Ursun", "Priest of Ursun"],
@@ -2590,10 +2594,20 @@ export const careers = {
 			"Perception",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Menacing, Mighty Shot or Strike Mighty Blow, Sharpshooter or Sure Shot, Specialist Weapon Group (Cavalry, Crossbow or Longbow, Two-handed), Stout-Hearted",
+		talents: [
+			"Menacing",
+			anyXTalents(1, ["Mighty Shot", "Strike Mighty Blow"]),
+			anyXTalents(1, ["Sharpshooter", "Sure Shot"]),
+			"Specialist Weapon Group (Cavalry)",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Crossbow)",
+				"Specialist Weapon Group (Longbow)",
+			]),
+			"Specialist Weapon Group (Two-handed)",
+			"Stout-Hearted",
+		],
 		trappings:
 			"Blessed Water, Crossbow or Longbow, Lance, Destrier with Saddle and Harness, Heavy Armour (Full Plate), Medallion of the Raven",
 		careerEntries: [
@@ -2692,20 +2706,23 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (the Empire)", "Common Knowledge (Kislev)"]),
-			anyX(1, ["Consume Alcohol", "Gossip"]),
+			anyXSkills(1, [
+				"Common Knowledge (the Empire)",
+				"Common Knowledge (Kislev)",
+			]),
+			anyXSkills(1, ["Consume Alcohol", "Gossip"]),
 			"Navigation",
 			"Outdoor Survival",
 			"Perception",
 			"Row",
 			"Sail",
-			anyX(1, [
+			anyXSkills(1, [
 				"Secret Language (Ranger Tongue)",
 				"Speak Language (Kislevian)",
 			]),
 			"Swim",
 		],
-		talents: "Orientation, Seasoned Traveller",
+		talents: ["Orientation", "Seasoned Traveller"],
 		trappings: "Light Armour (Leather Jack), Row Boat",
 		careerEntries: ["Ferryman", "Smuggler"],
 		careerExits: ["Fisherman", "Marine", "Navigator", "Seaman", "Smuggler"],
@@ -2785,8 +2802,14 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Dodge Blow", "Heal", "Intimidate", "Perception"],
-		talents:
-			"Disarm or Quick Draw, Specialist Weapon Group (Parrying), Specialist Weapon Group (Throwing), Street Fighting, Strike to Stun, Very Strong or Very Resilient",
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			"Specialist Weapon Group (Parrying)",
+			"Specialist Weapon Group (Throwing)",
+			"Street Fighting",
+			"Strike to Stun",
+			anyXTalents(1, ["Very Strong", "Very Resilient"]),
+		],
 		trappings:
 			"Buckler, Knuckle-dusters, A Pair of Throwing Axes or Throwing Knives, Light Armour (Leather Jack)",
 		careerEntries: ["Estalian Diestro", "Jailer", "Mercenary", "Thug"],
@@ -2879,8 +2902,13 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Consume Alcohol", "Gamble", "Gossip", "Intimidate"],
-		talents:
-			"Coolheaded or Savvy, Menacing, Quick Draw or Specialist Weapon Group (Two-handed), Stout-hearted, Strike Mighty Blow",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Savvy"]),
+			"Menacing",
+			anyXTalents(1, ["Quick Draw", "Specialist Weapon Group (Two-handed)"]),
+			"Stout-Hearted",
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Hand Weapon and Shield or Great Weapon, Medium Armour (Full Leather and Mail Shirt), Skin of Ale, three Gifts (each worth 1d10/2 gc)",
 		careerEntries: ["Berserker", "Mercenary", "Pit Fighter"],
@@ -2977,7 +3005,7 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, ["Charm", "Gossip"]),
+			anyXSkills(1, ["Charm", "Gossip"]),
 			"Drive",
 			"Common Knowledge (the Empire)",
 			"Evaluate",
@@ -2985,7 +3013,10 @@ export const careers = {
 			"Perception",
 			"Search",
 		],
-		talents: "Coolheaded or Streetwise, Hardy or Resistance to Disease",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Streetwise"]),
+			anyXTalents(1, ["Hardy", "Resistance to Disease"]),
+		],
 		trappings: "Cart, 3 Sacks",
 		careerEntries: ["Peasant", "Rat Catcher", "Vagabond"],
 		careerExits: [
@@ -3086,10 +3117,16 @@ export const careers = {
 			"Perception",
 			"Prepare Poison",
 			"Search",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents:
-			"Resistance to Poison, Schemer, Street Fighting, Strike to Injure, Suave, Very Resilient",
+		talents: [
+			"Resistance to Poison",
+			"Schemer",
+			"Street Fighting",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Suave",
+			"Very Resilient",
+		],
 		trappings:
 			"Medium Armour (Chain Shirt and Leather Jack), two Sets of Noble’s Garb, one Dose of Poison (any type)",
 		careerEntries: [
@@ -3193,8 +3230,12 @@ export const careers = {
 			"Shadowing",
 			"Silent Move",
 		],
-		talents:
-			"Marksman or Strike to Stun, Rover, Specialist Weapon Group (Entangling), Sharpshooter or Strike Mighty Blow",
+		talents: [
+			anyXTalents(1, ["Marksman", "Strike to Stun"]),
+			"Rover",
+			"Specialist Weapon Group (Entangling)",
+			anyXTalents(1, ["Sharpshooter", "Strike Mighty Blow"]),
+		],
 		trappings:
 			"Crossbow with 10 bolts, Net, Light Armour (Leather Jerkin and Leather Skullcap), Manacles, 10 Yards of Rope",
 		careerEntries: [
@@ -3289,21 +3330,21 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (the Empire)", "Consume Alcohol"]),
+			anyXSkills(1, ["Common Knowledge (the Empire)", "Consume Alcohol"]),
 			"Drive",
 			"Evaluate",
-			anyX(1, ["Gossip", "Read/Write"]),
+			anyXSkills(1, ["Gossip", "Read/Write"]),
 			"Haggle",
 			"Perception",
 			"Search",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 			"Speak Language (Reikspiel)",
 		],
-		talents: "Dealmaker, Savvy or Suave",
+		talents: ["Dealmaker", anyXTalents(1, ["Savvy", "Suave"])],
 		trappings: "Abacus, Lantern, One Set of Good Clothing",
 		careerEntries: ["Innkeeper", "Servant"],
 		careerExits: [
@@ -3396,7 +3437,7 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Strategy/Tactics)",
 			"Command",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (Tilea)",
@@ -3406,13 +3447,17 @@ export const careers = {
 			"Ride",
 			"Secret Language (Battle Tongue)",
 			"Speak Language (Classical)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Reikspiel)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents: "Disarm, Savvy or Warrior Born, Specialist Weapon Group (Fencing)",
+		talents: [
+			"Disarm",
+			anyXTalents(1, ["Savvy", "Warrior Born"]),
+			"Specialist Weapon Group (Fencing)",
+		],
 		trappings:
 			"Foil or Rapier, Light Armour (Full Leather Armour), Shield, Uniform (Cadet)",
 		careerEntries: [
@@ -3517,13 +3562,13 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Drive"]),
-			anyX(1, ["Charm", "Evaluate"]),
+			anyXSkills(1, ["Animal Care", "Drive"]),
+			anyXSkills(1, ["Charm", "Evaluate"]),
 			"Gossip",
 			"Haggle",
 			"Perception",
 			"Search",
-			anyX(1, [
+			anyXSkills(1, [
 				"Trade (Armourer)",
 				"Trade (Bowyer)",
 				"Trade (Cartographer)",
@@ -3535,15 +3580,19 @@ export const careers = {
 				"Trade (Tailor)",
 				"Trade (Weaponsmith)",
 			]),
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 			"Sleight of Hand",
 		],
-		talents:
-			"Dealmaker or Street Fighter, Flee!, Hardy or Suave, Resistance to Disease or Seasoned Traveller",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Street Fighting"]),
+			"Flee!",
+			anyXTalents(1, ["Hardy", "Suave"]),
+			anyXTalents(1, ["Resistance to Disease", "Seasoned Traveller"]),
+		],
 		trappings: "Lucky Charm or Trade Tools, Pouch, Tent",
 		careerEntries: ["Bone Picker", "Servant"],
 		careerExits: [
@@ -3638,14 +3687,14 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Theology)",
 			"Charm",
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Perception",
 			"Performer (Musician)",
 			"Performer (Singer)",
 			"Read/Write",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents: "Incantation (see sidebar)",
+		talents: ["Incantation"],
 		trappings: "Chorister’s Robe, Hymn Book, Staff",
 		careerEntries: [
 			"Anointed Priest",
@@ -3746,16 +3795,26 @@ export const careers = {
 			"Academic Knowledge (Strategy/Tactics)",
 			"Animal Care",
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Gossip",
 			"Read/Write",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(1, ["Speak Language (Kislevian)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Kislevian)", "Speak Language (Tilean)"]),
 		],
-		talents:
-			"Disarm or Quick Draw, Lightning Parry, Specialist Weapon Group (Cavalry or Two-handed Weapon), Specialist Weapon Group (Flail or Parrying)",
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			"Lightning Parry",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Cavalry)",
+				"Specialist Weapon Group (Two-handed)",
+			]),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Flail)",
+				"Specialist Weapon Group (Parrying)",
+			]),
+		],
 		trappings:
 			"Flail or Sword-breaker, Lance or Great Weapon, Medium Armour (Full Mail Armour), Shield, Destrier with Saddle and Harness, Unit of Troops",
 		careerEntries: [
@@ -3864,7 +3923,7 @@ export const careers = {
 			"Set Trap",
 			"Silent Move",
 		],
-		talents: "Flee!, Fleet-footed, Rover, Sharpshooter",
+		talents: ["Flee!", "Fleet Footed", "Rover", "Sharpshooter"],
 		trappings:
 			"Bow with 10 Arrows, Bretonnian Blue Sheepdog (optional), Light Armour (Leather Jerkin), Shepherd’s Crook (treat as Quarter staff), Herd of Sheep or Cute Little Lamb",
 		careerEntries: [
@@ -3970,14 +4029,17 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Geography)",
 			"Navigation",
-			anyX(1, ["Outdoor Survival", "Ride"]),
+			anyXSkills(1, ["Outdoor Survival", "Ride"]),
 			"Perception",
 			"Read/Write",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 			"Trade (Cartographer)",
 		],
-		talents:
-			"Excellent Vision, Orientation, Seasoned Traveller or Super Numerate",
+		talents: [
+			"Excellent Vision",
+			"Orientation",
+			anyXTalents(1, ["Seasoned Traveller", "Super Numerate"]),
+		],
 		trappings: "Writing Kit, Pony with saddle & harness, 1d10 map cases",
 		careerEntries: [
 			"Coachman",
@@ -4091,7 +4153,7 @@ export const careers = {
 			"Secret Signs (Thief)",
 			"Silent Move",
 		],
-		talents: "Alley Cat, Street Fighting, Streetwise, Trapfinder",
+		talents: ["Alley Cat", "Street Fighting", "Streetwise", "Trapfinder"],
 		trappings: "Grappling Hook, Lock Picks, 10 Yards of Rope",
 		careerEntries: [
 			"Bone Picker",
@@ -4186,14 +4248,14 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(1, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Read/Write",
-			anyX(1, languages, ["Speak Language (Classical)"]),
+			anyXSkills(1, languageSkills, ["Speak Language (Classical)"]),
 			"Speak Language (Classical)",
 		],
-		talents: "Public Speaking",
+		talents: ["Public Speaking"],
 		trappings: "Prayer Book, Writing Kit",
 		careerEntries: [
 			"Anointed Priest",
@@ -4291,7 +4353,12 @@ export const careers = {
 			"Perception",
 			"Torture",
 		],
-		talents: "Hardy, Resistance to Poison, Stout-hearted, Strong-minded",
+		talents: [
+			"Hardy",
+			"Resistance to Poison",
+			"Stout-Hearted",
+			"Strong-Minded",
+		],
 		trappings: "Filthy Loincloth and Tunic",
 		careerEntries: ["None"],
 		careerExits: ["Mystic", "Outlaw", "Servant", "Vagabond"],
@@ -4377,8 +4444,16 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Dodge Blow", "Evaluate", "Intimidate", "Perception"],
-		talents:
-			"Fleet Footed or Lightning Reflexes, Lightning Parry, Master Gunner, Mighty Shot, Quick Draw, Rapid Reload, Specialist Weapon Group (any three), Wrestling",
+		talents: [
+			anyXTalents(1, ["Fleet Footed", "Lightning Reflexes"]),
+			"Lightning Parry",
+			"Master Gunner",
+			"Mighty Shot",
+			"Quick Draw",
+			"Rapid Reload",
+			anyXTalents(3, specialistWeaponGroupTalents),
+			"Wrestling",
+		],
 		trappings:
 			"Any Six Weapons (all of Best Craftsmanship), Medium Armour (Mail Shirt and Leather Jack)",
 		careerEntries: [
@@ -4474,8 +4549,8 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (the Empire)", "Concealment"]),
-			anyX(1, ["Drive", "Gossip"]),
+			anyXSkills(1, ["Common Knowledge (the Empire)", "Concealment"]),
+			anyXSkills(1, ["Drive", "Gossip"]),
 			"Haggle",
 			"Outdoor Survival",
 			"Perception",
@@ -4483,7 +4558,7 @@ export const careers = {
 			"Search",
 			"Secret Signs (Ranger)",
 		],
-		talents: "Flee!, Savvy or Very Strong",
+		talents: ["Flee!", anyXTalents(1, ["Savvy", "Very Strong"])],
 		trappings: "3 Torches, Tinderbox, Hand Weapon (Hatchet)",
 		careerEntries: ["Camp Follower", "Hunter", "Miner", "Peasant"],
 		careerExits: ["Hunter", "Miner", "Scout", "Vagabond", "Woodsman"],
@@ -4570,7 +4645,10 @@ export const careers = {
 		skills: [
 			"Blather",
 			"Charm",
-			anyX(1, ["Common Knowledge (Bretonnia)", "Common Knowledge (Tilea)"]),
+			anyXSkills(1, [
+				"Common Knowledge (Bretonnia)",
+				"Common Knowledge (Tilea)",
+			]),
 			"Disguise",
 			"Evaluate",
 			"Gamble",
@@ -4579,11 +4657,16 @@ export const careers = {
 			"Perception",
 			"Secret Language (Thieves' Tongue)",
 			"Sleight of Hand",
-			anyX(1, ["Speak Language (Breton)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Breton)", "Speak Language (Tilean)"]),
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Flee!, Mimic, Public Speaking, Schemer or Streetwise, Seasoned Traveller",
+		talents: [
+			"Flee!",
+			"Mimic",
+			"Public Speaking",
+			anyXTalents(1, ["Schemer", "Streetwise"]),
+			"Seasoned Traveller",
+		],
 		trappings:
 			"6 sets of Common Clothes, 4 sets of Best Craftsmenship Clothes, Forged Document, 4 bottles of variously coloured water, 4 bottles of variously coloured powder",
 		careerEntries: [
@@ -4680,17 +4763,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (Law)", "Intimidate"]),
+			anyXSkills(1, ["Academic Knowledge (Law)", "Intimidate"]),
 			"Command",
 			"Common Knowledge (Kislev)",
-			anyX(1, ["Dodge Blow", "Shadowing"]),
+			anyXSkills(1, ["Dodge Blow", "Shadowing"]),
 			"Follow Trail",
 			"Perception",
 			"Ride",
 			"Search",
 		],
-		talents:
-			"Disarm or Specialist Weapon Group (Gunpowder), Menacing, Strike Mighty Blow or Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Disarm", "Specialist Weapon Group (Gunpowder)"]),
+			"Menacing",
+			anyXTalents(1, ["Strike Mighty Blow", "Strike to Stun"]),
+		],
 		trappings:
 			"Chekist are all identifiable by their black uniforms. Most wear leather jacks and leggings, and they all have distinctive helmets. Chekist are armed with bronze-tipped cudgels (Hand Weapon) and ride black Kislevite horses equipped with saddle, harness, and saddlebags.",
 		careerEntries: ["Kossar", "Protagonist", "Streltsi", "Thug", "Watchman"],
@@ -4796,7 +4882,7 @@ export const careers = {
 			"Search",
 			"Silent Move",
 		],
-		talents: "Contortionist or Very Strong, Streetwise",
+		talents: [anyXTalents(1, ["Contortionist", "Very Strong"]), "Streetwise"],
 		trappings: "Brush, Grappling Hook, 10 Yards of Rope",
 		careerEntries: ["Charcoal Burner", "Miner", "Peasant", "Rogue", "Thief"],
 		careerExits: [
@@ -4877,21 +4963,28 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Concealment",
 			"Disguise",
 			"Gossip",
 			"Perception",
 			"Read/Write",
 			"Search",
-			anyX(2, secretLanguages),
-			anyX(2, secretSigns),
+			anyXSkills(2, secretLanguageSkills),
+			anyXSkills(2, secretSignSkills),
 			"Silent Move",
-			anyX(4, languages),
-			anyX(1, trades),
+			anyXSkills(4, languageSkills),
+			anyXSkills(1, tradeSkills),
 		],
-		talents:
-			"Acute Hearing, Alley Cat, Coolheaded, Linguistics or Mimic, Savvy or Suave, Schemer, Streetwise",
+		talents: [
+			"Acute Hearing",
+			"Alley Cat",
+			"Coolheaded",
+			anyXTalents(1, ["Linguistics", "Mimic"]),
+			anyXTalents(1, ["Savvy", "Suave"]),
+			"Schemer",
+			"Streetwise",
+		],
 		trappings:
 			"Light Armour (Leather Jack), Hand Weapon, Garrotte*, Cloak, Good Craftsmanship Disguise Kit, three sets of Good Clothing, one Dose of Poison *See Old World Armoury page 31 for details.",
 		careerEntries: [
@@ -5003,19 +5096,21 @@ export const careers = {
 		skills: [
 			"Animal Care",
 			"Drive",
-			anyX(1, ["Gossip", "Haggle"]),
-			anyX(1, ["Heal", "Ride"]),
+			anyXSkills(1, ["Gossip", "Haggle"]),
+			anyXSkills(1, ["Heal", "Ride"]),
 			"Navigation",
 			"Perception",
 			"Secret Signs (Ranger)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents:
-			"Quick Draw or Seasoned Traveller, Specialist Weapon Group (Gunpowder)",
+		talents: [
+			anyXTalents(1, ["Quick Draw", "Seasoned Traveller"]),
+			"Specialist Weapon Group (Gunpowder)",
+		],
 		trappings:
 			"Blunderbuss with powder/ammunition enough for 10 shots, Medium Armour (Mail Shirt and Leather Jack), Instrument (Coach Horn)",
 		careerEntries: ["Outrider", "Messenger"],
@@ -5111,25 +5206,32 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Arts)",
 				"Academic Knowledge (History)",
 				"Gamble",
 			]),
 			"Blather",
 			"Charm",
-			anyX(1, performers.concat(["Command"])),
-			anyX(1, ["Common Knowledge (Bretonnia)", "Common Knowledge (Tilea)"]),
+			anyXSkills(1, ["Command", ...performerSkills]),
+			anyXSkills(1, [
+				"Common Knowledge (Bretonnia)",
+				"Common Knowledge (Tilea)",
+			]),
 			"Evaluate",
 			"Gossip",
 			"Perception",
 			"Read/Write",
 			"Ride",
-			anyX(1, ["Speak Language (Breton)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Breton)", "Speak Language (Tilean)"]),
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Dealmaker or Etiquette, Public Speaking, Savvy or Suave, Schemer or Specialist Weapon Group (Fencing)",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Etiquette"]),
+			"Public Speaking",
+			anyXTalents(1, ["Savvy", "Suave"]),
+			anyXTalents(1, ["Schemer", "Specialist Weapon Group (Fencing)"]),
+		],
 		trappings: "4 Sets of Noble’s Garb, 100 gc, Valet",
 		careerEntries: ["Dilettante", "Noble", "Herald", "Pistolier", "Politician"],
 		careerExits: [
@@ -5236,8 +5338,18 @@ export const careers = {
 			"Secret Signs (Thief)",
 			"Torture",
 		],
-		talents:
-			"Dealmaker or Schemer, Menacing, Public Speaking, Resistance to Poison, Sixth Sense, Specialist Weapon Group (Crossbow or Parrying), Streetwise",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Schemer"]),
+			"Menacing",
+			"Public Speaking",
+			"Resistance to Poison",
+			"Sixth Sense",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Crossbow)",
+				"Specialist Weapon Group (Parrying)",
+			]),
+			"Streetwise",
+		],
 		trappings:
 			"Crossbow pistol with 10 bolts or Sword-breaker, One set of Best Craftsmenship Clothing, Antitoxin Kit, 100 gc, Criminal Organisation",
 		careerEntries: [
@@ -5334,21 +5446,27 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (History)",
 			"Academic Knowledge (Strategy/Tactics)",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Navigation",
 			"Outdoor Survival",
 			"Perception",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Arabyan)",
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents:
-			"Orientation or Linguistics, Seasoned Traveller, Specialist Weapon Group (Parrying), Stout-hearted, Strike to Injure, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Orientation", "Linguistics"]),
+			"Seasoned Traveller",
+			"Specialist Weapon Group (Parrying)",
+			"Stout-Hearted",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Strike to Stun",
+		],
 		trappings:
 			"Heavy Armour (Best Craftsmanship Full Plate Armour), Maps (depicting the route of either a pilgrimage or crusade), Religious Symbol",
 		careerEntries: ["Knight", "Noble Lord", "Sergeant", "Veteran"],
@@ -5446,14 +5564,14 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Theology)",
 			"Charm",
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Gossip",
 			"Perception",
 			"Read/Write",
-			anyX(1, languages, ["Speak Language (Classical)"]),
+			anyXSkills(1, languageSkills, ["Speak Language (Classical)"]),
 			"Speak Language (Classical)",
 		],
-		talents: "Dealmaker, Public Speaking",
+		talents: ["Dealmaker", "Public Speaking"],
 		trappings: "Robes",
 		careerEntries: [
 			"Anointed Priest",
@@ -5541,13 +5659,13 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Consume Alcohol",
 			"Dodge Blow",
 			"Intimidate",
 			"Scale Sheer Surface",
 		],
-		talents: "Lightning Parry, Unsettling",
+		talents: ["Lightning Parry", "Unsettling"],
 		trappings: "Great Weapon",
 		careerEntries: ["Giant Slayer"],
 		careerExits: ["Glorious death"],
@@ -5639,9 +5757,14 @@ export const careers = {
 			"Scale Sheer Surface",
 			"Search",
 			"Silent Move",
+			"Evaluate",
 		],
-		talents:
-			"Evaluate, Orientation, Resistance to Disease, Resistance to Poison, Tunnel Rat",
+		talents: [
+			"Orientation",
+			"Resistance to Disease",
+			"Resistance to Poison",
+			"Tunnel Rat",
+		],
 		trappings:
 			"Light Armour (Leather Jack), Lantern, Lamp Oil, 10 Yards of Rope",
 		careerEntries: [
@@ -5754,8 +5877,12 @@ export const careers = {
 			"Perception",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Etiquette or Streetwise, Master Orator, Public Speaking, Street Fighting",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Streetwise"]),
+			"Master Orator",
+			"Public Speaking",
+			"Street Fighting",
+		],
 		trappings: "Light Armour (Leather Jack and Leather Skullcap)",
 		careerEntries: [
 			"Agitator",
@@ -5861,22 +5988,22 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges),
+			anyXSkills(1, academicKnowledgeSkills),
 			"Blather",
-			anyX(2, commonKnowledges),
-			anyX(1, ["Evaluate", "Gossip"]),
+			anyXSkills(2, commonKnowledgeSkills),
+			anyXSkills(1, ["Evaluate", "Gossip"]),
 			"Navigation",
 			"Perception",
 			"Read/Write",
-			anyX(1, secretSigns.concat(secretLanguages)),
-			anyX(2, languages),
-			anyX(1, [
+			anyXSkills(1, [...secretSignSkills, ...secretLanguageSkills]),
+			anyXSkills(2, languageSkills),
+			anyXSkills(1, [
 				"Trade (Artist)",
 				"Trade (Calligrapher)",
 				"Trade (Cartographer)",
 			]),
 		],
-		talents: "Etiquette",
+		talents: ["Etiquette"],
 		trappings: "3 books, craft tools, writing kit",
 		careerEntries: ["Any Career that includes Read/Write as a Skill"],
 		careerExits: [
@@ -5978,8 +6105,8 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, ["Animal Training", "Charm Animal"]),
-			anyX(1, [
+			anyXSkills(1, ["Animal Training", "Charm Animal"]),
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
@@ -5988,10 +6115,13 @@ export const careers = {
 			"Outdoor Survival",
 			"Perception",
 			"Ride",
-			anyX(1, ["Speak Language (Kislevian)", "Speak Language (Ungol)"]),
+			anyXSkills(1, ["Speak Language (Kislevian)", "Speak Language (Ungol)"]),
 		],
-		talents:
-			"Orientation, Rover or Seasoned Traveller, Specialist Weapon Group (Entangling)",
+		talents: [
+			"Orientation",
+			anyXTalents(1, ["Rover", "Seasoned Traveller"]),
+			"Specialist Weapon Group (Entangling)",
+		],
 		trappings:
 			"Drovers all have at least one herd dog and a Kislevite horse equipped with a saddle and harness. They use a lasso to round up errant herd animals. For personal equipment, drovers always have several days of rations and a couple of skins for water or kvas, as well as a yurta for shelter. The often dangerous environment necessitates some armour, usually a leather jack and leggings.",
 		careerEntries: ["Coachman", "Messenger", "Outrider", "Steppes Nomad"],
@@ -6091,8 +6221,20 @@ export const careers = {
 			"Perception",
 			"Sleight of Hand",
 		],
-		talents:
-			"Ambidextrous or Disarm, Etiquette, Master Gunner, Mighty Shot, Quick Draw, Sharpshooter, Specialist Weapon Group (Fencing), Specialist Weapon Group (Gunpowder), Specialist Weapon Group (Parrying), Strike Mighty Blow, Strike to Injure, Swashbuckler",
+		talents: [
+			anyXTalents(1, ["Ambidextrous", "Disarm"]),
+			"Etiquette",
+			"Master Gunner",
+			"Mighty Shot",
+			"Quick Draw",
+			"Sharpshooter",
+			"Specialist Weapon Group (Fencing)",
+			"Specialist Weapon Group (Gunpowder)",
+			"Specialist Weapon Group (Parrying)",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Swashbuckler",
+		],
 		trappings:
 			"Main Gauche, Pistol with Powder and Ammunition for 10 Shots, Rapier",
 		careerEntries: [
@@ -6195,7 +6337,10 @@ export const careers = {
 			"Perception",
 			"Search",
 		],
-		talents: "Coolheaded, Fearless or Resistance to Disease",
+		talents: [
+			"Coolheaded",
+			anyXTalents(1, ["Fearless", "Resistance to Disease"]),
+		],
 		trappings: "Cart, Shovel, Bag of Maggots, Dung",
 		careerEntries: [
 			"Bone Picker",
@@ -6302,7 +6447,11 @@ export const careers = {
 			"Speak Language (Classical)",
 			"Trade (Apothecary)",
 		],
-		talents: "Dealmaker or Streetwise, Resistance to Disease, Surgery",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Streetwise"]),
+			"Resistance to Disease",
+			"Surgery",
+		],
 		trappings:
 			"Abacus, Ether-Soaked Apron, Spare Hand, Trade Tools (Barber-Surgeon), Writing Kit",
 		careerEntries: ["Apothecary", "Barber-Surgeon", "Student", "Tradesman"],
@@ -6407,8 +6556,13 @@ export const careers = {
 			"Shadowing",
 			"Torture",
 		],
-		talents:
-			"Menacing, Quick Draw, Schemer, Specialist Weapon Group (Entangling), Street Fighting",
+		talents: [
+			"Menacing",
+			"Quick Draw",
+			"Schemer",
+			"Specialist Weapon Group (Entangling)",
+			"Street Fighting",
+		],
 		trappings: "Medium Armour (Chain Shirt and Leather Jack), Net",
 		careerEntries: ["Bounty Hunter", "Hunter", "Road Warden", "Watchman"],
 		careerExits: ["Spy", "Witch Hunter"],
@@ -6494,14 +6648,20 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Engineering)",
 			"Academic Knowledge (Science)",
-			anyX(1, ["Common Knowledge (Dwarves)", "Common Knowledge (Tilea)"]),
-			anyX(1, ["Drive", "Ride"]),
+			anyXSkills(1, ["Common Knowledge (Dwarves)", "Common Knowledge (Tilea)"]),
+			anyXSkills(1, ["Drive", "Ride"]),
 			"Perception",
 			"Read/Write",
-			anyX(1, ["Speak Language (Khazalid)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Khazalid)", "Speak Language (Tilean)"]),
 			"Trade (Gunsmith)",
 		],
-		talents: "Master Gunner, Specialist Weapon Group (Engineer or Gunpowder)",
+		talents: [
+			"Master Gunner",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Engineer)",
+				"Specialist Weapon Group (Gunpowder)",
+			]),
+		],
 		trappings: "Light Armour (Leather Jack), Engineer’s Kit, 6 Spikes",
 		careerEntries: ["Artisan", "Miner", "Student", "Tradesman"],
 		careerExits: [
@@ -6594,14 +6754,14 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Swim"]),
+			anyXSkills(1, ["Animal Care", "Swim"]),
 			"Charm",
 			"Common Knowledge (the Empire)",
-			anyX(1, ["Evaluate", "Gossip"]),
+			anyXSkills(1, ["Evaluate", "Gossip"]),
 			"Perception",
-			anyX(2, performers),
+			anyXSkills(2, performerSkills),
 			"Speak Language (Reikspiel)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Animal Training",
 				"Blather",
 				"Charm Animal",
@@ -6612,8 +6772,19 @@ export const careers = {
 				"Ventriloquism",
 			]),
 		],
-		talents:
-			"Any two of: Lightning Reflexes, Mimic, Public Speaking, Quick Draw, Sharpshooter, Specialist Weapon Group (Throwing), Trick Riding, Very Strong, Wrestling",
+		talents: [
+			anyXTalents(2, [
+				"Lightning Reflexes",
+				"Mimic",
+				"Public Speaking",
+				"Quick Draw",
+				"Sharpshooter",
+				"Specialist Weapon Group (Throwing)",
+				"Trick Riding",
+				"Very Strong",
+				"Wrestling",
+			]),
+		],
 		trappings:
 			"Light Armour (Leather Jerkin), Any one of: Instrument (any one), Trade Tools (Performer), 3 Throwing Knives, 2 Throwing Axes, Any one of: Costume, One Set of Good Craftsmenship Clothes",
 		careerEntries: ["Animal Trainer", "Herald", "Rogue", "Thief", "Vagabond"],
@@ -6705,7 +6876,7 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (the Wasteland)",
 			]),
@@ -6718,7 +6889,7 @@ export const careers = {
 			"Swim",
 			"Trade (Merchant)",
 		],
-		talents: "Dealmaker or Seasoned Traveller",
+		talents: [anyXTalents(1, ["Dealmaker", "Seasoned Traveller"])],
 		trappings:
 			"Light Armour (Leather Jack), 2 sets of Good Craftsmenship Clothes, Writing Kit",
 		careerEntries: ["Student", "Tradesman"],
@@ -6820,8 +6991,12 @@ export const careers = {
 			"Read/Write",
 			"Speak Language (Estalian)",
 		],
-		talents:
-			"Lightning Reflexes or Swashbuckler, Quick Draw or Strike to Injure, Specialist Weapon Group (Fencing), Strike Mighty Blow",
+		talents: [
+			anyXTalents(1, ["Lightning Reflexes", "Swashbuckler"]),
+			anyXTalents(1, ["Quick Draw", "Strike to Injure", "Focused Strike"]),
+			"Specialist Weapon Group (Fencing)",
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Foil or Rapier, One set of Best Craftsmenship Clothes, Perfume or Cologne, Healing Draught",
 		careerEntries: ["None"],
@@ -6920,8 +7095,11 @@ export const careers = {
 			"Secret Language (Prison Cant)",
 			"Sleight of Hand",
 		],
-		talents:
-			"Flee!, Resistance to Disease or Contortionist, Street Fighter or Wrestling",
+		talents: [
+			"Flee!",
+			anyXTalents(1, ["Resistance to Disease", "Contortionist"]),
+			anyXTalents(1, ["Street Fighting", "Wrestling"]),
+		],
 		trappings:
 			"Good Craftsmanship Improvised Weapon, Bone Dice, Lice, Poor Clothes",
 		careerEntries: [
@@ -7041,7 +7219,12 @@ export const careers = {
 			"Haggle",
 			"Read/Write",
 		],
-		talents: "Dealmaker, Savvy or Suave, Schemer, Super Numerate",
+		talents: [
+			"Dealmaker",
+			anyXTalents(1, ["Savvy", "Suave"]),
+			"Schemer",
+			"Super Numerate",
+		],
 		trappings: "Abacus, Hand Weapon, Light Armour, Writing Kit, 1d10/2 gc",
 		careerEntries: ["Messenger", "Scribe"],
 		careerExits: [
@@ -7136,7 +7319,7 @@ export const careers = {
 		},
 		skills: [
 			"Academic Knowledge (Theology)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Daemonology)",
 				"Academic Knowledge (Necromancy)",
 			]),
@@ -7148,10 +7331,16 @@ export const careers = {
 			"Perception",
 			"Speak Arcane Language (Magick)",
 			"Speak Arcane Language (Daemonic)",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents:
-			"Coolheaded or Savvy, Divine Lore (any one), Lesser Magic (Exorcism), Lesser Magic (any one), Menacing or Sixth Sense, Strong-minded or Stout-hearted",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Savvy"]),
+			anyXTalents(1, divineLoreTalents),
+			"Lesser Magic (Exorcism)",
+			anyXTalents(1, lesserMagicTalents, ["Lesser Magic (Exorcism)"]),
+			anyXTalents(1, ["Menacing", "Sixth Sense"]),
+			anyXTalents(1, ["Strong-Minded", "Stout-Hearted"]),
+		],
 		trappings: "Cult Robes, License, Prayer Book, Religious Symbol",
 		careerEntries: ["Anointed Priest", "Priest"],
 		careerExits: ["Anointed Priest", "Lay Priest", "Scholar", "Witch Hunter"],
@@ -7237,9 +7426,12 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (History)", "Academic Knowledge (Law)"]),
+			anyXSkills(1, [
+				"Academic Knowledge (History)",
+				"Academic Knowledge (Law)",
+			]),
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Drive",
 			"Evaluate",
 			"Follow Trail",
@@ -7251,11 +7443,14 @@ export const careers = {
 			"Scale Sheer Surface",
 			"Secret Language (Ranger Tongue)",
 			"Secret Signs (Scout)",
-			anyX(3, secretLanguages),
+			anyXSkills(3, secretLanguageSkills),
 			"Swim",
 			"Trade (Cartographer)",
 		],
-		talents: "Orientation or Linguistics, Seasoned Traveller",
+		talents: [
+			anyXTalents(1, ["Orientation", "Linguistics"]),
+			"Seasoned Traveller",
+		],
 		trappings:
 			"Bow or Crossbow with 10 arrows or bolts, Hand Weapon, Medium Armour (Mail Shirt and Leather Jack), Shield, 6 Maps, 1,000 gc in coin and trade goods, Riding Horse with saddle and harness",
 		careerEntries: [
@@ -7365,11 +7560,16 @@ export const careers = {
 			"Perception",
 			"Scale Sheer Surface",
 			"Secret Language (Battle Tongue)",
-			anyX(1, ["Secret Signs (Ranger)", "Secret Signs (Scout)"]),
+			anyXSkills(1, ["Secret Signs (Ranger)", "Secret Signs (Scout)"]),
 			"Silent Move",
 		],
-		talents:
-			"Mighty Shot, Public Speaking, Rapid Reload, Sure Shot, Unsettling",
+		talents: [
+			"Mighty Shot",
+			"Public Speaking",
+			"Rapid Reload",
+			"Sure Shot",
+			"Unsettling",
+		],
 		trappings:
 			"Bow with 10 Arrows, Medium Armour (Sleeved Mail Shirt and Leather Jack), Band of Herrimaults, Deep Hood or Mask",
 		careerEntries: [
@@ -7479,12 +7679,19 @@ export const careers = {
 			"Drive",
 			"Evaluate",
 			"Haggle",
-			anyX(1, ["Intimidate", "Charm"]),
+			anyXSkills(1, ["Intimidate", "Charm"]),
 			"Ride",
 			"Set Trap",
 			"Trade (Farmer)",
 		],
-		talents: "Dealmaker, Hardy, Specialist Weapon (Scythe or Flail).",
+		talents: [
+			"Dealmaker",
+			"Hardy",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Scythe)",
+				"Specialist Weapon Group (Flail)",
+			]),
+		],
 		trappings:
 			"Cart pulled by a horse or ox, scythe (two-handed weapon) or threshing flail (flail), sheep dog.",
 		careerEntries: ["Innkeeper", "Merchant", "Peasant", "Tradesman", "Veteran"],
@@ -7584,7 +7791,11 @@ export const careers = {
 			"Perception",
 			"Sleight of Hand",
 		],
-		talents: "Dealmaker or Streetwise, Strike to Stun, Super Numerate",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Streetwise"]),
+			"Strike to Stun",
+			"Super Numerate",
+		],
 		trappings: "Trade Tools (Engraver’s Kit), Writing Kit",
 		careerEntries: [
 			"Bone Picker",
@@ -7683,15 +7894,20 @@ export const careers = {
 		skills: [
 			"Charm",
 			"Common Knowledge (the Empire)",
-			anyX(1, ["Evaluate", "Secret Language (Ranger Tongue)"]),
-			anyX(1, ["Gossip", "Intimidate"]),
+			anyXSkills(1, ["Evaluate", "Secret Language (Ranger Tongue)"]),
+			anyXSkills(1, ["Gossip", "Intimidate"]),
 			"Haggle",
 			"Perception",
 			"Row",
 			"Swim",
 		],
-		talents:
-			"Marksman or Suave, Specialist Weapon Group (Gunpowder) or Street Fighting",
+		talents: [
+			anyXTalents(1, ["Marksman", "Suave"]),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Gunpowder)",
+				"Street Fighting",
+			]),
+		],
 		trappings:
 			"Crossbow with 10 bolts or Blunderbuss with powder/ammunition enough for 10 shots, Light Armour (Leather Jack)",
 		careerEntries: ["Coachman", "Smuggler", "Toll Keeper"],
@@ -7773,7 +7989,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Necromancy)",
 				"Common Knowledge (the Empire)",
 			]),
@@ -7784,8 +8000,11 @@ export const careers = {
 			"Search",
 			"Silent Move",
 		],
-		talents:
-			"Fleet Footed or Savvy, Mighty Shot or Rapid Reload, Rover or Quick Draw",
+		talents: [
+			anyXTalents(1, ["Fleet Footed", "Savvy"]),
+			anyXTalents(1, ["Mighty Shot", "Rapid Reload"]),
+			anyXTalents(1, ["Rover", "Quick Draw"]),
+		],
 		trappings:
 			"Sling with Ammunition, Lantern, Lamp Oil, Spade, Pony with Saddle and Harness",
 		careerEntries: ["Hunter", "Militiaman", "Toll Keeper"],
@@ -7878,20 +8097,23 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (the Wasteland)",
 			]),
-			anyX(1, ["Consume Alcohol", "Haggle"]),
-			anyX(1, ["Navigation", "Trade (Merchant)"]),
+			anyXSkills(1, ["Consume Alcohol", "Haggle"]),
+			anyXSkills(1, ["Navigation", "Trade (Merchant)"]),
 			"Outdoor Survival",
 			"Perception",
 			"Row",
 			"Sail",
-			anyX(1, ["Speak Language (Reikspiel)", "Speak Language (Norse)"]),
+			anyXSkills(1, ["Speak Language (Reikspiel)", "Speak Language (Norse)"]),
 			"Swim",
 		],
-		talents: "Hardy or Savvy, Orientation or Street Fighting",
+		talents: [
+			anyXTalents(1, ["Hardy", "Savvy"]),
+			anyXTalents(1, ["Orientation", "Street Fighting"]),
+		],
 		trappings: "Fish Hook and Line, Spear",
 		careerEntries: ["Boatman", "Peasant"],
 		careerExits: ["Marine", "Merchant", "Militiaman", "Navigator", "Seaman"],
@@ -7981,8 +8203,14 @@ export const careers = {
 			"Intimidate",
 			"Speak Language (Classical)",
 		],
-		talents:
-			"Fearless, Specialist Weapon Group (Flail or Two-handed Weapon), Strike Mighty Blow",
+		talents: [
+			"Fearless",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Flail)",
+				"Specialist Weapon Group (Two-handed)",
+			]),
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Flail or Great Weapon, Bottle of Good Craftsmenship Spirits, Religious Symbol, Religious Relic",
 		careerEntries: ["Anointed Priest", "Friar", "Priest", "Zealot"],
@@ -8072,20 +8300,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Charm", "Consume Alcohol"]),
+			anyXSkills(1, ["Charm", "Consume Alcohol"]),
 			"Command",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (the Wasteland)",
 			]),
-			anyX(1, ["Gamble", "Gossip"]),
+			anyXSkills(1, ["Gamble", "Gossip"]),
 			"Haggle",
 			"Perception",
 			"Performer (Singer)",
 			"Secret Language (Guild Tongue)",
 		],
-		talents: "Public Speaking, Streetwise",
+		talents: ["Public Speaking", "Streetwise"],
 		trappings: "Light Armour (Leather Jack), Whistle",
 		careerEntries: ["Peasant", "Scribe (marker)", "Stevedore", "Tradesman"],
 		careerExits: [
@@ -8181,18 +8409,22 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Arts)",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Evaluate",
 			"Haggle",
 			"Perception",
 			"Read/Write",
 			"Secret Signs (Thief)",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 			"Trade (Artist)",
 			"Trade (Calligrapher)",
 			"Trade (Smith)",
 		],
-		talents: "Artistic, Coolheaded or Dealmaker, Flee! or Suave",
+		talents: [
+			"Artistic",
+			anyXTalents(1, ["Coolheaded", "Dealmaker"]),
+			anyXTalents(1, ["Flee!", "Suave"]),
+		],
 		trappings: "Trade Tools (Forger), Writing Kit",
 		careerEntries: [
 			"Artisan",
@@ -8302,10 +8534,10 @@ export const careers = {
 			"Evaluate",
 			"Gossip",
 			"Haggle",
-			anyX(1, languages),
-			anyX(1, trades),
+			anyXSkills(1, languageSkills),
+			anyXSkills(1, tradeSkills),
 		],
-		talents: "Dealmaker, Public Speaking, Savvy, Schemer, Suave",
+		talents: ["Dealmaker", "Public Speaking", "Savvy", "Schemer", "Suave"],
 		trappings: "Longhouse and at least 1 Acre of Land, 1d10 Thralls, Livestock",
 		careerEntries: [
 			"Bondsman",
@@ -8394,11 +8626,11 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Theology)",
 			"Animal Care",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Heal",
 			"Outdoor Survival",
 			"Perception",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Kislevian)",
@@ -8407,7 +8639,7 @@ export const careers = {
 			"Speak Language (Classical)",
 			"Speak Language (Reikspiel)",
 		],
-		talents: "Seasoned Traveller",
+		talents: ["Seasoned Traveller"],
 		trappings: "Healing Draught, Religious Symbol, Religious Relic, Robes",
 		careerEntries: [
 			"Demagogue",
@@ -8503,7 +8735,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Evaluate",
 			"Gossip",
 			"Haggle",
@@ -8511,7 +8743,12 @@ export const careers = {
 			"Search",
 			"Trade (Cook)",
 		],
-		talents: "Dealmaker, Hardy or Rover, Stout-hearted, Streetwise",
+		talents: [
+			"Dealmaker",
+			anyXTalents(1, ["Hardy", "Rover"]),
+			"Stout-Hearted",
+			"Streetwise",
+		],
 		trappings: "Entrails bucket, frog guts, snail shells, sharp knife",
 		careerEntries: ["Bone Picker", "Camp Follower", "Peasant"],
 		careerExits: [
@@ -8610,12 +8847,15 @@ export const careers = {
 			"Charm",
 			"Evaluate",
 			"Gamble",
-			anyX(1, ["Gossip", "Secret Language (Thieves' Tongue)"]),
+			anyXSkills(1, ["Gossip", "Secret Language (Thieves' Tongue)"]),
 			"Perception",
 			"Sleight of Hand",
-			anyX(1, ["Read/Write", "Secret Signs (Thief)"]),
+			anyXSkills(1, ["Read/Write", "Secret Signs (Thief)"]),
 		],
-		talents: "Etiquette or Streetwise, Flee! or Luck",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Streetwise"]),
+			anyXTalents(1, ["Flee!", "Luck"]),
+		],
 		trappings: "Dice, Deck of Cards, Leather Jerkin",
 		careerEntries: [
 			"Entertainer",
@@ -8732,8 +8972,14 @@ export const careers = {
 			"Shadowing",
 			"Silent Move",
 		],
-		talents:
-			"Hardy or Fleet Footed, Lightning Parry, Mighty Shot, Quick Draw, Rapid Reload, Sure Shot",
+		talents: [
+			anyXTalents(1, ["Hardy", "Fleet Footed"]),
+			"Lightning Parry",
+			"Mighty Shot",
+			"Quick Draw",
+			"Rapid Reload",
+			"Sure Shot",
+		],
 		trappings:
 			"Elfbow with 10 Arrows, Light Armour (Best Craftsmenship Full Leather Armour)",
 		careerEntries: ["Scout"],
@@ -8821,14 +9067,18 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Consume Alcohol",
 			"Dodge Blow",
 			"Intimidate",
 			"Perception",
 		],
-		talents:
-			"Fearless, Resistance to Poison, Specialist Weapon Group (Flail), Strike to Injure",
+		talents: [
+			"Fearless",
+			"Resistance to Poison",
+			"Specialist Weapon Group (Flail)",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+		],
 		trappings: "Great Weapon",
 		careerEntries: ["Troll Slayer"],
 		careerExits: ["Daemon Slayer"],
@@ -8922,8 +9172,21 @@ export const careers = {
 			"Ride",
 			"Secret Language (Battle Tongue)",
 		],
-		talents:
-			"Grail Virtue (the one that matches the character’s Virtue of Knighthood), Luck, Public Speaking, Resistance to Chaos, Sixth Sense, Specialist Weapon Group (Two-handed), Stout-hearted, Strike Mighty Blow, Strike to Injure, Sturdy, Very Resilient, Very Strong, Warrior Born",
+		talents: [
+			anyXTalents(1, grailVirtueTalents),
+			"Luck",
+			"Public Speaking",
+			"Resistance to Chaos",
+			"Sixth Sense",
+			"Specialist Weapon Group (Two-handed)",
+			"Stout-Hearted",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Sturdy",
+			"Very Resilient",
+			"Very Strong",
+			"Warrior Born",
+		],
 		trappings:
 			"Heavy Armour (Full Plate Armour), Shield, Icon of the Lady of the Lake, Destrier with Saddle and Harness, Sip from the Grail",
 		careerEntries: ["Questing Knight"],
@@ -9021,8 +9284,12 @@ export const careers = {
 			"Outdoor Survival",
 			"Perception",
 		],
-		talents:
-			"Etiquette, Hardy or Very Resilient, Specialist Weapon Group (Two-handed), Stout-hearted or Strong-minded",
+		talents: [
+			"Etiquette",
+			anyXTalents(1, ["Hardy", "Very Resilient"]),
+			"Specialist Weapon Group (Two-handed)",
+			anyXTalents(1, ["Stout-Hearted", "Strong-Minded"]),
+		],
 		trappings:
 			"Halberd, Light Armour (Leather Jack), Bits That Fell Off the Back of A Grail Knight",
 		careerEntries: [
@@ -9123,7 +9390,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Academic Knowledge (Theology)",
 			]),
@@ -9131,7 +9398,7 @@ export const careers = {
 			"Animal Training",
 			"Charm",
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Intimidate",
 			"Perception",
@@ -9139,15 +9406,21 @@ export const careers = {
 			"Ride",
 			"Secret Language (Battle Tongue)",
 			"Secret Signs (Templar)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents:
-			"Fearless, Fleet Footed, Menacing, Seasoned Traveller, Specialist Weapon Group (any two), Strong Minded",
+		talents: [
+			"Fearless",
+			"Fleet Footed",
+			"Menacing",
+			"Seasoned Traveller",
+			anyXTalents(2, specialistWeaponGroupTalents),
+			"Strong-Minded",
+		],
 		trappings:
 			"Magic Weapon, Heavy Armour (Magical Full Plate Armour), Religious Relic or Blessing of the Emperor",
 		careerEntries: ["Knight of the Inner Circle"],
@@ -9236,14 +9509,18 @@ export const careers = {
 		},
 		skills: [
 			"Drive",
-			anyX(1, ["Gossip", "Haggle"]),
+			anyXSkills(1, ["Gossip", "Haggle"]),
 			"Perception",
 			"Scale Sheer Surface",
 			"Search",
 			"Secret Signs (Thief)",
 			"Silent Move",
 		],
-		talents: "Flee!, Resistance to Disease, Streetwise or Strong-minded",
+		talents: [
+			"Flee!",
+			"Resistance to Disease",
+			anyXTalents(1, ["Streetwise", "Strong-Minded"]),
+		],
 		trappings: "Lantern, Lamp Oil, Pick, Sack, Spade",
 		careerEntries: [
 			"Barber-Surgeon",
@@ -9346,7 +9623,10 @@ export const careers = {
 			"Outdoor Survival",
 			"Search",
 		],
-		talents: "Resistance to Disease, Stout-Hearted or Very Strong",
+		talents: [
+			"Resistance to Disease",
+			anyXTalents(1, ["Stout-Hearted", "Very Strong"]),
+		],
 		trappings: "Shovel, Stench, Wheelbarrow",
 		careerEntries: ["Bone Picker", "Rat Catcher", "Peasant"],
 		careerExits: [
@@ -9450,16 +9730,16 @@ export const careers = {
 			"Haggle",
 			"Perception",
 			"Secret Language (Guild Tongue)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Norse)",
 			]),
 			"Speak Language (Reikspiel)",
-			anyX(2, trades),
+			anyXSkills(2, tradeSkills),
 		],
-		talents: "Dealmaker, Etiquette, Linguistics",
+		talents: ["Dealmaker", "Etiquette", "Linguistics"],
 		trappings: "Writing Kit, 100 gc, Guild",
 		careerEntries: [
 			"Artisan",
@@ -9553,15 +9833,15 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Daemonology)",
 				"Academic Knowledge (Spirits)",
 			]),
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (History)",
 				"Academic Knowledge (Necromancy)",
 			]),
-			anyX(1, academicKnowledges, [
+			anyXSkills(1, academicKnowledgeSkills, [
 				"Academic Knowledge (Daemonology)",
 				"Academic Knowledge (History)",
 				"Academic Knowledge (Necromancy)",
@@ -9570,25 +9850,30 @@ export const careers = {
 			"Animal Care",
 			"Charm Animal",
 			"Command",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
-			anyX(1, commonKnowledges, [
+			anyXSkills(1, commonKnowledgeSkills, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
-			anyX(1, ["Heal", "Prepare Poison"]),
+			anyXSkills(1, ["Heal", "Prepare Poison"]),
 			"Intimidate",
 			"Magical Sense",
 			"Perception",
 			"Speak Arcane Language (Magick)",
-			anyX(1, arcaneLanguages, ["Speak Arcane Language (Magick)"]),
+			anyXSkills(1, arcaneLanguageSkills, ["Speak Arcane Language (Magick)"]),
 			"Speak Language (Ungol)",
-			anyX(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
 		],
-		talents:
-			"Aethyric Attunement, Excellent Vision or Luck, Lesser Magic (any three), Rover or Sixth Sense, Witch Lore (Hag)",
+		talents: [
+			"Aethyric Attunement",
+			anyXTalents(1, ["Excellent Vision", "Luck"]),
+			anyXTalents(3, lesserMagicTalents),
+			anyXTalents(1, ["Rover", "Sixth Sense"]),
+			"Witch Lore (Hag)",
+		],
 		trappings:
 			"Like other hags, hag mothers are talented healers, and they are never without the accoutrements of the trade. A hag mother usually carries an antitoxin kit, an apothecary kit, and at least three healing draughts and healing poultices. Most also have three or more potions (RoS, page 192). To ward away the chill that infiltrates everything, they also are never far from a skin of koumiss. Hag mothers wear the distinctive shawl and often carry walking sticks.",
 		careerEntries: ["Hag Witch"],
@@ -9670,22 +9955,34 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (History)", "Academic Knowledge (Spirits)"]),
+			anyXSkills(1, [
+				"Academic Knowledge (History)",
+				"Academic Knowledge (Spirits)",
+			]),
 			"Command",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
-			anyX(1, ["Consume Alcohol", "Perception"]),
+			anyXSkills(1, ["Consume Alcohol", "Perception"]),
 			"Heal",
 			"Intimidate",
 			"Magical Sense",
-			anyX(1, ["Prepare Poison", "Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, [
+				"Prepare Poison",
+				"Trade (Apothecary)",
+				"Trade (Herbalist)",
+			]),
 			"Speak Arcane Language (Magick)",
 			"Speak Language (Ungol)",
 		],
-		talents:
-			"Fast Hands, Hardy or Strong-minded, Lesser Magic (any three), Meditation, Petty Magic (Hag)",
+		talents: [
+			"Fast Hands",
+			anyXTalents(1, ["Hardy", "Strong-Minded"]),
+			anyXTalents(3, lesserMagicTalents),
+			"Meditation",
+			"Petty Magic (Hag)",
+		],
 		trappings:
 			"Hag witches are gifted healers, so they always have at least one antitoxin kit, a healing draught, a healing poultice, and a skin of koumiss to fight the cold. They are also quite superstitious and, thus, carry a number of small charms that include bits of bone, locks of hair, unusual stones, and so on. They mark their station with the tell-tale shawl.",
 		careerEntries: ["Wise Woman"],
@@ -9764,16 +10061,16 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Haggle"]),
-			anyX(1, ["Charm", "Intimidate"]),
+			anyXSkills(1, ["Animal Care", "Haggle"]),
+			anyXSkills(1, ["Charm", "Intimidate"]),
 			"Channelling",
-			anyX(1, ["Charm Animal", "Trade (Apothecary)"]),
-			anyX(1, ["Heal", "Hypnotism"]),
+			anyXSkills(1, ["Charm Animal", "Trade (Apothecary)"]),
+			anyXSkills(1, ["Heal", "Hypnotism"]),
 			"Magical Sense",
 			"Perception",
 			"Search",
 		],
-		talents: "Hedge Magic, Petty Magic (Hedge)",
+		talents: ["Hedge Magic", "Petty Magic (Hedge)"],
 		trappings: "Healing Draught, Hood",
 		careerEntries: ["None"],
 		careerExits: [
@@ -9866,18 +10163,21 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Channelling"]),
-			anyX(1, ["Charm Animal", "Concealment"]),
-			anyX(1, ["Consume Alcohol", "Gossip"]),
-			anyX(1, ["Haggle", "Outdoor Survival"]),
+			anyXSkills(1, ["Animal Care", "Channelling"]),
+			anyXSkills(1, ["Charm Animal", "Concealment"]),
+			anyXSkills(1, ["Consume Alcohol", "Gossip"]),
+			anyXSkills(1, ["Haggle", "Outdoor Survival"]),
 			"Heal",
-			anyX(1, ["Magical Sense", "Prepare Poison"]),
+			anyXSkills(1, ["Magical Sense", "Prepare Poison"]),
 			"Perception",
-			anyX(1, ["Read/Write", "Speak Arcane Language (Magick)"]),
-			anyX(1, ["Set Trap", "Silent Move"]),
-			anyX(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, ["Read/Write", "Speak Arcane Language (Magick)"]),
+			anyXSkills(1, ["Set Trap", "Silent Move"]),
+			anyXSkills(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
 		],
-		talents: "Coolheaded or Fast Hands, Petty Magic (Hedge) or Rover",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Fast Hands"]),
+			anyXTalents(1, ["Petty Magic (Hedge)", "Rover"]),
+		],
 		trappings: "Antitoxin Kit, Healing Draught, Healing Poultice, Lucky Charm",
 		careerEntries: ["Apothecary", "Peasant", "Hedge Witch"],
 		careerExits: [
@@ -9969,22 +10269,26 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Channelling"]),
-			anyX(1, ["Charm Animal", "Concealment"]),
+			anyXSkills(1, ["Animal Care", "Channelling"]),
+			anyXSkills(1, ["Charm Animal", "Concealment"]),
 			"Command",
-			anyX(1, ["Evaluate", "Navigation"]),
-			anyX(1, ["Follow Trail", "Consume Alcohol"]),
-			anyX(1, ["Gossip", "Intimidate"]),
-			anyX(1, ["Haggle", "Outdoor Survival"]),
+			anyXSkills(1, ["Evaluate", "Navigation"]),
+			anyXSkills(1, ["Follow Trail", "Consume Alcohol"]),
+			anyXSkills(1, ["Gossip", "Intimidate"]),
+			anyXSkills(1, ["Haggle", "Outdoor Survival"]),
 			"Heal",
-			anyX(1, ["Magical Sense", "Prepare Poison"]),
+			anyXSkills(1, ["Magical Sense", "Prepare Poison"]),
 			"Perception",
-			anyX(1, ["Read/Write", "Speak Arcane Language (Magick)"]),
-			anyX(1, ["Set Trap", "Silent Move"]),
-			anyX(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, ["Read/Write", "Speak Arcane Language (Magick)"]),
+			anyXSkills(1, ["Set Trap", "Silent Move"]),
+			anyXSkills(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
 		],
-		talents:
-			"Dealmaker or Fast Hands, Lesser Magic (any one) or Orientation, Lesser Magic (any one) or Fleet Footed, Luck or Witch Lore (Hedge), Meditation or Strong-minded",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Fast Hands"]),
+			anyXTalents(2, [...lesserMagicTalents, "Orientation", "Fleet Footed"]),
+			anyXTalents(1, ["Luck", "Witch Lore (Hedge)"]),
+			anyXTalents(1, ["Meditation", "Strong-Minded"]),
+		],
 		trappings:
 			"Antitoxin Kit, Healing Poultice, Staff, Trade Tools (Apothecary or Herbalist), 1d5 Amulets and Charms, 1d5 Healing Draughts, 1d5 Potions",
 		careerEntries: ["Hedgecraft Apprentice"],
@@ -10069,26 +10373,34 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges),
-			anyX(1, ["Animal Care", "Channelling"]),
-			anyX(1, ["Charm Animal", "Concealment"]),
+			anyXSkills(2, academicKnowledgeSkills),
+			anyXSkills(1, ["Animal Care", "Channelling"]),
+			anyXSkills(1, ["Charm Animal", "Concealment"]),
 			"Command",
 			"Common Knowledge (the Empire)",
 			"Evaluate",
-			anyX(1, ["Follow Trail", "Consume Alcohol"]),
+			anyXSkills(1, ["Follow Trail", "Consume Alcohol"]),
 			"Gossip",
-			anyX(1, ["Haggle", "Outdoor Survival"]),
+			anyXSkills(1, ["Haggle", "Outdoor Survival"]),
 			"Heal",
 			"Intimidate",
-			anyX(1, ["Magical Sense", "Prepare Poison"]),
+			anyXSkills(1, ["Magical Sense", "Prepare Poison"]),
 			"Navigation",
 			"Perception",
-			anyX(1, ["Read/Write", "Speak Arcane Language (Magick)"]),
-			anyX(1, ["Set Trap", "Silent Move"]),
-			anyX(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, ["Read/Write", "Speak Arcane Language (Magick)"]),
+			anyXSkills(1, ["Set Trap", "Silent Move"]),
+			anyXSkills(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
 		],
-		talents:
-			"Aethyric Attunement or Savvy, Excellent Vision or Hardy, Lesser Magic (any one) or Night Vision, Lesser Magic (any one) or Sixth Sense, Lesser Magic (any one) or Stout-hearted",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", "Savvy"]),
+			anyXTalents(1, ["Excellent Vision", "Hardy"]),
+			anyXTalents(3, [
+				...lesserMagicTalents,
+				"Night Vision",
+				"Sixth Sense",
+				"Stout-Hearted",
+			]),
+		],
 		trappings:
 			"Antitoxin Kit, Staff, Trade Tools (Apothecary or Herbalist), 1d10 Amulets and Charms, 1d5 Healing Draughts, 1d5 Healing Poultices, 1d10 Potions",
 		careerEntries: ["Hedge Master"],
@@ -10178,7 +10490,7 @@ export const careers = {
 			"Academic Knowledge (History)",
 			"Blather",
 			"Charm",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Tilea)",
@@ -10190,14 +10502,14 @@ export const careers = {
 			"Perception",
 			"Read/Write",
 			"Ride",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 			"Speak Language (Reikspiel)",
 		],
-		talents: "Etiquette, Master Orator, Public Speaking",
+		talents: ["Etiquette", "Master Orator", "Public Speaking"],
 		trappings:
 			"Cologne, Purse, Two sets of Best Craftsmenship Clothing, Uniform",
 		careerEntries: ["Messenger", "Valet"],
@@ -10288,17 +10600,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Charm"]),
+			anyXSkills(1, ["Animal Care", "Charm"]),
 			"Concealment",
 			"Dodge Blow",
-			anyX(1, ["Gossip", "Secret Signs (Ranger)"]),
+			anyXSkills(1, ["Gossip", "Secret Signs (Ranger)"]),
 			"Outdoor Survival",
 			"Perception",
 			"Scale Sheer Surface",
 			"Silent Move",
 		],
-		talents:
-			"Marksman or Specialist Weapon Group (Longbow), Rover, Seasoned Traveller",
+		talents: [
+			anyXTalents(1, ["Marksman", "Specialist Weapon Group (Longbow)"]),
+			"Rover",
+			"Seasoned Traveller",
+		],
 		trappings:
 			"Bow with 10 Arrows (Longbow if you have Specialist Weapon Group (Longbow), otherwise a Bow), Light Armour (Leather Jerkin), Shield",
 		careerEntries: [
@@ -10409,21 +10724,26 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(3, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(3, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Channelling",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Heal",
 			"Intimidate",
 			"Magical Sense",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Speak Arcane Language (Magick)",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 		],
-		talents:
-			"Aethyric Attunement or Meditation, Armoured Casting or Mighty Missile, Etiquette, Fast Hands or Strong-minded, Lesser Magic (any two)",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", "Meditation"]),
+			anyXTalents(1, ["Armoured Casting", "Mighty Missile"]),
+			"Etiquette",
+			anyXTalents(1, ["Fast Hands", "Strong-Minded"]),
+			anyXTalents(2, lesserMagicTalents),
+		],
 		trappings: "Religious Relic",
 		careerEntries: ["Anointed Priest"],
 		careerExits: ["Politician", "Scholar", "Witch Hunter"],
@@ -10517,8 +10837,17 @@ export const careers = {
 			"Ride",
 			"Silent Move",
 		],
-		talents:
-			"Ambidextrous, Etiquette, Master Gunner, Mighty Shot, Sharpshooter, Specialist Weapon Group (Fencing), Specialist Weapon Group (Gunpowder), Swashbuckler, Trick Riding",
+		talents: [
+			"Ambidextrous",
+			"Etiquette",
+			"Master Gunner",
+			"Mighty Shot",
+			"Sharpshooter",
+			"Specialist Weapon Group (Fencing)",
+			"Specialist Weapon Group (Gunpowder)",
+			"Swashbuckler",
+			"Trick Riding",
+		],
 		trappings:
 			"Pair of Pistols with Powder and Ammunition for 20 Shots, Noble’s Garb, Hood or Mask, Riding Horse with Saddle and Harness",
 		careerEntries: [
@@ -10623,14 +10952,18 @@ export const careers = {
 		},
 		skills: [
 			"Concealment",
-			anyX(1, ["Follow Trail", "Set Trap"]),
+			anyXSkills(1, ["Follow Trail", "Set Trap"]),
 			"Perception",
 			"Scale Sheer Surface",
 			"Secret Language (Ranger Tongue)",
 			"Secret Signs (Ranger)",
 			"Silent Move",
 		],
-		talents: "Frenzy, Hardy, Fleet Footed or Very Resilient",
+		talents: [
+			"Frenzy",
+			"Hardy",
+			anyXTalents(1, ["Fleet Footed", "Very Resilient"]),
+		],
 		trappings:
 			"Anti-toxin kit, Great weapon (two-handed axe), Light Armour (leather jack)",
 		careerEntries: ["Initiate (Taal)", "Scribe"],
@@ -10712,8 +11045,8 @@ export const careers = {
 		},
 		skills: [
 			"Academic Knowledge (Strategy/Tactics)",
-			anyX(1, ["Command", "Navigation"]),
-			anyX(1, [
+			anyXSkills(1, ["Command", "Navigation"]),
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
@@ -10722,10 +11055,14 @@ export const careers = {
 			"Outdoor Survival",
 			"Perception",
 			"Ride",
-			anyX(1, ["Speak Language (Kislevian)", "Speak Language (Ungol)"]),
+			anyXSkills(1, ["Speak Language (Kislevian)", "Speak Language (Ungol)"]),
 		],
-		talents:
-			"Coolheaded or Hardy, Mighty Shot or Sure Shot, Rapid Reload or Quick Draw, Specialist Weapon Group (Cavalry)",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Hardy"]),
+			anyXTalents(1, ["Mighty Shot", "Sure Shot"]),
+			anyXTalents(1, ["Rapid Reload", "Quick Draw"]),
+			"Specialist Weapon Group (Cavalry)",
+		],
 		trappings:
 			"Horse archers are warriors all. They wear leather jacks and leggings that often feature good luck charms made from of locks of hair or pieces of lightning-struck metal. Horse archers are also well-armed, as they are equipped with cavalry spears (as demilance), Kislevite horse bows with quivers containing 20 arrows, 20 armour-piercing arrows, and at least 5 screamer and 5 incendiary arrows. They ride Kislevite warhorses equipped with saddles and harnesses and common gear to survive in the oblast, such as saddle bags filled with rations, water skins, and a yurta.",
 		careerEntries: ["Horse Master", "Noble", "Peasant", "Steppes Nomad"],
@@ -10823,7 +11160,7 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, ["Charm", "Consume Alcohol"]),
+			anyXSkills(1, ["Charm", "Consume Alcohol"]),
 			"Charm Animal",
 			"Evaluate",
 			"Gossip",
@@ -10832,7 +11169,11 @@ export const careers = {
 			"Ride",
 			"Speak Language (Kislevian)",
 		],
-		talents: "Dealmaker or Flee!, Specialist Weapon Group (Entangling), Suave",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Flee!"]),
+			"Specialist Weapon Group (Entangling)",
+			"Suave",
+		],
 		trappings:
 			"It wouldn’t do to look shabby when trying to sell goods, so horse copers always have a set of superior clothing. To control their beasts, copers also carry a lasso or whip. In addition, they have a number of horses ready for sale (1d5 of varying quality) and have a bit of coin for bribes, feed, and stabling (1d10 gc).",
 		careerEntries: [
@@ -10924,13 +11265,16 @@ export const careers = {
 			"Animal Training",
 			"Charm",
 			"Charm Animal",
-			anyX(1, ["Consume Alcohol", "Dodge Blow"]),
+			anyXSkills(1, ["Consume Alcohol", "Dodge Blow"]),
 			"Drive",
 			"Perception",
 			"Ride",
 		],
-		talents:
-			"Coolheaded or Hardy, Specialist Weapon Group (Entangling), Very Strong",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Hardy"]),
+			"Specialist Weapon Group (Entangling)",
+			"Very Strong",
+		],
 		trappings:
 			"The horsemaster naturally rides a Kislevite horse or warhorse equipped with saddle, harness, and at least one saddlebag to carry a grooming kit and extra feed. Horsemasters also find lassos or whips useful, and like most Kislevites, they wear leather jacks and leggings.",
 		careerEntries: [
@@ -11040,12 +11384,16 @@ export const careers = {
 			"Follow Trail",
 			"Outdoor Survival",
 			"Perception",
-			anyX(1, ["Search", "Swim"]),
+			anyXSkills(1, ["Search", "Swim"]),
 			"Secret Signs (Ranger)",
-			anyX(1, ["Silent Move", "Set Trap"]),
+			anyXSkills(1, ["Silent Move", "Set Trap"]),
 		],
-		talents:
-			"Hardy or Specialist Weapon Group (Longbow), Lightning Reflexes or Very Resilient, Marksman or Rover, Rapid Reload",
+		talents: [
+			anyXTalents(1, ["Hardy", "Specialist Weapon Group (Longbow)"]),
+			anyXTalents(1, ["Lightning Reflexes", "Very Resilient"]),
+			anyXTalents(1, ["Marksman", "Rover"]),
+			"Rapid Reload",
+		],
 		trappings: "Longbow with 10 Arrows, 2 Animal Traps, Antitoxin Kit",
 		careerEntries: [
 			"Animal Trainer",
@@ -11143,17 +11491,22 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Magic)",
 			"Channelling",
-			anyX(1, ["Command", "Intimidate"]),
+			anyXSkills(1, ["Command", "Intimidate"]),
 			"Common Knowledge (Kislev)",
 			"Magical Sense",
-			anyX(1, ["Navigation", "Read/Write"]),
-			anyX(1, ["Outdoor Survival", "Ride"]),
+			anyXSkills(1, ["Navigation", "Read/Write"]),
+			anyXSkills(1, ["Outdoor Survival", "Ride"]),
 			"Perception",
 			"Speak Arcane Language (Magick)",
 			"Speak Language (Kislevian)",
 		],
-		talents:
-			"Coolheaded, Lesser Magic (any three), Meditation or Mighty Missile, Stout-hearted or Strong-minded, Witch Lore (Ice)",
+		talents: [
+			"Coolheaded",
+			anyXTalents(3, lesserMagicTalents),
+			anyXTalents(1, ["Meditation", "Mighty Missile"]),
+			anyXTalents(1, ["Stout-Hearted", "Strong-Minded"]),
+			"Witch Lore (Ice)",
+		],
 		trappings:
 			"Ice Maidens have few belongings and are equipped with sturdy winter clothing and a flask of kvas to keep the warm.",
 		careerEntries: ["Apprentice Witch"],
@@ -11244,21 +11597,25 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges, ["Academic Knowledge (Magic)"]),
+			anyXSkills(1, academicKnowledgeSkills, ["Academic Knowledge (Magic)"]),
 			"Academic Knowledge (Magic)",
 			"Channelling",
-			anyX(1, ["Command", "Intimidate"]),
-			anyX(1, commonKnowledges, ["Common Knowledge (Kislev)"]),
+			anyXSkills(1, ["Command", "Intimidate"]),
+			anyXSkills(1, commonKnowledgeSkills, ["Common Knowledge (Kislev)"]),
 			"Common Knowledge (Kislev)",
 			"Magical Sense",
-			anyX(1, ["Outdoor Survival", "Ride"]),
+			anyXSkills(1, ["Outdoor Survival", "Ride"]),
 			"Perception",
 			"Read/Write",
 			"Speak Arcane Language (Magick)",
-			anyX(2, languages, ["Speak Language (Kislevian)"]),
+			anyXSkills(2, languageSkills, ["Speak Language (Kislevian)"]),
 			"Speak Language (Kislevian)",
 		],
-		talents: "Fast Hands, Lesser Magic (any three), Menacing or Unsettling",
+		talents: [
+			"Fast Hands",
+			anyXTalents(3, lesserMagicTalents),
+			anyXTalents(1, ["Menacing", "Unsettling"]),
+		],
 		trappings:
 			"Ice witches all wear superior winter clothing and often accent their attire with a few bits of jewellery studded with diamonds or sapphires. As well, ice witches carry at least one magic item found during their wanderings as ice maidens.",
 		careerEntries: ["Ice Maiden"],
@@ -11346,7 +11703,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Astronomy)",
 				"Academic Knowledge (History)",
 			]),
@@ -11358,8 +11715,11 @@ export const careers = {
 			"Speak Language (Classical)",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Lightning Reflexes or Very Strong, Public Speaking, Suave or Warrior Born",
+		talents: [
+			anyXTalents(1, ["Lightning Reflexes", "Very Strong"]),
+			"Public Speaking",
+			anyXTalents(1, ["Suave", "Warrior Born"]),
+		],
 		trappings:
 			"Religious Symbol (see Chapter 8: Religion and Belief for types), Robes",
 		careerEntries: [
@@ -11461,7 +11821,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Blather", "Lip Reading"]),
+			anyXSkills(1, ["Blather", "Lip Reading"]),
 			"Charm",
 			"Common Knowledge (the Empire)",
 			"Consume Alcohol",
@@ -11469,8 +11829,8 @@ export const careers = {
 			"Gossip",
 			"Haggle",
 			"Perception",
-			anyX(1, ["Read/Write", "Sleight of Hand"]),
-			anyX(1, [
+			anyXSkills(1, ["Read/Write", "Sleight of Hand"]),
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Reikspiel)",
@@ -11478,8 +11838,11 @@ export const careers = {
 			]),
 			"Trade (Cook)",
 		],
-		talents:
-			"Etiquette or Streetwise, Dealmaker or Street Fighting, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Streetwise"]),
+			anyXTalents(1, ["Dealmaker", "Street Fighting"]),
+			"Strike to Stun",
+		],
 		trappings: "Inn, one or more Servants",
 		careerEntries: ["Burgher", "Farmer", "Servant"],
 		careerExits: [
@@ -11569,7 +11932,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Charm", "Heal", "Intimidate", "Perception", "Torture"],
-		talents: "Menacing, Specialist Weapon Group (Flail), Wrestling",
+		talents: ["Menacing", "Specialist Weapon Group (Flail)", "Wrestling"],
 		trappings: "5 knives, Flail, 3 sets of manacles",
 		careerEntries: [
 			"Barber-Surgeon",
@@ -11660,13 +12023,17 @@ export const careers = {
 			"Command",
 			"Consume Alcohol",
 			"Dodge Blow",
-			anyX(1, ["Heal", "Sleight of Hand"]),
+			anyXSkills(1, ["Heal", "Sleight of Hand"]),
 			"Intimidate",
 			"Perception",
 			"Search",
 		],
-		talents:
-			"Resistance to Disease, Resistance to Poison, Specialist Weapon Group (Entangling), Wrestling",
+		talents: [
+			"Resistance to Disease",
+			"Resistance to Poison",
+			"Specialist Weapon Group (Entangling)",
+			"Wrestling",
+		],
 		trappings: "Bottle of Common Wine, Tankard, Any one of: Bola, Lasso, Net",
 		careerEntries: ["Bodyguard", "Rat Catcher"],
 		careerExits: [
@@ -11755,7 +12122,7 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (History)",
 			"Academic Knowledge (Runes)",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Evaluate",
 			"Gossip",
@@ -11764,10 +12131,13 @@ export const careers = {
 			"Read/Write",
 			"Runecraft",
 			"Speak Arcane Language (Arcane Dwarf)",
-			anyX(2, languages),
-			anyX(2, trades),
+			anyXSkills(2, languageSkills),
+			anyXSkills(2, tradeSkills),
 		],
-		talents: "Artistic or Hardy, Rune (any six)",
+		talents: [
+			anyXTalents(1, ["Artistic", "Hardy"]),
+			anyXTalents(6, runeTalents),
+		],
 		trappings: "One runic item",
 		careerEntries: ["Apprentice Runesmith"],
 		careerExits: ["Master Runesmith", "Scholar", "Shieldbreaker"],
@@ -11850,20 +12220,25 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges, ["Academic Knowledge (Magic)"]),
+			anyXSkills(1, academicKnowledgeSkills, ["Academic Knowledge (Magic)"]),
 			"Academic Knowledge (Magic)",
 			"Channelling",
-			anyX(1, ["Charm", "Intimidate"]),
-			anyX(2, commonKnowledges),
+			anyXSkills(1, ["Charm", "Intimidate"]),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Magical Sense",
 			"Read/Write",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Speak Arcane Language (Magick)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Arcane Lore (any one) or Dark Lore (any one), Aethyric Attunement or Dark Magic, Fast Hands or Very Resilient, Lesser Magic (any two), Meditation or Mighty Missile",
+		talents: [
+			anyXTalents(1, [...arcaneLoreTalents, ...darkLoreTalents]),
+			anyXTalents(1, ["Aethyric Attunement", "Dark Magic"]),
+			anyXTalents(1, ["Fast Hands", "Very Resilient"]),
+			anyXTalents(2, lesserMagicTalents),
+			anyXTalents(1, ["Meditation", "Mighty Missile"]),
+		],
 		trappings: "Grimoire, Writing Kit",
 		careerEntries: ["Apprentice Wizard"],
 		careerExits: ["Charlatan", "Master Wizard", "Scholar"],
@@ -11945,8 +12320,13 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Dodge Blow", "Perception"],
-		talents:
-			"Lightning Parry, Specialist Weapon Group (Fencing), Specialist Weapon Group (Flail), Specialist Weapon Group (Parrying), Specialist Weapon Group (Two-handed)",
+		talents: [
+			"Lightning Parry",
+			"Specialist Weapon Group (Fencing)",
+			"Specialist Weapon Group (Flail)",
+			"Specialist Weapon Group (Parrying)",
+			"Specialist Weapon Group (Two-handed)",
+		],
 		trappings:
 			"Great Weapon, Flail or Morning Star, Rapier or Foil, Buckler or Main Gauche, 10 Yards of Rope",
 		careerEntries: ["Sergeant", "Veteran"],
@@ -12044,8 +12424,26 @@ export const careers = {
 			"Silent Move",
 			"Torture",
 		],
-		talents:
-			"Alley Cat or Rover, Fearless, Focussed Strike, Frenzy, Lightning Reflexes, Menacing, Mighty Shot or Rapid Reload, Sixth Sense, Specialist Weapon Group (Throwing or Crossbow), Specialist Weapon Group (Two-handed), Stout-hearted, Strike Mighty Blow, Strike to Injure, Unsettling, Very Resilient or Very Strong",
+		talents: [
+			anyXTalents(1, ["Alley Cat", "Rover"]),
+			"Fearless",
+			"Focused Strike",
+			"Frenzy",
+			"Lightning Reflexes",
+			"Menacing",
+			anyXTalents(1, ["Mighty Shot", "Rapid Reload"]),
+			"Sixth Sense",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Throwing)",
+				"Specialist Weapon Group (Crossbow)",
+			]),
+			"Specialist Weapon Group (Two-handed)",
+			"Stout-Hearted",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Unsettling",
+			anyXTalents(1, ["Very Resilient", "Very Strong"]),
+		],
 		trappings: "Blessed Water, 6 Stakes, Silvered Weapon",
 		careerEntries: [
 			"Agent of the Shroud",
@@ -12138,13 +12536,16 @@ export const careers = {
 			"Common Knowledge (Kislev)",
 			"Consume Alcohol",
 			"Dodge Blow",
-			anyX(1, ["Gamble", "Gossip"]),
+			anyXSkills(1, ["Gamble", "Gossip"]),
 			"Outdoor Survival",
 			"Perception",
 			"Search",
 			"Speak Language (Kislevian)",
 		],
-		talents: "Specialist Weapon Group (Two-handed), Strike to Injure",
+		talents: [
+			"Specialist Weapon Group (Two-handed)",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+		],
 		trappings:
 			"Bow with 10 Arrows, Great Weapon (Two-handed Axe), Medium Armour (Mail Coat, Leather Jack, and Leather Leggings)",
 		careerEntries: ["None"],
@@ -12239,13 +12640,16 @@ export const careers = {
 			"Concealment",
 			"Dodge Blow",
 			"Follow Trail",
-			anyX(1, ["Heal", "Search"]),
+			anyXSkills(1, ["Heal", "Search"]),
 			"Outdoor Survival",
 			"Perception",
 			"Scale Sheer Surface",
 			"Silent Move",
 		],
-		talents: "Marksman or Rover, Rapid Reload or Warrior Born",
+		talents: [
+			anyXTalents(1, ["Marksman", "Rover"]),
+			anyXTalents(1, ["Rapid Reload", "Warrior Born"]),
+		],
 		trappings: "Elfbow with 10 Arrows, Light Armour (Leather Jack)",
 		careerEntries: ["Hunter", "Messenger"],
 		careerExits: ["Hunter", "Outrider", "Scout", "Vagabond", "Veteran"],
@@ -12329,7 +12733,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Academic Knowledge (Theology)",
 			]),
@@ -12338,10 +12742,14 @@ export const careers = {
 			"Perception",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Specialist Weapon Group (Cavalry), Specialist Weapon Group (Flail), Specialist Weapon Group (Two-handed), Strike Mighty Blow",
+		talents: [
+			"Specialist Weapon Group (Cavalry)",
+			"Specialist Weapon Group (Flail)",
+			"Specialist Weapon Group (Two-handed)",
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Flail or Morning Star, Lance, Heavy Armour (Full Plate Armour), Shield, Religious Symbol, 25 gc, Destrier with Saddle and Harness",
 		careerEntries: [
@@ -12441,14 +12849,19 @@ export const careers = {
 			"Academic Knowledge (Genealogy/Heraldry)",
 			"Animal Care",
 			"Animal Training",
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Outdoor Survival",
 			"Ride",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents:
-			"Etiquette, Seasoned Traveller, Specialist Weapon Group (Cavalry), Strike Mighty Blow, Virtue of Chivalry",
+		talents: [
+			"Etiquette",
+			"Seasoned Traveller",
+			"Specialist Weapon Group (Cavalry)",
+			"Strike Mighty Blow",
+			"Virtue of Chivalry",
+		],
 		trappings:
 			"Medium Armour (Mail Shirt, Mail Coif, Leather Jack, Helmet), Lance, Shield, Light Warhorse with saddle and harness",
 		careerEntries: ["Knight", "Noble", "Squire"],
@@ -12534,17 +12947,25 @@ export const careers = {
 			"Academic Knowledge (Strategy/Tactics)",
 			"Academic Knowledge (Theology)",
 			"Command",
-			anyX(1, ["Common Knowledge (Estalia)", "Common Knowledge (Tilea)"]),
+			anyXSkills(1, ["Common Knowledge (Estalia)", "Common Knowledge (Tilea)"]),
 			"Dodge Blow",
 			"Perception",
 			"Read/Write",
 			"Ride",
 			"Secret Language (Battle Tongue)",
 			"Secret Signs (Templar)",
-			anyX(1, ["Speak Language (Estalian)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Estalian)", "Speak Language (Tilean)"]),
 		],
-		talents:
-			"Disarm, Etiquette, Seasoned Traveller, Specialist Weapon Group (Cavalry), Specialist Weapon Group (Fencing), Specialist Weapon Group (Parrying), Stout-hearted, Strike to Injure",
+		talents: [
+			"Disarm",
+			"Etiquette",
+			"Seasoned Traveller",
+			"Specialist Weapon Group (Cavalry)",
+			"Specialist Weapon Group (Fencing)",
+			"Specialist Weapon Group (Parrying)",
+			"Stout-Hearted",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+		],
 		trappings:
 			"Buckler or Shield, Destrier with Saddle and Harness, Hand Weapon (Sword) or Rapier, Heavy Armour (Full Plate Armour), Lance or Spear, Religious Symbol (Myrmidia)",
 		careerEntries: [
@@ -12645,7 +13066,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Academic Knowledge (Theology)",
 			]),
@@ -12653,22 +13074,30 @@ export const careers = {
 			"Animal Training",
 			"Charm",
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Perception",
 			"Read/Write",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(1, ["Secret Signs (Scout)", "Secret Signs (Templar)"]),
-			anyX(1, [
+			anyXSkills(1, ["Secret Signs (Scout)", "Secret Signs (Templar)"]),
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents:
-			"Etiquette, Lightning Parry, Seasoned Traveller, Specialist Weapon Group (Fencing), Specialist Weapon Group (Parrying), Stout-hearted, Strike to Injure, Strike to Stun",
+		talents: [
+			"Etiquette",
+			"Lightning Parry",
+			"Seasoned Traveller",
+			"Specialist Weapon Group (Fencing)",
+			"Specialist Weapon Group (Parrying)",
+			"Stout-Hearted",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Strike to Stun",
+		],
 		trappings:
 			"Buckler or Main Gauche, Rapier or Foil, Heavy Armour (Best Craftsmenship Full Plate Armour), Religious Symbol, 50 gc",
 		careerEntries: ["Knight", "Witch Hunter"],
@@ -12756,24 +13185,42 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (History)",
 				"Academic Knowledge (Necromancy)",
 				"Academic Knowledge (Strategy/Tactics)",
 				"Academic Knowledge (Theology)",
 			]),
 			"Animal Training",
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Follow Trail",
 			"Perception",
 			"Read/Write",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(1, ["Speak Language (Breton)", "Speak Language (Kislevian)"]),
+			anyXSkills(1, ["Speak Language (Breton)", "Speak Language (Kislevian)"]),
 		],
-		talents:
-			"Cool-headed or Sixth Sense, Focussed Strike or Sharpshooter, Lightning Parry, Marksman, Master Gunner or Quick Draw, Rapid Reload, Seasoned Traveller, Specialist Weapon Group (Crossbow or Longbow, Parrying or Two-handed), Stout-hearted, Strike to Injure, Strong-minded",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Sixth Sense"]),
+			anyXTalents(1, ["Focused Strike", "Sharpshooter"]),
+			"Lightning Parry",
+			"Marksman",
+			anyXTalents(1, ["Master Gunner", "Quick Draw"]),
+			"Rapid Reload",
+			"Seasoned Traveller",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Crossbow)",
+				"Specialist Weapon Group (Longbow)",
+			]),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Parrying)",
+				"Specialist Weapon Group (Two-handed)",
+			]),
+			"Stout-Hearted",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Strong-Minded",
+		],
 		trappings:
 			"Full Plate Armour (Heavy), Lance, Longbow or Crossbow or Two Pistols, Shield or Sword-Breaker or Greatweapon, 1 Silvered or Blessed Weapon, 4 Hawthorn Stakes, Blessed Water, Symbol of the Raven",
 		careerEntries: ["Black Guard", "Knight", "Knight of the Inner Circle"],
@@ -12867,7 +13314,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Academic Knowledge (Theology)",
 			]),
@@ -12877,10 +13324,14 @@ export const careers = {
 			"Perception",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Specialist Weapon Group (Cavalry), Specialist Weapon Group (Two-handed), Strike Mighty Blow, Virtue of Knighthood (any one)",
+		talents: [
+			"Specialist Weapon Group (Cavalry)",
+			"Specialist Weapon Group (Two-handed)",
+			"Strike Mighty Blow",
+			anyXTalents(1, virtueOfKnighthoodTalents),
+		],
 		trappings:
 			"Lance, Heavy Armour (Full Plate Armour), Shield, icon of the Lady of the Lake, Destrier with Saddle and Harness, Household Position with a Bretonnian Noble or Bretonnian Fief",
 		careerEntries: ["Knight Errant"],
@@ -12980,17 +13431,25 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Strategy/Tactics)",
 			"Charm Animal",
-			anyX(1, ["Command", "Intimidate"]),
+			anyXSkills(1, ["Command", "Intimidate"]),
 			"Dodge Blow",
 			"Follow Trail",
-			anyX(1, ["Outdoor Survival", "Scale Sheer Surface"]),
+			anyXSkills(1, ["Outdoor Survival", "Scale Sheer Surface"]),
 			"Perception",
 			"Ride",
 			"Search",
-			anyX(1, ["Secret Language (Ranger Tongue)", "Secret Signs (Ranger)"]),
+			anyXSkills(1, [
+				"Secret Language (Ranger Tongue)",
+				"Secret Signs (Ranger)",
+			]),
 		],
-		talents:
-			"Fleet Footed or Keen Senses, Orientation, Rover, Specialist Weapon Group (Longbow), Strike Mighty Blow or Sure Shot",
+		talents: [
+			anyXTalents(1, ["Fleet Footed", "Keen Senses"]),
+			"Orientation",
+			"Rover",
+			"Specialist Weapon Group (Longbow)",
+			anyXTalents(1, ["Strike Mighty Blow", "Sure Shot"]),
+		],
 		trappings:
 			"Hand Weapon (sword), Light Armour (Leather Jack, Leather Leggings), Longbow with 10 arrows.",
 		careerEntries: [
@@ -13096,10 +13555,18 @@ export const careers = {
 			"Perception",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Coolheaded, Dealmaker, Etiquette, Specialist Weapon Group (Cavalry), Specialist Weapon Group (any one), Strike to Injure, Sturdy, Warrior Born",
+		talents: [
+			"Coolheaded",
+			"Dealmaker",
+			"Etiquette",
+			"Specialist Weapon Group (Cavalry)",
+			anyXTalents(1, specialistWeaponGroupTalents),
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Sturdy",
+			"Warrior Born",
+		],
 		trappings:
 			"Hand Weapon (Sword), Lance, Heavy Armour (Full Plate Armour), Shield, Destrier with Full Plate Barding, Saddle, and Harness, 50 gc",
 		careerEntries: [
@@ -13201,14 +13668,18 @@ export const careers = {
 		},
 		skills: [
 			"Common Knowledge (the Empire)",
-			anyX(1, ["Consume Alcohol", "Drive"]),
+			anyXSkills(1, ["Consume Alcohol", "Drive"]),
 			"Gossip",
 			"Haggle",
 			"Outdoor Survival",
 			"Perception",
 			"Scale Sheer Surface",
 		],
-		talents: "Excellent Vision or Savvy, Flee!, Street Fighting",
+		talents: [
+			anyXTalents(1, ["Excellent Vision", "Savvy"]),
+			"Flee!",
+			"Street Fighting",
+		],
 		trappings:
 			"Lamp Oil, 20 Matches, Storm Lantern, Tinderbox, 8 Wax Candles, 10’ Lamplighter’s Pole",
 		careerEntries: ["Charcoal-Burner", "Peasant", "Rat Catcher", "Servant"],
@@ -13300,21 +13771,21 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Haggle",
 			"Heal",
 			"Magical Sense",
 			"Perception",
 			"Read/Write",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Speak Arcane Language (Magick)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents: "Etiquette, Public Speaking, Resistance to Magic",
+		talents: ["Etiquette", "Public Speaking", "Resistance to Magic"],
 		trappings: "Prayer Book, Good Quality Vestments, Writing Kit",
 		careerEntries: ["Friar", "Initiate", "Priest"],
 		careerExits: ["Friar", "Prelate", "Priest"],
@@ -13400,21 +13871,24 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Academic Knowledge (History)",
 			]),
 			"Academic Knowledge (Law)",
-			anyX(1, ["Blather", "Charm"]),
+			anyXSkills(1, ["Blather", "Charm"]),
 			"Common Knowledge (the Empire)",
-			anyX(1, ["Gossip", "Haggle"]),
+			anyXSkills(1, ["Gossip", "Haggle"]),
 			"Perception",
 			"Read/Write",
 			"Secret Language (Guild Tongue)",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Dealmaker or Etiquette, Public Speaking, Savvy or Suave Armour: None Weapons: Hand Weapon",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Etiquette"]),
+			"Public Speaking",
+			anyXTalents(1, ["Savvy", "Suave"]),
+		],
 		trappings: "Book of Empire Laws, Writing Kit.",
 		careerEntries: [
 			"Burgher",
@@ -13518,8 +13992,12 @@ export const careers = {
 			"Intimidate",
 			"Perception",
 		],
-		talents:
-			"Specialist Weapon Group (Two-handed), Street Fighting, Strike Mighty Blow, Strike to Injure",
+		talents: [
+			"Specialist Weapon Group (Two-handed)",
+			"Street Fighting",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+		],
 		trappings:
 			"Halberd, Light Armour (Leather Jack and Leather Skullcap), Uniform bearing Lord’s Heraldry",
 		careerEntries: [
@@ -13623,11 +14101,18 @@ export const careers = {
 			"Follow Trail",
 			"Navigation",
 			"Perception",
-			anyX(1, ["Ride", "Sail"]),
+			anyXSkills(1, ["Ride", "Sail"]),
 			"Search",
 		],
-		talents:
-			"Orientation, Specialist Weapon Group (Cavalry, Flail, or Two-handed), Strike to Injure",
+		talents: [
+			"Orientation",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Cavalry)",
+				"Specialist Weapon Group (Flail)",
+				"Specialist Weapon Group (Two-handed)",
+			]),
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+		],
 		trappings:
 			"Dagger or two Javelins, Flail, Great Weapon or Demilance, Hand Weapon, Light Armour (Helmet and Leather Leggings), Shield, Tattoos",
 		careerEntries: [
@@ -13724,15 +14209,19 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (the Wasteland)", "Gamble"]),
+			anyXSkills(1, ["Common Knowledge (the Wasteland)", "Gamble"]),
 			"Consume Alcohol",
 			"Dodge Blow",
-			anyX(1, ["Gossip", "Secret Language (Battle Tongue)"]),
+			anyXSkills(1, ["Gossip", "Secret Language (Battle Tongue)"]),
 			"Intimidate",
 			"Row",
 			"Swim",
 		],
-		talents: "Disarm or Quick Draw, Strike Mighty Blow, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			"Strike Mighty Blow",
+			"Strike to Stun",
+		],
 		trappings:
 			"Bow or Crossbow with 10 Arrows or Bolts, Light Armour (Leather Jack), Shield, Grappling Hook, 10 Yards of Rope",
 		careerEntries: ["Boatman", "Fisherman", "Seaman"],
@@ -13819,9 +14308,9 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(3, academicKnowledges),
+			anyXSkills(3, academicKnowledgeSkills),
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Evaluate",
 			"Gossip",
@@ -13830,11 +14319,18 @@ export const careers = {
 			"Read/Write",
 			"Runecraft",
 			"Speak Arcane Language (Arcane Dwarf)",
-			anyX(3, languages),
-			anyX(2, trades),
+			anyXSkills(3, languageSkills),
+			anyXSkills(2, tradeSkills),
 		],
-		talents:
-			"Disarm or Strike Mighty Blow, Master Rune (any two), Rune (any ten), Specialist Weapon Group (Flail or Two-handed)",
+		talents: [
+			anyXTalents(1, ["Disarm", "Strike Mighty Blow"]),
+			anyXTalents(2, masterRuneTalents),
+			anyXTalents(10, runeTalents),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Flail)",
+				"Specialist Weapon Group (Two-handed)",
+			]),
+		],
 		trappings: "Two runic items",
 		careerEntries: ["Journeyman Runesmith"],
 		careerExits: ["Runelord", "Scholar", "Veteran"],
@@ -13923,7 +14419,7 @@ export const careers = {
 			"Disguise",
 			"Dodge Blow",
 			"Evaluate",
-			anyX(1, ["Gamble", "Lip Reading"]),
+			anyXSkills(1, ["Gamble", "Lip Reading"]),
 			"Gossip",
 			"Perception",
 			"Pick Lock",
@@ -13936,8 +14432,13 @@ export const careers = {
 			"Sleight of Hand",
 			"Swim",
 		],
-		talents:
-			"Specialist Weapon Group (Crossbow), Specialist Weapon Group (Throwing), Street Fighting or Swashbuckler, Streetwise, Trapfinder",
+		talents: [
+			"Specialist Weapon Group (Crossbow)",
+			"Specialist Weapon Group (Throwing)",
+			anyXTalents(1, ["Street Fighting", "Swashbuckler"]),
+			"Streetwise",
+			"Trapfinder",
+		],
 		trappings:
 			"Crossbow Pistol with 10 Bolts, 2 Throwing Axes/Hammer or 3 Throwing Daggers/Stars, Best Craftsmenship Lock Picks, Cloak, Sack, Best Craftsmenship Rope (10 yards)",
 		careerEntries: [
@@ -14032,13 +14533,13 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Daemonology)",
 				"Academic Knowledge (Magic)",
 				"Academic Knowledge (Necromancy)",
 			]),
 			"Channelling",
-			anyX(1, commonKnowledges, ["Common Knowledge (the Empire)"]),
+			anyXSkills(1, commonKnowledgeSkills, ["Common Knowledge (the Empire)"]),
 			"Common Knowledge (the Empire)",
 			"Gossip",
 			"Intimidate",
@@ -14047,15 +14548,22 @@ export const careers = {
 			"Read/Write",
 			"Ride",
 			"Search",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Arcane Language (Daemonic)",
 				"Speak Arcane Language (Magick)",
 			]),
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 			"Torture",
 		],
-		talents:
-			"Fast Hands, Lesser Magic (any four), Menacing, Mighty Missile, Schemer, Stout-Hearted, Strong-minded",
+		talents: [
+			"Fast Hands",
+			anyXTalents(4, lesserMagicTalents),
+			"Menacing",
+			"Mighty Missile",
+			"Schemer",
+			"Stout-Hearted",
+			"Strong-Minded",
+		],
 		trappings:
 			"Trade Tools (Apothecary), two Magic Items, Silvered or Magical Blade",
 		careerEntries: ["Journeyman Wizard", "Master Wizard"],
@@ -14150,23 +14658,27 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Magic)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Magic)"]),
 			"Academic Knowledge (Magic)",
 			"Channelling",
-			anyX(1, ["Charm", "Intimidate"]),
-			anyX(2, commonKnowledges),
-			anyX(1, ["Gossip", "Ride"]),
+			anyXSkills(1, ["Charm", "Intimidate"]),
+			anyXSkills(2, commonKnowledgeSkills),
+			anyXSkills(1, ["Gossip", "Ride"]),
 			"Magical Sense",
 			"Read/Write",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Arcane Language (Daemonic)",
 				"Speak Arcane Language (Magick)",
 			]),
 			"Speak Arcane Language (Magick)",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 		],
-		talents:
-			"Aethyric Attunement or Meditation, Dark Magic or Strong-minded, Fast Hands or Mighty Missile, Lesser Magic (any two)",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", "Meditation"]),
+			anyXTalents(1, ["Dark Magic", "Strong-Minded"]),
+			anyXTalents(1, ["Fast Hands", "Mighty Missile"]),
+			anyXTalents(2, lesserMagicTalents),
+		],
 		trappings: "Trade Tools (Apothecary), Two magic items",
 		careerEntries: ["Journeyman Wizard"],
 		careerExits: ["Explorer", "Scholar", "Wizard Lord"],
@@ -14250,7 +14762,7 @@ export const careers = {
 		},
 		skills: [
 			"Command",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Consume Alcohol",
 			"Dodge Blow",
 			"Gamble",
@@ -14258,7 +14770,7 @@ export const careers = {
 			"Intimidate",
 			"Row",
 			"Sail",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Norse)",
@@ -14266,7 +14778,7 @@ export const careers = {
 			"Swim",
 			"Trade (Shipwright)",
 		],
-		talents: "Resistance to Disease, Seasoned Traveller, Street Fighting",
+		talents: ["Resistance to Disease", "Seasoned Traveller", "Street Fighting"],
 		trappings: "Light Armour (Leather Jack)",
 		careerEntries: ["Marine", "Seaman"],
 		careerExits: ["Explorer", "Merchant", "Navigator", "Sea Captain"],
@@ -14358,7 +14870,7 @@ export const careers = {
 			"Intimidate",
 			"Perception",
 		],
-		talents: "Dealmaker, Public Speaking, Seasoned Traveller, Suave",
+		talents: ["Dealmaker", "Public Speaking", "Seasoned Traveller", "Suave"],
 		trappings: "A Wandering Lamb or a Wilful Pig",
 		careerEntries: ["Hunter", "Man-at-Arms", "Herrimault", "Peasant", "Rogue"],
 		careerExits: ["Demagogue", "Herrimault", "Rogue", "Village Elder"],
@@ -14443,21 +14955,24 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Gamble"]),
-			anyX(1, [
+			anyXSkills(1, ["Animal Care", "Gamble"]),
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Tilea)",
 			]),
 			"Dodge Blow",
-			anyX(1, ["Drive", "Ride"]),
-			anyX(1, ["Gossip", "Haggle"]),
-			anyX(1, ["Perception", "Search"]),
+			anyXSkills(1, ["Drive", "Ride"]),
+			anyXSkills(1, ["Gossip", "Haggle"]),
+			anyXSkills(1, ["Perception", "Search"]),
 			"Secret Language (Battle Tongue)",
-			anyX(1, ["Speak Language (Tilean)", "Swim"]),
+			anyXSkills(1, ["Speak Language (Tilean)", "Swim"]),
 		],
-		talents:
-			"Disarm or Quick Draw, Rapid Reload or Strike Mighty Blow, Sharpshooter or Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			anyXTalents(1, ["Rapid Reload", "Strike Mighty Blow"]),
+			anyXTalents(1, ["Sharpshooter", "Strike to Stun"]),
+		],
 		trappings:
 			"Crossbow with 10 Bolts, Shield, Medium Armour (Mail Shirt and Leather Jack), Healing Draught",
 		careerEntries: [
@@ -14566,7 +15081,7 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Drive",
 			"Evaluate",
 			"Gossip",
@@ -14574,7 +15089,7 @@ export const careers = {
 			"Read/Write",
 			"Ride",
 			"Secret Language (Guild Tongue)",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Kislevian)",
@@ -14583,7 +15098,7 @@ export const careers = {
 			"Speak Language (Reikspiel)",
 			"Trade (Merchant)",
 		],
-		talents: "Dealmaker or Streetwise, Super Numerate",
+		talents: [anyXTalents(1, ["Dealmaker", "Streetwise"]), "Super Numerate"],
 		trappings: "Town House, Warehouse, 1,000 gc in coin or trade goods",
 		careerEntries: [
 			"Artisan",
@@ -14691,7 +15206,7 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (the Wasteland)",
 				"Gossip",
@@ -14704,7 +15219,7 @@ export const careers = {
 			"Speak Language (Reikspiel)",
 			"Swim",
 		],
-		talents: "Orientation, Seasoned Traveller",
+		talents: ["Orientation", "Seasoned Traveller"],
 		trappings:
 			"Light Armour (Leather Jack), Map Case, Riding Horse with Saddle and Harness or Pony (for Halflings), Shield",
 		careerEntries: ["Militiaman", "Roadwarden", "Servant"],
@@ -14803,15 +15318,17 @@ export const careers = {
 		skills: [
 			"Animal Care",
 			"Dodge Blow",
-			anyX(1, ["Drive", "Swim"]),
-			anyX(1, ["Gamble", "Gossip"]),
+			anyXSkills(1, ["Drive", "Swim"]),
+			anyXSkills(1, ["Gamble", "Gossip"]),
 			"Outdoor Survival",
 			"Perception",
 			"Search",
-			anyX(1, trades),
+			anyXSkills(1, tradeSkills),
 		],
-		talents:
-			"Specialist Weapon Group (Two-handed) or Rapid Reload, Strike Mighty Blow",
+		talents: [
+			anyXTalents(1, ["Specialist Weapon Group (Two-handed)", "Rapid Reload"]),
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Halberd or Bow with 10 Arrows, Light Armour (Leather Jack and Leather Skullcap), Uniform",
 		careerEntries: [
@@ -14917,15 +15434,18 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, ["Concealment", "Drive"]),
-			anyX(1, ["Evaluate", "Outdoor Survival"]),
+			anyXSkills(1, ["Concealment", "Drive"]),
+			anyXSkills(1, ["Evaluate", "Outdoor Survival"]),
 			"Navigation",
 			"Perception",
 			"Scale Sheer Surface",
-			anyX(1, ["Trade (Miner)", "Trade (Prospector)"]),
+			anyXSkills(1, ["Trade (Miner)", "Trade (Prospector)"]),
 		],
-		talents:
-			"Orientation, Specialist Weapon Group (Two-handed), Very Resilient or Warrior Born",
+		talents: [
+			"Orientation",
+			"Specialist Weapon Group (Two-handed)",
+			anyXTalents(1, ["Very Resilient", "Warrior Born"]),
+		],
 		trappings:
 			"Great Weapon (Two-handed Pick), Light Armour (Leather Jack), Pick, Spade, Storm Lantern, Lamp Oil",
 		careerEntries: ["Charcoal-Burner", "Hunter"],
@@ -15015,19 +15535,19 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Perception",
 			"Performer (Musician)",
 			"Performer (Singer)",
 			"Read/Write",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Eltharin)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents: "Etiquette, Pubic Speaking",
+		talents: ["Etiquette", "Public Speaking"],
 		trappings: "Entertainer’s Garb, Musical Instrument (Lute or Mandolin)",
 		careerEntries: ["Entertainer"],
 		careerExits: ["Charlatan", "Demagogue", "Highwayman", "Spy", "Student"],
@@ -15113,18 +15633,18 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Animal Care",
 			"Speak Arcane Language (Magick)",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Heal",
 			"Perception",
 			"Read/Write",
-			anyX(2, languages, ["Speak Language (Classical)"]),
+			anyXSkills(2, languageSkills, ["Speak Language (Classical)"]),
 			"Speak Language (Classical)",
 		],
-		talents: "Linguistics",
+		talents: ["Linguistics"],
 		trappings: "Prayer Book, Religious Symbol, Robes, Writing Kit",
 		careerEntries: [
 			"Friar",
@@ -15235,9 +15755,9 @@ export const careers = {
 			"Navigation",
 			"Outdoor Survival",
 			"Perception",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents: "Orientation, Seasoned Traveller",
+		talents: ["Orientation", "Seasoned Traveller"],
 		trappings: "Light Armour (Leather Jack), three Mules, Bow",
 		careerEntries: ["Burgher", "Hunter", "Messenger", "Peasant"],
 		careerExits: [
@@ -15329,10 +15849,10 @@ export const careers = {
 			"Charm",
 			"Command",
 			"Intimidate",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 			"Torture",
 		],
-		talents: "Menacing, Public Speaking",
+		talents: ["Menacing", "Public Speaking"],
 		trappings: "Filthy Loincloth and Tunic",
 		careerEntries: ["Anchorite", "Cenobite"],
 		careerExits: ["Charlatan", "Demagogue", "Hedge Wizard", "Rogue"],
@@ -15421,7 +15941,7 @@ export const careers = {
 		},
 		skills: [
 			"Academic Knowledge (Astronomy)",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Navigation",
 			"Perception",
 			"Read/Write",
@@ -15429,7 +15949,7 @@ export const careers = {
 			"Swim",
 			"Trade (Cartographer)",
 		],
-		talents: "Orientation",
+		talents: ["Orientation"],
 		trappings: "6 Maps and Charts, Trade Tools (Navigator’s Instruments)",
 		careerEntries: [
 			"Boatman",
@@ -15527,7 +16047,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Blather", "Sleight of Hand"]),
+			anyXSkills(1, ["Blather", "Sleight of Hand"]),
 			"Charm",
 			"Common Knowledge (the Empire)",
 			"Gossip",
@@ -15536,7 +16056,10 @@ export const careers = {
 			"Performer (Storyteller)",
 			"Read/Write",
 		],
-		talents: "Public Speaking, Street Fighting or Streetwise",
+		talents: [
+			"Public Speaking",
+			anyXTalents(1, ["Street Fighting", "Streetwise"]),
+		],
 		trappings: "Backpack, 1d10 Newssheets, Scroll Case",
 		careerEntries: ["Burgher", "Messenger", "Peasant", "Servant", "Student"],
 		careerExits: [
@@ -15629,17 +16152,21 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Blather", "Command"]),
+			anyXSkills(1, ["Blather", "Command"]),
 			"Common Knowledge (the Empire)",
-			anyX(1, ["Consume Alcohol", "Performer (Musician)"]),
+			anyXSkills(1, ["Consume Alcohol", "Performer (Musician)"]),
 			"Charm",
-			anyX(1, ["Gamble", "Gossip"]),
+			anyXSkills(1, ["Gamble", "Gossip"]),
 			"Read/Write",
 			"Ride",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Etiquette, Luck or Public Speaking, Savvy or Specialist Weapon (Fencing), Schemer or Specialist Weapon (Parrying)",
+		talents: [
+			"Etiquette",
+			anyXTalents(1, ["Luck", "Public Speaking"]),
+			anyXTalents(1, ["Savvy", "Specialist Weapon Group (Fencing)"]),
+			anyXTalents(1, ["Schemer", "Specialist Weapon Group (Parrying)"]),
+		],
 		trappings:
 			"Foil, Main Gauche, Noble’s Garb, Riding Horse with Saddle and Harness, 1d10 gc, Jewellery worth 6d10 gc",
 		careerEntries: ["Squire", "Steward"],
@@ -15735,7 +16262,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (History)",
 				"Academic Knowledge (Strategy/Tactics)",
 			]),
@@ -15751,8 +16278,11 @@ export const careers = {
 			"Speak Language (Classical)",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Master Orator, Public Speaking, Specialist Weapon Group (Fencing)",
+		talents: [
+			"Master Orator",
+			"Public Speaking",
+			"Specialist Weapon Group (Fencing)",
+		],
 		trappings:
 			"Best Craftsmenship Rapier or Foil, Best Craftsmenship Noble’s Garb, 500 gc, Jewellery worth 500 gc, Destrier with Saddle and Harness",
 		careerEntries: [
@@ -15853,8 +16383,12 @@ export const careers = {
 			"Speak Language (Norse)",
 			"Swim",
 		],
-		talents:
-			"Frenzy, Menacing, Quick Draw, Specialist Weapon Group (Two-handed)",
+		talents: [
+			"Frenzy",
+			"Menacing",
+			"Quick Draw",
+			"Specialist Weapon Group (Two-handed)",
+		],
 		trappings:
 			"Light Armour (Leather Jerkin), Bottle of Spirits, Great Weapon or Shield",
 		careerEntries: ["None"],
@@ -15940,17 +16474,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Common Knowledge (the Empire)"]),
+			anyXSkills(1, ["Animal Care", "Common Knowledge (the Empire)"]),
 			"Concealment",
 			"Dodge Blow",
-			anyX(1, ["Drive", "Ride"]),
-			anyX(1, ["Gossip", "Secret Signs (Thief)"]),
+			anyXSkills(1, ["Drive", "Ride"]),
+			anyXSkills(1, ["Gossip", "Secret Signs (Thief)"]),
 			"Perception",
 			"Scale Sheer Surface",
-			anyX(1, ["Set Trap", "Swim"]),
+			anyXSkills(1, ["Set Trap", "Swim"]),
 			"Silent Move",
 		],
-		talents: "Rover or Streetwise, Sharpshooter or Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Rover", "Streetwise"]),
+			anyXTalents(1, ["Sharpshooter", "Strike to Stun"]),
+		],
 		trappings: "Bow with 10 Arrows, Light Armour (Leather Jerkin), Shield",
 		careerEntries: [
 			"Agitator",
@@ -16074,11 +16611,16 @@ export const careers = {
 			"Scale Sheer Surface",
 			"Secret Language (Battle Tongue)",
 			"Secret Language (Thieves' Tongue)",
-			anyX(1, ["Secret Signs (Scout)", "Secret Signs (Thief)"]),
+			anyXSkills(1, ["Secret Signs (Scout)", "Secret Signs (Thief)"]),
 			"Silent Move",
 		],
-		talents:
-			"Lightning Parry, Mighty Shot, Quick Draw, Rapid Reload, Sure Shot",
+		talents: [
+			"Lightning Parry",
+			"Mighty Shot",
+			"Quick Draw",
+			"Rapid Reload",
+			"Sure Shot",
+		],
 		trappings:
 			"Bow or Crossbow with 10 Arrows or Bolts, Medium Armour (Sleeved Mail Shirt and Leather Jack), Horse with Saddle and Harness, Band of Outlaws",
 		careerEntries: [
@@ -16181,8 +16723,11 @@ export const careers = {
 			"Search",
 			"Silent Move",
 		],
-		talents:
-			"Coolheaded or Very Strong, Orientation, Specialist Weapon Group (Entangling)",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Very Strong"]),
+			"Orientation",
+			"Specialist Weapon Group (Entangling)",
+		],
 		trappings:
 			"Bow or Crossbow with 10 Arrows or Bolts, Net, Whip or Lasso, Light Armour (Leather Jack), Shield, 10 Yards of Rope, Riding Horse with Saddle and Harness",
 		careerEntries: ["Kithband Warrior", "Messenger", "Roadwarden", "Soldier"],
@@ -16268,9 +16813,9 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges),
+			anyXSkills(1, academicKnowledgeSkills),
 			"Blather",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Tilea)",
@@ -16279,12 +16824,12 @@ export const careers = {
 			"Concealment",
 			"Gossip",
 			"Perception",
-			anyX(1, ["Performer (Storyteller)", "Trade (Artist)"]),
+			anyXSkills(1, ["Performer (Storyteller)", "Trade (Artist)"]),
 			"Read/Write",
-			anyX(1, languages),
-			anyX(1, ["Trade (Calligrapher)", "Trade (Merchant)"]),
+			anyXSkills(1, languageSkills),
+			anyXSkills(1, ["Trade (Calligrapher)", "Trade (Merchant)"]),
 		],
-		talents: "Artistic or Public Speaking, Streetwise",
+		talents: [anyXTalents(1, ["Artistic", "Public Speaking"]), "Streetwise"],
 		trappings: "Writing Kit, Printing Press",
 		careerEntries: [
 			"Agitator",
@@ -16379,17 +16924,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Charm"]),
-			anyX(1, ["Animal Training", "Swim"]),
-			anyX(1, ["Charm Animal", "Trade (Cook)"]),
+			anyXSkills(1, ["Animal Care", "Charm"]),
+			anyXSkills(1, ["Animal Training", "Swim"]),
+			anyXSkills(1, ["Charm Animal", "Trade (Cook)"]),
 			"Concealment",
-			anyX(1, ["Drive", "Trade (Bowyer)"]),
-			anyX(1, ["Gamble", "Performer (Dancer)", "Performer (Singer)"]),
-			anyX(1, ["Outdoor Survival", "Trade (Farmer)"]),
-			anyX(1, ["Row", "Set Trap"]),
-			anyX(1, ["Scale Sheer Surface", "Silent Move"]),
+			anyXSkills(1, ["Drive", "Trade (Bowyer)"]),
+			anyXSkills(1, ["Gamble", "Performer (Dancer)", "Performer (Singer)"]),
+			anyXSkills(1, ["Outdoor Survival", "Trade (Farmer)"]),
+			anyXSkills(1, ["Row", "Set Trap"]),
+			anyXSkills(1, ["Scale Sheer Surface", "Silent Move"]),
 		],
-		talents: "Hardy or Rover, Flee! or Specialist Weapon Group (Sling)",
+		talents: [
+			anyXTalents(1, ["Hardy", "Rover"]),
+			anyXTalents(1, ["Flee!", "Specialist Weapon Group (Sling)"]),
+		],
 		trappings: "Sling or Quarter Staff, Leather Flask",
 		careerEntries: ["None"],
 		careerExits: [
@@ -16490,7 +17038,7 @@ export const careers = {
 			"Intimidate",
 			"Torture",
 		],
-		talents: "Hardy, Strike to Stun, Very Resilient",
+		talents: ["Hardy", "Strike to Stun", "Very Resilient"],
 		trappings: "Religious Symbol, Scourge",
 		careerEntries: ["Flagellant", "Initiate", "Outlaw", "Student", "Zealot"],
 		careerExits: [
@@ -16593,7 +17141,7 @@ export const careers = {
 			"Speak Language (Classical)",
 			"Trade (Apothecary)",
 		],
-		talents: "Resistance to Disease, Strike to Stun, Surgery,",
+		talents: ["Resistance to Disease", "Strike to Stun", "Surgery"],
 		trappings: "4 Healing Draughts, Trade Tools (Medical Instruments)",
 		careerEntries: ["Barber-Surgeon", "Interrogator", "Scholar", "Student"],
 		careerExits: ["Friar", "Guild Master", "Scholar", "Spy"],
@@ -16680,17 +17228,17 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (Theology)", "Consume Alcohol"]),
+			anyXSkills(1, ["Academic Knowledge (Theology)", "Consume Alcohol"]),
 			"Animal Care",
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Haggle",
-			anyX(1, ["Gossip", "Navigation"]),
+			anyXSkills(1, ["Gossip", "Navigation"]),
 			"Outdoor Survival",
 			"Perception",
 			"Performer (Storyteller)",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents: "Seasoned Traveller, Very Resilient",
+		talents: ["Seasoned Traveller", "Very Resilient"],
 		trappings: "Religious Symbol",
 		careerEntries: ["Any"],
 		careerExits: [
@@ -16785,13 +17333,20 @@ export const careers = {
 		skills: [
 			"Animal Care",
 			"Dodge Blow",
-			anyX(1, ["Evaluate", "Gossip"]),
+			anyXSkills(1, ["Evaluate", "Gossip"]),
 			"Perception",
 			"Ride",
 			"Secret Signs (Scout)",
 		],
-		talents:
-			"Master Gunner, Quick Draw, Rapid Reload, Sharpshooter, Specialist Weapon Group (Gunpowder), Strike Mighty Blow, Sure Shot",
+		talents: [
+			"Master Gunner",
+			"Quick Draw",
+			"Rapid Reload",
+			"Sharpshooter",
+			"Specialist Weapon Group (Gunpowder)",
+			"Strike Mighty Blow",
+			"Sure Shot",
+		],
 		trappings:
 			"Pair of Pistols with Ammunition and Gunpowder for 20 Shots, Best Craftsmenship Clothing, Light Warhorse",
 		careerEntries: ["Engineer", "Noble"],
@@ -16877,8 +17432,15 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Dodge Blow", "Intimidate"],
-		talents:
-			"Disarm or Wrestling, Quick Draw or Strike to Injure, Specialist Weapon Group (Flail), Specialist Weapon Group (Parrying), Specialist Weapon Group (Two-handed), Strike Mighty Blow, Very Strong or Strong-minded",
+		talents: [
+			anyXTalents(1, ["Disarm", "Wrestling"]),
+			anyXTalents(1, ["Quick Draw", "Strike to Injure", "Focused Strike"]),
+			"Specialist Weapon Group (Flail)",
+			"Specialist Weapon Group (Parrying)",
+			"Specialist Weapon Group (Two-handed)",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Very Strong", "Strong-Minded"]),
+		],
 		trappings:
 			"Flail or Great Weapon, Knuckle-duster, Shield or Buckler, Medium Armour (Mail Shirt and Leather Jack)",
 		careerEntries: ["Norse Berserker", "Protagonist", "Shieldbreaker", "Thug"],
@@ -16969,7 +17531,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (History)",
 				"Academic Knowledge (Genealogy/Heraldry)",
 			]),
@@ -16986,8 +17548,12 @@ export const careers = {
 			"Read/Write",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Dealmaker or Schemer, Etiquette or Streetwise, Master Orator, Public Speaking",
+		talents: [
+			anyXTalents(1, ["Dealmaker", "Schemer"]),
+			anyXTalents(1, ["Etiquette", "Streetwise"]),
+			"Master Orator",
+			"Public Speaking",
+		],
 		trappings:
 			"Best Craftsmenship Hand Weapon, Best Craftsmenship Leather Jack, Pamphlets",
 		careerEntries: [
@@ -17101,23 +17667,30 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Blather",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Heal",
 			"Intimidate",
 			"Perception",
 			"Performer (Storyteller)",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Secret Language (Guild Tongue)",
 			"Speak Arcane Language (Magick)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Master Orator, Etiquette, Linguistics, Seasoned Traveller, Schemer, Stout Hearted, Strong Minded",
+		talents: [
+			"Master Orator",
+			"Etiquette",
+			"Linguistics",
+			"Seasoned Traveller",
+			"Schemer",
+			"Stout-Hearted",
+			"Strong-Minded",
+		],
 		trappings: "Prayer Book, Best Quality Vestments, Relic of Faith",
 		careerEntries: ["Friar", "Lay Priest", "Priest"],
 		careerExits: ["Demagogue", "Friar", "Politician", "Priest"],
@@ -17204,22 +17777,25 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges, ["Academic Knowledge (Theology)"]),
+			anyXSkills(1, academicKnowledgeSkills, ["Academic Knowledge (Theology)"]),
 			"Academic Knowledge (Theology)",
 			"Channelling",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Heal",
 			"Magical Sense",
 			"Perception",
 			"Read/Write",
-			anyX(2, ["Ride", "Swim"]),
+			anyXSkills(2, ["Ride", "Swim"]),
 			"Speak Arcane Language (Magick)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Armoured Caster or Master Orator, Petty Magic (Divine), Strike to Injure or Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Armoured Casting", "Master Orator"]),
+			"Petty Magic (Divine)",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike", "Strike to Stun"]),
+		],
 		trappings: "Prayer Book, Writing Kit",
 		careerEntries: ["Flagellant", "Friar", "Initiate", "Lay Priest", "Prelate"],
 		careerExits: [
@@ -17309,9 +17885,20 @@ export const careers = {
 			IP: 0,
 			FP: 0,
 		},
-		skills: ["Dodge Blow", anyX(1, ["Gossip", "Haggle"]), "Intimidate", "Ride"],
-		talents:
-			"Disarm or Quick Draw, Menacing or Suave, Street Fighting, Strike Mighty Blow, Strike to Injure, Strike to Stun",
+		skills: [
+			"Dodge Blow",
+			anyXSkills(1, ["Gossip", "Haggle"]),
+			"Intimidate",
+			"Ride",
+		],
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			anyXTalents(1, ["Menacing", "Suave"]),
+			"Street Fighting",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Strike to Stun",
+		],
 		trappings:
 			"Medium Armour (Mail Shirt and Leather Jack), Shield, Riding Horse with Saddle and Harness",
 		careerEntries: [
@@ -17416,16 +18003,26 @@ export const careers = {
 			"Academic Knowledge (Strategy/Tactics)",
 			"Charm",
 			"Command",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Outdoor Survival",
 			"Perception",
 			"Ride",
 			"Secret Language (Battle Tongue)",
-			anyX(2, languages),
+			anyXSkills(2, languageSkills),
 		],
-		talents:
-			"Luck, Seasoned Traveller, Specialist Weapon Group (Two-handed), Strike Mighty Blow, Strike to Injure, Sturdy, Very Resilient, Very Strong, Virtue of the Quest, Warrior Born",
+		talents: [
+			"Luck",
+			"Seasoned Traveller",
+			"Specialist Weapon Group (Two-handed)",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Sturdy",
+			"Very Resilient",
+			"Very Strong",
+			"Virtue of the Quest",
+			"Warrior Born",
+		],
 		trappings:
 			"Heavy Armour (Full Plate Armour), Shield, Icon of the Lady of the Lake, Destrier with Saddle and Harness",
 		careerEntries: ["Knight of the Realm"],
@@ -17530,8 +18127,13 @@ export const careers = {
 			"Perception",
 			"Shadowing",
 		],
-		talents:
-			"Menacing, Street Fighting, Streetwise, Strike Mighty Blow, Strike to Stun",
+		talents: [
+			"Menacing",
+			"Street Fighting",
+			"Streetwise",
+			"Strike Mighty Blow",
+			"Strike to Stun",
+		],
 		trappings: "Knuckle-dusters, Good Quality Clothing, Hat",
 		careerEntries: [
 			"Bailiff",
@@ -17634,14 +18236,18 @@ export const careers = {
 		skills: [
 			"Blather",
 			"Charm",
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Gossip",
 			"Performer (Comedian)",
 			"Performer (Storyteller)",
 			"Read/Write",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents: "Etiquette or Hardy, Public Speaking, Seasoned Traveller",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Hardy"]),
+			"Public Speaking",
+			"Seasoned Traveller",
+		],
 		trappings: "Best Clothing, Outrageous Hat",
 		careerEntries: [
 			"Agitator",
@@ -17744,7 +18350,7 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Consume Alcohol",
 			"Dodge Blow",
 			"Evaluate",
@@ -17756,8 +18362,12 @@ export const careers = {
 			"Sleight of Hand",
 			"Swim",
 		],
-		talents:
-			"Ambidextrous or Fleet Footed, Dealmaker or Streetwise, Public Speaking or Sixth Sense, Swashbuckler or Quick Draw",
+		talents: [
+			anyXTalents(1, ["Ambidextrous", "Fleet Footed"]),
+			anyXTalents(1, ["Dealmaker", "Streetwise"]),
+			anyXTalents(1, ["Public Speaking", "Sixth Sense"]),
+			anyXTalents(1, ["Swashbuckler", "Quick Draw"]),
+		],
 		trappings:
 			"Light Armour (Leather Jack), Dashing clothes, Cloak, Sword or Pistol with Powder and Ammunition for 10 Shots, Dagger",
 		careerEntries: ["Dilettante", "Gambler", "Raconteur", "Vagabond"],
@@ -17853,8 +18463,12 @@ export const careers = {
 			"Set Trap",
 			"Silent Move",
 		],
-		talents:
-			"Resistance to Disease, Resistance to Poison, Specialist Weapon Group (Sling), Tunnel Rat",
+		talents: [
+			"Resistance to Disease",
+			"Resistance to Poison",
+			"Specialist Weapon Group (Sling)",
+			"Tunnel Rat",
+		],
 		trappings:
 			"Sling with Ammunition, 4 Animal Traps, Pole with 1d10 dead rats, Small but Vicious Dog",
 		careerEntries: ["Grave Robber", "Jailer", "Runebearer", "Tomb Robber"],
@@ -17947,7 +18561,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (Lustria)",
@@ -17961,7 +18575,7 @@ export const careers = {
 			"Row",
 			"Sail",
 			"Scale Sheer Surface",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Estalian)",
 				"Speak Language (Reikspiel)",
@@ -17969,8 +18583,11 @@ export const careers = {
 			]),
 			"Swim",
 		],
-		talents:
-			"Hardy or Street Fighting, Menacing or Strike Mighty Blow, Seasoned Traveller",
+		talents: [
+			anyXTalents(1, ["Hardy", "Street Fighting"]),
+			anyXTalents(1, ["Menacing", "Strike Mighty Blow"]),
+			"Seasoned Traveller",
+		],
 		trappings:
 			"Hand Weapon, Medium Armour (Mail Shirt, Leather Jack, Leather Leggings, Leather Skullcap, and Helmet), Shield, Tattoos",
 		careerEntries: [
@@ -18071,16 +18688,22 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (Kislev)", "Common Knowledge (the Empire)"]),
-			anyX(1, ["Gossip", "Speak Language (Kislevian)"]),
+			anyXSkills(1, [
+				"Common Knowledge (Kislev)",
+				"Common Knowledge (the Empire)",
+			]),
+			anyXSkills(1, ["Gossip", "Speak Language (Kislevian)"]),
 			"Navigation",
-			anyX(1, ["Outdoor Survival", "Sail"]),
+			anyXSkills(1, ["Outdoor Survival", "Sail"]),
 			"Perception",
 			"Row",
 			"Search",
 			"Secret Signs (Scout)",
 		],
-		talents: "Orientation or Very Strong, Specialist Weapon (Gunpowder)",
+		talents: [
+			anyXTalents(1, ["Orientation", "Very Strong"]),
+			"Specialist Weapon Group (Gunpowder)",
+		],
 		trappings:
 			"Pistol with Powder and Ammunition for 10 Shots, Light Armour (Leather Jack), Row Boat, Shield, Uniform, 10 Yards of Rope",
 		careerEntries: ["Boatman", "Ferryman", "Marine", "Roadwarden"],
@@ -18176,16 +18799,19 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, ["Common Knowledge (the Empire)", "Gossip"]),
+			anyXSkills(1, ["Common Knowledge (the Empire)", "Gossip"]),
 			"Drive",
-			anyX(1, ["Follow Trail", "Secret Signs (Scout)"]),
+			anyXSkills(1, ["Follow Trail", "Secret Signs (Scout)"]),
 			"Navigation",
 			"Outdoor Survival",
 			"Perception",
 			"Ride",
 			"Search",
 		],
-		talents: "Quick Draw or Rapid Reload, Specialist Weapons Group (Gunpowder)",
+		talents: [
+			anyXTalents(1, ["Quick Draw", "Rapid Reload"]),
+			"Specialist Weapon Group (Gunpowder)",
+		],
 		trappings:
 			"Pistol with 10 Firearm Balls and Gunpowder, Medium Armour (Mail Shirt and Leather Jack), Shield, 10 Yards of Rope, Light Warhorse with Saddle and Harness (or Pony for Halfling)",
 		careerEntries: [
@@ -18284,14 +18910,18 @@ export const careers = {
 			"Blather",
 			"Charm",
 			"Evaluate",
-			anyX(1, ["Gamble", "Secret Signs (Thief)"]),
-			anyX(1, ["Gossip", "Haggle"]),
+			anyXSkills(1, ["Gamble", "Secret Signs (Thief)"]),
+			anyXSkills(1, ["Gossip", "Haggle"]),
 			"Perception",
-			anyX(1, ["Performer (Actor)", "Performer (Storyteller)"]),
-			anyX(1, ["Search", "Secret Language (Thieves' Tongue)"]),
+			anyXSkills(1, ["Performer (Actor)", "Performer (Storyteller)"]),
+			anyXSkills(1, ["Search", "Secret Language (Thieves' Tongue)"]),
 			"Speak Language (Reikspiel)",
 		],
-		talents: "Flee! or Streetwise, Luck or Sixth Sense, Public Speaking",
+		talents: [
+			anyXTalents(1, ["Flee!", "Streetwise"]),
+			anyXTalents(1, ["Luck", "Sixth Sense"]),
+			"Public Speaking",
+		],
 		trappings:
 			"One set of Best Craftsmenship Clothing or Dice or Deck of Cards, 1d10 gc",
 		careerEntries: [
@@ -18401,8 +19031,13 @@ export const careers = {
 			"Perception",
 			"Swim",
 		],
-		talents:
-			"Flee!, Fleet Footed or Sixth Sense, Orientation, Rapid Reload, Very Resilient or Very Strong",
+		talents: [
+			"Flee!",
+			anyXTalents(1, ["Fleet Footed", "Sixth Sense"]),
+			"Orientation",
+			"Rapid Reload",
+			anyXTalents(1, ["Very Resilient", "Very Strong"]),
+		],
 		trappings:
 			"Crossbow and 10 Bolts, Light Armour (Leather Jerkin), Healing Draught, Lucky Charm",
 		careerEntries: ["Shieldbreaker"],
@@ -18492,10 +19127,10 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(4, academicKnowledges),
+			anyXSkills(4, academicKnowledgeSkills),
 			"Charm",
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Evaluate",
 			"Gossip",
@@ -18504,11 +19139,15 @@ export const careers = {
 			"Read/Write",
 			"Runecraft",
 			"Speak Arcane Language (Arcane Dwarf)",
-			anyX(3, languages),
-			anyX(2, trades),
+			anyXSkills(3, languageSkills),
+			anyXSkills(2, tradeSkills),
 		],
-		talents:
-			"Master Rune (any two), Rune (any ten), Specialist Weapon Group (any one), Strike to Injure or Strike to Stun",
+		talents: [
+			anyXTalents(2, masterRuneTalents),
+			anyXTalents(10, runeTalents),
+			anyXTalents(1, specialistWeaponGroupTalents),
+			anyXTalents(1, ["Strike to Injure", "Focused Strike", "Strike to Stun"]),
+		],
 		trappings: "Three runic items",
 		careerEntries: ["Journeyman Runesmith"],
 		careerExits: ["Captain", "Guild Master"],
@@ -18591,15 +19230,15 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(3, academicKnowledges),
-			anyX(3, commonKnowledges),
-			anyX(1, ["Evaluate", "Trade (Cartographer)"]),
+			anyXSkills(3, academicKnowledgeSkills),
+			anyXSkills(3, commonKnowledgeSkills),
+			anyXSkills(1, ["Evaluate", "Trade (Cartographer)"]),
 			"Perception",
 			"Read/Write",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 			"Speak Language (Classical)",
 		],
-		talents: "Linguistics",
+		talents: ["Linguistics"],
 		trappings: "Writing Kit",
 		careerEntries: [
 			"Anointed Priest",
@@ -18705,8 +19344,15 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Academic Knowledge (Theology)", "Charm", "Heal", "Intimidate"],
-		talents:
-			"Luck, Menacing, Public Speaking, Resistance to Chaos, Sixth Sense, Very Resilient, Very Strong",
+		talents: [
+			"Luck",
+			"Menacing",
+			"Public Speaking",
+			"Resistance to Chaos",
+			"Sixth Sense",
+			"Very Resilient",
+			"Very Strong",
+		],
 		trappings:
 			"Flail or Great Weapon, Religious Symbol, Religious Relic, Remains of a Heretic",
 		careerEntries: ["Flagellant"],
@@ -18795,7 +19441,7 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Concealment",
 			"Dodge Blow",
 			"Follow Trail",
@@ -18805,10 +19451,18 @@ export const careers = {
 			"Secret Language (Ranger Tongue)",
 			"Secret Signs (Scout)",
 			"Silent Move",
-			anyX(2, secretLanguages),
+			anyXSkills(2, secretLanguageSkills),
+			"Charm Animal",
 		],
-		talents:
-			"Charm Animal, Mighty Shot or Sure Shot, Orientation, Rapid Reload, Specialist Weapon (Crossbow or Longbow)",
+		talents: [
+			anyXTalents(1, ["Mighty Shot", "Sure Shot"]),
+			"Orientation",
+			"Rapid Reload",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Crossbow)",
+				"Specialist Weapon Group (Longbow)",
+			]),
+		],
 		trappings:
 			"Medium Armour (Mail Shirt and Leather Jack), Shield, 10 Yards of Rope, Horse with Saddle and Harness",
 		careerEntries: [
@@ -18910,17 +19564,17 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, academicKnowledges),
-			anyX(1, ["Common Knowledge (the Empire)", "Gossip"]),
+			anyXSkills(1, academicKnowledgeSkills),
+			anyXSkills(1, ["Common Knowledge (the Empire)", "Gossip"]),
 			"Perception",
 			"Read/Write",
 			"Secret Language (Guild Tongue)",
 			"Speak Language (Breton)",
 			"Speak Language (Classical)",
-			anyX(1, ["Speak Language (Reikspiel)", "Speak Language (Tilean)"]),
+			anyXSkills(1, ["Speak Language (Reikspiel)", "Speak Language (Tilean)"]),
 			"Trade (Calligrapher)",
 		],
-		talents: "Linguistics",
+		talents: ["Linguistics"],
 		trappings:
 			"Knife, A Pair of Candles, Wax, 5 matches, Illuminated Book, Writing Kit",
 		careerEntries: ["Apprentice Wizard", "Cartographer", "Initiate"],
@@ -19012,16 +19666,21 @@ export const careers = {
 			"Academic Knowledge (Strategy/Tactics)",
 			"Animal Training",
 			"Command",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Perception",
 			"Sail",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 			"Swim",
-			anyX(1, ["Trade (Cartographer)", "Trade (Shipwright)"]),
+			anyXSkills(1, ["Trade (Cartographer)", "Trade (Shipwright)"]),
 		],
-		talents:
-			"Disarm, Lightning Parry or Swashbuckler, Seasoned Traveller, Specialist Weapon Group (Fencing), Strike Mighty Blow",
+		talents: [
+			"Disarm",
+			anyXTalents(1, ["Lightning Parry", "Swashbuckler"]),
+			"Seasoned Traveller",
+			"Specialist Weapon Group (Fencing)",
+			"Strike Mighty Blow",
+		],
 		trappings: "Rapier, Light Armour (Leather Jack), Telescope, Ship",
 		careerEntries: ["Explorer", "Mate", "Navigator", "Noble Lord"],
 		careerExits: ["Explorer", "Noble Lord", "Scholar", "Spy"],
@@ -19107,26 +19766,29 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (Norsca)",
 				"Common Knowledge (Tilea)",
 				"Common Knowledge (the Wasteland)",
 			]),
-			anyX(1, ["Consume Alcohol", "Perception"]),
+			anyXSkills(1, ["Consume Alcohol", "Perception"]),
 			"Dodge Blow",
 			"Row",
 			"Sail",
 			"Scale Sheer Surface",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Norse)",
 				"Speak Language (Tilean)",
 			]),
 			"Swim",
 		],
-		talents:
-			"Hardy or Street Fighting, Seasoned Traveller, Strike Mighty Blow or Swashbuckler",
+		talents: [
+			anyXTalents(1, ["Hardy", "Street Fighting"]),
+			"Seasoned Traveller",
+			anyXTalents(1, ["Strike Mighty Blow", "Swashbuckler"]),
+		],
 		trappings: "Leather Jerkin, Bottle of Poor Craftsmenship Spirits",
 		careerEntries: [
 			"Boatman",
@@ -19220,17 +19882,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Blather",
 				"Speak Arcane Language (Daemonic)",
 				"Speak Arcane Language (Magick)",
 			]),
-			anyX(1, ["Channelling", "Performer (Palm Reader)"]),
+			anyXSkills(1, ["Channelling", "Performer (Palm Reader)"]),
 			"Charm Animal",
-			anyX(1, ["Magical Sense", "Perception"]),
+			anyXSkills(1, ["Magical Sense", "Perception"]),
 		],
-		talents:
-			"Hedge Magic or Keen Senses, Luck or Petty Magic (Hedge), Public Speaking",
+		talents: [
+			anyXTalents(1, ["Hedge Magic", "Keen Senses"]),
+			anyXTalents(1, ["Luck", "Petty Magic (Hedge)"]),
+			"Public Speaking",
+		],
 		trappings: "Instruments of Divination (dice, cards, a chicken, etc.)",
 		careerEntries: ["Hedge Wizard", "Skald"],
 		careerExits: [
@@ -19321,17 +19986,21 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Strategy/Tactics)",
 			"Command",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Gossip",
 			"Intimidate",
 			"Perception",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Secret Language (Battle Tongue)",
 			"Speak Language (Tilean)",
 		],
-		talents:
-			"Menacing or Seasoned Traveller, Street Fighting or Wrestling, Strike Mighty Blow, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Menacing", "Seasoned Traveller"]),
+			anyXTalents(1, ["Street Fighting", "Wrestling"]),
+			"Strike Mighty Blow",
+			"Strike to Stun",
+		],
 		trappings: "Medium Armour (Full Mail Armour), Shield",
 		careerEntries: [
 			"Assassin",
@@ -19430,17 +20099,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, ["Animal Care", "Trade (Cook)"]),
+			anyXSkills(2, ["Animal Care", "Trade (Cook)"]),
 			"Blather",
 			"Dodge Blow",
-			anyX(2, ["Drive", "Search"]),
-			anyX(2, ["Evaluate", "Haggle"]),
+			anyXSkills(2, ["Drive", "Search"]),
+			anyXSkills(2, ["Evaluate", "Haggle"]),
 			"Gossip",
 			"Perception",
-			anyX(2, ["Read/Write", "Sleight of Hand"]),
+			anyXSkills(2, ["Read/Write", "Sleight of Hand"]),
 		],
-		talents:
-			"Acute Hearing or Flee!, Etiquette or Hardy, Lightning Reflexes or Very Resilient",
+		talents: [
+			anyXTalents(1, ["Acute Hearing", "Flee!"]),
+			anyXTalents(1, ["Etiquette", "Hardy"]),
+			anyXTalents(1, ["Lightning Reflexes", "Very Resilient"]),
+		],
 		trappings:
 			"One Set of Good Craftsmenship Clothing, Pewter Tankard, Tinderbox, Storm Lantern, Lamp Oil",
 		careerEntries: ["Camp Follower", "Peasant", "Rogue"],
@@ -19535,13 +20207,16 @@ export const careers = {
 		skills: [
 			"Concealment",
 			"Dodge Blow",
-			anyX(1, ["Follow Trail", "Secret Signs (Scout)"]),
+			anyXSkills(1, ["Follow Trail", "Secret Signs (Scout)"]),
 			"Perception",
 			"Scale Sheer Surface",
-			anyX(1, ["Search", "Swim"]),
+			anyXSkills(1, ["Search", "Swim"]),
 			"Silent Move",
 		],
-		talents: "Quick Draw or Resistance to Disease, Tunnel Rat",
+		talents: [
+			anyXTalents(1, ["Quick Draw", "Resistance to Disease"]),
+			"Tunnel Rat",
+		],
 		trappings: "Crossbow with 10 bolts, Lantern, Light Armour (Leather Jack)",
 		careerEntries: [
 			"Jailer",
@@ -19649,8 +20324,13 @@ export const careers = {
 			"Scale Sheer Surface",
 			"Shadowing",
 		],
-		talents:
-			"Acute Hearing or Coolheaded, Orientation, Strike Mighty Blow, Strike to Injure, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Acute Hearing", "Coolheaded"]),
+			"Orientation",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Strike to Stun",
+		],
 		trappings:
 			"Crossbow with 10 bolts, Medium Armour (Mail Coat, Leather Jack and Leather Leggings), Shield, Grappling Hook, 10 Yards of Rope, Water Skin",
 		careerEntries: [
@@ -19756,11 +20436,11 @@ export const careers = {
 			"Common Knowledge (Chaos Wastes)",
 			"Gossip",
 			"Perception",
-			anyX(2, performers),
+			anyXSkills(2, performerSkills),
 			"Speak Language (Norse)",
-			anyX(2, languages.concat(["Ventriloquism"])),
+			anyXSkills(2, ["Ventriloquism", ...languageSkills]),
 		],
-		talents: "Mimic, Public Speaking, Savvy, Suave",
+		talents: ["Mimic", "Public Speaking", "Savvy", "Suave"],
 		trappings:
 			"Hand Weapon, Shield, Light Armour (Leather Jack and Leather Skullcap), Banner, Several Scrolls Recounting the Histories of the Character’s Tribe",
 		careerEntries: ["Bondsman", "Entertainer"],
@@ -19862,8 +20542,11 @@ export const careers = {
 			"Search",
 			"Speak Language (Queekish)",
 		],
-		talents:
-			"Acute Hearing or Excellent Vision, Flee! or Hardy, Natural Weapons",
+		talents: [
+			anyXTalents(1, ["Acute Hearing", "Excellent Vision"]),
+			anyXTalents(1, ["Flee!", "Hardy"]),
+			"Natural Weapons",
+		],
 		trappings: "None",
 		careerEntries: ["All"],
 		careerExits: ["Clanrat", "Clawleader", "Any (see special rules)"],
@@ -19944,7 +20627,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (the Empire)",
 				"Common Knowledge (Tilea)",
@@ -19955,11 +20638,19 @@ export const careers = {
 			"Haggle",
 			"Intimidate",
 			"Ride",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 			"Torture",
 		],
-		talents:
-			"Dealmaker, Menacing, Public Speaking, Seasoned Traveller or Streetwise, Specialist Weapon Group (Entangling) or Strike to Stun",
+		talents: [
+			"Dealmaker",
+			"Menacing",
+			"Public Speaking",
+			anyXTalents(1, ["Seasoned Traveller", "Streetwise"]),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Entangling)",
+				"Strike to Stun",
+			]),
+		],
 		trappings:
 			"Hand Weapon, Horse and Cart, Horse with Saddle and Harness, three Pairs of Manacles, 10 Yards of Rope, 1d10 Thralls",
 		careerEntries: ["Marauder", "Merchant", "Reaver"],
@@ -20041,20 +20732,20 @@ export const careers = {
 		skills: [
 			"Drive",
 			"Evaluate",
-			anyX(1, ["Gossip", "Secret Language (Thieves' Tongue)"]),
+			anyXSkills(1, ["Gossip", "Secret Language (Thieves' Tongue)"]),
 			"Haggle",
 			"Perception",
 			"Row",
 			"Search",
 			"Silent Move",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Secret Signs (Thief)",
 			]),
 			"Swim",
 		],
-		talents: "Dealmaker or Streetwise",
+		talents: [anyXTalents(1, ["Dealmaker", "Streetwise"])],
 		trappings:
 			"Light Armour (Leather Jack), 2 Torches, Draft Horse and Cart or Rowing Boat",
 		careerEntries: [
@@ -20154,15 +20845,23 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Heal"]),
-			anyX(1, ["Common Knowledge (the Empire)", "Perception"]),
+			anyXSkills(1, ["Animal Care", "Heal"]),
+			anyXSkills(1, ["Common Knowledge (the Empire)", "Perception"]),
 			"Dodge Blow",
-			anyX(1, ["Drive", "Ride"]),
-			anyX(1, ["Gamble", "Gossip"]),
+			anyXSkills(1, ["Drive", "Ride"]),
+			anyXSkills(1, ["Gamble", "Gossip"]),
 			"Intimidate",
 		],
-		talents:
-			"Disarm or Quick Draw, Sharpshooter or Strike Mighty Blow, Specialist Weapon Group (Gunpowder or Two-handed), Strike to Injure or Rapid Reload, Strike to Stun or Mighty Shot",
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			anyXTalents(1, ["Sharpshooter", "Strike Mighty Blow"]),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Gunpowder)",
+				"Specialist Weapon Group (Two-handed)",
+			]),
+			anyXTalents(1, ["Strike to Injure", "Focused Strike", "Rapid Reload"]),
+			anyXTalents(1, ["Strike to Stun", "Mighty Shot"]),
+		],
 		trappings:
 			"Great Weapon (Halberd) or Firearm with ammunition for 10 shots, Shield, Light Armour (Full Leather Armour), Uniform",
 		careerEntries: [
@@ -20261,7 +20960,7 @@ export const careers = {
 		},
 		skills: [
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Concealment",
 			"Disguise",
 			"Gossip",
@@ -20270,11 +20969,16 @@ export const careers = {
 			"Pick Lock",
 			"Shadowing",
 			"Sleight of Hand",
-			anyX(1, secretLanguages),
+			anyXSkills(1, secretLanguageSkills),
 			"Silent Move",
-			anyX(3, languages),
+			anyXSkills(3, languageSkills),
 		],
-		talents: "Flee!, Linguistics, Schemer, Suave or Sixth Sense",
+		talents: [
+			"Flee!",
+			"Linguistics",
+			"Schemer",
+			anyXTalents(1, ["Suave", "Sixth Sense"]),
+		],
 		trappings: "Disguise Kit, 4 Homing Pigeons",
 		careerEntries: [
 			"Camp Follower",
@@ -20372,18 +21076,22 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(3, [
+			anyXSkills(3, [
 				"Academic Knowledge (Genealogy/Heraldry)",
 				"Common Knowledge (Bretonnia)",
 			]),
 			"Animal Care",
 			"Animal Training",
-			anyX(1, ["Charm", "Gossip"]),
+			anyXSkills(1, ["Charm", "Gossip"]),
 			"Dodge Blow",
 			"Ride",
-			anyX(1, ["Speak Language (Breton)", "Speak Language (Reikspiel)"]),
+			anyXSkills(1, ["Speak Language (Breton)", "Speak Language (Reikspiel)"]),
 		],
-		talents: "Etiquette, Specialist Weapon Group (Cavalry), Strike Mighty Blow",
+		talents: [
+			"Etiquette",
+			"Specialist Weapon Group (Cavalry)",
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Demilance, Medium Armour (Mail Shirt, Mail Coif, Leather Jack), Shield, Horse with Saddle and Harness",
 		careerEntries: ["Herald", "Noble", "Valet"],
@@ -20471,17 +21179,17 @@ export const careers = {
 		},
 		skills: [
 			"Animal Care",
-			anyX(1, ["Animal Training", "Trade (Cook)"]),
-			anyX(1, ["Charm Animal", "Consume Alcohol"]),
+			anyXSkills(1, ["Animal Training", "Trade (Cook)"]),
+			anyXSkills(1, ["Charm Animal", "Consume Alcohol"]),
 			"Common Knowledge (Troll Country)",
-			anyX(1, ["Concealment", "Heal"]),
-			anyX(1, ["Follow Trail", "Trade (Bowyer)"]),
-			anyX(1, ["Navigation", "Secret Signs (Scout)"]),
+			anyXSkills(1, ["Concealment", "Heal"]),
+			anyXSkills(1, ["Follow Trail", "Trade (Bowyer)"]),
+			anyXSkills(1, ["Navigation", "Secret Signs (Scout)"]),
 			"Outdoor Survival",
-			anyX(1, ["Perception", "Performer (Dancer)"]),
+			anyXSkills(1, ["Perception", "Performer (Dancer)"]),
 			"Ride",
 		],
-		talents: "Hardy or Rover",
+		talents: [anyXTalents(1, ["Hardy", "Rover"])],
 		trappings:
 			"Steppe nomads are accustomed to the harshness of their environment, so they are equipped accordingly. A sturdy Kislevite horse with saddle and harness laden with at least a week of ration, a few skins of water and koumiss, and a yurta ensure the steppe nomad survives the biting winds and the frigid temperatures. The steppe is also home to ravenous beasts and terrifying monsters, so steppe nomads wear leather jacks and leggings for protection, and all carry at least a Kislevite horse bow with a quiver of 10 arrows.",
 		careerEntries: ["Any"],
@@ -20574,15 +21282,15 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Consume Alcohol", "Gamble"]),
-			anyX(1, ["Dodge Blow", "Scale Sheer Surface"]),
+			anyXSkills(1, ["Consume Alcohol", "Gamble"]),
+			anyXSkills(1, ["Dodge Blow", "Scale Sheer Surface"]),
 			"Gossip",
-			anyX(1, ["Perception", "Search"]),
+			anyXSkills(1, ["Perception", "Search"]),
 			"Performer (Singer)",
 			"Secret Language (Guild Tongue)",
 			"Swim",
 		],
-		talents: "Lightning Reflexes or Sturdy, Very Strong",
+		talents: [anyXTalents(1, ["Lightning Reflexes", "Sturdy"]), "Very Strong"],
 		trappings:
 			"Light Armour (Leather Jack), Watch Cap in Gang Colours, 10 Yards of Rope, 1d10 Wooden Spikes",
 		careerEntries: ["Boatman", "Peasant"],
@@ -20693,7 +21401,7 @@ export const careers = {
 			"Speak Language (Reikspiel)",
 			"Trade (Merchant)",
 		],
-		talents: "Public Speaking, Super Numerate",
+		talents: ["Public Speaking", "Super Numerate"],
 		trappings: "2 Sets of Best Craftsmenship Noble’s Garb, Writing Kit",
 		careerEntries: [
 			"Courtier",
@@ -20780,14 +21488,19 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (Kislev)", "Perception"]),
+			anyXSkills(1, ["Common Knowledge (Kislev)", "Perception"]),
 			"Consume Alcohol",
 			"Dodge Blow",
-			anyX(1, ["Gamble", "Gossip"]),
+			anyXSkills(1, ["Gamble", "Gossip"]),
 			"Speak Language (Kislevian)",
 		],
-		talents:
-			"Marksman or Sharpshooter, Master Gunner or Quick Draw, Mighty Shot or Rapid Reload, Specialist Weapon Group (Gunpowder, Two-handed)",
+		talents: [
+			anyXTalents(1, ["Marksman", "Sharpshooter"]),
+			anyXTalents(1, ["Master Gunner", "Quick Draw"]),
+			anyXTalents(1, ["Mighty Shot", "Rapid Reload"]),
+			"Specialist Weapon Group (Gunpowder)",
+			"Specialist Weapon Group (Two-handed)",
+		],
 		trappings:
 			"The streltsi are all distinguishable by the smart uniforms they wear beneath a leather jerkin, leggings, and helmet. They carry berdysh – special pole-arms designed to improve accuracy with the firearms they also carry. Streltsi keep enough powder and shot to shoot their firearm up to 10 times.",
 		careerEntries: ["Kossar", "Watchman"],
@@ -20883,17 +21596,17 @@ export const careers = {
 		skills: [
 			"Academic Knowledge (Necromancy)",
 			"Charm",
-			anyX(1, ["Drive", "Ride"]),
+			anyXSkills(1, ["Drive", "Ride"]),
 			"Evaluate",
 			"Gossip",
 			"Haggle",
-			anyX(1, ["Hypnotism", "Trade (Apothecary)"]),
-			anyX(1, performers),
-			anyX(1, ["Secret Signs (Astrologer)", "Secret Signs (Ranger)"]),
+			anyXSkills(1, ["Hypnotism", "Trade (Apothecary)"]),
+			anyXSkills(1, performerSkills),
+			anyXSkills(1, ["Secret Signs (Astrologer)", "Secret Signs (Ranger)"]),
 			"Sleight of Hand",
 			"Speak Language (Strigany)",
 		],
-		talents: "Sixth Sense, Rover or Seasoned Traveller",
+		talents: ["Sixth Sense", anyXTalents(1, ["Rover", "Seasoned Traveller"])],
 		trappings: "Deck of Cards, Eldritch Jewellery",
 		careerEntries: ["None"],
 		careerExits: [
@@ -20989,16 +21702,19 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges.concat(["Gossip"])),
-			anyX(1, ["Charm", "Consume Alcohol"]),
-			anyX(1, ["Heal", "Search"]),
+			anyXSkills(2, ["Gossip", ...academicKnowledgeSkills]),
+			anyXSkills(1, ["Charm", "Consume Alcohol"]),
+			anyXSkills(1, ["Heal", "Search"]),
 			"Perception",
 			"Read/Write",
 			"Speak Language (Classical)",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Etiquette or Linguistics, Savvy or Suave, Seasoned Traveller or Super Numerate",
+		talents: [
+			anyXTalents(1, ["Etiquette", "Linguistics"]),
+			anyXTalents(1, ["Savvy", "Suave"]),
+			anyXTalents(1, ["Seasoned Traveller", "Super Numerate"]),
+		],
 		trappings: "Two Textbooks corresponding to Knowledge Skills, Writing Kit",
 		careerEntries: [
 			"Dilettante",
@@ -21105,7 +21821,7 @@ export const careers = {
 			"Silent Move",
 			"Swim",
 		],
-		talents: "Resistance to Disease, Sixth Sense",
+		talents: ["Resistance to Disease", "Sixth Sense"],
 		trappings: "Large Sack, Thigh-high Waterproof Boots",
 		careerEntries: ["Anchorite", "Peasant", "Vagabond"],
 		careerExits: ["Mercenary", "Peasant", "Vagabond"],
@@ -21200,8 +21916,13 @@ export const careers = {
 			"Set Trap",
 			"Swim",
 		],
-		talents:
-			"Hardy, Lightning Reflexes or Very Resilient, Marksman, Rover, Specialist Weapon Group (entangling)",
+		talents: [
+			"Hardy",
+			anyXTalents(1, ["Lightning Reflexes", "Very Resilient"]),
+			"Marksman",
+			"Rover",
+			"Specialist Weapon Group (Entangling)",
+		],
 		trappings:
 			"Net, spear, sack, 1d10 warts, swamping rights granted by local lord",
 		careerEntries: [
@@ -21314,8 +22035,17 @@ export const careers = {
 			"Search",
 			"Sleight of Hand",
 		],
-		talents:
-			"Mighty Shot, Rapid Reload, Sharpshooter, Specialist Weapon Group (Longbow), Specialist Weapon Group (Crossbow or Throwing), Sure Shot",
+		talents: [
+			"Mighty Shot",
+			"Rapid Reload",
+			"Sharpshooter",
+			"Specialist Weapon Group (Longbow)",
+			anyXTalents(1, [
+				"Specialist Weapon Group (Crossbow)",
+				"Specialist Weapon Group (Throwing)",
+			]),
+			"Sure Shot",
+		],
 		trappings:
 			"Longbow or Crossbow with 10 Arrows or Bolts, Light Armour (Leather Jack)",
 		careerEntries: [
@@ -21402,14 +22132,18 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, commonKnowledges),
+			anyXSkills(1, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Gossip",
 			"Intimidate",
 			"Perception",
 			"Search",
 		],
-		talents: "Cool Headed or Stout Hearted, Strike Mighty Blow, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Stout-Hearted"]),
+			"Strike Mighty Blow",
+			"Strike to Stun",
+		],
 		trappings: "Light Armour (Leather Jack), Robes or Uniform",
 		careerEntries: [
 			"Grave Warden",
@@ -21496,17 +22230,23 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Charm", "Scale Sheer Surface"]),
+			anyXSkills(1, ["Charm", "Scale Sheer Surface"]),
 			"Concealment",
-			anyX(1, ["Evaluate", "Disguise"]),
-			anyX(1, ["Gamble", "Pick Lock"]),
+			anyXSkills(1, ["Evaluate", "Disguise"]),
+			anyXSkills(1, ["Gamble", "Pick Lock"]),
 			"Perception",
-			anyX(1, ["Read/Write", "Sleight of Hand"]),
+			anyXSkills(1, ["Read/Write", "Sleight of Hand"]),
 			"Search",
-			anyX(1, ["Secret Language (Thieves' Tongue)", "Secret Signs (Thief)"]),
+			anyXSkills(1, [
+				"Secret Language (Thieves' Tongue)",
+				"Secret Signs (Thief)",
+			]),
 			"Silent Move",
 		],
-		talents: "Alley Cat or Streetwise, Super Numerate or Trapfinder",
+		talents: [
+			anyXTalents(1, ["Alley Cat", "Streetwise"]),
+			anyXTalents(1, ["Super Numerate", "Trapfinder"]),
+		],
 		trappings:
 			"Light Armour (Leather Jerkin), Sack, Lock picks, 10 Yards of Rope",
 		careerEntries: [
@@ -21618,8 +22358,13 @@ export const careers = {
 			"Intimidate",
 			"Secret Language (Thieves' Tongue)",
 		],
-		talents:
-			"Coolheaded or Lightning Reflexes, Disarm, Resistance to Poison or Quick Draw, Strike to Injure or Wrestling, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Lightning Reflexes"]),
+			"Disarm",
+			anyXTalents(1, ["Resistance to Poison", "Quick Draw"]),
+			anyXTalents(1, ["Strike to Injure", "Focused Strike", "Wrestling"]),
+			"Strike to Stun",
+		],
 		trappings: "Knuckle-dusters, Medium Armour (Mail Shirt and Leather Jerkin)",
 		careerEntries: ["Ex-Convict", "Marine", "Protagonist"],
 		careerExits: [
@@ -21707,17 +22452,17 @@ export const careers = {
 		skills: [
 			"Dodge Blow",
 			"Evaluate",
-			anyX(1, ["Gossip", "Haggle"]),
+			anyXSkills(1, ["Gossip", "Haggle"]),
 			"Perception",
 			"Read/Write",
 			"Search",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Breton)",
 				"Speak Language (Kislevian)",
 				"Speak Language (Tilean)",
 			]),
 		],
-		talents: "Lightning Reflexes or Marksman",
+		talents: [anyXTalents(1, ["Lightning Reflexes", "Marksman"])],
 		trappings:
 			"Chest, Crossbow with 10 Bolts, Medium Armour (Mail Shirt and Leather Jerkin), Shield, 1d10 gc",
 		careerEntries: ["Bailiff", "Coachman", "Roadwarden"],
@@ -21814,21 +22559,24 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (the Empire)", "Secret Signs (Thief)"]),
-			anyX(1, ["Concealment", "Outdoor Survival"]),
+			anyXSkills(1, ["Common Knowledge (the Empire)", "Secret Signs (Thief)"]),
+			anyXSkills(1, ["Concealment", "Outdoor Survival"]),
 			"Evaluate",
 			"Perception",
-			anyX(1, ["Pick Lock", "Silent Move"]),
+			anyXSkills(1, ["Pick Lock", "Silent Move"]),
 			"Read/Write",
 			"Scale Sheer Surface",
 			"Search",
-			anyX(1, [
+			anyXSkills(1, [
 				"Speak Language (Classical)",
 				"Speak Language (Khazalid)",
 				"Speak Language (Eltharin)",
 			]),
 		],
-		talents: "Luck or Sixth Sense, Trapfinder or Tunnel Rat",
+		talents: [
+			anyXTalents(1, ["Luck", "Sixth Sense"]),
+			anyXTalents(1, ["Trapfinder", "Tunnel Rat"]),
+		],
 		trappings:
 			"Light Armour (Leather Jack), Crowbar, Lantern, Lamp Oil, 10 Yards of Rope, 2 Sacks",
 		careerEntries: ["Dilettante", "Runebearer", "Shieldbreaker", "Thief"],
@@ -21921,16 +22669,16 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Gossip"]),
+			anyXSkills(1, ["Animal Care", "Gossip"]),
 			"Drive",
 			"Haggle",
 			"Evaluate",
 			"Perception",
 			"Read/Write",
 			"Secret Language (Guild Tongue)",
-			anyX(2, trades),
+			anyXSkills(2, tradeSkills),
 		],
-		talents: "Dealmaker or Savvy",
+		talents: [anyXTalents(1, ["Dealmaker", "Savvy"])],
 		trappings: "Light Armour (Leather Jerkin), 1d10 gc",
 		careerEntries: [
 			"Barber-Surgeon",
@@ -22026,8 +22774,14 @@ export const careers = {
 			FP: 0,
 		},
 		skills: ["Consume Alcohol", "Dodge Blow", "Intimidate"],
-		talents:
-			"Disarm or Quick Draw, Hardy, Lightning Reflexes or Very Resilient, Specialist Weapon Group (Two-handed), Street Fighter, Strike Mighty Blow",
+		talents: [
+			anyXTalents(1, ["Disarm", "Quick Draw"]),
+			"Hardy",
+			anyXTalents(1, ["Lightning Reflexes", "Very Resilient"]),
+			"Specialist Weapon Group (Two-handed)",
+			"Street Fighting",
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Great Weapon, Light Armour (Leather Jerkin), One Bottle of Poor Craftsmenship Spirits",
 		careerEntries: ["Pit Fighter"],
@@ -22109,18 +22863,22 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Bretonnia)",
 				"Common Knowledge (Estalia)",
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Tilea)",
 			]),
-			anyX(1, ["Gossip", "Secret Signs (Ranger)", "Secret Signs (Thief)"]),
-			anyX(1, ["Haggle", "Swim"]),
-			anyX(1, ["Heal", "Perception"]),
+			anyXSkills(1, [
+				"Gossip",
+				"Secret Signs (Ranger)",
+				"Secret Signs (Thief)",
+			]),
+			anyXSkills(1, ["Haggle", "Swim"]),
+			anyXSkills(1, ["Heal", "Perception"]),
 			"Navigation",
 			"Outdoor Survival",
-			anyX(1, [
+			anyXSkills(1, [
 				"Performer (Dancer)",
 				"Performer (Singer)",
 				"Performer (Storyteller)",
@@ -22129,8 +22887,11 @@ export const careers = {
 			]),
 			"Silent Move",
 		],
-		talents:
-			"Fleet Footed or Rover, Marksman or Orientation, Seasoned Traveller",
+		talents: [
+			anyXTalents(1, ["Fleet Footed", "Rover"]),
+			anyXTalents(1, ["Marksman", "Orientation"]),
+			"Seasoned Traveller",
+		],
 		trappings: "Back Pack, Rations (1 week), Tent, Water Skin",
 		careerEntries: [
 			"Barber-Surgeon",
@@ -22236,7 +22997,7 @@ export const careers = {
 			"Academic Knowledge (Genealogy/Heraldry)",
 			"Blather",
 			"Evaluate",
-			anyX(1, [
+			anyXSkills(1, [
 				"Gossip",
 				"Speak Language (Breton)",
 				"Speak Language (Reikspiel)",
@@ -22246,7 +23007,11 @@ export const careers = {
 			"Read/Write",
 			"Search",
 		],
-		talents: "Coolheaded or Suave, Dealmaker or Seasoned Traveller, Etiquette",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Suave"]),
+			anyXTalents(1, ["Dealmaker", "Seasoned Traveller"]),
+			"Etiquette",
+		],
 		trappings:
 			"Cologne, Purse, Two sets of Best Craftsmenship Clothing, Uniform",
 		careerEntries: ["Burgher", "Servant"],
@@ -22333,7 +23098,7 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (History)",
 				"Academic Knowledge (Necromancy)",
 			]),
@@ -22348,8 +23113,14 @@ export const careers = {
 			"Silent Move",
 			"Speak Language (Classical)",
 		],
-		talents:
-			"Mighty Shot or Rapid Reload, Specialist Weapon Group (Crossbow), Stout-hearted, Strike Mighty Blow, Strike to Injure, Tunnel Rat",
+		talents: [
+			anyXTalents(1, ["Mighty Shot", "Rapid Reload"]),
+			"Specialist Weapon Group (Crossbow)",
+			"Stout-Hearted",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Tunnel Rat",
+		],
 		trappings:
 			"Repeater Crossbow with 10 Bolts, Medium Armour (Full Mail Armour), Blessed Water, 4 Stakes",
 		careerEntries: [
@@ -22449,10 +23220,10 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(2, academicKnowledges, ["Academic Knowledge (Law)"]),
+			anyXSkills(2, academicKnowledgeSkills, ["Academic Knowledge (Law)"]),
 			"Academic Knowledge (Law)",
 			"Command",
-			anyX(2, commonKnowledges, ["Common Knowledge (the Empire)"]),
+			anyXSkills(2, commonKnowledgeSkills, ["Common Knowledge (the Empire)"]),
 			"Common Knowledge (the Empire)",
 			"Concealment",
 			"Disguise",
@@ -22465,16 +23236,20 @@ export const careers = {
 			"Shadowing",
 			"Silent Move",
 			"Sleight of Hand",
-			anyX(1, secretSigns),
-			anyX(1, languages, [
+			anyXSkills(1, secretSignSkills),
+			anyXSkills(1, languageSkills, [
 				"Speak Language (Classical)",
 				"Speak Language (Reikspiel)",
 			]),
 			"Speak Language (Classical)",
 			"Speak Language (Reikspiel)",
 		],
-		talents:
-			"Alley Cat or Coolheaded, Keen Senses or Savvy, Street Fighting or Strong-minded, Streetwise",
+		talents: [
+			anyXTalents(1, ["Alley Cat", "Coolheaded"]),
+			anyXTalents(1, ["Keen Senses", "Savvy"]),
+			anyXTalents(1, ["Street Fighting", "Strong-Minded"]),
+			"Streetwise",
+		],
 		trappings:
 			"Lock Picks, Magnifying Glass, Manacles, 2 Homing Pigeons and Cages",
 		careerEntries: [
@@ -22579,8 +23354,12 @@ export const careers = {
 			"Perception",
 			"Secret Language (Battle Tongue)",
 		],
-		talents:
-			"Mighty Shot or Strike Mighty Blow, Rapid Reload or Strike to Injure, Specialist Weapon Group (any two), Very Resilient or Very Strong",
+		talents: [
+			anyXTalents(1, ["Mighty Shot", "Strike Mighty Blow"]),
+			anyXTalents(1, ["Rapid Reload", "Strike to Injure", "Focused Strike"]),
+			anyXTalents(2, specialistWeaponGroupTalents),
+			anyXTalents(1, ["Very Resilient", "Very Strong"]),
+		],
 		trappings:
 			"Any two weapons, Medium Armour (Full Mail Armour), Bottle of Good Craftsmenship Spirits",
 		careerEntries: [
@@ -22695,7 +23474,7 @@ export const careers = {
 			"Perception",
 			"Torture",
 		],
-		talents: "Master Orator, Menacing, Public Speaking, Suave",
+		talents: ["Master Orator", "Menacing", "Public Speaking", "Suave"],
 		trappings: "Peasant Village",
 		careerEntries: ["Faceless", "Mediator", "Yeoman"],
 		careerExits: [
@@ -22794,7 +23573,7 @@ export const careers = {
 			"Trade (Carpenter)",
 			"Trade (Stoneworker)",
 		],
-		talents: "Lightning Reflexes, Specialist Weapon Group (Engineer)",
+		talents: ["Lightning Reflexes", "Specialist Weapon Group (Engineer)"],
 		trappings: "Fortifications to look after, trade tools",
 		careerEntries: ["Man-at-Arms", "Peasant", "Tradesman"],
 		careerExits: ["Spy", "Steward", "Yeoman"],
@@ -22884,8 +23663,14 @@ export const careers = {
 			"Intimidate",
 			"Perception",
 		],
-		talents:
-			"Fearless, Strike Mighty Blow, Strike to Injure, Specialist Weapon Group (Twohanded), Unsettling, Very Resilient or Very Strong",
+		talents: [
+			"Fearless",
+			"Strike Mighty Blow",
+			anyXTalents(1, ["Strike to Injure", "Focused Strike"]),
+			"Specialist Weapon Group (Two-handed)",
+			"Unsettling",
+			anyXTalents(1, ["Very Resilient", "Very Strong"]),
+		],
 		trappings:
 			"Hand Weapon and Shield or Great Weapon, Medium Armour (Sleeved Mail Shirt, Mail Coif, and Full Leather Armour), Warband of 2d10 Marauders",
 		careerEntries: ["Bondsman", "Marauder", "Reaver"],
@@ -22973,26 +23758,30 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, [
+			anyXSkills(1, [
 				"Academic Knowledge (Daemonology)",
 				"Academic Knowledge (Necromancy)",
 			]),
 			"Channelling",
 			"Charm",
-			anyX(3, commonKnowledges),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Concealment",
 			"Disguise",
 			"Gossip",
 			"Haggle",
 			"Heal",
-			anyX(1, ["Hypnotism", "Read/Write"]),
+			anyXSkills(1, ["Hypnotism", "Read/Write"]),
 			"Magical Sense",
 			"Perception",
-			anyX(1, ["Ride", "Swim"]),
+			anyXSkills(1, ["Ride", "Swim"]),
 			"Search",
-			anyX(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, ["Trade (Apothecary)", "Trade (Herbalist)"]),
 		],
-		talents: "Dark Lore (any one), Dark Magic, Hardy or Very Resilient",
+		talents: [
+			anyXTalents(1, darkLoreTalents),
+			"Dark Magic",
+			anyXTalents(1, ["Hardy", "Very Resilient"]),
+		],
 		trappings: "Lucky Charm",
 		careerEntries: ["Witch"],
 		careerExits: [
@@ -23087,19 +23876,28 @@ export const careers = {
 			"Academic Knowledge (Strategy/Tactics)",
 			"Academic Knowledge (Theology)",
 			"Channelling",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Dodge Blow",
 			"Heal",
 			"Magical Sense",
 			"Ride",
 			"Secret Language (Battle Tongue)",
 			"Speak Arcane Language (Magick)",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents:
-			"Armoured Casting, Divine Lore (any one), Lesser Magic (any two), Meditation or Fast, Hands Specialist Weapon Group (Two-handed*) or Strike Mighty Blow",
+		talents: [
+			"Armoured Casting",
+			anyXTalents(1, divineLoreTalents),
+			anyXTalents(2, lesserMagicTalents),
+			anyXTalents(1, ["Meditation", "Fast Hands"]),
+			anyXTalents(1, [
+				"Specialist Weapon Group (Two-handed)",
+				"Specialist Weapon Group (Longbow)",
+				"Strike Mighty Blow",
+			]),
+		],
 		trappings:
-			"Great Weapon*, Medium Armour (Full Mail Armour), Religious Symbol",
+			"Great Weapon or Longbow, Medium Armour (Full Mail Armour), Religious Symbol",
 		careerEntries: ["Anointed Priest", "Prelate", "Priest"],
 		careerExits: ["High Priest", "Knight", "Prelate", "Witch Hunter"],
 		/*
@@ -23189,8 +23987,12 @@ export const careers = {
 			"Perception",
 			"Search",
 		],
-		talents:
-			"Coolheaded or Savvy, Disarm or Street Fighting, Strike Mighty Blow, Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Savvy"]),
+			anyXTalents(1, ["Disarm", "Street Fighting"]),
+			"Strike Mighty Blow",
+			"Strike to Stun",
+		],
 		trappings:
 			"Light Armour (Leather Jack), Lantern and Pole, Lamp Oil, Uniform",
 		careerEntries: ["Jailer", "Soldier"],
@@ -23289,8 +24091,13 @@ export const careers = {
 			"Sail",
 			"Swim",
 		],
-		talents:
-			"Coolheaded, Excellent Vision, Hardy, Seasoned Traveller, Very Strong",
+		talents: [
+			"Coolheaded",
+			"Excellent Vision",
+			"Hardy",
+			"Seasoned Traveller",
+			"Very Strong",
+		],
 		trappings:
 			"Dagger, Lantern with four pints of Whale Oil, Light Armour (Leather Jack), Pipe, Spear, Bottle of Good Spirits, Lucky Charm (Scrimshaw Talisman or Tattoos, see WFRP page 123)",
 		careerEntries: ["Fisherman", "Reaver", "Seaman"],
@@ -23378,9 +24185,9 @@ export const careers = {
 		},
 		skills: [
 			"Academic Knowledge (Strategy/Tactics)",
-			anyX(1, ["Animal Care", "Dodge Blow"]),
-			anyX(1, ["Command", "Navigation"]),
-			anyX(1, [
+			anyXSkills(1, ["Animal Care", "Dodge Blow"]),
+			anyXSkills(1, ["Command", "Navigation"]),
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
@@ -23391,8 +24198,15 @@ export const careers = {
 			"Secret Language (Battle Tongue)",
 			"Speak Language (Kislevian)",
 		],
-		talents:
-			"Hardy or Very Resilient, Specialist Weapon Group (Cavalry), Strike Mighty Blow or Strike to Injure",
+		talents: [
+			anyXTalents(1, ["Hardy", "Very Resilient"]),
+			"Specialist Weapon Group (Cavalry)",
+			anyXTalents(1, [
+				"Strike Mighty Blow",
+				"Strike to Injure",
+				"Focused Strike",
+			]),
+		],
 		trappings:
 			"Winged lancers are fearsome warriors, and they dress the part. All winged lancers have at least full suits of mail, though some accent their armour with bits of plate. From their backs fly winged banners. In battle, they thunder across the field, riding Kislevite warhorses equipped with saddles and harnesses. For arms, they carry lances, scimitars (Hand Weapons), shields, and at least two javelins. Finally, such heroes keep a bottle of kvas to help them through the icy nights.",
 		careerEntries: [
@@ -23485,22 +24299,29 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Academic Knowledge (History)", "Academic Knowledge (Spirits)"]),
-			anyX(1, ["Charm", "Intimidate"]),
+			anyXSkills(1, [
+				"Academic Knowledge (History)",
+				"Academic Knowledge (Spirits)",
+			]),
+			anyXSkills(1, ["Charm", "Intimidate"]),
 			"Command",
-			anyX(1, [
+			anyXSkills(1, [
 				"Common Knowledge (Kislev)",
 				"Common Knowledge (Troll Country)",
 			]),
-			anyX(1, ["Consume Alcohol", "Gossip"]),
+			anyXSkills(1, ["Consume Alcohol", "Gossip"]),
 			"Heal",
 			"Magical Sense",
 			"Perception",
 			"Performer (Storyteller)",
-			anyX(1, ["Prepare Poison", "Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(1, [
+				"Prepare Poison",
+				"Trade (Apothecary)",
+				"Trade (Herbalist)",
+			]),
 			"Speak Language (Ungol)",
 		],
-		talents: "Coolheaded or Savvy",
+		talents: [anyXTalents(1, ["Coolheaded", "Savvy"])],
 		trappings:
 			"Wise women are gifted healers, so they always have at least one antitoxin kit, healing draught, a healing poultice, and a skin of koumiss to ease other sorts of hurts. They are also quite superstitious and, thus, carry a number of small charms that include bits of bone, locks of hair, unusual stones, and so on. They mark their station with the tell-tale shawl, a beautifully woven length of cloth they wear draped from their heads or around their necks.",
 		careerEntries: ["Any"],
@@ -23586,20 +24407,20 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Animal Care", "Intimidate"]),
+			anyXSkills(1, ["Animal Care", "Intimidate"]),
 			"Channelling",
 			"Charm",
-			anyX(2, commonKnowledges),
+			anyXSkills(2, commonKnowledgeSkills),
 			"Gossip",
 			"Haggle",
 			"Heal",
 			"Magical Sense",
 			"Perception",
-			anyX(2, ["Ride", "Swim"]),
+			anyXSkills(2, ["Ride", "Swim"]),
 			"Search",
-			anyX(2, ["Trade (Apothecary)", "Trade (Herbalist)"]),
+			anyXSkills(2, ["Trade (Apothecary)", "Trade (Herbalist)"]),
 		],
-		talents: "Dark Magic or Mighty Missile, Witchcraft",
+		talents: [anyXTalents(1, ["Dark Magic", "Mighty Missile"]), "Witchcraft"],
 		trappings:
 			"Healing Draught, Healing Poultice, Trade Tools (Apothecary or Herbalist)",
 		careerEntries: ["Hedge Wizard"],
@@ -23704,10 +24525,20 @@ export const careers = {
 			"Ride",
 			"Search",
 			"Silent Move",
-			anyX(1, languages),
+			anyXSkills(1, languageSkills),
 		],
-		talents:
-			"Lightning Parry, Lightning Reflexes or Marksman, Menacing, Public Speaking, Sixth Sense, Specialist Weapon Group (Crossbow), Specialist Weapon Group (Entangling), Specialist Weapon Group (Throwing), Stout-hearted, Strike Mighty Blow",
+		talents: [
+			"Lightning Parry",
+			anyXTalents(1, ["Lightning Reflexes", "Marksman"]),
+			"Menacing",
+			"Public Speaking",
+			"Sixth Sense",
+			"Specialist Weapon Group (Crossbow)",
+			"Specialist Weapon Group (Entangling)",
+			"Specialist Weapon Group (Throwing)",
+			"Stout-Hearted",
+			"Strike Mighty Blow",
+		],
 		trappings:
 			"Crossbow Pistol with 10 bolts, Best Craftsmenship Hand Weapon, 4 Throwing Knives/Stars, Heavy Armour (Full Plate Armour), 10 Yards of Rope",
 		careerEntries: [
@@ -23811,22 +24642,26 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(3, academicKnowledges, ["Academic Knowledge (Magic)"]),
+			anyXSkills(3, academicKnowledgeSkills, ["Academic Knowledge (Magic)"]),
 			"Academic Knowledge (Magic)",
 			"Channelling",
-			anyX(1, ["Charm", "Intimidate"]),
-			anyX(3, commonKnowledges),
+			anyXSkills(1, ["Charm", "Intimidate"]),
+			anyXSkills(3, commonKnowledgeSkills),
 			"Magical Sense",
 			"Read/Write",
 			"Speak Arcane Language (Magick)",
-			anyX(2, [
+			anyXSkills(2, [
 				"Speak Arcane Language (Daemonic)",
 				"Speak Arcane Language (Arcane Elf)",
 			]),
-			anyX(4, languages),
+			anyXSkills(4, languageSkills),
 		],
-		talents:
-			"Aethyric Attunement or Mighty Missile, Dark Magic or Meditation, Fast Hands or Hardy, Lesser Magic (any two)",
+		talents: [
+			anyXTalents(1, ["Aethyric Attunement", "Mighty Missile"]),
+			anyXTalents(1, ["Dark Magic", "Meditation"]),
+			anyXTalents(1, ["Fast Hands", "Hardy"]),
+			anyXTalents(2, lesserMagicTalents),
+		],
 		trappings: "Three magic items, 12 Grimoires",
 		careerEntries: ["Master Wizard"],
 		careerExits: ["Explorer", "Guild Master"],
@@ -23911,15 +24746,18 @@ export const careers = {
 		},
 		skills: [
 			"Concealment",
-			anyX(1, ["Follow Trail", "Set Trap"]),
+			anyXSkills(1, ["Follow Trail", "Set Trap"]),
 			"Perception",
 			"Scale Sheer Surface",
 			"Secret Language (Ranger Tongue)",
 			"Secret Signs (Ranger)",
 			"Silent Move",
 		],
-		talents:
-			"Fleet Footed or Very Resilient, Rover, Specialist Weapon Group (Two-handed)",
+		talents: [
+			anyXTalents(1, ["Fleet Footed", "Very Resilient"]),
+			"Rover",
+			"Specialist Weapon Group (Two-handed)",
+		],
 		trappings:
 			"Great Weapon (Two-handed Axe), Light Armour (Leather Jack), Antitoxin Kit",
 		careerEntries: ["Charcoal-Burner", "Vagabond"],
@@ -23999,16 +24837,22 @@ export const careers = {
 			FP: 0,
 		},
 		skills: [
-			anyX(1, ["Common Knowledge (the Empire)", "Common Knowledge (Kislev)"]),
-			anyX(1, ["Consume Alcohol", "Dodge Blow"]),
-			anyX(1, ["Gamble", "Navigation"]),
-			anyX(1, ["Outdoor Survival", "Sail"]),
-			anyX(1, ["Perception", "Search"]),
+			anyXSkills(1, [
+				"Common Knowledge (the Empire)",
+				"Common Knowledge (Kislev)",
+			]),
+			anyXSkills(1, ["Consume Alcohol", "Dodge Blow"]),
+			anyXSkills(1, ["Gamble", "Navigation"]),
+			anyXSkills(1, ["Outdoor Survival", "Sail"]),
+			anyXSkills(1, ["Perception", "Search"]),
 			"Row",
-			anyX(1, ["Secret Signs (Ranger)", "Speak Language (Kislevian)"]),
+			anyXSkills(1, ["Secret Signs (Ranger)", "Speak Language (Kislevian)"]),
 			"Swim",
 		],
-		talents: "Orientation or Rover, Sharpshooter or Strike to Stun",
+		talents: [
+			anyXTalents(1, ["Orientation", "Rover"]),
+			anyXTalents(1, ["Sharpshooter", "Strike to Stun"]),
+		],
 		trappings: "Bow with 10 Arrows, Light Armour (Leather Jack), Row Boat",
 		careerEntries: [
 			"Boatman",
@@ -24114,8 +24958,13 @@ export const careers = {
 			"Secret Language (Battle Tongue)",
 			"Silent Move",
 		],
-		talents:
-			"Rover, Specialist Weapon Group (any one), Specialist Weapon Group (Two-handed), Strike to Stun, Very Resilient or Very Strong",
+		talents: [
+			"Rover",
+			anyXTalents(1, specialistWeaponGroupTalents),
+			"Specialist Weapon Group (Two-handed)",
+			"Strike to Stun",
+			anyXTalents(1, ["Very Resilient", "Very Strong"]),
+		],
 		trappings:
 			"Halberd, any one weapon, Medium Armour (Full Mail Armour), Riding Horse with Tack and Harness.",
 		careerEntries: ["Carcassonne Shepherd", "Man-at-Arms", "Mercenary"],
@@ -24208,8 +25057,12 @@ export const careers = {
 			"Intimidate",
 			"Read/Write",
 		],
-		talents:
-			"Coolheaded or Very Strong, Hardy or Suave, Public Speaking, Specialist Weapon Group (Flail)",
+		talents: [
+			anyXTalents(1, ["Coolheaded", "Very Strong"]),
+			anyXTalents(1, ["Hardy", "Suave"]),
+			"Public Speaking",
+			"Specialist Weapon Group (Flail)",
+		],
 		trappings:
 			"Flail or Morning Star, Light Armour (Leather Jack), Bottle of Good Craftsmenship Spirits",
 		careerEntries: [
