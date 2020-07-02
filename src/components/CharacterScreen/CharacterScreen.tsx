@@ -5,6 +5,7 @@ import { PersonalSection } from "./PersonalSection";
 import { SkillsSection } from "./SkillsSection";
 import { History } from "../HistoryBar/History";
 import { Character } from "../../store/state/character";
+import { TalentsSection } from "./TalentsSection";
 
 export function CharacterScreen(props: { char: Character }) {
 	return (
@@ -13,7 +14,10 @@ export function CharacterScreen(props: { char: Character }) {
 				<CharacterSection char={props.char} />
 				<StatsSection char={props.char} />
 				<PersonalSection char={props.char} />
-				<SkillsSection char={props.char} />
+				<div className="flexrow">
+					<SkillsSection char={props.char} />
+					<TalentsSection char={props.char} />
+				</div>
 			</div>
 			<History char={props.char} />
 		</div>

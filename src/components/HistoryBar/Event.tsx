@@ -1,10 +1,11 @@
 import * as React from "react";
-import { HistoryStep } from "../../store/state/character";
 import { skills } from "../../data/skills";
 import { EventHeader } from "./EventHeader";
+import { HistoryEvent } from "../../store/state/history";
+import { talents } from "../../data/talents";
 
 export function Event(props: {
-	event: HistoryStep;
+	event: HistoryEvent;
 	remove: () => void;
 }): JSX.Element {
 	switch (props.event.type) {
@@ -16,6 +17,16 @@ export function Event(props: {
 						remove={props.event.locked ? undefined : props.remove}
 					/>
 					<div className="content">{skills[props.event.skill].name}</div>
+				</div>
+			);
+		case "TalentAdvance":
+			return (
+				<div className="flexcol event">
+					<EventHeader
+						title="Learned Talent"
+						remove={props.event.locked ? undefined : props.remove}
+					/>
+					<div className="content">{talents[props.event.talent].name}</div>
 				</div>
 			);
 		case "StatAdvance":

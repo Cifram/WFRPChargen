@@ -1,14 +1,25 @@
-import { HistoryStatAdvance, HistorySkillAdvance } from "./history";
+import {
+	HistoryStatAdvance,
+	HistorySkillAdvance,
+	HistoryEvent,
+	HistoryTalentAdvance,
+} from "./history";
 import { RaceName, races } from "../../data/races";
-import { CareerName, careers, SkillChoice } from "../../data/careers";
+import {
+	CareerName,
+	careers,
+	SkillChoice,
+	TalentChoice,
+} from "../../data/careers";
 import { StatBlock, PrimaryStatNames, PrimaryStat } from "../../data/stats";
 import { SkillName, SkillMastery } from "../../data/skills";
+import { TalentName } from "../../data/talents";
 
 export interface Character {
 	name: string;
 	race: RaceName;
 	career: CareerName;
-	history: HistoryStep[];
+	history: HistoryEvent[];
 	birthplace: string;
 	age: number;
 	gender: "Male" | "Female";
@@ -18,8 +29,6 @@ export interface Character {
 	shallyasMercy: PrimaryStat | null;
 	uiState: CharacterUiState;
 }
-
-export type HistoryStep = HistoryStatAdvance | HistorySkillAdvance;
 
 export enum CharacterAdvancesPage {
 	Root,
@@ -33,17 +42,17 @@ export interface CharacterUiState {
 	advanceBarState: CharacterAdvancesPage;
 }
 
-export function calcStatBlock(char: Character): StatBlock {
-	let race = races[char.race];
-	let stats = Object.assign({}, char.statRolls);
+export const calcStatBlock = (char: Character): StatBlock => {
+	const race = races[char.race];
+	const stats = Object.assign({}, char.statRolls);
 	if (char.shallyasMercy != null) {
 		stats[char.shallyasMercy] = 11;
 	}
-	for (let statName of PrimaryStatNames) {
-		let stat = <PrimaryStat>statName;
+	for (const statName of PrimaryStatNames) {
+		const stat = <PrimaryStat>statName;
 		stats[stat] += race.baseStats[stat];
 	}
-	for (let event of char.history) {
+	for (const event of char.history) {
 		if (event.type == "StatAdvance") {
 			stats[event.stat] += event.change;
 		}
@@ -52,17 +61,17 @@ export function calcStatBlock(char: Character): StatBlock {
 	stats.TB += Math.floor(stats.T / 10);
 
 	return stats;
-}
+};
 
 export interface OwnedSkill {
 	skill: SkillName;
 	mastery: SkillMastery;
 }
 
-export function getSkillList(char: Character): OwnedSkill[] {
-	let skills: OwnedSkill[] = [];
-	let addSkill = (skill: SkillName) => {
-		let ownedSkill = skills.find((ownedSkill) => ownedSkill.skill === skill);
+export const getSkillList = (char: Character): OwnedSkill[] => {
+	const skills: OwnedSkill[] = [];
+	const addSkill = (skill: SkillName) => {
+		const ownedSkill = skills.find((ownedSkill) => ownedSkill.skill === skill);
 		if (ownedSkill == undefined) {
 			skills.push({ skill: skill, mastery: 0 });
 		} else if (ownedSkill.mastery == 0) {
@@ -76,35 +85,41 @@ export function getSkillList(char: Character): OwnedSkill[] {
 		}
 	};
 
-	for (let event of char.history) {
+	for (const event of char.history) {
 		if (event.type == "SkillAdvance") {
 			addSkill(event.skill);
 		}
 	}
 	return skills;
-}
+};
 
-export function getCurrentCareer(char: Character): CareerName {
+export const getTalentList = (char: Character): TalentName[] => {
+	return char.history
+		.filter(
+			(event): event is HistoryTalentAdvance => event.type == "TalentAdvance"
+		)
+		.map((event) => event.talent);
+};
+
+export const getCurrentCareer = (char: Character): CareerName => {
 	return char.career;
-}
+};
 
-export function getFreeSkillChoices(char: Character): SkillChoice[] {
-	let career = getCurrentCareer(char);
-	let careerSkills = careers[career].skills;
-	let availableSkills: SkillChoice[] = [];
-	let ownedSkills = getSkillList(char);
+export const getFreeSkillChoices = (char: Character): SkillChoice[] => {
+	const career = getCurrentCareer(char);
+	const careerSkills = careers[career].skills;
+	const availableSkills: SkillChoice[] = [];
+	const ownedSkills = getSkillList(char);
 
-	for (let careerSkill of careerSkills) {
+	for (const careerSkill of careerSkills) {
 		if (typeof careerSkill != "string") {
-			var unchosen: SkillName[] = [];
-			for (let skill of careerSkill.skills) {
-				let found = ownedSkills.find((ownedSkill) => ownedSkill.skill == skill);
-				if (found == undefined) {
-					unchosen.push(skill);
-				}
-			}
+			const unchosen = careerSkill.skills.filter(
+				(skill) =>
+					ownedSkills.find((ownedSkill) => ownedSkill.skill == skill) ==
+					undefined
+			);
 
-			var numChosen = careerSkill.skills.length - unchosen.length;
+			const numChosen = careerSkill.skills.length - unchosen.length;
 			if (careerSkill.count > numChosen) {
 				availableSkills.push({
 					skills: unchosen,
@@ -114,24 +129,41 @@ export function getFreeSkillChoices(char: Character): SkillChoice[] {
 		}
 	}
 	return availableSkills;
-}
+};
 
-export function getRequiredSkills(char: Character): SkillName[] {
-	let career = getCurrentCareer(char);
-	let careerSkills = careers[career].skills;
-	let availableSkills: SkillName[] = [];
-	let ownedSkills = getSkillList(char);
+export const getRequiredSkills = (char: Character): SkillName[] => {
+	const career = getCurrentCareer(char);
+	const careerSkills = careers[career].skills;
+	const ownedSkills = getSkillList(char);
 
-	for (let careerSkill of careerSkills) {
-		if (typeof careerSkill == "string") {
-			let found = ownedSkills.find(
-				(ownedSkill) => ownedSkill.skill == careerSkill
+	const availableSkills = careerSkills.filter(
+		(skill): skill is SkillName =>
+			typeof skill == "string" &&
+			ownedSkills.find((ownedSkill) => ownedSkill.skill == skill) == undefined
+	);
+	return availableSkills;
+};
+
+export const getFreeTalentChoices = (char: Character): TalentChoice[] => {
+	const career = getCurrentCareer(char);
+	const careerTalents = careers[career].talents;
+	const availableTalents: TalentChoice[] = [];
+	const ownedTalents = getTalentList(char);
+
+	for (const careerTalent of careerTalents) {
+		if (typeof careerTalent != "string") {
+			const unchosen = careerTalent.talents.filter(
+				(talent) =>
+					ownedTalents.find((ownedTalent) => ownedTalent == talent) == undefined
 			);
-
-			if (found == undefined) {
-				availableSkills.push(careerSkill);
+			const numChosen = careerTalent.talents.length - unchosen.length;
+			if (careerTalent.count > numChosen) {
+				availableTalents.push({
+					talents: unchosen,
+					count: careerTalent.count - numChosen,
+				});
 			}
 		}
 	}
-	return availableSkills;
-}
+	return availableTalents;
+};

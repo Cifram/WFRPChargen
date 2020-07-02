@@ -1,12 +1,15 @@
 import { RaceName, races } from "./data/races";
-import {
-	Character,
-	HistoryStep,
-	CharacterAdvancesPage,
-} from "./store/state/character";
+import { Character, CharacterAdvancesPage } from "./store/state/character";
 import { d10, d100, d1000 } from "./dice";
 import { StatBlock } from "./data/stats";
 import { careers } from "./data/careers";
+import {
+	HistoryEvent,
+	HistorySkillAdvance,
+	HistoryTalentAdvance,
+} from "./store/state/history";
+import { SkillName } from "./data/skills";
+import { TalentName } from "./data/talents";
 
 export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 	const rolls: StatBlock = {
@@ -28,16 +31,26 @@ export function generate(race: RaceName, gender: "Male" | "Female"): Character {
 		FP: races[race].baseFatePointTable[d10() - 1],
 	};
 	const career = races[race].careerTable[d1000() - 1];
-	let history: HistoryStep[] = [];
-	for (let careerSkill of careers[career].skills) {
-		if (typeof careerSkill == "string") {
-			history.push({
-				type: "SkillAdvance",
-				skill: careerSkill,
-				locked: true,
-			});
-		}
-	}
+	const history: HistoryEvent[] = [
+		...careers[career].skills
+			.filter((skill): skill is SkillName => typeof skill == "string")
+			.map(
+				(skill): HistorySkillAdvance => ({
+					type: "SkillAdvance",
+					skill: skill,
+					locked: true,
+				})
+			),
+		...careers[career].talents
+			.filter((talent): talent is TalentName => typeof talent == "string")
+			.map(
+				(talent): HistoryTalentAdvance => ({
+					type: "TalentAdvance",
+					talent: talent,
+					locked: true,
+				})
+			),
+	];
 	return {
 		name: "Foo Barson",
 		race: race,
