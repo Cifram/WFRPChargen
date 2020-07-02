@@ -16,7 +16,7 @@ const connector = connect(mapState);
 
 interface Props extends ConnectedProps<typeof connector> {}
 
-export let App = connector((props: Props) => (
+export const App = connector((props: Props) => (
 	<div className="flexrow app">
 		<Sidebar />
 		{props.char != null ? (

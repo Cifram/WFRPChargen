@@ -9,9 +9,9 @@ interface Props {
 }
 
 export const CharacterList = (props: Props) => {
-	let characters: JSX.Element[] = [];
+	const characters: JSX.Element[] = [];
 	for (let i = 0; i < props.characters.length; i++) {
-		let char = props.characters[i];
+		const char = props.characters[i];
 		characters.push(
 			<CharacterListItem
 				charIndex={i}

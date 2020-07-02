@@ -7,11 +7,11 @@ import {
 import { skills } from "../../data/skills";
 
 export function SkillsSection(props: { char: Character }) {
-	let ownedSkills = getSkillList(props.char);
-	let stats = calcStatBlock(props.char);
-	let skillList = [];
-	for (let ownedSkill of ownedSkills) {
-		let skill = skills[ownedSkill.skill];
+	const ownedSkills = getSkillList(props.char);
+	const stats = calcStatBlock(props.char);
+	const skillList: JSX.Element[] = [];
+	for (const ownedSkill of ownedSkills) {
+		const skill = skills[ownedSkill.skill];
 		let stat = skill.characteristic;
 		let statValue = stats[stat];
 		if (ownedSkill.mastery == 1) {

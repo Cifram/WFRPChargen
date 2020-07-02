@@ -11,8 +11,8 @@ export function d1000(): number {
 }
 
 export function initDieTable<T>(...elements: [number, T][]): T[] {
-	let table: T[] = [];
-	for (let elem of elements) {
+	const table: T[] = [];
+	for (const elem of elements) {
 		if (elem[0] <= table.length) {
 			throw (
 				"Die table initialization: Initialization element up to " +

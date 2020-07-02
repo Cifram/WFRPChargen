@@ -9,7 +9,7 @@ export const ShallyasMercyAdvance = (props: {
 	applyShallyasMercy: (stat: PrimaryStat) => void;
 }) => {
 	if (props.char.shallyasMercy == null) {
-		let shallyasMercyStats = PrimaryStatNames.filter(
+		const shallyasMercyStats = PrimaryStatNames.filter(
 			(stat) => props.char.statRolls[stat] < 11
 		).map((stat) => (
 			<div

@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { rootReducer } from "./store/reducers/rootReducer";
 
-let store = createStore(rootReducer);
+const store = createStore(rootReducer);
 
 function tick() {
 	ReactDOM.render(

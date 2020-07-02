@@ -1,7 +1,9 @@
 const { app, BrowserWindow } = require("electron");
 
 // Check for dev mode
-let isDev = process.env.APP_DEV ? process.env.APP_DEV.trim() == "true" : false;
+const isDev = process.env.APP_DEV
+	? process.env.APP_DEV.trim() == "true"
+	: false;
 
 function createWindow() {
 	// Create the browser window.

@@ -35,7 +35,7 @@ interface Props extends ConnectedProps<typeof connector> {
 
 export const History = connector((props: Props) => {
 	let eventIndex = -1;
-	let history = props.char.history.map((event) => {
+	const history = props.char.history.map((event) => {
 		eventIndex++;
 		return (
 			<Event

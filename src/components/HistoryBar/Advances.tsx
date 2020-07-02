@@ -30,7 +30,7 @@ export const Advances = (props: {
 			/>
 		);
 	} else {
-		var page = props.char.uiState.advanceBarState;
+		const page = props.char.uiState.advanceBarState;
 		return (
 			<>
 				<div

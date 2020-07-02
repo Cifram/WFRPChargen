@@ -6,7 +6,7 @@ export interface Skill {
 	characteristic: PrimaryStat;
 }
 
-let MakeSkill = (skill: Skill) => skill;
+const MakeSkill = (skill: Skill) => skill;
 
 export const skills = {
 	"Academic Knowledge (Arts)": MakeSkill({

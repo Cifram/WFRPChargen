@@ -16,7 +16,7 @@ export const FreeAdvancesPage = (props: {
 	) => ApplyShallyasMercyAction;
 	gainSkill: (charIndex: number, skill: SkillName) => GainSkillAction;
 }) => {
-	var choices = getFreeSkillChoices(props.char).map((choice) => (
+	const choices = getFreeSkillChoices(props.char).map((choice) => (
 		<SkillChoiceAdvance
 			choice={choice}
 			charIndex={props.charIndex}

@@ -17,10 +17,10 @@ export interface Race {
 	ageStep: number;
 }
 
-let MakeRace = (race: Race) => race;
+const MakeRace = (race: Race) => race;
 
-let GetHumanBirthplace = () => {
-	let place = [
+const GetHumanBirthplace = () => {
+	const place = [
 		"Averland",
 		"Hochland",
 		"Middenland",
@@ -32,7 +32,7 @@ let GetHumanBirthplace = () => {
 		"Talabecland",
 		"Wissenland",
 	][d10() - 1];
-	let type = [
+	const type = [
 		"City",
 		"Prosperous Town",
 		"Market Town",
@@ -46,7 +46,7 @@ let GetHumanBirthplace = () => {
 	][d10() - 1];
 	return `${type} in ${place}`;
 };
-let GetElfBirthplace = () =>
+const GetElfBirthplace = () =>
 	initDieTable<string>(
 		[20, "City of Altdorf"],
 		[40, "City of Marienburg"],
@@ -54,11 +54,11 @@ let GetElfBirthplace = () =>
 		[85, "The Great Forest"],
 		[100, "Reikwald Forest"]
 	)[d100() - 1];
-let GetHalflingBirthplace = () =>
+const GetHalflingBirthplace = () =>
 	initDieTable<string>([50, GetHumanBirthplace()], [100, "the Moot"])[
 		d100() - 1
 	];
-let GetDwarfBirthplace = () =>
+const GetDwarfBirthplace = () =>
 	initDieTable<string>(
 		[30, GetHumanBirthplace()],
 		[40, "Karak Norn (Grey Mountains)"],

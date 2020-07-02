@@ -11,7 +11,7 @@ export function charactersReducer(
 			return [...state, action.char];
 		default:
 			if ("charIndex" in action) {
-				let newChar = characterReducer(state[action.charIndex], action);
+				const newChar = characterReducer(state[action.charIndex], action);
 				if (state[action.charIndex] != newChar) {
 					return state.map((char, index) =>
 						index == action.charIndex ? newChar : char

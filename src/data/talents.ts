@@ -13,7 +13,7 @@ export interface Talent {
 	skillBonus: { skill: SkillName; bonus: number; condition: string | null }[];
 }
 
-let MakeTalent = (talent: Talent) => talent;
+const MakeTalent = (talent: Talent) => talent;
 
 export const talents = {
 	"Acute Hearing": MakeTalent({

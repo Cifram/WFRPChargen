@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const CharacterListItem = (props: Props) => {
-	let className = "flexcol listItem" + (props.selected ? " selected" : "");
+	const className = "flexcol listItem" + (props.selected ? " selected" : "");
 	return (
 		<div
 			className={className}

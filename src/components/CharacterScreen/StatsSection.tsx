@@ -2,7 +2,7 @@ import * as React from "react";
 import { Character, calcStatBlock } from "../../store/state/character";
 
 export function StatsSection(props: { char: Character }) {
-	let stats = calcStatBlock(props.char);
+	const stats = calcStatBlock(props.char);
 	return (
 		<div className="flexcol block">
 			<div className="header">CHARACTER PROFILE</div>
