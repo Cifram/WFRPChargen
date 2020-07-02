@@ -5,6 +5,7 @@ import { SelectCharacterAction } from "./SelectCharacter";
 import { GainSkillAction } from "./GainSkill";
 import { RemoveShallyasMercyAction } from "./RemoveShallyasMercy";
 import { RemoveEventAction } from "./RemoveEvent";
+import { GainTalentAction } from "./GainTalent";
 
 export type Action =
 	| AddCharacterAction
@@ -13,4 +14,5 @@ export type Action =
 	| RemoveShallyasMercyAction
 	| SelectCharacterAction
 	| GainSkillAction
+	| GainTalentAction
 	| RemoveEventAction;

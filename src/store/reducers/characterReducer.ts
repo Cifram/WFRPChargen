@@ -29,6 +29,18 @@ export function characterReducer(state: Character, action: Action): Character {
 					{ type: "SkillAdvance", skill: action.skill, locked: action.locked },
 				],
 			};
+		case "GAIN_TALENT":
+			return {
+				...state,
+				history: [
+					...state.history,
+					{
+						type: "TalentAdvance",
+						talent: action.talent,
+						locked: action.locked,
+					},
+				],
+			};
 		case "REMOVE_EVENT":
 			return {
 				...state,

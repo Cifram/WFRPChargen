@@ -7,6 +7,8 @@ import { FreeAdvancesPage } from "./FreeAdvancesPage";
 import { PrimaryStat } from "../../data/stats";
 import { SkillName } from "../../data/skills";
 import { GainSkillAction } from "../../store/actions/GainSkill";
+import { TalentName } from "../../data/talents";
+import { GainTalentAction } from "../../store/actions/GainTalent";
 
 export const Advances = (props: {
 	char: Character;
@@ -20,6 +22,7 @@ export const Advances = (props: {
 		section: CharacterAdvancesPage
 	) => ChangeAdvancesPageAction;
 	gainSkill: (charIndex: number, skill: SkillName) => GainSkillAction;
+	gainTalent: (charIndex: number, talent: TalentName) => GainTalentAction;
 }) => {
 	const uiState = props.char.uiState.advanceBarState;
 	if (uiState == CharacterAdvancesPage.Root) {
@@ -58,6 +61,7 @@ export const Advances = (props: {
 							charIndex={props.charIndex}
 							applyShallyasMercy={props.applyShallyasMercy}
 							gainSkill={props.gainSkill}
+							gainTalent={props.gainTalent}
 						/>
 					) : null}
 				</div>
