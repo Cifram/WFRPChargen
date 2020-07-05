@@ -1,9 +1,4 @@
-import {
-	HistoryStatAdvance,
-	HistorySkillAdvance,
-	HistoryEvent,
-	HistoryTalentAdvance,
-} from "./history";
+import { HistoryEvent, HistoryTalentAdvance } from "./history";
 import { RaceName, races } from "../../data/races";
 import {
 	CareerName,
@@ -11,9 +6,10 @@ import {
 	SkillChoice,
 	TalentChoice,
 } from "../../data/careers";
-import { StatBlock, PrimaryStatNames, PrimaryStat } from "../../data/stats";
+import { StatBlock, PrimaryStat, PrimaryStatList } from "../../data/stats";
 import { SkillName, SkillMastery } from "../../data/skills";
 import { TalentName, talents } from "../../data/talents";
+import { Stat } from "../../data/stats";
 
 export interface Character {
 	name: string;
@@ -42,37 +38,107 @@ export interface CharacterUiState {
 	advanceBarState: CharacterAdvancesPage;
 }
 
-export const calcStatBlock = (char: Character): StatBlock => {
-	const race = races[char.race];
-	const stats = Object.assign({}, char.statRolls);
-	if (char.shallyasMercy != null) {
-		stats[char.shallyasMercy] = 11;
-	}
-	for (const statName of PrimaryStatNames) {
-		const stat = <PrimaryStat>statName;
-		stats[stat] += race.baseStats[stat];
-	}
-	for (const event of char.history) {
-		if (event.type == "StatAdvance") {
-			stats[event.stat] += event.change;
-		}
-	}
-	stats.SB += Math.floor(stats.S / 10);
-	stats.TB += Math.floor(stats.T / 10);
-
-	return stats;
-};
-
-export interface SkillBonus {
+export interface BonusDescriptor {
 	bonus: number;
 	desc: string;
 }
 
+export interface StatData {
+	total: number;
+	racial: number;
+	roll: number;
+	shallyasMercy: boolean;
+	bonuses: BonusDescriptor[];
+	sitBonuses: BonusDescriptor[];
+}
+
+export type StatBlockWithBonuses = {
+	[K in Stat]: StatData;
+};
+
+export const bonusDescStr = (bonuses: BonusDescriptor[]) =>
+	bonuses
+		.map(
+			(bonus) =>
+				`  ${bonus.bonus >= 0 ? "+" : ""}${bonus.bonus} - ${bonus.desc}\n`
+		)
+		.join("");
+
+export const calcStatBlock = (char: Character): StatBlockWithBonuses => {
+	const race = races[char.race];
+	const baseStat = (stat: Stat) => {
+		const racial =
+			stat in PrimaryStatList ? race.baseStats[stat as PrimaryStat] : 0;
+		const roll = char.statRolls[stat];
+		const total = racial + (char.shallyasMercy == stat ? 11 : roll);
+		return {
+			racial: racial,
+			roll: roll,
+			total: total,
+			shallyasMercy: char.shallyasMercy == stat,
+			bonuses: [],
+			sitBonuses: [],
+		};
+	};
+	const stats: StatBlockWithBonuses = {
+		WS: baseStat("WS"),
+		BS: baseStat("BS"),
+		S: baseStat("S"),
+		T: baseStat("T"),
+		Ag: baseStat("Ag"),
+		Int: baseStat("Int"),
+		WP: baseStat("WP"),
+		Fel: baseStat("Fel"),
+		A: baseStat("A"),
+		W: baseStat("W"),
+		SB: baseStat("SB"),
+		TB: baseStat("TB"),
+		MV: baseStat("MV"),
+		Mag: baseStat("Mag"),
+		IP: baseStat("IP"),
+		FP: baseStat("FP"),
+	};
+	for (const event of char.history) {
+		if (event.type == "StatAdvance") {
+			stats[event.stat].bonuses.push({ bonus: event.change, desc: "advance" });
+			stats[event.stat].total += event.change;
+		} else if (event.type == "TalentAdvance") {
+			const talent = talents[event.talent];
+			for (const statBonus of talent.statBonus) {
+				if (statBonus.condition == null) {
+					stats[statBonus.stat].bonuses.push({
+						bonus: statBonus.bonus,
+						desc: talent.name,
+					});
+					stats[statBonus.stat].total += statBonus.bonus;
+				} else {
+					stats[statBonus.stat].sitBonuses.push({
+						bonus: statBonus.bonus,
+						desc: `${statBonus.condition} (${talent.name})`,
+					});
+				}
+			}
+		}
+	}
+	stats.TB.total += Math.floor(stats.T.total / 10);
+	stats.TB.bonuses.unshift({
+		bonus: Math.floor(stats.T.total / 10),
+		desc: "Toughness / 10",
+	});
+	stats.SB.total += Math.floor(stats.S.total / 10);
+	stats.SB.bonuses.unshift({
+		bonus: Math.floor(stats.S.total / 10),
+		desc: "Strength / 10",
+	});
+
+	return stats;
+};
+
 export interface OwnedSkill {
 	skill: SkillName;
 	mastery: SkillMastery;
-	bonuses: SkillBonus[];
-	sitBonuses: SkillBonus[];
+	bonuses: BonusDescriptor[];
+	sitBonuses: BonusDescriptor[];
 }
 
 export const getSkillList = (char: Character): OwnedSkill[] => {
@@ -81,8 +147,8 @@ export const getSkillList = (char: Character): OwnedSkill[] => {
 	const addSkill = (skill: SkillName) => {
 		const ownedSkill = skills.find((ownedSkill) => ownedSkill.skill === skill);
 		if (ownedSkill == undefined) {
-			const bonuses: SkillBonus[] = [];
-			const sitBonuses: SkillBonus[] = [];
+			const bonuses: BonusDescriptor[] = [];
+			const sitBonuses: BonusDescriptor[] = [];
 			for (const talent of ownedTalents) {
 				for (const bonus of talents[talent].skillBonus) {
 					if (bonus.skill == skill) {

@@ -3,8 +3,10 @@ import {
 	Character,
 	getSkillList,
 	calcStatBlock,
+	bonusDescStr,
 } from "../../store/state/character";
 import { skills } from "../../data/skills";
+import { StatFullNames } from "../../data/stats";
 
 export function SkillsSection(props: { char: Character }) {
 	const ownedSkills = getSkillList(props.char);
@@ -13,37 +15,29 @@ export function SkillsSection(props: { char: Character }) {
 	for (const ownedSkill of ownedSkills) {
 		const skill = skills[ownedSkill.skill];
 		let stat = skill.characteristic;
-		let statValue = stats[stat];
+		let statData = stats[stat];
 		let totalBonus = ownedSkill.bonuses.reduce(
 			(total, bonus) => total + bonus.bonus,
 			0
 		);
 
-		let bonusStr = ownedSkill.bonuses
-			.map(
-				(bonus) =>
-					`\n  ${bonus.bonus >= 0 ? "+" : ""}${bonus.bonus} - ${bonus.desc}`
-			)
-			.join();
-
-		let sitBonusStr = ownedSkill.sitBonuses
-			.map(
-				(bonus) =>
-					`\n  ${bonus.bonus >= 0 ? "+" : ""}${bonus.bonus} - ${bonus.desc}`
-			)
-			.join();
-
-		let tooltip = `${skill.name}\n  +${statValue} - ${stat}${bonusStr}\n${
-			statValue + totalBonus
-		} total\n\nSituational bonuses:${sitBonusStr}`;
-
+		let tooltip =
+			`${skill.name}\n` +
+			bonusDescStr([
+				{ bonus: statData.total, desc: StatFullNames[stat] },
+				...ownedSkill.bonuses,
+			]) +
+			`${statData.total + totalBonus} total` +
+			(ownedSkill.sitBonuses.length > 0
+				? `\n\nSituational bonuses:\n` + bonusDescStr(ownedSkill.sitBonuses)
+				: "");
 		skillList.push(
 			<div className="flexrow" title={tooltip} key={skill.name}>
 				<div>{skill.name}</div>
 				<div className="stat">
 					{stat}
 					{totalBonus != 0 ? `${totalBonus > 0 ? "+" : ""}${totalBonus}` : ""} (
-					{statValue + totalBonus})
+					{statData.total + totalBonus})
 				</div>
 			</div>
 		);
