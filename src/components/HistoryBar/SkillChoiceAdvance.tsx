@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SkillChoice } from "../../data/careers";
-import { SkillName } from "../../data/skills";
+import { SkillName, skills } from "../../data/skills";
 import { GainSkillAction } from "../../store/actions/GainSkill";
 
 export const SkillChoiceAdvance = (props: {
@@ -16,9 +16,10 @@ export const SkillChoiceAdvance = (props: {
 			<div
 				className="button"
 				onClick={() => props.gainSkill(props.charIndex, skill)}
+				title={`${skills[skill].type} skill, based on ${skills[skill].characteristic}`}
 				key={skill}
 			>
-				{skill}
+				{skills[skill].name}
 			</div>
 		))}
 	</div>

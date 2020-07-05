@@ -14,18 +14,36 @@ export function SkillsSection(props: { char: Character }) {
 		const skill = skills[ownedSkill.skill];
 		let stat = skill.characteristic;
 		let statValue = stats[stat];
-		if (ownedSkill.mastery == 1) {
-			stat += " +10";
-			statValue += 10;
-		} else if (ownedSkill.mastery == 2) {
-			stat += " +20";
-			statValue += 20;
-		}
+		let totalBonus = ownedSkill.bonuses.reduce(
+			(total, bonus) => total + bonus.bonus,
+			0
+		);
+
+		let bonusStr = ownedSkill.bonuses
+			.map(
+				(bonus) =>
+					`\n  ${bonus.bonus >= 0 ? "+" : ""}${bonus.bonus} - ${bonus.desc}`
+			)
+			.join();
+
+		let sitBonusStr = ownedSkill.sitBonuses
+			.map(
+				(bonus) =>
+					`\n  ${bonus.bonus >= 0 ? "+" : ""}${bonus.bonus} - ${bonus.desc}`
+			)
+			.join();
+
+		let tooltip = `${skill.name}\n  +${statValue} - ${stat}${bonusStr}\n${
+			statValue + totalBonus
+		} total\n\nSituational bonuses:${sitBonusStr}`;
+
 		skillList.push(
-			<div className="flexrow" key={skill.name}>
+			<div className="flexrow" title={tooltip} key={skill.name}>
 				<div>{skill.name}</div>
 				<div className="stat">
-					{stat} ({statValue})
+					{stat}
+					{totalBonus != 0 ? `${totalBonus > 0 ? "+" : ""}${totalBonus}` : ""} (
+					{statValue + totalBonus})
 				</div>
 			</div>
 		);

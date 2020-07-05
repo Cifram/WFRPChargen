@@ -13,7 +13,7 @@ import {
 } from "../../data/careers";
 import { StatBlock, PrimaryStatNames, PrimaryStat } from "../../data/stats";
 import { SkillName, SkillMastery } from "../../data/skills";
-import { TalentName } from "../../data/talents";
+import { TalentName, talents } from "../../data/talents";
 
 export interface Character {
 	name: string;
@@ -63,17 +63,46 @@ export const calcStatBlock = (char: Character): StatBlock => {
 	return stats;
 };
 
+export interface SkillBonus {
+	bonus: number;
+	desc: string;
+}
+
 export interface OwnedSkill {
 	skill: SkillName;
 	mastery: SkillMastery;
+	bonuses: SkillBonus[];
+	sitBonuses: SkillBonus[];
 }
 
 export const getSkillList = (char: Character): OwnedSkill[] => {
+	const ownedTalents = getTalentList(char);
 	const skills: OwnedSkill[] = [];
 	const addSkill = (skill: SkillName) => {
 		const ownedSkill = skills.find((ownedSkill) => ownedSkill.skill === skill);
 		if (ownedSkill == undefined) {
-			skills.push({ skill: skill, mastery: 0 });
+			const bonuses: SkillBonus[] = [];
+			const sitBonuses: SkillBonus[] = [];
+			for (const talent of ownedTalents) {
+				for (const bonus of talents[talent].skillBonus) {
+					if (bonus.skill == skill) {
+						if (bonus.condition == null) {
+							bonuses.push({ bonus: bonus.bonus, desc: talents[talent].name });
+						} else {
+							sitBonuses.push({
+								bonus: bonus.bonus,
+								desc: `${bonus.condition} (from ${talents[talent].name})`,
+							});
+						}
+					}
+				}
+			}
+			skills.push({
+				skill: skill,
+				mastery: 0,
+				bonuses: bonuses,
+				sitBonuses: sitBonuses,
+			});
 		} else if (ownedSkill.mastery == 0) {
 			ownedSkill.mastery = 1;
 		} else if (ownedSkill.mastery == 1) {
@@ -88,6 +117,13 @@ export const getSkillList = (char: Character): OwnedSkill[] => {
 	for (const event of char.history) {
 		if (event.type == "SkillAdvance") {
 			addSkill(event.skill);
+		}
+	}
+	for (const ownedSkill of skills) {
+		if (ownedSkill.mastery == 1) {
+			ownedSkill.bonuses.push({ bonus: 10, desc: "learned twice" });
+		} else if (ownedSkill.mastery == 2) {
+			ownedSkill.bonuses.push({ bonus: 20, desc: "learned thrice" });
 		}
 	}
 	return skills;
