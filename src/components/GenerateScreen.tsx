@@ -1,20 +1,29 @@
 import * as React from "react";
 import { generate } from "../generate";
 import { RaceName } from "../data/races";
-import { addCharacter } from "../store/actions/addChracter";
+import { addCharacter } from "../store/actions/AddChracter";
+import { selectCharacter } from "../store/actions/SelectCharacter";
 import { connect, ConnectedProps } from "react-redux";
+import { State } from "../store/state/state";
+
+const mapState = (state: State) => ({
+	charCount: state.characters.length,
+});
 
 const mapDispatch = {
 	addCharacter,
+	selectCharacter,
 };
 
-const connector = connect(undefined, mapDispatch);
+const connector = connect(mapState, mapDispatch);
 
 interface Props extends ConnectedProps<typeof connector> {}
 
 export const GenerateScreen = connector((props: Props) => {
-	const makeOnClick = (race: RaceName, gender: "Male" | "Female") => () =>
+	const makeOnClick = (race: RaceName, gender: "Male" | "Female") => () => {
 		props.addCharacter(generate(race, gender));
+		props.selectCharacter(props.charCount);
+	};
 	return (
 		<div className="flexrow generateScreen">
 			<div className="flexcol group">
