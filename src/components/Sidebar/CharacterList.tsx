@@ -22,6 +22,5 @@ export const CharacterList = (props: Props) => {
 			/>
 		);
 	}
-	console.log("Num characters " + props.characters.length);
 	return <div className="flexcol">{characters}</div>;
 };
