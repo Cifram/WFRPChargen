@@ -41,6 +41,18 @@ export function characterReducer(state: Character, action: Action): Character {
 					},
 				],
 			};
+		case "ADVANCE_STAT":
+			return {
+				...state,
+				history: [
+					...state.history,
+					{
+						type: "StatAdvance",
+						stat: action.stat,
+						change: action.amount,
+					},
+				],
+			};
 		case "REMOVE_EVENT":
 			return {
 				...state,

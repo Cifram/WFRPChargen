@@ -5,7 +5,6 @@ import { races } from "../../data/races";
 
 export const ShallyasMercyAdvance = (props: {
 	char: Character;
-	charIndex: number;
 	applyShallyasMercy: (stat: PrimaryStat) => void;
 }) => {
 	if (props.char.shallyasMercy == null) {

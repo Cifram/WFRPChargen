@@ -3,6 +3,7 @@ import { skills } from "../../data/skills";
 import { EventHeader } from "./EventHeader";
 import { HistoryEvent } from "../../store/state/history";
 import { talents } from "../../data/talents";
+import { StatFullNames } from "../../data/stats";
 
 export function Event(props: {
 	event: HistoryEvent;
@@ -32,9 +33,9 @@ export function Event(props: {
 		case "StatAdvance":
 			return (
 				<div className="flexcol event">
-					<EventHeader title="Improved Characteristic" />
+					<EventHeader title="Improved Characteristic" remove={props.remove} />
 					<div className="content">
-						{props.event.stat} +{props.event.change}
+						{StatFullNames[props.event.stat]} +{props.event.change}
 					</div>
 				</div>
 			);

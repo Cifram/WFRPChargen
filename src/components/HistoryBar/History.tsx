@@ -8,6 +8,7 @@ import { changeAdvancesPage } from "../../store/actions/ChangeAdvancesPage";
 import { gainSkill } from "../../store/actions/GainSkill";
 import { gainTalent } from "../../store/actions/GainTalent";
 import { removeEvent } from "../../store/actions/RemoveEvent";
+import { advanceStat } from "../../store/actions/AdvanceStat";
 import { ConnectedProps, connect } from "react-redux";
 import { State } from "../../store/state/state";
 import { ShallyasMercyEvent } from "./ShallyasMercyEvent";
@@ -28,6 +29,7 @@ const mapDispatch = {
 	gainSkill,
 	gainTalent,
 	removeEvent,
+	advanceStat,
 };
 
 const connector = connect(mapState, mapDispatch);
@@ -68,14 +70,18 @@ export const History = connector((props: Props) => {
 			<div className="advancesSection flexcol">
 				<Advances
 					char={props.char}
-					charIndex={props.charIndex}
-					applyShallyasMercy={props.applyShallyasMercy}
-					changeAdvancesPage={props.changeAdvancesPage}
-					gainSkill={(charIndex, skill) =>
-						props.gainSkill(charIndex, skill, false)
+					applyShallyasMercy={(stat) =>
+						props.applyShallyasMercy(props.charIndex, stat)
 					}
-					gainTalent={(charIndex, talent) =>
-						props.gainTalent(charIndex, talent, false)
+					changeAdvancesPage={(section) =>
+						props.changeAdvancesPage(props.charIndex, section)
+					}
+					gainSkill={(skill) => props.gainSkill(props.charIndex, skill, false)}
+					gainTalent={(talent) =>
+						props.gainTalent(props.charIndex, talent, false)
+					}
+					advanceStat={(stat, amount) =>
+						props.advanceStat(props.charIndex, stat, amount)
 					}
 				/>
 			</div>

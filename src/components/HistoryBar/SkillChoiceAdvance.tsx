@@ -5,8 +5,7 @@ import { GainSkillAction } from "../../store/actions/GainSkill";
 
 export const SkillChoiceAdvance = (props: {
 	choice: SkillChoice;
-	charIndex: number;
-	gainSkill: (charIndex: number, skill: SkillName) => GainSkillAction;
+	gainSkill: (skill: SkillName) => GainSkillAction;
 }) => (
 	<div className="flexcol event">
 		<div className="title">
@@ -15,7 +14,7 @@ export const SkillChoiceAdvance = (props: {
 		{props.choice.skills.map((skill) => (
 			<div
 				className="button"
-				onClick={() => props.gainSkill(props.charIndex, skill)}
+				onClick={() => props.gainSkill(skill)}
 				title={`${skills[skill].type} skill, based on ${skills[skill].characteristic}`}
 				key={skill}
 			>

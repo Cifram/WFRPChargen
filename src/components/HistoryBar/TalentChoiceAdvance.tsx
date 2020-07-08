@@ -5,8 +5,7 @@ import { GainTalentAction } from "../../store/actions/GainTalent";
 
 export const TalentChoiceAdvance = (props: {
 	choice: TalentChoice;
-	charIndex: number;
-	gainTalent: (charIndex: number, talent: TalentName) => GainTalentAction;
+	gainTalent: (talent: TalentName) => GainTalentAction;
 }) => (
 	<div className="flexcol event">
 		<div className="title">
@@ -15,7 +14,7 @@ export const TalentChoiceAdvance = (props: {
 		{props.choice.talents.map((talent) => (
 			<div
 				className="button"
-				onClick={() => props.gainTalent(props.charIndex, talent)}
+				onClick={() => props.gainTalent(talent)}
 				title={talents[talent].description}
 				key={talent}
 			>

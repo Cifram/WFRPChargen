@@ -5,7 +5,7 @@ import {
 	getFreeSkillChoices,
 	getFreeTalentChoices,
 } from "../../store/state/character";
-import { PrimaryStat } from "../../data/stats";
+import { PrimaryStat, Stat } from "../../data/stats";
 import { ApplyShallyasMercyAction } from "../../store/actions/ApplyShallyasMercy";
 import { SkillChoiceAdvance } from "./SkillChoiceAdvance";
 import { SkillName } from "../../data/skills";
@@ -13,22 +13,20 @@ import { GainSkillAction } from "../../store/actions/GainSkill";
 import { TalentChoiceAdvance } from "./TalentChoiceAdvance";
 import { GainTalentAction } from "../../store/actions/GainTalent";
 import { TalentName } from "../../data/talents";
+import { StatAdvance } from "./StatAdvance";
+import { AdvanceStat } from "../../store/actions/AdvanceStat";
 
 export const FreeAdvancesPage = (props: {
 	char: Character;
-	charIndex: number;
-	applyShallyasMercy: (
-		charIndex: number,
-		stat: PrimaryStat
-	) => ApplyShallyasMercyAction;
-	gainSkill: (charIndex: number, skill: SkillName) => GainSkillAction;
-	gainTalent: (charIndex: number, talent: TalentName) => GainTalentAction;
+	applyShallyasMercy: (stat: PrimaryStat) => ApplyShallyasMercyAction;
+	gainSkill: (skill: SkillName) => GainSkillAction;
+	gainTalent: (talent: TalentName) => GainTalentAction;
+	advanceStat: (stat: Stat, amount: number) => AdvanceStat;
 }) => {
 	const choices = [
 		...getFreeSkillChoices(props.char).map((choice) => (
 			<SkillChoiceAdvance
 				choice={choice}
-				charIndex={props.charIndex}
 				key={choice.skills[0]}
 				gainSkill={props.gainSkill}
 			/>
@@ -36,7 +34,6 @@ export const FreeAdvancesPage = (props: {
 		...getFreeTalentChoices(props.char).map((choice) => (
 			<TalentChoiceAdvance
 				choice={choice}
-				charIndex={props.charIndex}
 				key={choice.talents[0]}
 				gainTalent={props.gainTalent}
 			/>
@@ -46,11 +43,14 @@ export const FreeAdvancesPage = (props: {
 		<>
 			<ShallyasMercyAdvance
 				char={props.char}
-				charIndex={props.charIndex}
-				applyShallyasMercy={(stat) =>
-					props.applyShallyasMercy(props.charIndex, stat)
-				}
+				applyShallyasMercy={props.applyShallyasMercy}
 			/>
+			{props.char.history.find((event) => event.type == "StatAdvance") ==
+			undefined ? (
+				<StatAdvance char={props.char} advanceStat={props.advanceStat} />
+			) : (
+				<></>
+			)}
 			{choices}
 		</>
 	);

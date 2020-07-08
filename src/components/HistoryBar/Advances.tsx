@@ -4,46 +4,33 @@ import { ApplyShallyasMercyAction } from "../../store/actions/ApplyShallyasMercy
 import { ChangeAdvancesPageAction } from "../../store/actions/ChangeAdvancesPage";
 import { AdvancesPageSelection } from "./AdvancesPageSelection";
 import { FreeAdvancesPage } from "./FreeAdvancesPage";
-import { PrimaryStat } from "../../data/stats";
+import { PrimaryStat, Stat } from "../../data/stats";
 import { SkillName } from "../../data/skills";
 import { GainSkillAction } from "../../store/actions/GainSkill";
 import { TalentName } from "../../data/talents";
 import { GainTalentAction } from "../../store/actions/GainTalent";
+import { AdvanceStat } from "../../store/actions/AdvanceStat";
 
 export const Advances = (props: {
 	char: Character;
-	charIndex: number;
-	applyShallyasMercy: (
-		charIndex: number,
-		stat: PrimaryStat
-	) => ApplyShallyasMercyAction;
+	applyShallyasMercy: (stat: PrimaryStat) => ApplyShallyasMercyAction;
 	changeAdvancesPage: (
-		charIndex: number,
 		section: CharacterAdvancesPage
 	) => ChangeAdvancesPageAction;
-	gainSkill: (charIndex: number, skill: SkillName) => GainSkillAction;
-	gainTalent: (charIndex: number, talent: TalentName) => GainTalentAction;
+	gainSkill: (skill: SkillName) => GainSkillAction;
+	gainTalent: (talent: TalentName) => GainTalentAction;
+	advanceStat: (stat: Stat, amount: number) => AdvanceStat;
 }) => {
 	const uiState = props.char.uiState.advanceBarState;
 	if (uiState == CharacterAdvancesPage.Root) {
-		return (
-			<AdvancesPageSelection
-				changePage={props.changeAdvancesPage}
-				index={props.charIndex}
-			/>
-		);
+		return <AdvancesPageSelection changePage={props.changeAdvancesPage} />;
 	} else {
 		const page = props.char.uiState.advanceBarState;
 		return (
 			<>
 				<div
 					className="flexrow subheader"
-					onClick={() =>
-						props.changeAdvancesPage(
-							props.charIndex,
-							CharacterAdvancesPage.Root
-						)
-					}
+					onClick={() => props.changeAdvancesPage(CharacterAdvancesPage.Root)}
 				>
 					←{" "}
 					{page == CharacterAdvancesPage.FreeAdvances
@@ -58,10 +45,10 @@ export const Advances = (props: {
 					{uiState == CharacterAdvancesPage.FreeAdvances ? (
 						<FreeAdvancesPage
 							char={props.char}
-							charIndex={props.charIndex}
 							applyShallyasMercy={props.applyShallyasMercy}
 							gainSkill={props.gainSkill}
 							gainTalent={props.gainTalent}
+							advanceStat={props.advanceStat}
 						/>
 					) : null}
 				</div>

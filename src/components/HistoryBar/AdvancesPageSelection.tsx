@@ -3,42 +3,30 @@ import { CharacterAdvancesPage } from "../../store/state/character";
 import { ChangeAdvancesPageAction } from "../../store/actions/ChangeAdvancesPage";
 
 export const AdvancesPageSelection = (props: {
-	changePage: (
-		charIndex: number,
-		section: CharacterAdvancesPage
-	) => ChangeAdvancesPageAction;
-	index: number;
+	changePage: (section: CharacterAdvancesPage) => ChangeAdvancesPageAction;
 }) => (
 	<div className="flexCol">
 		<div
 			className="button"
-			onClick={() =>
-				props.changePage(props.index, CharacterAdvancesPage.FreeAdvances)
-			}
+			onClick={() => props.changePage(CharacterAdvancesPage.FreeAdvances)}
 		>
 			Free Advances
 		</div>
 		<div
 			className="button"
-			onClick={() =>
-				props.changePage(props.index, CharacterAdvancesPage.RequiredAdvances)
-			}
+			onClick={() => props.changePage(CharacterAdvancesPage.RequiredAdvances)}
 		>
 			Required Advances
 		</div>
 		<div
 			className="button"
-			onClick={() =>
-				props.changePage(props.index, CharacterAdvancesPage.OptionalAdvances)
-			}
+			onClick={() => props.changePage(CharacterAdvancesPage.OptionalAdvances)}
 		>
 			Optional Advances
 		</div>
 		<div
 			className="button"
-			onClick={() =>
-				props.changePage(props.index, CharacterAdvancesPage.OtherChanges)
-			}
+			onClick={() => props.changePage(CharacterAdvancesPage.OtherChanges)}
 		>
 			Other Changes
 		</div>
