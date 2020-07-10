@@ -24,7 +24,12 @@ export const Advances = (props: {
 }) => {
 	const uiState = props.char.uiState.advanceBarState;
 	if (uiState == CharacterAdvancesPage.Root) {
-		return <AdvancesPageSelection changePage={props.changeAdvancesPage} />;
+		return (
+			<AdvancesPageSelection
+				char={props.char}
+				changePage={props.changeAdvancesPage}
+			/>
+		);
 	} else {
 		const page = props.char.uiState.advanceBarState;
 		return (
