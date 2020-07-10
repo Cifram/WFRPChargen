@@ -55,7 +55,7 @@ export const History = connector((props: Props) => {
 			<div className="header">HISTORY</div>
 			<div className="historySection scrollPage">
 				{props.char.shallyasMercy == null ? (
-					""
+					<></>
 				) : (
 					<ShallyasMercyEvent
 						char={props.char}

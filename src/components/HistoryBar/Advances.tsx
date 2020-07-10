@@ -10,6 +10,7 @@ import { GainSkillAction } from "../../store/actions/GainSkill";
 import { TalentName } from "../../data/talents";
 import { GainTalentAction } from "../../store/actions/GainTalent";
 import { AdvanceStat } from "../../store/actions/AdvanceStat";
+import { RequiredAdvancesPage } from "./RequiredAdvancesPage";
 
 export const Advances = (props: {
 	char: Character;
@@ -50,7 +51,16 @@ export const Advances = (props: {
 							gainTalent={props.gainTalent}
 							advanceStat={props.advanceStat}
 						/>
-					) : null}
+					) : uiState == CharacterAdvancesPage.RequiredAdvances ? (
+						<RequiredAdvancesPage
+							char={props.char}
+							gainSkill={props.gainSkill}
+							gainTalent={props.gainTalent}
+							advanceStat={props.advanceStat}
+						/>
+					) : (
+						<></>
+					)}
 				</div>
 			</>
 		);

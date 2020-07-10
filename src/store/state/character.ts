@@ -233,19 +233,6 @@ export const getFreeSkillChoices = (char: Character): SkillChoice[] => {
 	return availableSkills;
 };
 
-export const getRequiredSkillChoices = (char: Character): SkillName[] => {
-	const career = getCurrentCareer(char);
-	const careerSkills = careers[career].skills;
-	const ownedSkills = getSkillList(char);
-
-	const availableSkills = careerSkills.filter(
-		(skill): skill is SkillName =>
-			typeof skill == "string" &&
-			ownedSkills.find((ownedSkill) => ownedSkill.skill == skill) == undefined
-	);
-	return availableSkills;
-};
-
 export const getFreeTalentChoices = (char: Character): TalentChoice[] => {
 	const career = getCurrentCareer(char);
 	const careerTalents = careers[career].talents;
@@ -275,14 +262,14 @@ export const getStatChoices = (
 ): { stat: Stat; amount: number }[] => {
 	const career = careers[char.career];
 	const baseAdvances = { ...career.advances };
-	for (const event of char.history) {
-		if (event.type == "StatAdvance") {
-			baseAdvances[event.stat] -= event.change;
+	for (const historyEvent of char.history) {
+		if (historyEvent.type == "StatAdvance") {
+			baseAdvances[historyEvent.stat] -= historyEvent.change;
 		}
 	}
 	const advances: { stat: Stat; amount: number }[] = [];
-	for (const stat in career.advances) {
-		const amount = career.advances[stat as Stat];
+	for (const stat in baseAdvances) {
+		const amount = baseAdvances[stat as Stat];
 		if (amount != 0) {
 			advances.push({ stat: stat as Stat, amount: amount });
 		}
