@@ -41,11 +41,12 @@ export const History = connector((props: Props) => {
 	let eventIndex = -1;
 	const history = props.char.history.map((event) => {
 		eventIndex++;
+		const savedEventIndex = eventIndex;
 		return (
 			<Event
 				key={eventIndex}
 				event={event}
-				remove={() => props.removeEvent(props.charIndex, eventIndex)}
+				remove={() => props.removeEvent(props.charIndex, savedEventIndex)}
 			/>
 		);
 	});
